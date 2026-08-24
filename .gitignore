@@ -1,0 +1,4 @@
+# 108MB of raw ERA5 pulls. Regenerate with scripts/allhours.mjs.
+data/cache/
+node_modules/
+.DS_Store
