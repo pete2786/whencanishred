@@ -175,10 +175,29 @@ function reconcileClose(slug, season) {
   if (soc) return { date: soc.date, precision: "exact", corroboration: "single",
                     sources: [{ kind: "social", url: soc.url, evidence: soc.evidence }] };
   if (!wb?.lastOpen) return empty();
+
+  // "Last capture still reporting open" is a lower bound on the closing date,
+  // and a weak one — it says where the archive stopped looking, not where the
+  // season stopped. Wild Mountain's 2022-23 last open capture is 9 December,
+  // which is midwinter. Only trust it when a CLOSED capture follows it (a real
+  // bracket) or it already falls in the plausible closing window.
+  const EARLIEST_PLAUSIBLE_CLOSE = "03-01";
+  const y = Number(season.slice(0, 4)) + 1;
+  const plausible = wb.lastOpen >= `${y}-${EARLIEST_PLAUSIBLE_CLOSE}`;
+  const sources = [{ kind: "wayback", url: null, evidence: `open on ${wb.lastOpen}` }];
+
+  if (!wb.firstClosedAfter && !plausible) {
+    return {
+      ...empty(),
+      note: `last archived open capture is ${wb.lastOpen}, too early in the season to date the close`,
+      sources,
+    };
+  }
+
   return {
     date: wb.lastOpen, precision: "bracket", range: [wb.lastOpen, wb.firstClosedAfter ?? null],
     corroboration: "single", note: "last capture still reporting open",
-    sources: [{ kind: "wayback", url: null, evidence: `open on ${wb.lastOpen}` }],
+    sources,
   };
 }
 

@@ -80,6 +80,8 @@ for (const slug of Object.keys(resorts)) {
       (fetchErrors ? `  ERRORS:${fetchErrors}` : ""),
     );
   }
-}
 
-writeFileSync("data/raw/wayback.json", JSON.stringify(out, null, 2) + "\n");
+  // Flush after every resort. A full sweep takes the better part of an hour and
+  // writing only at the end makes partial progress invisible and a crash total.
+  writeFileSync("data/raw/wayback.json", JSON.stringify(out, null, 2) + "\n");
+}
