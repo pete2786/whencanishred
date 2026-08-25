@@ -16,14 +16,19 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // archive.org rate-limits and occasionally 503s under load. Back off rather
 // than hammering, and give up quietly so one dead URL cannot stall a sweep.
-async function retrying(url, tries = 5) {
+// A full sweep is thousands of requests and archive.org throttles hard partway
+// through. Back off exponentially and patiently — a slow sweep that finishes
+// beats a fast one that dies at resort nine.
+async function retrying(url, tries = 7) {
   for (let attempt = 0; attempt < tries; attempt++) {
     try {
       const res = await fetch(url, { headers: { "user-agent": UA } });
       if (res.ok) return res;
       if (res.status !== 429 && res.status !== 503) return null;
     } catch { /* network flake; fall through to the backoff */ }
-    await sleep(5000 * (attempt + 1));
+    const wait = Math.min(300000, 10000 * 2 ** attempt);
+    process.stderr.write(`    throttled, waiting ${Math.round(wait / 1000)}s\n`);
+    await sleep(wait);
   }
   return null;
 }

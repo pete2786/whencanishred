@@ -9,8 +9,12 @@ const OPEN_PATTERNS = [
   /\bopen for the season\b/i,
   /\blifts?\s+(?:are\s+)?(?:now\s+)?spinning\b/i,
   /\bopen (?:today|now)\b/i,
-  /\bopen\s+\d{1,2}(?::\d{2})?\s*(?:a\.?m\.?|p\.?m\.?)\s*[-–—]\s*\d/i,
 ];
+
+// Deliberately NOT an open signal: a bare hours range like "Open 10am - 9pm".
+// Resorts publish next month's lift schedule weeks ahead, and Wild Mountain's
+// 9 Nov 2024 snow report advertised its 15 Nov holiday hours while the hill was
+// still closed. Present-tense phrasing ("open today", "now open") is required.
 
 const CLOSED_PATTERNS = [
   /\bclosed for the season\b/i,
