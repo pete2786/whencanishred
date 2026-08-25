@@ -109,18 +109,28 @@ const tally = () => {
   const all = Object.values(seasons).flatMap(s => Object.values(s)).map(e => e.firstLift);
   const withDate = all.filter(e => e.date);
   const confirmed = withDate.filter(e => e.corroboration === "confirmed").length;
-  return { n: withDate.length, confirmed, total: all.length };
+  const hills = Object.values(seasons).filter(s => Object.values(s).some(e => e.firstLift?.date)).length;
+  return { n: withDate.length, confirmed, total: all.length, hills, allHills: Object.keys(seasons).length };
 };
 
 const t = tally();
+// Only name sources that actually contributed. The plan expected a second,
+// independent social pass; it never ran, so every date here traces to the
+// archive — including the "announced" ones, which are opening notices found
+// on those same archived pages, not a separate source.
 const provenance =
-  `${t.n} of ${t.total} opening dates sourced from archived resort pages and the resorts' own ` +
-  `announcements, ${t.confirmed} corroborated by two independent sources. Blanks are gaps, not guesses.`;
+  `${t.n} of ${t.total} opening dates sourced from archived resort pages and the opening ` +
+  `announcements on them, ${t.confirmed} corroborated by a second independent source. ` +
+  `Blanks are gaps, not guesses.`;
 
+// The banner states the coverage rather than describing the intent, and it
+// counts the record every build. A hand-written claim about how well the
+// backfill went is a claim that goes stale the moment the backfill changes.
 const notice =
   `<strong>Part real.</strong> Wet-bulb curve, snowmaking hours and first-window dates are computed ` +
-  `from 31 years of ERA5 data. Opening dates are sourced per hill and labelled with how firmly ` +
-  `they are pinned. The projected column has not been recalibrated yet.`;
+  `from 31 years of ERA5 data. Real opening dates are mostly still missing: ` +
+  `${t.hills} of ${t.allHills} hills ${t.hills === 1 ? "has" : "have"} a sourced record, and the ` +
+  `rest fall back to a model. The projected column has not been recalibrated yet.`;
 
 const now = new Date();
 const dateline = `${now.getDate()} ${FULL[now.getMonth()]} ${now.getFullYear()}`;
