@@ -231,9 +231,27 @@
   .hero-sub a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; opacity: .75; }
   .eyebrow a:hover { opacity: 1; }
+
+  .brandbar { display:flex; height:6px; }
+  .brandbar span { flex:1; }
+  .brandbar span:first-child { background:var(--brand-raw-1); }
+  .brandbar span:last-child  { background:var(--brand-raw-2); box-shadow:inset 0 -1px 0 var(--line); }
+
+  .bm-1 { color:var(--brand-ink); }
+  .bm-2 { color:var(--brand-ink-2); }
+  .hero-say.mark { font-size:clamp(30px,5vw,52px); line-height:1.1; margin:14px 0 0; }
+  .hero-say.mark .bm-1, .hero-say.mark .bm-2 { font-weight:400; }
+</style>
+<style>
+  :root { --accent:#196aaa; --accent-soft:#d7e7f4;
+          --brand-ink:#196aaa; --brand-ink-2:#9e9600;
+          --brand-raw-1:#1c75bc; --brand-raw-2:#d1c600; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent:#3494e1; --accent-soft:#1d2a35; --brand-ink:#3494e1; --brand-ink-2:#fff200; --brand-raw-1:#1c75bc; --brand-raw-2:#fff200; } }
+  :root[data-theme="dark"] { --accent:#3494e1; --accent-soft:#1d2a35; --brand-ink:#3494e1; --brand-ink-2:#fff200; --brand-raw-1:#1c75bc; --brand-raw-2:#fff200; }
 </style>
 </head>
 <body>
+<div class="brandbar"><span></span><span></span></div>
 <div class="wrap">
 
   <header class="masthead">
@@ -244,7 +262,7 @@
   <p class="eyebrow"><a href="../index.html">&larr; every hill</a></p>
 
   <section class="hero">
-    <p class="hero-say"><b>Welch Village</b></p>
+    <p class="hero-say mark"><span class="bm-1">Welch</span> <span class="bm-2">Village</span></p>
     <p class="hero-sub">Welch, MN &middot;
       <a href="https://www.welchvillage.com/" target="_blank" rel="noopener">Official site</a> &middot; <a href="https://facebook.com/welchvillage" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://instagram.com/welchvillage" target="_blank" rel="noopener">Instagram</a>
     </p>

@@ -231,9 +231,27 @@
   .hero-sub a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
   .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; opacity: .75; }
   .eyebrow a:hover { opacity: 1; }
+
+  .brandbar { display:flex; height:6px; }
+  .brandbar span { flex:1; }
+  .brandbar span:first-child { background:var(--brand-raw-1); }
+  .brandbar span:last-child  { background:var(--brand-raw-2); box-shadow:inset 0 -1px 0 var(--line); }
+
+  .bm-1 { color:var(--brand-ink); }
+  .bm-2 { color:var(--brand-ink-2); }
+  .hero-say.mark { font-size:clamp(30px,5vw,52px); line-height:1.1; margin:14px 0 0; }
+  .hero-say.mark .bm-1, .hero-say.mark .bm-2 { font-weight:400; }
+</style>
+<style>
+  :root { --accent:#167095; --accent-soft:#d7ebf4;
+          --brand-ink:#167095; --brand-ink-2:#5aa523;
+          --brand-raw-1:#3db3e3; --brand-raw-2:#81d742; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent:#3db3e3; --accent-soft:#1d2e35; --brand-ink:#3db3e3; --brand-ink-2:#81d742; --brand-raw-1:#3db3e3; --brand-raw-2:#81d742; } }
+  :root[data-theme="dark"] { --accent:#3db3e3; --accent-soft:#1d2e35; --brand-ink:#3db3e3; --brand-ink-2:#81d742; --brand-raw-1:#3db3e3; --brand-raw-2:#81d742; }
 </style>
 </head>
 <body>
+<div class="brandbar"><span></span><span></span></div>
 <div class="wrap">
 
   <header class="masthead">
@@ -244,7 +262,7 @@
   <p class="eyebrow"><a href="../index.html">&larr; every hill</a></p>
 
   <section class="hero">
-    <p class="hero-say"><b>Buck Hill</b></p>
+    <p class="hero-say mark"><span class="bm-1">Buck</span> <span class="bm-2">Hill</span></p>
     <p class="hero-sub">Burnsville, MN &middot;
       <a href="https://buckhill.com/" target="_blank" rel="noopener">Official site</a> &middot; <a href="https://facebook.com/buckhillmn" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://instagram.com/buckhill" target="_blank" rel="noopener">Instagram</a>
     </p>

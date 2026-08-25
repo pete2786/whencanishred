@@ -19,6 +19,142 @@ function slugify(name) {
   return HOURS_ALIASES[s] ?? s;
 }
 
+// ------------------------------------------------------------ brand colours
+//
+// Every one of the sixteen brand colours fails 4.5:1 body-text contrast on at
+// least one of the two themes — Wild Mountain's chartreuse is invisible on
+// white, Lutsen's navy is invisible on black. The page uses --accent for text,
+// so dropping a brand colour straight in breaks readability on one theme or
+// the other, every time. Instead, keep the hue and saturation and move only
+// the lightness until the colour clears the threshold against that theme's
+// worst-case background. It still reads as their colour; it also stays legible.
+
+const hex2rgb = h => {
+  const n = parseInt(h.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+const rgb2hex = ([r, g, b]) =>
+  "#" + [r, g, b].map(v => Math.round(Math.min(255, Math.max(0, v))).toString(16).padStart(2, "0")).join("");
+
+const luminance = hex => {
+  const c = hex2rgb(hex).map(v => {
+    v /= 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+};
+const contrast = (a, b) => {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+};
+
+function rgb2hsl([r, g, b]) {
+  r /= 255; g /= 255; b /= 255;
+  const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
+  const l = (mx + mn) / 2;
+  if (!d) return [0, 0, l];
+  const s = l > 0.5 ? d / (2 - mx - mn) : d / (mx + mn);
+  const h = mx === r ? ((g - b) / d + (g < b ? 6 : 0)) : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  return [h * 60, s, l];
+}
+function hsl2rgb([h, s, l]) {
+  if (!s) { const v = l * 255; return [v, v, v]; }
+  const q = l < 0.5 ? l * (1 + s) : l + s - l * s, p = 2 * l - q;
+  const f = t => {
+    t = (t + 360) % 360 / 360;
+    if (t < 1 / 6) return p + (q - p) * 6 * t;
+    if (t < 1 / 2) return q;
+    if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+    return p;
+  };
+  return [f(h + 120) * 255, f(h) * 255, f(h - 120) * 255];
+}
+
+// Walk lightness toward the readable end in small steps. Pure black and pure
+// white have no hue to preserve, so they get the theme's own ink instead of a
+// pointless search that would land on grey.
+//
+// The accent has to clear the bar against every surface it lands on, not just
+// the page: the same colour is chip text on a tinted chip background, which is
+// closer to it than the page is. Fixing against the page alone left eleven of
+// the sixteen chips under 4.5:1, so all backgrounds are checked together.
+function readable(hex, bgs, target, fallback) {
+  const list = [].concat(bgs);
+  const [h, s, l0] = rgb2hsl(hex2rgb(hex));
+  if (s < 0.05) return fallback;
+  const darken = luminance(list[0]) > 0.35;
+  for (let i = 0; i <= 100; i++) {
+    const l = darken ? l0 - i / 100 : l0 + i / 100;
+    if (l < 0 || l > 1) break;
+    const candidate = rgb2hex(hsl2rgb([h, s, l]));
+    if (list.every(bg => contrast(candidate, bg) >= target)) return candidate;
+  }
+  return fallback;
+}
+
+// The chip background: the same hue, pushed to the far end of the lightness
+// range so accent-coloured text sits on it comfortably.
+const soft = (hex, dark) => {
+  const [h, s] = rgb2hsl(hex2rgb(hex));
+  if (s < 0.05) return dark ? "#242c38" : "#e8eaee";
+  return rgb2hex(hsl2rgb([h, Math.min(s, dark ? 0.30 : 0.55), dark ? 0.16 : 0.90]));
+};
+
+// Worst case per theme: the lightest surface a light page paints text on, and
+// the lightest surface the dark page does.
+const LIGHT_BG = "#ffffff", DARK_BG = "#1b2431";
+const LIGHT_INK = "#8a5108", DARK_INK = "#f2a65a";
+const LIGHT_GROUND = "#edf1f5", DARK_GROUND = "#0b1017";
+
+// The brand stripe shows the colours raw, which fails when a brand colour is
+// the page background: Wild Mountain's black half vanishes on the dark theme
+// and Elm Creek's white half vanishes on the light one, and a two-colour bar
+// that renders as one colour reads as a bug. Nudge only far enough to be
+// visible — this is separation, not legibility, so the bar is 1.5:1 not 4.5:1.
+// Unlike the text colours this must also work for pure black and pure white,
+// which have no hue and so walk the grey ramp.
+function stripe(hex, bg, min = 1.5) {
+  if (contrast(hex, bg) >= min) return hex;
+  const [h, s, l0] = rgb2hsl(hex2rgb(hex));
+  const lighten = luminance(bg) < 0.2;
+  for (let i = 1; i <= 100; i++) {
+    const l = lighten ? l0 + i / 100 : l0 - i / 100;
+    if (l < 0 || l > 1) break;
+    const candidate = rgb2hex(hsl2rgb([h, s, l]));
+    if (contrast(candidate, bg) >= min) return candidate;
+  }
+  return hex;
+}
+
+function brandCss(r) {
+  const p = r.colors.primary, s = r.colors.secondary;
+  const softLight = soft(p, false), softDark = soft(p, true);
+  const light = readable(p, [LIGHT_BG, softLight], 4.5, LIGHT_INK);
+  const dark = readable(p, [DARK_BG, softDark], 4.5, DARK_INK);
+  // The wordmark's second colour is large display type, so 3:1 is the bar.
+  const light2 = readable(s, [LIGHT_BG], 3, "#46596e");
+  const dark2 = readable(s, [DARK_BG], 3, "#a6b6c8");
+  const darkVars =
+    `--accent:${dark}; --accent-soft:${softDark}; --brand-ink:${dark}; --brand-ink-2:${dark2}; ` +
+    `--brand-raw-1:${stripe(p, DARK_GROUND)}; --brand-raw-2:${stripe(s, DARK_GROUND)};`;
+  return `<style>
+  :root { --accent:${light}; --accent-soft:${softLight};
+          --brand-ink:${light}; --brand-ink-2:${light2};
+          --brand-raw-1:${stripe(p, LIGHT_GROUND)}; --brand-raw-2:${stripe(s, LIGHT_GROUND)}; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { ${darkVars} } }
+  :root[data-theme="dark"] { ${darkVars} }
+</style>`;
+}
+
+// The name, set in the hill's own two colours. A single-word name has no
+// second half to colour, so it takes the primary and leans on the rule beneath.
+function wordmark(name) {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length < 2) return `<span class="bm-1">${esc(name)}</span>`;
+  const head = parts.slice(0, -1).join(" "), tail = parts.at(-1);
+  return `<span class="bm-1">${esc(head)}</span> <span class="bm-2">${esc(tail)}</span>`;
+}
+
 const hours = Object.fromEntries(hoursRows.map(h => [slugify(h.hill), h]));
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -161,6 +297,8 @@ for (const [slug, r] of Object.entries(resorts)) {
   const o = observed(slug);
   writeFileSync(`resorts/${slug}.html`, fill(resortTpl, {
     NAME: esc(r.name), PLACE: esc(`${r.place}, ${r.state}`), WEBSITE: esc(r.website),
+    NAME_MARK: wordmark(r.name),
+    BRAND_CSS: brandCss(r),
     SOCIAL_LINKS: socialLinks(r),
     TYPICAL: pretty(o.typical), EARLIEST: pretty(o.earliest), LATEST: pretty(o.latest),
     HOURS: String(hours[slug]?.normal ?? "—"),
