@@ -98,9 +98,21 @@ function reconcileFirstLift(slug, season) {
 
   if (soc) return { date: soc.date, precision: "exact", corroboration: "single", sources };
 
+  // An announced date is a plan, and hills slip. Report it as the near end of a
+  // bracket that closes at the first capture actually showing the hill open,
+  // rather than asserting they opened on the day they meant to.
   if (end && hint) {
-    return { date: hint.date, precision: "exact", corroboration: "single",
-             note: "from an announced opening date on a pre-season page", sources };
+    const exact = hint.date === end;
+    return {
+      date: hint.date,
+      precision: exact ? "exact" : "bracket",
+      ...(exact ? {} : { range: [hint.date, end] }),
+      corroboration: "single",
+      note: exact
+        ? "announced opening date, matched by the first open capture"
+        : `announced for ${hint.date}; first capture showing it open is ${end}`,
+      sources,
+    };
   }
 
   if (end && (start || plausibleOpening(end, season))) {
