@@ -1,0 +1,162 @@
+{
+  "wild-mountain": {
+    "homepages": [
+      "https://wildmountain.com/"
+    ],
+    "conditions": [
+      "https://wildmountain.com/mountain-info/snow-report",
+      "https://wildmountain.com/mountain-info/hours-of-operation",
+      "https://wildmountain.com/wild-mountain/mountain-info/hours-of-operation"
+    ]
+  },
+  "trollhaugen": {
+    "homepages": [
+      "https://trollhaugen.com/"
+    ],
+    "conditions": [
+      "https://trollhaugen.com/snow-report",
+      "https://trollhaugen.com/video-snow-report",
+      "https://trollhaugen.com/hours-and-rates"
+    ]
+  },
+  "hyland-hills": {
+    "homepages": [
+      "https://www.threeriversparks.org/location/hyland-hills-ski-area"
+    ],
+    "conditions": [
+      "https://threeriversparks.org/page/hyland-hills-ski-area-hours-rates"
+    ]
+  },
+  "afton-alps": {
+    "homepages": [
+      "https://www.aftonalps.com/"
+    ],
+    "conditions": [
+      "https://aftonalps.com/conditions.lasso",
+      "https://aftonalps.com/the-mountain/mountain-conditions",
+      "https://aftonalps.com/the-mountain/mountain-conditions/mountain-cams.aspx",
+      "https://aftonalps.com/the-mountain/mountain-conditions/lift-and-terrain-status.aspx",
+      "https://aftonalps.com/the-mountain/mountain-conditions/snow-and-weather-report.aspx"
+    ]
+  },
+  "welch-village": {
+    "homepages": [
+      "https://www.welchvillage.com/"
+    ],
+    "conditions": [
+      "https://welchvillage.com/snowReport.cfm",
+      "https://welchvillage.com/assets/snowReport.cfm",
+      "https://welchvillage.com/hours.cfm",
+      "https://welchvillage.com/assets/hours.cfm"
+    ]
+  },
+  "buck-hill": {
+    "homepages": [
+      "https://buckhill.com/"
+    ],
+    "conditions": [
+      "https://buckhill.com/hours"
+    ]
+  },
+  "elm-creek": {
+    "homepages": [
+      "https://www.threeriversparks.org/location/elm-creek-park-reserve"
+    ],
+    "conditions": [
+      "https://threeriversparks.org/page/elm-creek-winter-recreation-area-hours-and-rates"
+    ]
+  },
+  "lutsen-mountains": {
+    "homepages": [
+      "https://www.lutsen.com/"
+    ],
+    "conditions": [
+      "https://lutsen.com/mountain-info/mountain-report",
+      "https://lutsen.com/mountain-info/daily-snow-report",
+      "https://lutsen.com/winter/mountain-information/cams-conditions",
+      "https://lutsen.com/mountain-info/hours-weather",
+      "https://lutsen.com/mountain-info/hours-of-operation"
+    ]
+  },
+  "giants-ridge": {
+    "homepages": [
+      "https://www.giantsridge.com/"
+    ],
+    "conditions": [
+      "https://giantsridge.com/snow-report",
+      "https://giantsridge.com/mountain-report",
+      "https://giantsridge.com/hours-of-operation",
+      "https://giantsridge.com/hours-of-operation-winter"
+    ]
+  },
+  "spirit-mountain": {
+    "homepages": [
+      "https://spiritmt.com/"
+    ],
+    "conditions": [
+      "https://spiritmt.com/snow-report",
+      "https://spiritmt.com/current-conditions",
+      "https://spiritmt.com/winter/snow-report",
+      "https://spiritmt.com/ski-board/snow-report",
+      "https://spiritmt.com/snow-report--winter-map"
+    ]
+  },
+  "powder-ridge": {
+    "homepages": [
+      "https://powderridge.com/"
+    ],
+    "conditions": [
+      "https://powderridge.com/ski-ride/hours"
+    ]
+  },
+  "mount-kato": {
+    "homepages": [
+      "https://www.mountkato.com/"
+    ],
+    "conditions": [
+      "https://mountkato.com/snow-report",
+      "https://mountkato.com/the-snow-report",
+      "https://mountkato.com/mountain/snow-report",
+      "https://mountkato.com/pages/public/mountain/snow-report",
+      "https://mountkato.com/pages/public/mountain/snow-report/index.html"
+    ]
+  },
+  "buena-vista": {
+    "homepages": [
+      "https://bvskiarea.com/"
+    ],
+    "conditions": [
+      "https://bvskiarea.com/conditions.html"
+    ]
+  },
+  "detroit-mountain": {
+    "homepages": [
+      "https://detroitmountain.com/"
+    ],
+    "conditions": [
+      "https://detroitmountain.com/winter/pricing-hours",
+      "https://detroitmountain.com/winter-pricing-hours",
+      "https://detroitmountain.com/pricing-hours",
+      "https://detroitmountain.com/events/opening-day-2023-2024",
+      "https://detroitmountain.com/dm-events/opening-day"
+    ]
+  },
+  "andes-tower-hills": {
+    "homepages": [
+      "https://www.andestowerhills.com/"
+    ],
+    "conditions": [
+      "https://andestowerhills.com/ski-conditions",
+      "https://andestowerhills.com/downhill-conditions"
+    ]
+  },
+  "coffee-mill": {
+    "homepages": [
+      "https://cmskiarea.com/",
+      "https://coffeemillski.com/"
+    ],
+    "conditions": [
+      "https://cmskiarea.com/hours-events"
+    ]
+  }
+}

@@ -250,6 +250,7 @@ git commit -m "Add Wayback CDX client with on-disk capture cache"
 **Files:**
 - Create: `scripts/discover.mjs`
 - Create (output): `data/sources.json`
+- Create: `data/sources-extra.json` (hand-owned add/drop corrections, applied by the script so rerunning discovery does not wipe them)
 
 **Interfaces:**
 - Consumes: `data/resorts.json` (Task 1), `captures` from `scripts/lib/cdx.mjs` (Task 2).
@@ -314,9 +315,11 @@ node scripts/discover.mjs && cat data/sources.json
 
 Expected: `wild-mountain` picks up `/mountain-info/snow-report` and `/mountain-info/hours-of-operation`; `andes-tower-hills` picks up `/downhill-conditions`. Some resorts will find nothing — that is fine and expected, they fall back to the homepage alone.
 
-- [ ] **Step 3: Hand-correct the file**
+- [ ] **Step 3: Hand-correct via `data/sources-extra.json`**
 
-`data/sources.json` is a generated starting point that is then hand-owned. Read every entry. Delete anything that is obviously not an operational page (a blog post that happens to contain "conditions", a summer hours page). Add any conditions URL you know exists that discovery missed. Coffee Mill has only 14 captures across five seasons — expect it to be homepage-only, and do not manufacture URLs for it.
+`data/sources.json` is overwritten on every run, so corrections go in
+`data/sources-extra.json` as `{ slug: { add: [], drop: [] } }` and are applied by
+the script. Read every entry of the generated file. Delete anything that is obviously not an operational page (a blog post that happens to contain "conditions", a summer hours page). Add any conditions URL you know exists that discovery missed. Coffee Mill has only 14 captures across five seasons — expect it to be homepage-only, and do not manufacture URLs for it.
 
 - [ ] **Step 4: Commit**
 

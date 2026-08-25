@@ -28,11 +28,13 @@ async function retrying(url, tries = 5) {
   return null;
 }
 
-export async function captures(url, { from, to, matchType, collapse = "timestamp:8", limit = 5000 } = {}) {
-  const q = new URLSearchParams({
-    url, output: "json", collapse, limit: String(limit),
-    filter: "statuscode:200", fl: "timestamp,original",
-  });
+export async function captures(url, {
+  from, to, matchType, collapse = "timestamp:8", limit = 5000,
+  filters = [], fl = "timestamp,original",
+} = {}) {
+  const q = new URLSearchParams({ url, output: "json", collapse, limit: String(limit), fl });
+  // CDX takes repeated `filter` params, so these must be appended, not set.
+  for (const f of ["statuscode:200", ...filters]) q.append("filter", f);
   if (from) q.set("from", from);
   if (to) q.set("to", to);
   if (matchType) q.set("matchType", matchType);

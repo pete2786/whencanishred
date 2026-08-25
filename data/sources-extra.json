@@ -1,0 +1,17 @@
+{
+  "_comment": "Hand-owned corrections applied on top of what scripts/discover.mjs finds. Rerunning discovery preserves these.",
+  "detroit-mountain": {
+    "add": [
+      "https://detroitmountain.com/winter/pricing-hours",
+      "https://detroitmountain.com/winter-pricing-hours",
+      "https://detroitmountain.com/pricing-hours",
+      "https://detroitmountain.com/events/opening-day-2023-2024",
+      "https://detroitmountain.com/dm-events/opening-day"
+    ],
+    "drop": []
+  },
+  "welch-village": {
+    "add": [],
+    "drop": ["https://welchvillage.com/images/gradient/snowReport.cfm"]
+  }
+}
