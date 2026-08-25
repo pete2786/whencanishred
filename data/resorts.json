@@ -1,0 +1,308 @@
+{
+  "wild-mountain": {
+    "name": "Wild Mountain",
+    "place": "Taylors Falls",
+    "state": "MN",
+    "region": "twin-cities",
+    "lat": 45.3897,
+    "lon": -92.7143,
+    "website": "https://wildmountain.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "trollhaugen": {
+    "name": "Trollhaugen",
+    "place": "Dresser",
+    "state": "WI",
+    "region": "twin-cities",
+    "lat": 45.3572,
+    "lon": -92.6349,
+    "website": "https://trollhaugen.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "hyland-hills": {
+    "name": "Hyland Hills",
+    "place": "Bloomington",
+    "state": "MN",
+    "region": "twin-cities",
+    "lat": 44.8297,
+    "lon": -93.3672,
+    "website": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "afton-alps": {
+    "name": "Afton Alps",
+    "place": "Afton",
+    "state": "MN",
+    "region": "twin-cities",
+    "lat": 44.8574,
+    "lon": -92.7899,
+    "website": "https://www.aftonalps.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "welch-village": {
+    "name": "Welch Village",
+    "place": "Welch",
+    "state": "MN",
+    "region": "twin-cities",
+    "lat": 44.5619,
+    "lon": -92.736,
+    "website": "https://www.welchvillage.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "buck-hill": {
+    "name": "Buck Hill",
+    "place": "Burnsville",
+    "state": "MN",
+    "region": "twin-cities",
+    "lat": 44.7433,
+    "lon": -93.2872,
+    "website": "https://buckhill.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "elm-creek": {
+    "name": "Elm Creek",
+    "place": "Maple Grove",
+    "state": "MN",
+    "region": "twin-cities",
+    "lat": 45.1461,
+    "lon": -93.4419,
+    "website": "https://www.threeriversparks.org/location/elm-creek-park-reserve",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "lutsen-mountains": {
+    "name": "Lutsen Mountains",
+    "place": "Lutsen",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 47.6683,
+    "lon": -90.7175,
+    "website": "https://www.lutsen.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "giants-ridge": {
+    "name": "Giants Ridge",
+    "place": "Biwabik",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 47.5583,
+    "lon": -92.283,
+    "website": "https://www.giantsridge.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "spirit-mountain": {
+    "name": "Spirit Mountain",
+    "place": "Duluth",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 46.7183,
+    "lon": -92.22,
+    "website": "https://spiritmt.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "powder-ridge": {
+    "name": "Powder Ridge",
+    "place": "Kimball",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 45.3308,
+    "lon": -94.3086,
+    "website": "https://powderridge.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "mount-kato": {
+    "name": "Mount Kato",
+    "place": "Mankato",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 44.1372,
+    "lon": -94.0186,
+    "website": "https://www.mountkato.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "buena-vista": {
+    "name": "Buena Vista",
+    "place": "Bemidji",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 47.5875,
+    "lon": -94.8464,
+    "website": "https://bvskiarea.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "detroit-mountain": {
+    "name": "Detroit Mountain",
+    "place": "Detroit Lakes",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 46.8222,
+    "lon": -95.7736,
+    "website": "https://detroitmountain.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "andes-tower-hills": {
+    "name": "Andes Tower Hills",
+    "place": "Kensington",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 45.8047,
+    "lon": -95.6664,
+    "website": "https://www.andestowerhills.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  },
+  "coffee-mill": {
+    "name": "Coffee Mill",
+    "place": "Wabasha",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 44.3819,
+    "lon": -92.0413,
+    "website": "https://cmskiarea.com/",
+    "formerDomains": [
+      "coffeemillski.com"
+    ],
+    "social": {
+      "facebook": null,
+      "instagram": null
+    },
+    "colors": {
+      "primary": null,
+      "secondary": null
+    },
+    "photos": []
+  }
+}

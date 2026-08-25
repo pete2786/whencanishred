@@ -30,7 +30,7 @@
 - Read for reference: `scripts/climatology.mjs:26-43` (names, places, coordinates), `index.html:352-478` (website URLs, region grouping)
 
 **Interfaces:**
-- Produces: `data/resorts.json`, an object keyed by slug. Every later task reads it. Fields: `name`, `place`, `state`, `region`, `lat`, `lon`, `website`, `social` (`{facebook, instagram}`, both `null` until Task 5), `colors` (`{primary, secondary}`, both `null` until Task 5), `photos` (`[]`).
+- Produces: `data/resorts.json`, an object keyed by slug. Every later task reads it. Fields: `name`, `place`, `state`, `region`, `lat`, `lon`, `website`, `formerDomains` (`string[]`, bare hostnames the resort used previously — Coffee Mill moved from `coffeemillski.com` to `cmskiarea.com`, and the sweep needs the old one to find any history at all), `social` (`{facebook, instagram}`, both `null` until Task 6), `colors` (`{primary, secondary}`, both `null` until Task 6), `photos` (`[]`).
 
 - [ ] **Step 1: Build the file from the two existing sources**
 
@@ -61,7 +61,7 @@ Continue for all 16 in the order the table uses: `wild-mountain`, `trollhaugen`,
 
 Note `state` is `"WI"` for Trollhaugen only. `place` drops the state suffix that `climatology.mjs` embeds in `"Dresser, WI"`.
 
-- [ ] **Step 2: Re-verify every website URL — do not copy them on faith**
+- [ ] **Step 2: Re-verify every website URL and record former domains**
 
 `index.html` links Wild Mountain to `wildmountainski.com`, which is dead and has zero Wayback captures. The real site is `wildmountain.com`. Assume others may be wrong too. Check each:
 
@@ -253,7 +253,7 @@ git commit -m "Add Wayback CDX client with on-disk capture cache"
 
 **Interfaces:**
 - Consumes: `data/resorts.json` (Task 1), `captures` from `scripts/lib/cdx.mjs` (Task 2).
-- Produces: `data/sources.json`, keyed by slug: `{ homepage: string, conditions: string[] }`. Task 4 sweeps exactly these URLs.
+- Produces: `data/sources.json`, keyed by slug: `{ homepages: string[], conditions: string[] }`. Task 5 sweeps exactly these URLs. `homepages` is a list because a resort that changed domains has history under both.
 
 Conditions pages beat homepages — they are structured, publish runs-open counts, and do not rotate with marketing — but their paths differ per resort (`/mountain-info/snow-report`, `/downhill-conditions`, a `ski-area-snow-report` WordPress plugin). Discover them instead of guessing.
 
@@ -275,10 +275,15 @@ const JUNK = /(wp-content|wp-includes|wp-json|\/feed\/?$|fbclid=|utm_|\/tag\/|\/
 
 const out = {};
 for (const [slug, r] of Object.entries(resorts)) {
-  const domain = new URL(r.website).hostname.replace(/^www\./, "");
-  const rows = await captures(`${domain}*`, {
+  // Sweep former domains too. Coffee Mill moved from coffeemillski.com to
+  // cmskiarea.com; its entire archived history lives under the old name.
+  const domains = [
+    new URL(r.website).hostname.replace(/^www\./, ""),
+    ...(r.formerDomains ?? []),
+  ];
+  const rows = (await Promise.all(domains.map(d => captures(`${d}*`, {
     from: "20211001", to: "20260430", collapse: "urlkey", limit: 2000,
-  });
+  })))).flat();
 
   const seen = new Set();
   const conditions = [];
@@ -292,7 +297,9 @@ for (const [slug, r] of Object.entries(resorts)) {
     conditions.push(norm);
   }
 
-  out[slug] = { homepage: r.website, conditions: conditions.slice(0, 4) };
+  // Former-domain homepages are swept as well, so the old site's own history counts.
+  const homepages = [r.website, ...(r.formerDomains ?? []).map(d => `https://${d}/`)];
+  out[slug] = { homepages, conditions: conditions.slice(0, 4) };
   console.error(`${slug.padEnd(20)} ${rows.length.toString().padStart(4)} urls -> ${conditions.length} conditions`);
 }
 
@@ -501,9 +508,9 @@ mkdirSync("data/raw", { recursive: true });
 
 const out = {};
 for (const slug of Object.keys(resorts)) {
-  const { homepage, conditions } = sources[slug];
+  const { homepages, conditions } = sources[slug];
   const urls = [
-    { url: homepage, kind: "homepage" },
+    ...homepages.map(url => ({ url, kind: "homepage" })),
     ...conditions.map(url => ({ url, kind: "conditions" })),
   ];
   out[slug] = {};
