@@ -185,6 +185,62 @@ function observed(slug) {
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const daysUntil = iso => Math.round((new Date(`${iso}T00:00:00`) - new Date()) / 86400000);
 
+// ------------------------------------------------------------------- hero
+//
+// A single "75 days, probably" hid how wide the spread actually is: Wild
+// Mountain has opened as early as 18 October and as late as 20 November, five
+// weeks apart. Three numbers say that honestly. Each one is a season that
+// actually happened, not a percentile invented from five samples.
+
+// Openings land either side of New Year, so a season's dates belong to the
+// year the season started in, not the year on the calendar.
+const seasonStartYear = () => {
+  const n = new Date();
+  return n.getMonth() >= 6 ? n.getFullYear() : n.getFullYear() - 1;
+};
+const thisSeason = iso => `${seasonStartYear() + (Number(iso.slice(5, 7)) >= 7 ? 0 : 1)}-${iso.slice(5)}`;
+
+function scenarios(slug) {
+  const seen = Object.entries(seasons[slug] ?? {})
+    .map(([season, s]) => ({ season, date: s.firstLift?.date }))
+    .filter(e => e.date)
+    .sort((a, b) => snowDay(a.date) - snowDay(b.date));
+  if (seen.length < 2) return null;
+  return [
+    { ...seen[0], key: "early", lede: "earliest on record" },
+    { ...seen[Math.floor((seen.length - 1) / 2)], key: "real", lede: `median of ${seen.length} seasons` },
+    { ...seen.at(-1), key: "late", lede: "latest on record" },
+  ];
+}
+
+// Past the date the countdown is meaningless, and a build in December must not
+// print "-30 days". The scenario says it has come and gone instead.
+function countdown(days) {
+  if (days > 0) return `${days}<span class="scen-unit">days</span>`;
+  if (days === 0) return `<span class="scen-word">today</span>`;
+  return `<span class="scen-word">passed</span>`;
+}
+
+function heroScenarios(slug) {
+  const rows = scenarios(slug);
+  // One observed season is not a spread. Fall back to the model date alone.
+  if (!rows) {
+    return `<div class="count">
+      <span class="count-num">${daysUntil(projection[slug].date)}</span>
+      <span class="count-unit">days, probably</span>
+    </div>`;
+  }
+  const cells = rows.map(r => {
+    const iso = thisSeason(r.date);
+    return `      <div class="scen scen-${r.key}">
+        <span class="scen-num">${countdown(daysUntil(iso))}</span>
+        <span class="scen-date">${pretty(iso)}</span>
+        <span class="scen-lede">${r.lede}<span class="scen-yr">${esc(r.season)}</span></span>
+      </div>`;
+  });
+  return `<div class="scens">\n${cells.join("\n")}\n    </div>`;
+}
+
 const GROUPS = [["twin-cities", "Twin Cities"], ["greater-minnesota", "Greater Minnesota"]];
 
 function tableRows() {
@@ -282,11 +338,11 @@ writeFileSync("index.html", fill(readFileSync("templates/index.html", "utf8"), {
   TABLE: tableRows(),
   NOTICE: notice,
   DATELINE: dateline,
-  HERO_DAYS: String(daysUntil(projection[leader].date)),
+  HERO_SCENARIOS: heroScenarios(leader),
   HERO_LEADER: esc(resorts[leader].name),
-  HERO_TYPICAL: pretty(lead.typical),
-  HERO_EARLIEST: pretty(lead.earliest),
-  HERO_LATEST: pretty(lead.latest),
+  HERO_SEASONS: String(lead.n),
+  HERO_HILLS: String(Object.keys(resorts).length),
+  HERO_HOURS: String(hours[leader]?.normal ?? "—"),
   FOOTER_PROVENANCE: provenance,
 }));
 

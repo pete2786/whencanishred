@@ -228,6 +228,45 @@
   footer a { color:var(--ink-2); }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
+
+  .scens {
+    display:flex; align-items:flex-end; flex-wrap:wrap;
+    gap:clamp(22px,6vw,64px); margin:2px 0 0;
+  }
+  .scen { display:flex; flex-direction:column; }
+  .scen-num {
+    font-family:"Instrument Serif",Georgia,serif; line-height:.86;
+    letter-spacing:-.03em; font-variant-numeric:tabular-nums;
+    font-size:clamp(46px,7vw,80px); color:var(--ink-2);
+  }
+  .scen-real .scen-num { font-size:clamp(80px,13vw,150px); color:var(--ink); }
+  .scen-unit {
+    font-family:"Instrument Serif",Georgia,serif; font-style:italic;
+    font-size:.32em; color:var(--ink-3); margin-left:.22em; letter-spacing:0;
+  }
+  .scen-word { font-size:.62em; font-style:italic; color:var(--ink-3); }
+  .scen-date {
+    font-size:15px; font-weight:600; margin-top:12px; color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .scen-real .scen-date { color:var(--accent); }
+  .scen-lede {
+    font-size:11px; font-weight:600; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--ink-3); margin-top:3px;
+  }
+  .scen-yr { display:block; letter-spacing:.06em; opacity:.75; margin-top:1px; }
+
+  /* Three numbers only mean something next to each other. Left to wrap they
+     split two-and-one around 480px, which reads as a mistake, so below that
+     they hold a three-up grid and shrink instead. */
+  @media (max-width:560px) {
+    .scens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
+    .scen-num { font-size:34px; }
+    .scen-real .scen-num { font-size:48px; }
+    .scen-unit { font-size:.36em; margin-left:.1em; }
+    .scen-date { font-size:13px; margin-top:8px; }
+    .scen-lede { font-size:9.5px; letter-spacing:.07em; }
+  }
 </style>
 </head>
 <body>
@@ -243,10 +282,7 @@
   <p class="eyebrow"><!--{{DATELINE}}--> · Minnesota</p>
 
   <section class="hero">
-    <div class="count">
-      <span class="count-num"><!--{{HERO_DAYS}}--></span>
-      <span class="count-unit">days, probably</span>
-    </div>
+    <!--{{HERO_SCENARIOS}}-->
     <p class="hero-say"><b><!--{{HERO_LEADER}}--></b> usually opens first.</p>
     <p class="hero-sub">
       Nothing is announced yet. Wild Mountain blows early and opens on whatever sticks,
@@ -254,10 +290,10 @@
     </p>
 
     <dl class="stats">
-      <div><dt>Typical opening</dt><dd class="lede"><!--{{HERO_TYPICAL}}--></dd></div>
-      <div><dt>Earliest ever</dt><dd><!--{{HERO_EARLIEST}}--></dd></div>
-      <div><dt>Latest ever</dt><dd><!--{{HERO_LATEST}}--></dd></div>
+      <div><dt>Seasons on record</dt><dd class="lede"><!--{{HERO_SEASONS}}--></dd></div>
       <div><dt>Guns can first run</dt><dd>Oct 28</dd></div>
+      <div><dt>Normal snowmaking hrs</dt><dd><!--{{HERO_HOURS}}--></dd></div>
+      <div><dt>Hills tracked</dt><dd><!--{{HERO_HILLS}}--></dd></div>
     </dl>
   </section>
 
