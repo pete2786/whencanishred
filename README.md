@@ -47,3 +47,10 @@ them `locked`. Do not "correct" them to match the probe's evidence.
 ## Site
 
 `index.html` is the whole site. No build step.
+
+## Opening dates
+
+The dates are not on the internet. The archive sweep filled 5 of 80 season-slots
+and no aggregator carries historical opening dates for hills this small, so the
+record is filled by asking the hills directly. See `docs/asking-the-hills.md` for
+who to ask, what to send, and how to log a reply.
