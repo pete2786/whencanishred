@@ -103,7 +103,9 @@ Two orthogonal fields, because they are different failure modes:
 - **`precision`** — `exact`, or `bracket` with a `range`. How well we pinned the
   day. Wayback usually brackets; social usually pins.
 - **`corroboration`** — `confirmed` (two independent sources agree), `single` (one
-  source), `conflict` (sources disagree, both retained), `unknown`.
+  source), `conflict` (sources disagree, both retained), or `unknown` when nothing
+  was found. An `unknown` entry is still written, so the page can say "no record"
+  rather than leaving a silent hole.
 
 "Nov 15, confirmed", "sometime Nov 6-9, archive only", and a placeholder are three
 different claims, and the page says which one it is showing.
@@ -154,7 +156,7 @@ Joins raw sources per hill, season, and event:
 | Social only | `exact` | `single` | the social date |
 | Wayback only | `bracket` | `single` | first `OPEN` capture |
 | Social date outside bracket | as found | `conflict` | both retained, queued |
-| Neither | — | `unknown` | absent |
+| Neither | — | `unknown` | absent, entry retained |
 
 The Wayback-only point estimate is the first `OPEN` capture, never earlier than the
 evidence supports. `data/overrides.json` is applied last and always wins.
