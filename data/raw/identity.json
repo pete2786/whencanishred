@@ -1,0 +1,1138 @@
+{
+  "wild-mountain": {
+    "archivedPages": 345,
+    "liveFetched": "https://wildmountain.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "wildmtnskisnowboardwaterpark",
+          "hits": 378
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "skiwildmtn",
+          "hits": 378
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": []
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#5cc6d6",
+          "hits": 108
+        },
+        {
+          "hex": "#0d6efd",
+          "hits": 29
+        },
+        {
+          "hex": "#212529",
+          "hits": 28
+        },
+        {
+          "hex": "#70ddbe",
+          "hits": 22
+        },
+        {
+          "hex": "#dc3545",
+          "hits": 16
+        },
+        {
+          "hex": "#198754",
+          "hits": 16
+        },
+        {
+          "hex": "#ffc107",
+          "hits": 14
+        },
+        {
+          "hex": "#0dcaf0",
+          "hits": 14
+        }
+      ],
+      "stylesheets": [
+        "https://wildmountain.com/templates/yootheme/css/theme.139.css?1784514830",
+        "https://wildmountain.com/templates/yootheme/css/custom.css?5.0.5",
+        "https://wildmountain.com/media/plg_system_jcemediabox/css/jcemediabox.min.css?f646e5445d3791b94e8b9282903afc4f",
+        "https://wildmountain.com/media/plg_system_jcepro/site/css/content.min.css?86aa0286b6232c4a5b58f892ce080277",
+        "https://wildmountain.com/media/vendor/bootstrap/css/bootstrap.min.css?5.3.8"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "trollhaugen": {
+    "archivedPages": 61,
+    "liveFetched": "https://trollhaugen.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "trollhaugen",
+          "hits": 63
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "trollhaugentroll",
+          "hits": 62
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": []
+    },
+    "colors": {
+      "meta": {},
+      "declared": {
+        "--e-global-color-primary": "#005395",
+        "--e-global-color-secondary": "#ffec26",
+        "--e-global-color-accent": "#f31922"
+      },
+      "frequent": [
+        {
+          "hex": "#cc3366",
+          "hits": 4
+        },
+        {
+          "hex": "#005395",
+          "hits": 3
+        },
+        {
+          "hex": "#f31922",
+          "hits": 2
+        },
+        {
+          "hex": "#40d9f1",
+          "hits": 1
+        },
+        {
+          "hex": "#ade7ff",
+          "hits": 1
+        },
+        {
+          "hex": "#00acf8",
+          "hits": 1
+        },
+        {
+          "hex": "#f78da7",
+          "hits": 1
+        },
+        {
+          "hex": "#cf2e2e",
+          "hits": 1
+        }
+      ],
+      "stylesheets": [
+        "https://trollhaugen.com/wp-content/themes/hello-elementor/style.min.css?ver=3.2.1",
+        "https://trollhaugen.com/wp-content/themes/hello-elementor/theme.min.css?ver=3.2.1",
+        "https://trollhaugen.com/wp-content/themes/hello-elementor/header-footer.min.css?ver=3.2.1",
+        "https://trollhaugen.com/wp-content/uploads/elementor/css/post-7.css?ver=1787621442",
+        "https://trollhaugen.com/wp-content/uploads/elementor/css/post-479.css?ver=1787621442"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "hyland-hills": {
+    "archivedPages": 64,
+    "liveFetched": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "threeriversparkdistrict",
+          "hits": 65
+        },
+        {
+          "network": "facebook",
+          "handle": "hylandski",
+          "hits": 51
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "threeriversparks",
+          "hits": 65
+        },
+        {
+          "network": "instagram",
+          "handle": "hylandhills",
+          "hits": 51
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": []
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#006951",
+          "hits": 96
+        },
+        {
+          "hex": "#b45340",
+          "hits": 85
+        },
+        {
+          "hex": "#005480",
+          "hits": 73
+        },
+        {
+          "hex": "#85cddb",
+          "hits": 62
+        },
+        {
+          "hex": "#a5cf57",
+          "hits": 52
+        },
+        {
+          "hex": "#fec874",
+          "hits": 48
+        },
+        {
+          "hex": "#f58466",
+          "hits": 41
+        },
+        {
+          "hex": "#ab5425",
+          "hits": 8
+        }
+      ],
+      "stylesheets": [
+        "https://www.threeriversparks.org/sites/default/files/css/css_TJy1VjrcqnFx0co2e7HvR2hbYJk7vJPKWK-gz_9D5Ho.css?delta=0&language=en&theme=threerivers&include=eJxVzEEOgzAMRNELheRIlXEMWA2xZTug3r6oi7ZsRqO3-PikyiH2AESxytLL9-XFpAf1mi6ggrKrdOrhOTYjMj7IfJoQTIZTS_uVgrJwC7KMoHE1koLBaqCbl2pDoeWf5NF1zI19o5r-mgUMV_YbrU1maBP6nf1kJbtRvJSeHOlgOr18Nu9SR6M3ZB1dkQ",
+        "https://www.threeriversparks.org/sites/default/files/css/css_Tl48dDrmvgDv7SAQAuqLG9Y0pQM08Hebz93BiNOekoI.css?delta=1&language=en&theme=threerivers&include=eJxVzEEOgzAMRNELheRIlXEMWA2xZTug3r6oi7ZsRqO3-PikyiH2AESxytLL9-XFpAf1mi6ggrKrdOrhOTYjMj7IfJoQTIZTS_uVgrJwC7KMoHE1koLBaqCbl2pDoeWf5NF1zI19o5r-mgUMV_YbrU1maBP6nf1kJbtRvJSeHOlgOr18Nu9SR6M3ZB1dkQ",
+        "https://www.threeriversparks.org/sites/default/files/css/css_8sSw_S5KDDaj2SxZMP1n5qvTRI_sftveKp4D3UUst7g.css?delta=4&language=en&theme=threerivers&include=eJxVzEEOgzAMRNELheRIlXEMWA2xZTug3r6oi7ZsRqO3-PikyiH2AESxytLL9-XFpAf1mi6ggrKrdOrhOTYjMj7IfJoQTIZTS_uVgrJwC7KMoHE1koLBaqCbl2pDoeWf5NF1zI19o5r-mgUMV_YbrU1maBP6nf1kJbtRvJSeHOlgOr18Nu9SR6M3ZB1dkQ",
+        "https://www.threeriversparks.org/sites/default/files/css/css_DQvn-bpNPRDosH3syrjC2ktS55JlXVsZn_VjSuFVAlM.css?delta=5&language=en&theme=threerivers&include=eJxVzEEOgzAMRNELheRIlXEMWA2xZTug3r6oi7ZsRqO3-PikyiH2AESxytLL9-XFpAf1mi6ggrKrdOrhOTYjMj7IfJoQTIZTS_uVgrJwC7KMoHE1koLBaqCbl2pDoeWf5NF1zI19o5r-mgUMV_YbrU1maBP6nf1kJbtRvJSeHOlgOr18Nu9SR6M3ZB1dkQ",
+        "https://www.threeriversparks.org/sites/default/files/css/css_XVpmXZp6Rxw_4pkN3yhaSUg0gkcjXmei3xithJEJrFY.css?delta=6&language=en&theme=threerivers&include=eJxVzEEOgzAMRNELheRIlXEMWA2xZTug3r6oi7ZsRqO3-PikyiH2AESxytLL9-XFpAf1mi6ggrKrdOrhOTYjMj7IfJoQTIZTS_uVgrJwC7KMoHE1koLBaqCbl2pDoeWf5NF1zI19o5r-mgUMV_YbrU1maBP6nf1kJbtRvJSeHOlgOr18Nu9SR6M3ZB1dkQ"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "afton-alps": {
+    "archivedPages": 249,
+    "liveFetched": "https://www.aftonalps.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "aftonalpsmn",
+          "hits": 241
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "aftonalps",
+          "hits": 252
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": []
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#b02621",
+          "hits": 47
+        },
+        {
+          "hex": "#10325a",
+          "hits": 27
+        },
+        {
+          "hex": "#337ab7",
+          "hits": 25
+        },
+        {
+          "hex": "#107d33",
+          "hits": 23
+        },
+        {
+          "hex": "#161d65",
+          "hits": 22
+        },
+        {
+          "hex": "#637987",
+          "hits": 21
+        },
+        {
+          "hex": "#3e728a",
+          "hits": 17
+        },
+        {
+          "hex": "#3c763d",
+          "hits": 14
+        }
+      ],
+      "stylesheets": [
+        "https://www.aftonalps.com/Assets/css/sites/aftonalps/main.bundle.css",
+        "https://www.aftonalps.com/Assets/css/sites/aftonalps/header.bundle.css",
+        "https://www.aftonalps.com/Assets/css/sites/aftonalps/components/sitewideAlert.css",
+        "https://www.aftonalps.com/Assets/css/sites/aftonalps/components/headerWeather.css",
+        "https://www.aftonalps.com/Assets/css/sites/aftonalps/content.bundle.css"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "welch-village": {
+    "archivedPages": 64,
+    "liveFetched": "https://www.welchvillage.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "welchvillage",
+          "hits": 321
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "welchvillage",
+          "hits": 101
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": []
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#037ac5",
+          "hits": 62
+        },
+        {
+          "hex": "#1c75bc",
+          "hits": 58
+        },
+        {
+          "hex": "#f89406",
+          "hits": 45
+        },
+        {
+          "hex": "#738d00",
+          "hits": 45
+        },
+        {
+          "hex": "#337ab7",
+          "hits": 25
+        },
+        {
+          "hex": "#a94442",
+          "hits": 15
+        },
+        {
+          "hex": "#428bca",
+          "hits": 14
+        },
+        {
+          "hex": "#3c763d",
+          "hits": 14
+        }
+      ],
+      "stylesheets": [
+        "https://www.welchvillage.com/css/style.css",
+        "https://www.welchvillage.com/css/customizer/home-pages-customizer.css",
+        "https://www.welchvillage.com/css/buttons/buttons.css",
+        "https://www.welchvillage.com/css/buttons/social-icons.css",
+        "https://www.welchvillage.com/css/bootstrap.min.css"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "buck-hill": {
+    "archivedPages": 0,
+    "liveFetched": "https://buckhill.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "buckhillmn",
+          "hits": 3
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "buckhill",
+          "hits": 2
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:buckhillmn",
+        "instagram:buckhill"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#3db3e3",
+          "hits": 233
+        },
+        {
+          "hex": "#81d742",
+          "hits": 59
+        },
+        {
+          "hex": "#428bca",
+          "hits": 24
+        },
+        {
+          "hex": "#3c763d",
+          "hits": 13
+        },
+        {
+          "hex": "#8a6d3b",
+          "hits": 13
+        },
+        {
+          "hex": "#a94442",
+          "hits": 13
+        },
+        {
+          "hex": "#d12a5c",
+          "hits": 13
+        },
+        {
+          "hex": "#31708f",
+          "hits": 8
+        }
+      ],
+      "stylesheets": [
+        "https://buckhill.com/wp-content/themes/the-core-parent/style.css?ver=7.1",
+        "https://buckhill.com/wp-content/themes/the-core-parent/css/bootstrap.css?ver=1.0.42",
+        "https://buckhill.com/wp-content/themes/the-core-child/style.css?ver=1.0.42",
+        "https://buckhill.com/wp-content/themes/the-core-parent/css/prettyPhoto.css?ver=1.0.42",
+        "https://buckhill.com/wp-content/uploads/the-core-style.css?ver=1705015405"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "elm-creek": {
+    "archivedPages": 0,
+    "liveFetched": "https://www.threeriversparks.org/location/elm-creek-park-reserve",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "elmcreekparkreserve",
+          "hits": 1
+        },
+        {
+          "network": "facebook",
+          "handle": "threeriversparkdistrict",
+          "hits": 1
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "elmcreekparkreserve",
+          "hits": 1
+        },
+        {
+          "network": "instagram",
+          "handle": "threeriversparks",
+          "hits": 1
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:elmcreekparkreserve",
+        "instagram:elmcreekparkreserve",
+        "facebook:threeriversparkdistrict",
+        "instagram:threeriversparks"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#006951",
+          "hits": 96
+        },
+        {
+          "hex": "#b45340",
+          "hits": 85
+        },
+        {
+          "hex": "#005480",
+          "hits": 73
+        },
+        {
+          "hex": "#85cddb",
+          "hits": 62
+        },
+        {
+          "hex": "#a5cf57",
+          "hits": 52
+        },
+        {
+          "hex": "#fec874",
+          "hits": 48
+        },
+        {
+          "hex": "#f58466",
+          "hits": 41
+        },
+        {
+          "hex": "#ab5425",
+          "hits": 8
+        }
+      ],
+      "stylesheets": [
+        "https://www.threeriversparks.org/sites/default/files/css/css_8FmMrBxkfmAMz2oW15TpuhWpxC0cUG4wEw1KFNoQEvE.css?delta=0&language=en&theme=threerivers&include=eJxVy0EOwyAMRNELEThS5Rg3WCHYsiFRb9-qi6ZsRl9PGtwpcxd7AKJYZmnpV_Fp0jq1HD5ACeVQadS6x16MyPgk82VBMBlONSgYbAZaPGUbCjXeEkfTsVb2Qjn83RMYbuwTbVVWqAv6zH6xkk3UX0o793AyXZ6-Gw_Jo9IbOOJVlA",
+        "https://www.threeriversparks.org/sites/default/files/css/css_Tl48dDrmvgDv7SAQAuqLG9Y0pQM08Hebz93BiNOekoI.css?delta=1&language=en&theme=threerivers&include=eJxVy0EOwyAMRNELEThS5Rg3WCHYsiFRb9-qi6ZsRl9PGtwpcxd7AKJYZmnpV_Fp0jq1HD5ACeVQadS6x16MyPgk82VBMBlONSgYbAZaPGUbCjXeEkfTsVb2Qjn83RMYbuwTbVVWqAv6zH6xkk3UX0o793AyXZ6-Gw_Jo9IbOOJVlA",
+        "https://www.threeriversparks.org/sites/default/files/css/css_8sSw_S5KDDaj2SxZMP1n5qvTRI_sftveKp4D3UUst7g.css?delta=4&language=en&theme=threerivers&include=eJxVy0EOwyAMRNELEThS5Rg3WCHYsiFRb9-qi6ZsRl9PGtwpcxd7AKJYZmnpV_Fp0jq1HD5ACeVQadS6x16MyPgk82VBMBlONSgYbAZaPGUbCjXeEkfTsVb2Qjn83RMYbuwTbVVWqAv6zH6xkk3UX0o793AyXZ6-Gw_Jo9IbOOJVlA",
+        "https://www.threeriversparks.org/sites/default/files/css/css_DQvn-bpNPRDosH3syrjC2ktS55JlXVsZn_VjSuFVAlM.css?delta=5&language=en&theme=threerivers&include=eJxVy0EOwyAMRNELEThS5Rg3WCHYsiFRb9-qi6ZsRl9PGtwpcxd7AKJYZmnpV_Fp0jq1HD5ACeVQadS6x16MyPgk82VBMBlONSgYbAZaPGUbCjXeEkfTsVb2Qjn83RMYbuwTbVVWqAv6zH6xkk3UX0o793AyXZ6-Gw_Jo9IbOOJVlA",
+        "https://www.threeriversparks.org/sites/default/files/css/css_XVpmXZp6Rxw_4pkN3yhaSUg0gkcjXmei3xithJEJrFY.css?delta=6&language=en&theme=threerivers&include=eJxVy0EOwyAMRNELEThS5Rg3WCHYsiFRb9-qi6ZsRl9PGtwpcxd7AKJYZmnpV_Fp0jq1HD5ACeVQadS6x16MyPgk82VBMBlONSgYbAZaPGUbCjXeEkfTsVb2Qjn83RMYbuwTbVVWqAv6zH6xkk3UX0o793AyXZ6-Gw_Jo9IbOOJVlA"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "lutsen-mountains": {
+    "archivedPages": 0,
+    "liveFetched": "https://www.lutsen.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "lutsenmountains",
+          "hits": 2
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "lutsenmountains",
+          "hits": 2
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:lutsenmountains",
+        "instagram:lutsenmountains"
+      ]
+    },
+    "colors": {
+      "meta": {
+        "msapplication-tilecolor": "#ffffff",
+        "theme-color": "#ffffff"
+      },
+      "declared": {
+        "--color-primary": "#00344f",
+        "--color-secondary": "#45697d"
+      },
+      "frequent": [
+        {
+          "hex": "#0094f0",
+          "hits": 10
+        },
+        {
+          "hex": "#f4daa6",
+          "hits": 6
+        },
+        {
+          "hex": "#f9c9bf",
+          "hits": 6
+        },
+        {
+          "hex": "#007ecc",
+          "hits": 4
+        },
+        {
+          "hex": "#022639",
+          "hits": 3
+        },
+        {
+          "hex": "#ffff00",
+          "hits": 2
+        },
+        {
+          "hex": "#77b259",
+          "hits": 2
+        },
+        {
+          "hex": "#e09600",
+          "hits": 2
+        }
+      ],
+      "stylesheets": [
+        "https://www.lutsen.com/sites/default/files/css/css_8bdU8tYPjParr4DwDdwz2UE-ZqoBtWd8QAfMpi7SSnk.css?delta=0&language=en&theme=lutsen&include=eJx9kVFyAyEIhi-k65E6rBK1i2BFk6anj9OdTJ7cFxH4Bn4AsoP8FUl2IOPBJ7zR0OQ-360gD-MJVJ-uoCpE1LfPEtB4aei8lCqM3HWTlmNmaz20cJnUq6wMRVoCAWGdxPt0bUdQbEvohtBHw7XCJAXrHHYJUNaeOa6nKBIGoU0I4ULI5Q5_RvYHZT7WXRqqtK62NimypHQqnVq80Cg8TX0u0Q77jmEy3Gf8xEIbFWiDb_g9AyytAOU_NDS6IrvTmLOI20WO2dE-cojYTYUGsUFN-q70iWyD69jnMtM8hj61Y3H7PJ25Z3yo-3-3c5UvncAH0g",
+        "https://www.lutsen.com/sites/default/files/css/css_efC0LtYB0pJIAPWrbJe7ygCr93UUpmF5imfAB32ssNY.css?delta=1&language=en&theme=lutsen&include=eJx9kVFyAyEIhi-k65E6rBK1i2BFk6anj9OdTJ7cFxH4Bn4AsoP8FUl2IOPBJ7zR0OQ-360gD-MJVJ-uoCpE1LfPEtB4aei8lCqM3HWTlmNmaz20cJnUq6wMRVoCAWGdxPt0bUdQbEvohtBHw7XCJAXrHHYJUNaeOa6nKBIGoU0I4ULI5Q5_RvYHZT7WXRqqtK62NimypHQqnVq80Cg8TX0u0Q77jmEy3Gf8xEIbFWiDb_g9AyytAOU_NDS6IrvTmLOI20WO2dE-cojYTYUGsUFN-q70iWyD69jnMtM8hj61Y3H7PJ25Z3yo-3-3c5UvncAH0g"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "giants-ridge": {
+    "archivedPages": 0,
+    "liveFetched": "https://www.giantsridge.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "giantsridge",
+          "hits": 3
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "giantsridge",
+          "hits": 2
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:giantsridge",
+        "instagram:giantsridge"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {
+        "--primary": "#007bff",
+        "--secondary": "#6c757d"
+      },
+      "frequent": [
+        {
+          "hex": "#ed2a00",
+          "hits": 134
+        },
+        {
+          "hex": "#e66060",
+          "hits": 50
+        },
+        {
+          "hex": "#99de74",
+          "hits": 37
+        },
+        {
+          "hex": "#007bff",
+          "hits": 34
+        },
+        {
+          "hex": "#212529",
+          "hits": 33
+        },
+        {
+          "hex": "#74a6de",
+          "hits": 30
+        },
+        {
+          "hex": "#dc3545",
+          "hits": 28
+        },
+        {
+          "hex": "#28a745",
+          "hits": 28
+        }
+      ],
+      "stylesheets": [
+        "https://www.giantsridge.com/wp-content/themes/gsi/assets/css/responsive.css?v=1.7.78&ver=7.0.4",
+        "https://www.giantsridge.com/wp-content/themes/gsi/assets/css/theme-default.css?v=1.7.78&ver=7.0.4",
+        "https://www.giantsridge.com/wp-content/themes/gsi/style.css?v=1.7.78&ver=7.0.4",
+        "https://www.giantsridge.com/wp-content/tablepress-combined.min.css",
+        "https://www.giantsridge.com/?code-snippets-css=1&ver=2"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "spirit-mountain": {
+    "archivedPages": 0,
+    "liveFetched": "https://spiritmt.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "spiritmtduluth",
+          "hits": 4
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "spiritmtduluth",
+          "hits": 4
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:spiritmtduluth",
+        "instagram:spiritmtduluth"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {
+        "--e-global-color-primary": "#2d65b0",
+        "--e-global-color-secondary": "#189f5a",
+        "--e-global-color-accent": "#189f5a"
+      },
+      "frequent": [
+        {
+          "hex": "#17a059",
+          "hits": 4
+        },
+        {
+          "hex": "#189f5a",
+          "hits": 2
+        },
+        {
+          "hex": "#f78da7",
+          "hits": 1
+        },
+        {
+          "hex": "#cf2e2e",
+          "hits": 1
+        },
+        {
+          "hex": "#ff6900",
+          "hits": 1
+        },
+        {
+          "hex": "#fcb900",
+          "hits": 1
+        },
+        {
+          "hex": "#7bdcb5",
+          "hits": 1
+        },
+        {
+          "hex": "#00d084",
+          "hits": 1
+        }
+      ],
+      "stylesheets": [
+        "https://spiritmt.com/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.7",
+        "https://spiritmt.com/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.7",
+        "https://spiritmt.com/wp-content/plugins/all-in-one-event-calendar/apiki/dist/styles/theme.css?ver=1715882482",
+        "https://spiritmt.com/wp-content/plugins/dynamic-content-for-elementor/assets/css/style.min.css?ver=3.4.7",
+        "https://spiritmt.com/wp-content/uploads/elementor/css/post-9.css?ver=1787071014"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "powder-ridge": {
+    "archivedPages": 0,
+    "liveFetched": "https://powderridge.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "powderridge",
+          "hits": 2
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "powder_ridge",
+          "hits": 1
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:powderridge",
+        "instagram:powder_ridge"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#2ea3f2",
+          "hits": 53
+        },
+        {
+          "hex": "#006799",
+          "hits": 14
+        },
+        {
+          "hex": "#00a5cb",
+          "hits": 14
+        },
+        {
+          "hex": "#068bc4",
+          "hits": 12
+        },
+        {
+          "hex": "#7cc68d",
+          "hits": 9
+        },
+        {
+          "hex": "#c37cc6",
+          "hits": 9
+        },
+        {
+          "hex": "#82c0c7",
+          "hits": 9
+        },
+        {
+          "hex": "#cd5c5c",
+          "hits": 8
+        }
+      ],
+      "stylesheets": [
+        "https://powderridge.com/wp-content/themes/Divi/style-static.min.css?ver=4.27.8",
+        "https://powderridge.com/wp-content/themes/powder-ridge/style.css?ver=4.27.8",
+        "https://powderridge.com/wp-content/plugins/divi-blog-extras/styles/style.min.css?ver=2.6.4",
+        "https://powderridge.com/wp-content/uploads/pum/pum-site-styles.css?generated=1780513638&ver=1.24.0",
+        "https://powderridge.com/wp-content/et-cache/15332/et-core-unified-tb-10561-tb-10612-15332.min.css?ver=1787382759"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "mount-kato": {
+    "archivedPages": 0,
+    "liveFetched": "https://www.mountkato.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [],
+      "instagram": [],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": []
+    },
+    "colors": {
+      "meta": {},
+      "declared": {
+        "--secondary-color": "#86868b",
+        "--accent": "#ff3c3c",
+        "--chatbot-primary": "#6366f1",
+        "--chatbot-secondary": "#ec4899"
+      },
+      "frequent": [
+        {
+          "hex": "#2196f3",
+          "hits": 82
+        },
+        {
+          "hex": "#f44336",
+          "hits": 45
+        },
+        {
+          "hex": "#4caf50",
+          "hits": 44
+        },
+        {
+          "hex": "#00bcd4",
+          "hits": 38
+        },
+        {
+          "hex": "#0d6efd",
+          "hits": 33
+        },
+        {
+          "hex": "#ffeb3b",
+          "hits": 24
+        },
+        {
+          "hex": "#ffc107",
+          "hits": 23
+        },
+        {
+          "hex": "#212529",
+          "hits": 21
+        }
+      ],
+      "stylesheets": [
+        "https://www.mountkato.com/assets/theme/j1/core/css/themes/unolight/bootstrap.min.css",
+        "https://www.mountkato.com/assets/theme/j1/core/css/vendor.min.css",
+        "https://www.mountkato.com/assets/theme/j1/modules/bootstrap/css/bootstrap.min.css",
+        "https://www.mountkato.com/assets/theme/j1/modules/backstretch/css/attic.min.css",
+        "https://www.mountkato.com/assets/theme/j1/modules/mmenuLight/css/mmenu-light.min.css"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "buena-vista": {
+    "archivedPages": 0,
+    "liveFetched": "https://bvskiarea.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "buenavistaskiarea",
+          "hits": 2
+        }
+      ],
+      "instagram": [],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:buenavistaskiarea"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#ff0000",
+          "hits": 5
+        },
+        {
+          "hex": "#c03223",
+          "hits": 3
+        },
+        {
+          "hex": "#a82c1e",
+          "hits": 3
+        },
+        {
+          "hex": "#cc0000",
+          "hits": 2
+        },
+        {
+          "hex": "#000066",
+          "hits": 2
+        },
+        {
+          "hex": "#ffff33",
+          "hits": 2
+        },
+        {
+          "hex": "#cc3300",
+          "hits": 1
+        },
+        {
+          "hex": "#000099",
+          "hits": 1
+        }
+      ],
+      "stylesheets": [
+        "https://bvskiarea.com/includes/bv.css"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "detroit-mountain": {
+    "archivedPages": 0,
+    "liveFetched": "https://detroitmountain.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "dmrainc",
+          "hits": 3
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "detroitmountain",
+          "hits": 7
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:dmrainc",
+        "instagram:detroitmountain"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#fbab54",
+          "hits": 33
+        },
+        {
+          "hex": "#009ddd",
+          "hits": 25
+        },
+        {
+          "hex": "#00d084",
+          "hits": 2
+        },
+        {
+          "hex": "#0693e3",
+          "hits": 2
+        },
+        {
+          "hex": "#7a00df",
+          "hits": 1
+        },
+        {
+          "hex": "#007cba",
+          "hits": 1
+        },
+        {
+          "hex": "#006ba1",
+          "hits": 1
+        },
+        {
+          "hex": "#005a87",
+          "hits": 1
+        }
+      ],
+      "stylesheets": [
+        "https://detroitmountain.com/wp-content/themes/salient/css/build/grid-system.css?ver=18.2.1",
+        "https://detroitmountain.com/wp-content/themes/salient/css/build/style.css?ver=18.2.1",
+        "https://detroitmountain.com/wp-content/themes/salient/css/build/header/header-secondary-nav.css?ver=18.2.1",
+        "https://detroitmountain.com/wp-content/themes/salient/css/build/elements/element-highlighted-text.css?ver=18.2.1",
+        "https://detroitmountain.com/wp-content/themes/salient/css/build/elements/element-wpb-column-border.css?ver=18.2.1"
+      ]
+    },
+    "formerDomainHints": []
+  },
+  "andes-tower-hills": {
+    "archivedPages": 0,
+    "liveFetched": "https://www.andestowerhills.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "andestowerhills",
+          "hits": 2
+        }
+      ],
+      "instagram": [
+        {
+          "network": "instagram",
+          "handle": "andestowerhills",
+          "hits": 2
+        }
+      ],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:andestowerhills",
+        "instagram:andestowerhills"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#fff86b",
+          "hits": 4
+        },
+        {
+          "hex": "#116dff",
+          "hits": 3
+        },
+        {
+          "hex": "#0f2ccf",
+          "hits": 1
+        },
+        {
+          "hex": "#2f5dff",
+          "hits": 1
+        },
+        {
+          "hex": "#597dff",
+          "hits": 1
+        },
+        {
+          "hex": "#acbeff",
+          "hits": 1
+        },
+        {
+          "hex": "#9c2426",
+          "hits": 1
+        },
+        {
+          "hex": "#df3336",
+          "hits": 1
+        }
+      ],
+      "stylesheets": []
+    },
+    "formerDomainHints": []
+  },
+  "coffee-mill": {
+    "archivedPages": 0,
+    "liveFetched": "https://cmskiarea.com/",
+    "redirectedTo": null,
+    "social": {
+      "facebook": [
+        {
+          "network": "facebook",
+          "handle": "coffee-mill-ski-area-196228406750",
+          "hits": 1
+        }
+      ],
+      "instagram": [],
+      "fromArchiveOnly": [],
+      "fromLiveOnly": [
+        "facebook:coffee-mill-ski-area-196228406750"
+      ]
+    },
+    "colors": {
+      "meta": {},
+      "declared": {},
+      "frequent": [
+        {
+          "hex": "#f26c0d",
+          "hits": 15
+        },
+        {
+          "hex": "#ff2252",
+          "hits": 1
+        },
+        {
+          "hex": "#ffd870",
+          "hits": 1
+        },
+        {
+          "hex": "#ed9f07",
+          "hits": 1
+        },
+        {
+          "hex": "#f70808",
+          "hits": 1
+        },
+        {
+          "hex": "#21759b",
+          "hits": 1
+        }
+      ],
+      "stylesheets": [
+        "https://cmskiarea.com/wp-content/themes/hello-elementor/style.css?ver=7.0.4",
+        "https://cmskiarea.com/wp-content/themes/hello-elementor/assets/css/theme.css?ver=3.4.9",
+        "https://cmskiarea.com/wp-content/themes/hello-elementor/assets/css/header-footer.css?ver=3.4.9",
+        "https://cmskiarea.com/wp-content/plugins/location-weather/includes/Blocks/build/style-index.css?ver=3.0.7",
+        "https://cmskiarea.com/wp-content/plugins/bookly-responsive-appointment-booking-tool/frontend/resources/css/bookly-main.css?ver=28.0"
+      ]
+    },
+    "formerDomainHints": [
+      "coffeemillski.com"
+    ]
+  },
+  "_probe": {
+    "offline": false
+  }
+}

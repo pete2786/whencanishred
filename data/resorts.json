@@ -9,12 +9,14 @@
     "website": "https://wildmountain.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "wildmtnskisnowboardwaterpark",
+      "instagram": "skiwildmtn"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#beee07",
+      "secondary": "#000000",
+      "source": "manual",
+      "note": "Terrain park green and black, chosen by hand. The site uses inconsistent colours, so nothing on it is authoritative."
     },
     "photos": []
   },
@@ -28,12 +30,12 @@
     "website": "https://trollhaugen.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "trollhaugen",
+      "instagram": "trollhaugentroll"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#005395",
+      "secondary": "#ffec26"
     },
     "photos": []
   },
@@ -47,12 +49,14 @@
     "website": "https://www.threeriversparks.org/location/hyland-hills-ski-area",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "hylandski",
+      "instagram": "hylandhills"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#5f3894",
+      "secondary": "#f26522",
+      "source": "manual",
+      "note": "Park purple and orange, chosen by hand. Shares threeriversparks.org with Elm Creek, so site CSS cannot tell the two hills apart."
     },
     "photos": []
   },
@@ -66,12 +70,12 @@
     "website": "https://www.aftonalps.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "aftonalpsmn",
+      "instagram": "aftonalps"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#b02621",
+      "secondary": "#10325a"
     },
     "photos": []
   },
@@ -85,12 +89,12 @@
     "website": "https://www.welchvillage.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "welchvillage",
+      "instagram": "welchvillage"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#1c75bc",
+      "secondary": "#fff200"
     },
     "photos": []
   },
@@ -104,12 +108,12 @@
     "website": "https://buckhill.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "buckhillmn",
+      "instagram": "buckhill"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#3db3e3",
+      "secondary": "#81d742"
     },
     "photos": []
   },
@@ -123,12 +127,14 @@
     "website": "https://www.threeriversparks.org/location/elm-creek-park-reserve",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "elmcreekparkreserve",
+      "instagram": "elmcreekparkreserve"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#fe3332",
+      "secondary": "#ffffff",
+      "source": "manual",
+      "note": "Park red and white, chosen by hand. Shares threeriversparks.org with Hyland Hills, so site CSS cannot tell the two hills apart."
     },
     "photos": []
   },
@@ -142,12 +148,12 @@
     "website": "https://www.lutsen.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "lutsenmountains",
+      "instagram": "lutsenmountains"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#00344f",
+      "secondary": "#45697d"
     },
     "photos": []
   },
@@ -161,12 +167,12 @@
     "website": "https://www.giantsridge.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "giantsridge",
+      "instagram": "giantsridge"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#ed2a00",
+      "secondary": "#99de74"
     },
     "photos": []
   },
@@ -180,12 +186,12 @@
     "website": "https://spiritmt.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "spiritmtduluth",
+      "instagram": "spiritmtduluth"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#2d65b0",
+      "secondary": "#189f5a"
     },
     "photos": []
   },
@@ -199,12 +205,12 @@
     "website": "https://powderridge.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "powderridge",
+      "instagram": "powder_ridge"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#068bc4",
+      "secondary": "#1a2738"
     },
     "photos": []
   },
@@ -218,12 +224,12 @@
     "website": "https://www.mountkato.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "mountkato",
+      "instagram": "mountkato"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#00487f",
+      "secondary": "#fd8204"
     },
     "photos": []
   },
@@ -237,12 +243,12 @@
     "website": "https://bvskiarea.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "buenavistaskiarea",
+      "instagram": "bvskiarea"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#0c356d",
+      "secondary": "#c03223"
     },
     "photos": []
   },
@@ -256,12 +262,12 @@
     "website": "https://detroitmountain.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "dmrainc",
+      "instagram": "detroitmountain"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#fbab54",
+      "secondary": "#009ddd"
     },
     "photos": []
   },
@@ -275,12 +281,12 @@
     "website": "https://www.andestowerhills.com/",
     "formerDomains": [],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "andestowerhills",
+      "instagram": "andestowerhills"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#12592e",
+      "secondary": "#213871"
     },
     "photos": []
   },
@@ -296,12 +302,12 @@
       "coffeemillski.com"
     ],
     "social": {
-      "facebook": null,
-      "instagram": null
+      "facebook": "Coffee-Mill-Ski-Area-196228406750",
+      "instagram": "coffeemillski"
     },
     "colors": {
-      "primary": null,
-      "secondary": null
+      "primary": "#00a8f0",
+      "secondary": "#000000"
     },
     "photos": []
   }
