@@ -30,6 +30,18 @@ function announcedDate(hint, season) {
   return `${year}-${String(m).padStart(2, "0")}-${String(hint.day).padStart(2, "0")}`;
 }
 
+// An OPEN capture in March says the hill was open in March, not when it opened.
+// With no CLOSED capture before it there is nothing bounding the estimate from
+// below, so a late one-sided "first open" is not an opening date at all — it is
+// a gap for the social pass to fill. Mid-January is the cutoff: no Minnesota
+// hill that opens at all opens later than that.
+const LATEST_PLAUSIBLE_MONTHDAY = "01-15";
+function plausibleOpening(date, season) {
+  if (!date) return false;
+  const y = Number(season.slice(0, 4));
+  return date <= `${y + 1}-${LATEST_PLAUSIBLE_MONTHDAY}`;
+}
+
 function inRange(date, start, end) {
   if (!date || !end) return false;
   if (date > end) return false;
@@ -91,12 +103,22 @@ function reconcileFirstLift(slug, season) {
              note: "from an announced opening date on a pre-season page", sources };
   }
 
-  if (end) {
+  if (end && (start || plausibleOpening(end, season))) {
     return {
       date: end, precision: "bracket",
       range: [start ? nextDay(start) : null, end],
       corroboration: "single",
       note: start ? null : "one-sided: no closed capture before the first open one",
+      sources,
+    };
+  }
+
+  // Something was observed open, but too late in the season to say when it
+  // opened. Record the observation without claiming it as an opening date.
+  if (end) {
+    return {
+      ...empty(),
+      note: `first archived open capture is ${end}, too late in the season to date the opening`,
       sources,
     };
   }
