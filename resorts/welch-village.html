@@ -115,6 +115,9 @@
     margin:0; text-wrap:balance;
   }
   .sec-note { font-size:14.5px; color:var(--ink-2); max-width:62ch; margin:12px 0 26px; }
+  /* Nothing styled links in body copy, so the first one to appear rendered
+     as browser-default #0000EE: 2:1 against the dark page. */
+  .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
 
   .chart-box {
     background:var(--surface); border:1px solid var(--line); border-radius:4px;

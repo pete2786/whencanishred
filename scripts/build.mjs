@@ -227,7 +227,11 @@ function forecastSection() {
   }).join("\n");
 
   return {
-    NOTE: `Wet-bulb forecast made ${madeStr}. Guns can run under ${fc.threshold}&deg;.${stale}`,
+    // No heading sits above this any more, so the note carries what the
+    // numbers are, where they come from, and when they were made.
+    NOTE: `${fc.horizonDays}-day wet-bulb forecast from ` +
+      `<a href="https://open-meteo.com/">Open-Meteo</a>, made ${madeStr}. ` +
+      `Guns can run under ${fc.threshold}&deg;.${stale}`,
     HEADLINE: headline,
     CARDS: cards,
   };
