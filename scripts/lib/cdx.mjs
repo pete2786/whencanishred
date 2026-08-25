@@ -14,6 +14,17 @@ mkdirSync(CACHE, { recursive: true });
 const key = s => createHash("sha1").update(s).digest("hex").slice(0, 16);
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+// archive.org throttles on request rate, and a full sweep makes a few hundred
+// index lookups. Pacing them apart costs a few minutes and avoids the long
+// exponential backoffs that cost far more.
+const CDX_MIN_INTERVAL = 2000;
+let lastCdxCall = 0;
+async function paceCdx() {
+  const wait = lastCdxCall + CDX_MIN_INTERVAL - Date.now();
+  if (wait > 0) await sleep(wait);
+  lastCdxCall = Date.now();
+}
+
 // archive.org rate-limits and occasionally 503s under load. Back off rather
 // than hammering, and give up quietly so one dead URL cannot stall a sweep.
 // A full sweep is thousands of requests and archive.org throttles hard partway
@@ -47,6 +58,7 @@ export async function captures(url, {
   const file = `${CACHE}/cdx-${key(q.toString())}.json`;
   if (existsSync(file)) return JSON.parse(readFileSync(file, "utf8"));
 
+  await paceCdx();
   const res = await retrying(`${CDX}?${q}`);
   if (!res) throw new Error(`CDX request failed: ${url}`);
 
