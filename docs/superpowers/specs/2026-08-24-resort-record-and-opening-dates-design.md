@@ -31,8 +31,8 @@ Nov 20.
 a recent-history strip per hill. It is also the window where Facebook posts and
 Wayback captures are both reliably findable. Roughly 160 dates across 16 hills.
 
-**Two independent sources, cross-referenced.** The Wayback sweep brackets a date;
-the social pass pins it. Agreement is the confidence signal. Disagreement is a
+**Two independent sources, cross-referenced.** The Wayback sweep runs first and
+brackets a date; the targeted social pass then pins it. Agreement is the confidence signal. Disagreement is a
 recorded state, not an error — never silently averaged.
 
 **Provenance on every date.** Every value carries its sources and how well they
@@ -138,10 +138,21 @@ social pass, rather than quietly producing no row.
 Not a script. A documented procedure run through the user's logged-in Chrome,
 writing into `data/raw/social.json` in the observation shape.
 
-Facebook is the primary target over Instagram: posts carry visible dates, pages are
-usually public, and most of these hills post "WE OPEN FRIDAY" as their entire
-marketing plan. Where a resort keeps a news or blog archive on its own site, that
-is easier than either and takes precedence.
+**Runs after the Wayback sweep, not before.** By then every hill has a bracket, so
+the pass is confirming a known few-day window rather than hunting through a season.
+When a resort's history is unreachable for an older season, the bracket survives and
+we lose precision rather than the whole row.
+
+Facebook is the primary target over Instagram. The resorts are more active on
+Instagram, but they cross-post the same announcements to Facebook, where the post
+carries a visible date and greppable text instead of "OPENING FRIDAY" baked into a
+graphic with an emoji caption. Instagram also offers no date navigation — the grid
+is newest-first with dates only on individual post pages — so reaching November 2021
+means scrolling past thousands of daily conditions posts into a rate-limit wall.
+Facebook is used for the same content at a fraction of the cost.
+
+Where a resort keeps a news or blog archive on its own site, that is easier than
+either and takes precedence.
 
 This pass also collects social handles, website URLs, and brand colors into
 `data/resorts.json`.
