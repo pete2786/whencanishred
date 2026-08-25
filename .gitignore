@@ -2,3 +2,6 @@
 data/cache/
 node_modules/
 .DS_Store
+
+# A local review table for data/resorts.json, regenerated on demand.
+review.html
