@@ -218,3 +218,61 @@ evidence. Beyond that:
 Recalibrating the projection and the hero range. Resort page design and color
 theming. The author's photos. The Troll/Wild race feature. Any hill outside the
 current 16. Each is its own project, and each gets better inputs from this one.
+
+---
+
+## Field findings, 2026-08-24
+
+Probed the Wayback backbone before planning. Four things change.
+
+**1. Wild Mountain's URL in `index.html` is wrong.** The page links
+`wildmountainski.com`, which has zero captures. The real site is
+`wildmountain.com` (357 captures). Every resort URL is re-verified when
+`resorts.json` is seeded rather than copied on faith.
+
+**2. Capture density is far thinner than "brackets to a few days" implied.**
+Daily-collapsed captures per domain, Oct 2021 - Apr 2026:
+
+| domain | captures | domain | captures |
+|---|---|---|---|
+| aftonalps.com | 371 | mountkato.com | 80 |
+| wildmountain.com | 357 | andestowerhills.com | 78 |
+| spiritmt.com | 218 | detroitmountain.com | 78 |
+| buckhill.com | 197 | trollhaugen.com | 73 |
+| lutsen.com | 165 | welchvillage.com | 62 |
+| giantsridge.com | 129 | bvskiarea.com | 92 |
+| powderridge.com | 95 | coffeemillski.com | 14 |
+
+For the thin hills that is roughly one capture every two weeks across a
+seven-month window. Brackets will often be one to two weeks wide, not four days.
+The social pass therefore carries more of the work than originally described, and
+Coffee Mill at 14 captures across five seasons is effectively social-only.
+
+**3. Absence of "open" is not evidence of closed.** Wild Mountain's homepage on
+9, 19, and 26 November 2024 showed season-pass and gift-card marketing with no
+operational language at all; only the 8 December capture said "OPEN DAILY". A
+hill can be open while its hero rotates to a gift card sale. The classifier
+therefore asserts a state only on explicit positive evidence:
+
+- `OPEN` on explicit open language or a nonzero runs-open count
+- `CLOSED` on explicit closed or pre-season language, or zero runs open
+- `NO-SIGNAL` otherwise, which is never treated as `CLOSED`
+
+A bracket is the last explicit `CLOSED` before the first explicit `OPEN`, and is
+frequently one-sided. One-sided is recorded as such.
+
+Pre-season pages often announce a future date ("WE OPEN FRIDAY NOV 15"). That is
+a `CLOSED` state carrying an `announcedOpening` hint, which is captured because
+it is often more precise than the bracket around it.
+
+**4. Conditions pages beat homepages and must be discovered, not guessed.** They
+are structured, they publish runs-open counts, and they do not rotate with
+marketing. They exist and are archived, at paths that differ per resort:
+`wildmountain.com/mountain-info/snow-report`,
+`andestowerhills.com/downhill-conditions`, and a `ski-area-snow-report` WordPress
+plugin on `trollhaugen.com`. A discovery pass over the CDX index finds these per
+resort into `data/sources.json` before the sweep runs, rather than hardcoding a
+guess.
+
+Also noted: some captures return compressed bodies that must be decoded before
+text extraction, and a binary-looking body is a fetch bug, not a `NO-SIGNAL`.
