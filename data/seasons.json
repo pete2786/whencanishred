@@ -1,0 +1,1748 @@
+{
+  "wild-mountain": {
+    "2021-22": {
+      "firstLift": {
+        "date": "2021-11-20",
+        "precision": "bracket",
+        "range": [
+          null,
+          "2021-11-20"
+        ],
+        "corroboration": "single",
+        "note": "one-sided: no closed capture before the first open one",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": "https://wildmountain.com/",
+            "evidence": "open by 2021-11-20, no prior closed capture"
+          }
+        ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": null,
+            "evidence": "open on 2022-02-28"
+          }
+        ],
+        "note": "last archived open capture is 2022-02-28, too early in the season to date the close"
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": "2022-10-18",
+        "precision": "bracket",
+        "range": [
+          null,
+          "2022-10-18"
+        ],
+        "corroboration": "single",
+        "note": "one-sided: no closed capture before the first open one",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": "https://wildmountain.com/mountain-info/snow-report",
+            "evidence": "open by 2022-10-18, no prior closed capture"
+          }
+        ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": null,
+            "evidence": "open on 2022-12-09"
+          }
+        ],
+        "note": "last archived open capture is 2022-12-09, too early in the season to date the close"
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": "2023-11-01",
+        "precision": "bracket",
+        "range": [
+          null,
+          "2023-11-01"
+        ],
+        "corroboration": "single",
+        "note": "one-sided: no closed capture before the first open one",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": "https://wildmountain.com/",
+            "evidence": "open by 2023-11-01, no prior closed capture"
+          }
+        ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": "2024-02-29",
+        "precision": "bracket",
+        "range": [
+          "2024-02-29",
+          "2024-04-30"
+        ],
+        "corroboration": "single",
+        "note": "last capture still reporting open",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": null,
+            "evidence": "open on 2024-02-29"
+          }
+        ]
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": "2024-11-15",
+        "precision": "bracket",
+        "range": [
+          "2024-11-15",
+          "2024-12-02"
+        ],
+        "corroboration": "single",
+        "note": "announced for 2024-11-15; first capture showing it open is 2024-12-02",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": "https://wildmountain.com/",
+            "evidence": "open by 2024-12-02, closed on 2024-11-09"
+          },
+          {
+            "kind": "announced",
+            "url": "https://wildmountain.com/wild-mountain/mountain-info/hours-of-operation",
+            "evidence": "All Responsibility Report Buy Now More Adventures Hours of Operation Projected Opening Is November 15 Projected Opening Is Friday, November 15 Weekend & Holiday Lift Schedule: All l"
+          }
+        ]
+      },
+      "fullOps": {
+        "date": "2024-12-24",
+        "precision": "bracket",
+        "range": [
+          null,
+          "2024-12-24"
+        ],
+        "corroboration": "single",
+        "note": "first capture reporting 25 runs, against a peak of 25",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": "https://wildmountain.com/mountain-info/snow-report",
+            "evidence": "rent Conditions Date / Time Dec 23, 2024 - 11:05:AM Daily Notes It's PILINg Up. 25 of 26 trails open. December 24: Open 10am - 4pm December 25: Closed December 26 & Beyond: 10"
+          }
+        ]
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": null,
+            "evidence": "open on 2025-01-15"
+          }
+        ],
+        "note": "last archived open capture is 2025-01-15, too early in the season to date the close"
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": "2025-11-10",
+        "precision": "bracket",
+        "range": [
+          "2025-11-10",
+          "2025-11-10"
+        ],
+        "corroboration": "single",
+        "note": null,
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": "https://wildmountain.com/",
+            "evidence": "open by 2025-11-10, closed on 2025-11-09"
+          }
+        ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": "2026-03-14",
+        "precision": "bracket",
+        "range": [
+          "2026-03-14",
+          null
+        ],
+        "corroboration": "single",
+        "note": "last capture still reporting open",
+        "sources": [
+          {
+            "kind": "wayback",
+            "url": null,
+            "evidence": "open on 2026-03-14"
+          }
+        ]
+      }
+    }
+  },
+  "trollhaugen": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "hyland-hills": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "afton-alps": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "welch-village": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "buck-hill": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "elm-creek": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "lutsen-mountains": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "giants-ridge": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "spirit-mountain": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "powder-ridge": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "mount-kato": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "buena-vista": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "detroit-mountain": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "andes-tower-hills": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "coffee-mill": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  }
+}
