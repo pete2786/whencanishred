@@ -14,6 +14,7 @@ Opening dates are still placeholders.
 node scripts/allhours.mjs > data/hours.json   # Oct-Nov snowmaking hours per hill
 node scripts/climatology.mjs                  # first-window date, normal/earliest/latest
 node scripts/curve.mjs                        # mean wet-bulb curve for the chart
+node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
 node scripts/identity.mjs                     # social/color candidates -> data/raw/identity.json
 node scripts/identity.mjs --report            # the record next to the evidence
 node scripts/identity.mjs --page              # review.html: the whole record as a table
@@ -21,6 +22,11 @@ node scripts/identity.mjs --page              # review.html: the whole record as
 
 Raw pulls cache to `data/cache/` (~108MB, gitignored). First run is slow and
 rate-limited; reruns are free.
+
+The forecast is the one thing on the page that goes out of date. Rerun
+`scripts/forecast.mjs` before building; the page prints the date it was made and
+says so in the copy once it is two days old. Build it without `data/forecast.json`
+and the section says the forecast is missing rather than showing stale numbers.
 
 `review.html` is the page to read while editing: every field as a table, colors as
 swatches, handles as links, gaps in red, and each value sat next to the evidence

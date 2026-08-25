@@ -2,13 +2,16 @@
 // substitution, no dependencies. Output is committed; GitHub Pages serves the
 // repo root.
 
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
 const resorts = read("data/resorts.json");
 const seasons = read("data/seasons.json");
 const projection = read("data/projection.json");
 const hoursRows = read("data/hours.json");
+// Optional: the site builds without it, and says the forecast is missing
+// rather than printing numbers it does not have.
+const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
 
 // data/hours.json keys hills by display name, and one of them is shorter than
 // the name in the resort record.
@@ -156,6 +159,79 @@ function wordmark(name) {
 }
 
 const hours = Object.fromEntries(hoursRows.map(h => [slugify(h.hill), h]));
+
+// --------------------------------------------------------------- forecast
+//
+// Three hills stand for the three climates the state's hills sit in. The
+// metro is the warm case, the North Shore the cold one, and Duluth between.
+const REGIONS = [
+  { slug: "hyland-hills", label: "Metro", note: "Bloomington" },
+  { slug: "spirit-mountain", label: "Duluth", note: "Spirit Mountain" },
+  { slug: "lutsen-mountains", label: "North Shore", note: "Lutsen" },
+];
+
+const F = n => `${n.toFixed(1)}&deg;`;
+const whenWindow = iso => {
+  const d = new Date(`${iso}:00`);
+  const hour = d.getHours();
+  const h12 = hour % 12 === 0 ? 12 : hour % 12;
+  return `${DAYS[d.getDay()]} ${h12}${hour < 12 ? "am" : "pm"}`;
+};
+const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+function forecastSection() {
+  if (!fc) {
+    return { NOTE: "No forecast on file. Run <code>node scripts/forecast.mjs</code>.",
+             HEADLINE: "&mdash;", CARDS: "" };
+  }
+  const made = new Date(fc.generatedAt);
+  const ageDays = Math.floor((new Date() - made) / 86400000);
+  const madeStr = `${made.getDate()} ${FULL[made.getMonth()]}`;
+  // A forecast is only a forecast while it is about the future. Past a couple
+  // of days it is a stale guess, and the page should say so rather than let
+  // the reader assume it is current.
+  const stale = ageDays >= 2 ? ` <b>${ageDays} days old &mdash; rerun the forecast.</b>` : "";
+
+  const known = Object.entries(fc.hills).filter(([, h]) => h.min !== null);
+  const withWindow = known.filter(([, h]) => h.hoursUnder > 0);
+
+  let headline;
+  if (!known.length) {
+    headline = "The forecast could not be read for any hill.";
+  } else if (!withWindow.length) {
+    const [slug, h] = known.reduce((a, b) => (b[1].min < a[1].min ? b : a));
+    headline = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
+      `Coldest is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
+  } else {
+    const first = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
+    headline = `${withWindow.length} of ${known.length} hills get snowmaking weather. ` +
+      `<b>${esc(resorts[first[0]].name)}</b> first, ${whenWindow(first[1].firstWindow)}.`;
+  }
+
+  const cards = REGIONS.map(({ slug, label, note }) => {
+    const h = fc.hills[slug];
+    if (!h || h.min === null) {
+      return `      <div class="card"><h3>${label}</h3><p class="big">&mdash;</p>
+        <p>Forecast unavailable for ${esc(note)}.</p></div>`;
+    }
+    return `      <div class="card">
+        <h3>${label}</h3>
+        <p class="big">${F(h.min)}</p>
+        <p>Coldest wet bulb the ${fc.horizonDays}-day forecast reaches at ${esc(note)}.</p>
+        <dl>
+          <dt>Hours under ${fc.threshold}&deg;</dt><dd>${h.hoursUnder}</dd>
+          <dt>First window</dt><dd>${h.firstWindow ? whenWindow(h.firstWindow) : "&mdash;"}</dd>
+          <dt>Normal Oct&ndash;Nov hours</dt><dd>${hours[slug]?.normal ?? "&mdash;"}</dd>
+        </dl>
+      </div>`;
+  }).join("\n");
+
+  return {
+    NOTE: `Wet-bulb forecast made ${madeStr}. Guns can run under ${fc.threshold}&deg;.${stale}`,
+    HEADLINE: headline,
+    CARDS: cards,
+  };
+}
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const FULL = ["January","February","March","April","May","June","July","August",
@@ -327,6 +403,8 @@ const notice =
 const now = new Date();
 const dateline = `${now.getDate()} ${FULL[now.getMonth()]} ${now.getFullYear()}`;
 
+const fcSection = forecastSection();
+
 const fill = (tpl, map) =>
   Object.entries(map).reduce((s, [k, v]) => s.replaceAll(`<!--{{${k}}}-->`, v), tpl);
 
@@ -338,6 +416,9 @@ writeFileSync("index.html", fill(readFileSync("templates/index.html", "utf8"), {
   TABLE: tableRows(),
   NOTICE: notice,
   DATELINE: dateline,
+  FORECAST_NOTE: fcSection.NOTE,
+  FORECAST_HEADLINE: fcSection.HEADLINE,
+  FORECAST_CARDS: fcSection.CARDS,
   HERO_SCENARIOS: heroScenarios(leader),
   HERO_LEADER: esc(resorts[leader].name),
   HERO_SEASONS: String(lead.n),
