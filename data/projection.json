@@ -1,0 +1,66 @@
+{
+  "wild-mountain": {
+    "date": "2026-11-08",
+    "label": "model"
+  },
+  "trollhaugen": {
+    "date": "2026-11-10",
+    "label": "model"
+  },
+  "hyland-hills": {
+    "date": "2026-11-16",
+    "label": "model"
+  },
+  "afton-alps": {
+    "date": "2026-11-21",
+    "label": "target"
+  },
+  "welch-village": {
+    "date": "2026-11-22",
+    "label": "model"
+  },
+  "buck-hill": {
+    "date": "2026-11-24",
+    "label": "model"
+  },
+  "elm-creek": {
+    "date": "2026-12-06",
+    "label": "model"
+  },
+  "lutsen-mountains": {
+    "date": "2026-11-22",
+    "label": "announced"
+  },
+  "giants-ridge": {
+    "date": "2026-11-24",
+    "label": "target"
+  },
+  "spirit-mountain": {
+    "date": "2026-11-26",
+    "label": "model"
+  },
+  "powder-ridge": {
+    "date": "2026-11-26",
+    "label": "model"
+  },
+  "mount-kato": {
+    "date": "2026-11-27",
+    "label": "model"
+  },
+  "buena-vista": {
+    "date": "2026-11-28",
+    "label": "model"
+  },
+  "detroit-mountain": {
+    "date": "2026-12-03",
+    "label": "model"
+  },
+  "andes-tower-hills": {
+    "date": "2026-12-05",
+    "label": "model"
+  },
+  "coffee-mill": {
+    "date": "2026-12-10",
+    "label": "model"
+  }
+}
