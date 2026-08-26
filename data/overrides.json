@@ -155,13 +155,19 @@
     "2021-22": {
       "firstLift": {
         "date": "2021-11-26",
-        "note": "threeriversparks.org Hyland page, captured 27 and 29 November 2021, after the fact: \"Ski hill opens Friday, Nov. 26.\" By 18 January the same page read \"Hyland Hills is open for the season\", and by 24 March \"closed for the season\"."
+        "note": "threeriversparks.org Hyland page, captured 27 and 29 November 2021, after the fact: \"Ski hill opens Friday, Nov. 26.\" By 18 January the same page read \"Hyland Hills is open for the season\", and by 24 March \"closed for the season\". Facebook confirms it independently: on 26 November \"Now that we are back on the hill...\", and on the 27th \"Thanks to everyone who came out for opening day.\""
       }
     },
     "2024-25": {
       "firstLift": {
         "date": "2024-12-04",
         "note": "threeriversparks.org Hyland page, 2 December 2024: \"Opening day is Wednesday, Dec. 4 at 3 PM. We will see you on the slopes.\" The page carries a status field that read \"Closed for the season\" on 9, 14 and 19 November and \"Open, Regular Season Hours\" by 22 December, so the season did start; the announcement two days ahead is the only thing naming the day."
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": "2022-11-22",
+        "note": "Facebook, 22 November 2022, same day: \"We are all dressed up in our finest fresh pressed corduroy for opening day. We will have all 3 lifts running, both terrain park rope tows (big park is closed).\" The day before: \"We have a lot of snow. Want to avoid waiting in line for your season pass tomorrow?\""
       }
     }
   }
