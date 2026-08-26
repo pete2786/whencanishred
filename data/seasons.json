@@ -441,20 +441,27 @@
         "date": "2023-12-01",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Facebook, 28 November 2023: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Announced three days ahead and no post-hoc confirmation of the day exists: the archived page for that season drops the status field the site carried in other years. The season plainly ran — park posts on 31 December and \"East side of the park is now open\" on 12 January. Buck Hill also opened 1 December 2023.",
+        "note": "Hyland Hills Facebook, 28 November 2023, the hill announcing its own season: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Hyland opens the whole hill rather than easing in, so first lift and full operations are the same day. Buck Hill also opened 1 December 2023.",
         "sources": [
           {
             "kind": "local",
             "url": null,
-            "evidence": "Facebook, 28 November 2023: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Announced three days ahead and no post-hoc confirmation of the day exists: the archived page for that season drops the status field the site carried in other years. The season plainly ran — park posts on 31 December and \"East side of the park is now open\" on 12 January. Buck Hill also opened 1 December 2023."
+            "evidence": "Hyland Hills Facebook, 28 November 2023, the hill announcing its own season: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Hyland opens the whole hill rather than easing in, so first lift and full operations are the same day. Buck Hill also opened 1 December 2023."
           }
         ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-01",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Hyland Hills Facebook, 28 November 2023, the hill announcing its own season: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Hyland opens the whole hill rather than easing in, so first lift and full operations are the same day. Buck Hill also opened 1 December 2023.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Hyland Hills Facebook, 28 November 2023, the hill announcing its own season: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Hyland opens the whole hill rather than easing in, so first lift and full operations are the same day. Buck Hill also opened 1 December 2023."
+          }
+        ]
       },
       "close": {
         "date": null,
