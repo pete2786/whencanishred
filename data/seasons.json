@@ -1902,12 +1902,12 @@
         "date": "2024-11-23",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Andes Tower Hills, 23 November 2024: an opening weekend event. Source reference acc_5E9QLNyBRjytztWVRX08Q7.",
+        "note": "Andes Tower Hills Facebook event, 23 November 2024: an opening weekend event.",
         "sources": [
           {
             "kind": "local",
-            "url": null,
-            "evidence": "Andes Tower Hills, 23 November 2024: an opening weekend event. Source reference acc_5E9QLNyBRjytztWVRX08Q7."
+            "url": "https://www.facebook.com/events/1708852519966886/",
+            "evidence": "Andes Tower Hills Facebook event, 23 November 2024: an opening weekend event."
           }
         ]
       },
