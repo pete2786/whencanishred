@@ -1007,16 +1007,30 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-16",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Elm Creek Park Reserve Facebook, 16 December 2023.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/ElmCreekParkReserve/posts/pfbid02NWtsqKZ6m7qFwzWfQSjuXcBC4YbyR5yiTiqyN3hSvpXSEBMwVzfFrD95e3eGQRUVl",
+            "evidence": "Elm Creek Park Reserve Facebook, 16 December 2023."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-16",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Recorded as the same day as first lift. The hill opened and then shut intermittently to make snow through the rest of December, so no single later date marks the start of normal operations.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/ElmCreekParkReserve/posts/pfbid02NWtsqKZ6m7qFwzWfQSjuXcBC4YbyR5yiTiqyN3hSvpXSEBMwVzfFrD95e3eGQRUVl",
+            "evidence": "Recorded as the same day as first lift. The hill opened and then shut intermittently to make snow through the rest of December, so no single later date marks the start of normal operations."
+          }
+        ]
       },
       "close": {
         "date": null,
