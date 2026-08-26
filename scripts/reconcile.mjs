@@ -74,7 +74,7 @@ function reconcileFirstLift(slug, season) {
   if (hint) sources.push({ kind: "announced", url: hint.t.url, evidence: hint.t.announcedOpening.evidence });
 
   if (soc) sources.push({ kind: "social", url: soc.url, evidence: soc.evidence });
-  if (ovr) sources.push({ kind: "local", url: null, evidence: ovr.note });
+  if (ovr) sources.push({ kind: "local", url: ovr.url ?? null, evidence: ovr.note });
 
   // An override is the author's own knowledge and outranks everything.
   if (ovr) {
@@ -146,7 +146,7 @@ function reconcileFullOps(slug, season) {
   const soc = social[slug]?.[season]?.fullOps;
   const ovr = overrides[slug]?.[season]?.fullOps;
   if (ovr) return { date: ovr.date, precision: "exact", corroboration: "single", note: ovr.note,
-                    sources: [{ kind: "local", url: null, evidence: ovr.note }] };
+                    sources: [{ kind: "local", url: ovr.url ?? null, evidence: ovr.note }] };
   if (soc) return { date: soc.date, precision: "exact", corroboration: "single",
                     sources: [{ kind: "social", url: soc.url, evidence: soc.evidence }] };
 
@@ -171,7 +171,7 @@ function reconcileClose(slug, season) {
   const soc = social[slug]?.[season]?.close;
   const ovr = overrides[slug]?.[season]?.close;
   if (ovr) return { date: ovr.date, precision: "exact", corroboration: "single", note: ovr.note,
-                    sources: [{ kind: "local", url: null, evidence: ovr.note }] };
+                    sources: [{ kind: "local", url: ovr.url ?? null, evidence: ovr.note }] };
   if (soc) return { date: soc.date, precision: "exact", corroboration: "single",
                     sources: [{ kind: "social", url: soc.url, evidence: soc.evidence }] };
   if (!wb?.lastOpen) return empty();
