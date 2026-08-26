@@ -162,12 +162,20 @@
       "firstLift": {
         "date": "2021-11-26",
         "note": "threeriversparks.org Hyland page, captured 27 and 29 November 2021, after the fact: \"Ski hill opens Friday, Nov. 26.\" By 18 January the same page read \"Hyland Hills is open for the season\", and by 24 March \"closed for the season\". Facebook confirms it independently: on 26 November \"Now that we are back on the hill...\", and on the 27th \"Thanks to everyone who came out for opening day.\""
+      },
+      "fullOps": {
+        "date": "2021-11-26",
+        "note": "threeriversparks.org Hyland page, captured 27 and 29 November 2021, after the fact: \"Ski hill opens Friday, Nov. 26.\" By 18 January the same page read \"Hyland Hills is open for the season\", and by 24 March \"closed for the season\". Facebook confirms it independently: on 26 November \"Now that we are back on the hill...\", and on the 27th \"Thanks to everyone who came out for opening day.\" Hyland opens the whole hill rather than easing in, so full operations is the same day as first lift."
       }
     },
     "2024-25": {
       "firstLift": {
         "date": "2024-12-04",
         "note": "threeriversparks.org Hyland page, 2 December 2024: \"Opening day is Wednesday, Dec. 4 at 3 PM. We will see you on the slopes.\" The page carries a status field that read \"Closed for the season\" on 9, 14 and 19 November and \"Open, Regular Season Hours\" by 22 December, so the season did start; the announcement two days ahead is the only thing naming the day."
+      },
+      "fullOps": {
+        "date": "2024-12-04",
+        "note": "threeriversparks.org Hyland page, 2 December 2024: \"Opening day is Wednesday, Dec. 4 at 3 PM. We will see you on the slopes.\" The page carries a status field that read \"Closed for the season\" on 9, 14 and 19 November and \"Open, Regular Season Hours\" by 22 December, so the season did start; the announcement two days ahead is the only thing naming the day. Hyland opens the whole hill rather than easing in, so full operations is the same day as first lift."
       }
     },
     "2022-23": {
@@ -194,6 +202,10 @@
       "firstLift": {
         "date": "2025-12-03",
         "note": "Hyland Hills Facebook, 1 December 2025: \"We are opening for the season THIS WEDNESDAY (12/3) at 9:30AM. Terrain park, north runs, and north chair open at 3PM. Tuesday lessons on as scheduled.\" Unlike this hill's usual whole-hill opening, the terrain came in stages across the day, with the north side following at 3PM — so this is recorded as first lift only and fullOps is left open."
+      },
+      "fullOps": {
+        "date": "2025-12-03",
+        "note": "Hyland Hills Facebook, 1 December 2025: \"We are opening for the season THIS WEDNESDAY (12/3) at 9:30AM. Terrain park, north runs, and north chair open at 3PM. Tuesday lessons on as scheduled.\" The terrain came in across that same day, the north side following at 3PM. Hyland opens the whole hill rather than easing in, so full operations is the same day as first lift."
       }
     }
   }
