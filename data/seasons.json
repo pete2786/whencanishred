@@ -486,10 +486,17 @@
   "afton-alps": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-11-24",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "aftonalps.com homepage banner, captured 25 and 28 November 2021, after the fact: \"Opening Day Wed, Nov 24th at 3:30pm.\" The same banner had read \"Afton Alps plans to open for winter November 19\" from 5 October through 8 November, so the plan slipped five days. By 9 December: \"Open for the 2021/22 Winter Season!\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "aftonalps.com homepage banner, captured 25 and 28 November 2021, after the fact: \"Opening Day Wed, Nov 24th at 3:30pm.\" The same banner had read \"Afton Alps plans to open for winter November 19\" from 5 October through 8 November, so the plan slipped five days. By 9 December: \"Open for the 2021/22 Winter Season!\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -506,10 +513,17 @@
     },
     "2022-23": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2022-11-18",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "aftonalps.com banner, 16 November 2022: \"JOIN US FOR OPENING DAY, NOV 18\"; by the 28th: \"WE ARE OPEN FOR THE 2022-23 SEASON!\" CBS Minnesota on 12 November reported snowmaking ahead of a \"targeted opener next Friday\", which is the 18th. Announced rather than same-day, but two independent sources name the date and the hill confirms the season started.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "aftonalps.com banner, 16 November 2022: \"JOIN US FOR OPENING DAY, NOV 18\"; by the 28th: \"WE ARE OPEN FOR THE 2022-23 SEASON!\" CBS Minnesota on 12 November reported snowmaking ahead of a \"targeted opener next Friday\", which is the 18th. Announced rather than same-day, but two independent sources name the date and the hill confirms the season started."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -546,10 +560,17 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-11-30",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "aftonalps.com banner, captured 3 December 2024, after the fact: \"Opening Day Announced! The wait is over. Join us on Saturday, November 30th starting at 10:00 AM for the first turns of the 24/25 winter season.\" On 25 November the banner still read \"Opening Day News Is Coming Soon\", so the hill was shut then. News coverage agrees, reporting a first chair banner break at 10am with three trails open.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "aftonalps.com banner, captured 3 December 2024, after the fact: \"Opening Day Announced! The wait is over. Join us on Saturday, November 30th starting at 10:00 AM for the first turns of the 24/25 winter season.\" On 25 November the banner still read \"Opening Day News Is Coming Soon\", so the hill was shut then. News coverage agrees, reporting a first chair banner break at 10am with three trails open."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -566,10 +587,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-04",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "aftonalps.com banner, 2 December 2025: \"Afton Opening Announcement: Afton Alps opens Thur, Dec 4th\"; captured again on the 6th, after the fact: \"Afton is Open. The 25/26 season is underway.\" On 17 November the banner offered only pre-season retail and tune shop hours.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "aftonalps.com banner, 2 December 2025: \"Afton Opening Announcement: Afton Alps opens Thur, Dec 4th\"; captured again on the 6th, after the fact: \"Afton is Open. The 25/26 season is underway.\" On 17 November the banner offered only pre-season retail and tune shop hours."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
