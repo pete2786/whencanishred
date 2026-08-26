@@ -50,6 +50,26 @@ them `locked`. Do not "correct" them to match the probe's evidence.
 
 ## Opening dates
 
+Each season carries two dates, and the difference between them is the point.
+
+- **`firstLift`** — any public lift-served skiing. One rope tow, one run, a
+  Friday night park session. Wild Mountain spinning a chair over a single strip
+  of man-made snow counts.
+- **`fullOps`** — normal hours and normal services: the regular schedule,
+  rentals, lessons, the food open. **Not 100% open.** A connector trail still
+  closed or a halfpipe not yet built does not count against it — those are
+  bonus, and where the line sits varies by hill.
+
+Buck Hill's 2025-26 season is the worked example. It ran an opening weekend on
+29-30 November, closed for four days to make snow, and came back on 5 December
+with additional lifts, more parks, tubing and lessons. More terrain followed on
+the 12th and the halfpipe on the 17th, when the hill called itself "100% open".
+`firstLift` is 29 November, `fullOps` is 5 December, and 17 December is neither.
+
+Trollhaugen says it plainly in its own words: "NORMAL HOURS BEGIN 11/28",
+eighteen days after first lift.
+
+
 The dates are not on the internet. The archive sweep filled 5 of 80 season-slots
 and no aggregator carries historical opening dates for hills this small, so the
 record is filled by asking the hills directly. See `docs/asking-the-hills.md` for

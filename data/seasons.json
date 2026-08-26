@@ -768,10 +768,17 @@
         ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-05",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 2 and 4 December 2025: \"We are officially back on Friday, December 5th at 3:00 PM. New trails, more parks, and additional lifts will be ready to go.\" Snow tubing opened the same day and lessons were bookable. The hill ran the opening weekend of 29-30 November then closed 1-4 December to make snow, so this is the day it started operating as a hill rather than an event. Not 100%: more terrain followed on the 12th and the halfpipe on the 17th, both treated as bonus.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 2 and 4 December 2025: \"We are officially back on Friday, December 5th at 3:00 PM. New trails, more parks, and additional lifts will be ready to go.\" Snow tubing opened the same day and lessons were bookable. The hill ran the opening weekend of 29-30 November then closed 1-4 December to make snow, so this is the day it started operating as a hill rather than an event. Not 100%: more terrain followed on the 12th and the halfpipe on the 17th, both treated as bonus."
+          }
+        ]
       },
       "close": {
         "date": null,
