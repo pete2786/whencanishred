@@ -1899,10 +1899,17 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-11-23",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Andes Tower Hills, 23 November 2024: an opening weekend event. Source reference acc_5E9QLNyBRjytztWVRX08Q7.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Andes Tower Hills, 23 November 2024: an opening weekend event. Source reference acc_5E9QLNyBRjytztWVRX08Q7."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
