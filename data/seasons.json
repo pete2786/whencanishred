@@ -640,10 +640,17 @@
   "buck-hill": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-11-26",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Confirmed on the day by Facebook, 26 November 2021: \"At 10:00 AM today Buck Hill will be officially open for the 2021-2022 season!\", \"WELCOME TO WINTER!\", and that evening \"Thanks to everyone for coming out to ski and snowboard today! There were smiles from top to bottom all day!\" Announced 22 Nov (\"On Friday, November 26th Buck Hill will be welcoming you back to winter\") and 24 Nov. The Wayback archive holds no capture of this hill for the whole of Oct-Dec 2021.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Confirmed on the day by Facebook, 26 November 2021: \"At 10:00 AM today Buck Hill will be officially open for the 2021-2022 season!\", \"WELCOME TO WINTER!\", and that evening \"Thanks to everyone for coming out to ski and snowboard today! There were smiles from top to bottom all day!\" Announced 22 Nov (\"On Friday, November 26th Buck Hill will be welcoming you back to winter\") and 24 Nov. The Wayback archive holds no capture of this hill for the whole of Oct-Dec 2021."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
