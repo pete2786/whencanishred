@@ -680,16 +680,30 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-01",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 1 December 2023, same day: \"Buck Hill is NOW OPEN for the 2023-2024 season!\" Confirms the announcement on buckhill.com/opening-friday-dec-1st.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 1 December 2023, same day: \"Buck Hill is NOW OPEN for the 2023-2024 season!\" Confirms the announcement on buckhill.com/opening-friday-dec-1st."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-01",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Opened at full operations. buckhill.com/opening-friday-dec-1st lists 13 of 16 trails, both terrain parks, and the new Center Chair plus North Chair, Red Tail rope tow and both carpets, from day one.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Opened at full operations. buckhill.com/opening-friday-dec-1st lists 13 of 16 trails, both terrain parks, and the new Center Chair plus North Chair, Red Tail rope tow and both carpets, from day one."
+          }
+        ]
       },
       "close": {
         "date": null,
@@ -700,16 +714,30 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-11-30",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Reported by the author from Buck Hill’s Facebook feed, 25 August 2026. Archive agrees it was shut on 2 November (\"OPENING FOR WINTER 2024-2025 AS WEATHER ALLOWS\", all days Closed).",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Reported by the author from Buck Hill’s Facebook feed, 25 August 2026. Archive agrees it was shut on 2 November (\"OPENING FOR WINTER 2024-2025 AS WEATHER ALLOWS\", all days Closed)."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-12-09",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Reported by the author from Buck Hill’s Facebook feed, 25 August 2026. Note a later blog post dated 23 December 2024 titled \"BUCK HILL IS 100% OPEN!\", which may mark the last trails rather than full operations — unresolved.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Reported by the author from Buck Hill’s Facebook feed, 25 August 2026. Note a later blog post dated 23 December 2024 titled \"BUCK HILL IS 100% OPEN!\", which may mark the last trails rather than full operations — unresolved."
+          }
+        ]
       },
       "close": {
         "date": null,
