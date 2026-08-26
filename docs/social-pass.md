@@ -29,6 +29,37 @@ run, Trollhaugen and Coffee Mill are effectively social-only, and Detroit
 Mountain has no conditions page at all. Do those first; they are the rows where
 the pass is the entire source rather than a confirmation.
 
+## Driving the page
+
+Learned the hard way across six hills. The pass works when you follow these and
+stalls for an hour when you do not.
+
+**Use the date filter, not scrolling.** Every page has a **Filters** button above
+the posts. It offers Year, then Month, then Day, and jumps the feed straight
+there. Scrolling a month of image-heavy posts to reach its start takes dozens of
+screens; the Day field takes three clicks. Set it a few days *after* the opening
+you expect, so the confirming posts are the first thing you see.
+
+**Go slowly.** This matters more than anything else here. Facebook stops
+returning old posts if you page back quickly — the page keeps rendering, posts
+below the first stay as grey skeletons that never fill, and it looks like the
+history is gone. It is not; it is rate limiting. A few scroll ticks with several
+seconds between them keeps it feeding. Bursts of twenty ticks do not.
+
+**The throttle builds per page.** Hammering one hill gets that page cut off while
+a hill you have not touched still loads normally. If a page goes quiet, move to
+the next hill and come back later rather than pushing.
+
+**Reload before changing seasons.** After several filter changes on one page load
+the feed can wedge — it stops scrolling past the header and the dialog stops
+accepting selections. Navigating to the page afresh clears it.
+
+**Try the page search first.** Some pages carry a **Search** button next to
+Follow, which maps to `facebook.com/profile/{id}/search/?q=...` and can be
+visited directly. It is ranked and returns about seven results, so it finds a
+well-phrased opening post in one shot and misses plenty. Cheap to try, not
+something to rely on.
+
 ## Procedure
 
 For each resort, in worklist order:
@@ -39,8 +70,9 @@ For each resort, in worklist order:
    with an emoji caption and offers no date navigation.
 2. If the resort keeps a news or blog archive on its own site, use that first —
    it is easier than either platform.
-3. Scroll to the season's November. Look for the announcement post: "WE OPEN
-   SATURDAY", "WE'RE OPEN", "opening day", "first chair".
+3. Filter to the season's opening month and a day just after it, per **Driving
+   the page** above. Look for the announcement post: "WE OPEN SATURDAY", "WE'RE
+   OPEN", "opening day", "first chair".
 4. Record what exists, per season:
    - `firstLift` — the first day of public lift-served skiing, however small.
      One run, one rope tow, a Friday night park session all count.
@@ -62,6 +94,15 @@ For each resort, in worklist order:
   post about the tubing park is not `firstLift`.
 - **Reposts and anniversary throwbacks** carry an old date in the image and
   today's date on the post. Trust the post date only when the text is current.
+  These are also useful in reverse: Trollhaugen's throwback a year later is what
+  confirmed its 19 October 2022 opening independently.
+- **A first powder day is not a first day.** Wild Mountain and Buck Hill both
+  post about "the first POW DAY of the season" weeks after opening. It is about
+  natural snow, not lifts.
+- **Look for the day-after post, not just the announcement.** "Thanks to everyone
+  who came out for opening day" on the 27th proves the 26th happened; the
+  announcement on the 22nd only proves it was planned. The confirming post is
+  what turns a plan into a date.
 
 Do not guess. A season with no findable post is left absent, and the Wayback
 bracket stands alone. An absent entry is a better outcome than an invented one.
