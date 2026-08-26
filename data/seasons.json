@@ -1919,10 +1919,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-11-09",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Andes Tower Hills Facebook reel, 9 November 2025.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/reel/1172250117589776",
+            "evidence": "Andes Tower Hills Facebook reel, 9 November 2025."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
