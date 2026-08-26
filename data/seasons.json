@@ -660,10 +660,17 @@
     },
     "2022-23": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2022-11-22",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Confirmed on the day by Facebook, 22 November 2022: \"Come enjoy opening day with us! The skiing and snowboarding will be perfect with a sunny sky, 30 degree temp, and silky smooth corduroy\" and \"First day vibes are the best vibes!\". Announced 16 Nov, trailed by \"opens tomorrow\" on the 21st and \"the best part of opening weekend\" on the 27th.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Confirmed on the day by Facebook, 22 November 2022: \"Come enjoy opening day with us! The skiing and snowboarding will be perfect with a sunny sky, 30 degree temp, and silky smooth corduroy\" and \"First day vibes are the best vibes!\". Announced 16 Nov, trailed by \"opens tomorrow\" on the 21st and \"the best part of opening weekend\" on the 27th."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -748,10 +755,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-11-29",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Confirmed on the day by Facebook, 29 November 2025: \"Day one is on! Buck Hill is NOW OPEN FOR THE SEASON!\", \"Opening TODAY at 10:00 AM\", and a post naming Max, Eli and Bob as the season’s First Chair. Preceded by \"Buck Hill opens TOMORROW!\" on the 28th.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Confirmed on the day by Facebook, 29 November 2025: \"Day one is on! Buck Hill is NOW OPEN FOR THE SEASON!\", \"Opening TODAY at 10:00 AM\", and a post naming Max, Eli and Bob as the season’s First Chair. Preceded by \"Buck Hill opens TOMORROW!\" on the 28th."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
