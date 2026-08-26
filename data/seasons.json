@@ -1068,10 +1068,17 @@
         ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-12-16",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Recorded as the same day as first lift.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/ElmCreekParkReserve/posts/pfbid024DhcZES9dtb2QZZJgG4jRAjf9HqDVS5uto19sVyqmkemrD8xjZeFy9kwmr9SHTa8l",
+            "evidence": "Recorded as the same day as first lift."
+          }
+        ]
       },
       "close": {
         "date": null,
