@@ -218,10 +218,17 @@
   "trollhaugen": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-11-19",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 19 November 2021, \"OPENING WEEKEND\" with the full schedule: \"FRIDAY NOV.19TH 2pm-8pm | $30 Lift Tickets | 1 Chair + 1 Rope | Nissebakken & Tomte Park | Snack Bar Open | Bar Closed | Ski Shop 12-6pm\". The next day’s post opens \"Day 2 let’s go!!\", confirming Friday was day one. Pre-season by the hill’s own description on 17 Nov: \"limited terrain, no rentals or lessons, and reduced Snack Bar & Skol hours\". Mondays, Tuesdays and Thursdays were closed for the following fortnight.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 19 November 2021, \"OPENING WEEKEND\" with the full schedule: \"FRIDAY NOV.19TH 2pm-8pm | $30 Lift Tickets | 1 Chair + 1 Rope | Nissebakken & Tomte Park | Snack Bar Open | Bar Closed | Ski Shop 12-6pm\". The next day’s post opens \"Day 2 let’s go!!\", confirming Friday was day one. Pre-season by the hill’s own description on 17 Nov: \"limited terrain, no rentals or lessons, and reduced Snack Bar & Skol hours\". Mondays, Tuesdays and Thursdays were closed for the following fortnight."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -238,16 +245,30 @@
     },
     "2022-23": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2022-10-19",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 19 October 2022, same day: \"WHO WANTS FIRST CHAIR — We will be OPEN TODAY for some preseason playtime\", and a second post that day naming the riders who \"earned the coveted first chair at Troll + first chair in North America badge for the 22/23 season\". Two days of preseason only: open again 20 Oct 2-8pm, then \"closing down our preseason playtime at 7pm\" on the 21st, shut until 14 November.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 19 October 2022, same day: \"WHO WANTS FIRST CHAIR — We will be OPEN TODAY for some preseason playtime\", and a second post that day naming the riders who \"earned the coveted first chair at Troll + first chair in North America badge for the 22/23 season\". Two days of preseason only: open again 20 Oct 2-8pm, then \"closing down our preseason playtime at 7pm\" on the 21st, shut until 14 November."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2022-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 28 November 2022: \"We’re back to normal operating hours for daily Troll fun\", with the normal rope hours listed. Before this the week was patchy — closed Thanksgiving, 3-9pm weekdays. The same calendar date as the hill’s \"NORMAL HOURS BEGIN 11/28\" in 2025-26.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 28 November 2022: \"We’re back to normal operating hours for daily Troll fun\", with the normal rope hours listed. Before this the week was patchy — closed Thanksgiving, 3-9pm weekdays. The same calendar date as the hill’s \"NORMAL HOURS BEGIN 11/28\" in 2025-26."
+          }
+        ]
       },
       "close": {
         "date": null,
@@ -258,16 +279,30 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-11-02",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 2 November 2023, same day: \"OPENING TODAY — Get the first turns of the 23/24 season today 11/2 from 3-9pm\". The next day: \"Thanks for enjoying Day 1 on the slopes with us\". A false start — the hill shut on the 6th and posted on the 8th \"Mother Nature wins this round. We will remain closed until snowmaking weather returns\", not reopening until 22 November.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 2 November 2023, same day: \"OPENING TODAY — Get the first turns of the 23/24 season today 11/2 from 3-9pm\". The next day: \"Thanks for enjoying Day 1 on the slopes with us\". A false start — the hill shut on the 6th and posted on the 8th \"Mother Nature wins this round. We will remain closed until snowmaking weather returns\", not reopening until 22 November."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-01",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 30 November 2023: \"It’s our last late 3pm start of preseason, and then we kick off normal season hours starting tomorrow. We have 8 Trails for you to enjoy\". Terrain had been added through the preceding week: Vesterdahl on the 28th, Jim’s Run and Galende on the 29th, Valhalla Park on the 30th.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 30 November 2023: \"It’s our last late 3pm start of preseason, and then we kick off normal season hours starting tomorrow. We have 8 Trails for you to enjoy\". Terrain had been added through the preceding week: Vesterdahl on the 28th, Jim’s Run and Galende on the 29th, Valhalla Park on the 30th."
+          }
+        ]
       },
       "close": {
         "date": null,
@@ -278,16 +313,30 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-11-27",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 27 November 2024, same day: \"So much SNOW! The 24/25 Season starts TODAY Wednesday 11/27 from 12-8pm\". The next day: \"Day 1 of our 75th Anniversary Season was unbelievable\". Four runs open by the 29th.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 27 November 2024, same day: \"So much SNOW! The 24/25 Season starts TODAY Wednesday 11/27 from 12-8pm\". The next day: \"Day 1 of our 75th Anniversary Season was unbelievable\". Four runs open by the 29th."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-12-08",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 8 December 2024: \"Regular Hours are back and we’re open daily at 10am for skiing & snowboarding! Wahoo!\" Eleven runs and six-plus lifts that weekend. Terrain kept filling in afterwards — Valhalla on the 12th, Bjorkedahl on the 18th, Chair 1 not until the 23rd — which is why the hill running normally comes before the hill being complete.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 8 December 2024: \"Regular Hours are back and we’re open daily at 10am for skiing & snowboarding! Wahoo!\" Eleven runs and six-plus lifts that weekend. Terrain kept filling in afterwards — Valhalla on the 12th, Bjorkedahl on the 18th, Chair 1 not until the 23rd — which is why the hill running normally comes before the hill being complete."
+          }
+        ]
       },
       "close": {
         "date": null,
