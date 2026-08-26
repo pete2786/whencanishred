@@ -60,6 +60,18 @@ visited directly. It is ranked and returns about seven results, so it finds a
 well-phrased opening post in one shot and misses plenty. Cheap to try, not
 something to rely on.
 
+Pages without that button still have the endpoint — the id is in the page
+source. In the browser console:
+
+```js
+[...new Set([...document.documentElement.innerHTML
+  .matchAll(/"pageID":"(\d{10,})"/g)].map(m => m[1]))]
+```
+
+Then visit `facebook.com/profile/{id}/search/?q=downhill+opens`. Search the
+words the hill actually uses: "downhill opens" found two Elm Creek seasons that
+"opening day" did not.
+
 ## Procedure
 
 For each resort, in worklist order:
