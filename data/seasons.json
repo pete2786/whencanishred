@@ -1013,10 +1013,17 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-12-16",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Elm Creek Park Reserve Facebook, 16 December 2024, same day: \"Downhill ski and snowboard opens at 3pm today.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Elm Creek Park Reserve Facebook, 16 December 2024, same day: \"Downhill ski and snowboard opens at 3pm today.\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -1033,16 +1040,30 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-20",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Elm Creek Park Reserve Facebook, 15 December 2025, \"Winter Season Opening Update\": \"Snow Tubing and the Downhill Ski & Snowboard Hills open this Saturday, December 20 — and we are rolling straight into winter break hours\", listing Downhill Ski & Snowboard 9am-9pm daily from the 20th. On 26 December: \"All Winter Recreation Area activities are OPEN.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Elm Creek Park Reserve Facebook, 15 December 2025, \"Winter Season Opening Update\": \"Snow Tubing and the Downhill Ski & Snowboard Hills open this Saturday, December 20 — and we are rolling straight into winter break hours\", listing Downhill Ski & Snowboard 9am-9pm daily from the 20th. On 26 December: \"All Winter Recreation Area activities are OPEN.\""
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-20",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Opened straight into full daily hours rather than a partial start: the 15 December post lists Chalet 8am-9pm, Downhill Ski & Snowboard 9am-9pm, Snow Tubing 10am-9pm, Cross Country 5am-10pm and Rentals 8am-9pm, all daily from 20 December.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Opened straight into full daily hours rather than a partial start: the 15 December post lists Chalet 8am-9pm, Downhill Ski & Snowboard 9am-9pm, Snow Tubing 10am-9pm, Cross Country 5am-10pm and Rentals 8am-9pm, all daily from 20 December."
+          }
+        ]
       },
       "close": {
         "date": null,

@@ -208,5 +208,23 @@
         "note": "Hyland Hills Facebook, 1 December 2025: \"We are opening for the season THIS WEDNESDAY (12/3) at 9:30AM. Terrain park, north runs, and north chair open at 3PM. Tuesday lessons on as scheduled.\" The terrain came in across that same day, the north side following at 3PM. Hyland opens the whole hill rather than easing in, so full operations is the same day as first lift."
       }
     }
+  },
+  "elm-creek": {
+    "2024-25": {
+      "firstLift": {
+        "date": "2024-12-16",
+        "note": "Elm Creek Park Reserve Facebook, 16 December 2024, same day: \"Downhill ski and snowboard opens at 3pm today.\""
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": "2025-12-20",
+        "note": "Elm Creek Park Reserve Facebook, 15 December 2025, \"Winter Season Opening Update\": \"Snow Tubing and the Downhill Ski & Snowboard Hills open this Saturday, December 20 — and we are rolling straight into winter break hours\", listing Downhill Ski & Snowboard 9am-9pm daily from the 20th. On 26 December: \"All Winter Recreation Area activities are OPEN.\""
+      },
+      "fullOps": {
+        "date": "2025-12-20",
+        "note": "Opened straight into full daily hours rather than a partial start: the 15 December post lists Chalet 8am-9pm, Downhill Ski & Snowboard 9am-9pm, Snow Tubing 10am-9pm, Cross Country 5am-10pm and Rentals 8am-9pm, all daily from 20 December."
+      }
+    }
   }
 }
