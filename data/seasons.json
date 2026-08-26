@@ -1054,28 +1054,28 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": "2025-12-20",
+        "date": "2025-12-19",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Elm Creek Park Reserve Facebook, 15 December 2025, \"Winter Season Opening Update\": \"Snow Tubing and the Downhill Ski & Snowboard Hills open this Saturday, December 20 — and we are rolling straight into winter break hours\", listing Downhill Ski & Snowboard 9am-9pm daily from the 20th. On 26 December: \"All Winter Recreation Area activities are OPEN.\"",
+        "note": "Elm Creek Park Reserve Facebook, 19 December 2025. Opened a day ahead of the 20 December date announced on the 15th, and opened straight into full operations rather than a partial start.",
         "sources": [
           {
             "kind": "local",
-            "url": null,
-            "evidence": "Elm Creek Park Reserve Facebook, 15 December 2025, \"Winter Season Opening Update\": \"Snow Tubing and the Downhill Ski & Snowboard Hills open this Saturday, December 20 — and we are rolling straight into winter break hours\", listing Downhill Ski & Snowboard 9am-9pm daily from the 20th. On 26 December: \"All Winter Recreation Area activities are OPEN.\""
+            "url": "https://www.facebook.com/ElmCreekParkReserve/posts/pfbid0E98Ub5Piofb7A1sBJuw94xzJrB6trP2QiykAVGkwJ74GztZxjhYk2PyiSDGFEj9xl",
+            "evidence": "Elm Creek Park Reserve Facebook, 19 December 2025. Opened a day ahead of the 20 December date announced on the 15th, and opened straight into full operations rather than a partial start."
           }
         ]
       },
       "fullOps": {
-        "date": "2025-12-20",
+        "date": "2025-12-19",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Opened straight into full daily hours rather than a partial start: the 15 December post lists Chalet 8am-9pm, Downhill Ski & Snowboard 9am-9pm, Snow Tubing 10am-9pm, Cross Country 5am-10pm and Rentals 8am-9pm, all daily from 20 December.",
+        "note": "Elm Creek Park Reserve Facebook, 19 December 2025. Opened a day ahead of the 20 December date announced on the 15th, and opened straight into full operations rather than a partial start.",
         "sources": [
           {
             "kind": "local",
-            "url": null,
-            "evidence": "Opened straight into full daily hours rather than a partial start: the 15 December post lists Chalet 8am-9pm, Downhill Ski & Snowboard 9am-9pm, Snow Tubing 10am-9pm, Cross Country 5am-10pm and Rentals 8am-9pm, all daily from 20 December."
+            "url": "https://www.facebook.com/ElmCreekParkReserve/posts/pfbid0E98Ub5Piofb7A1sBJuw94xzJrB6trP2QiykAVGkwJ74GztZxjhYk2PyiSDGFEj9xl",
+            "evidence": "Elm Creek Park Reserve Facebook, 19 December 2025. Opened a day ahead of the 20 December date announced on the 15th, and opened straight into full operations rather than a partial start."
           }
         ]
       },
