@@ -561,10 +561,17 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-11-29",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Facebook, 29 November 2023, same day: \"It is official. Afton Alps is open for the 2023/24 season\", posted with photos of a \"CELEBRATING 60 SEASONS - OPENING DAY 2023-2024\" banner break. A comment that day reads \"Nice to get some runs in today.\" The archive could only bracket this between 1 November (\"Keep thinking snow\") and 30 November (\"NOW OPEN\").",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Facebook, 29 November 2023, same day: \"It is official. Afton Alps is open for the 2023/24 season\", posted with photos of a \"CELEBRATING 60 SEASONS - OPENING DAY 2023-2024\" banner break. A comment that day reads \"Nice to get some runs in today.\" The archive could only bracket this between 1 November (\"Keep thinking snow\") and 30 November (\"NOW OPEN\")."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
