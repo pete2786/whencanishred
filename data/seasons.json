@@ -1839,10 +1839,17 @@
   "andes-tower-hills": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-11-20",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Andes Tower Hills Facebook video, Saturday 20 November 2021.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/watch/?v=295763105755890",
+            "evidence": "Andes Tower Hills Facebook video, Saturday 20 November 2021."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
