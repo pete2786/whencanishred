@@ -1859,10 +1859,17 @@
     },
     "2022-23": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2022-10-18",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Andes Tower Hills Facebook, 18 October 2022, same day: \"Come out and be part of a record breaking opener!! Our earliest opener EVER!!! Open today 1pm to 6pm. Turtle Express run (bunny hill) will be only run open. $10 lift ticket.\" One run, five hours, discounted ticket — first lift by the hill’s own account, nowhere near full operations.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/AndesTowerHills/posts/pfbid022MN5Nx6crSAq5HZQyyNmExR9FXGBSJDqnwErUR7R5bgM4LDQeJfEU98bpvopMPeul",
+            "evidence": "Andes Tower Hills Facebook, 18 October 2022, same day: \"Come out and be part of a record breaking opener!! Our earliest opener EVER!!! Open today 1pm to 6pm. Turtle Express run (bunny hill) will be only run open. $10 lift ticket.\" One run, five hours, discounted ticket — first lift by the hill’s own account, nowhere near full operations."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
