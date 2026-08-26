@@ -1932,10 +1932,17 @@
         ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-11-09",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Recorded as the same day as first lift, provisionally. Andes appears to run a weekend-only schedule, in which case opening weekend is its normal schedule and the two dates coincide by definition. Not confirmed: the earliest posted hours found so far are from 23 January 2026.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/reel/1172250117589776",
+            "evidence": "Recorded as the same day as first lift, provisionally. Andes appears to run a weekend-only schedule, in which case opening weekend is its normal schedule and the two dates coincide by definition. Not confirmed: the earliest posted hours found so far are from 23 January 2026."
+          }
+        ]
       },
       "close": {
         "date": null,
