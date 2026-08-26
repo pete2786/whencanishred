@@ -1,85 +1,85 @@
 {
-  "generatedAt": "2026-08-25T17:01:52.615Z",
+  "generatedAt": "2026-08-26T22:06:36.242Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
     "wild-mountain": {
-      "min": 49.4,
+      "min": 41.8,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "trollhaugen": {
-      "min": 49.7,
+      "min": 41.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "hyland-hills": {
-      "min": 50.6,
+      "min": 45.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "afton-alps": {
-      "min": 50.3,
+      "min": 42.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "welch-village": {
-      "min": 49.7,
+      "min": 42.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buck-hill": {
-      "min": 49.3,
+      "min": 42.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "elm-creek": {
-      "min": 49.1,
+      "min": 42.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "lutsen-mountains": {
-      "min": 43.7,
+      "min": 38,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "giants-ridge": {
-      "min": 44.6,
+      "min": 37.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "spirit-mountain": {
-      "min": 45.7,
+      "min": 38.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "powder-ridge": {
-      "min": 46.8,
+      "min": 39.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mount-kato": {
-      "min": 45.8,
+      "min": 41.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buena-vista": {
-      "min": 46,
+      "min": 38.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "detroit-mountain": {
-      "min": 45.7,
+      "min": 36.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "andes-tower-hills": {
-      "min": 46.3,
+      "min": 38.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "coffee-mill": {
-      "min": 49.7,
+      "min": 41.9,
       "hoursUnder": 0,
       "firstWindow": null
     }
