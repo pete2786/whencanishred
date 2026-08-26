@@ -175,6 +175,12 @@
         "date": "2022-11-22",
         "note": "Facebook, 22 November 2022, same day: \"We are all dressed up in our finest fresh pressed corduroy for opening day. We will have all 3 lifts running, both terrain park rope tows (big park is closed).\" The day before: \"We have a lot of snow. Want to avoid waiting in line for your season pass tomorrow?\""
       }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": "2023-12-01",
+        "note": "Facebook, 28 November 2023: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Announced three days ahead and no post-hoc confirmation of the day exists: the archived page for that season drops the status field the site carried in other years. The season plainly ran — park posts on 31 December and \"East side of the park is now open\" on 12 January. Buck Hill also opened 1 December 2023."
+      }
     }
   }
 }
