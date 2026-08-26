@@ -1879,10 +1879,17 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-11-11",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Andes Tower Hills Facebook, Saturday 11 November 2023.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/AndesTowerHills/posts/pfbid02yPo2xa9cntc43LrCJQ9eVThEKnqHmHsFmLf5jDzdBTbzuH17z8z6YMc2nWfofBsdl",
+            "evidence": "Andes Tower Hills Facebook, Saturday 11 November 2023."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
