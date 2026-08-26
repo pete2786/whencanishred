@@ -72,6 +72,47 @@ Then visit `facebook.com/profile/{id}/search/?q=downhill+opens`. Search the
 words the hill actually uses: "downhill opens" found two Elm Creek seasons that
 "opening day" did not.
 
+## Harvesting
+
+Reading posts a screenful at a time is the slow half. Drive the feed by hand —
+that part only a human does well — and let a snippet lift what is on screen.
+
+Paste `scripts/harvest-snippet.js` into the DevTools console once per page load.
+Chrome blocks pasted code until you type `allow pasting` at the prompt, once per
+profile. It defines `harvest()`:
+
+```js
+await harvest()      // expands every "See more", extracts, copies to clipboard
+copy(__out)          // if the auto-copy was blocked
+```
+
+Then merge the clipboard into the hill's post store:
+
+```sh
+pbpaste | node scripts/harvest.mjs elm-creek
+pbpaste | node scripts/harvest.mjs elm-creek --year 2023   # if posts came back undated
+```
+
+The store at `data/raw/posts/<slug>.json` is keyed by post id and append-only, so
+re-harvesting an overlapping view costs nothing. Grab whatever is on screen
+before moving on rather than deciding in the moment whether a view was worth it.
+It is committed: it is the evidence behind every date, and it means a season can
+be re-read without re-browsing.
+
+`harvest.mjs` prints the posts worth reading, oldest first. That ranking is
+recall-first on purpose. `lib/classify.mjs` was tuned for resort homepages and
+misses post-shaped language — "Downhill ski and snowboard opens at 3pm today"
+matches none of its patterns — so anything mentioning opening near ski context
+is surfaced and the judging below still happens by hand.
+
+**The date is often in the image.** Elm Creek's 16 December 2021 post reads only
+"1/2 Terrain Park & Bunny Hill Opening this weekend!"; the graphic attached to it
+gives Saturday the 18th and Sunday the 19th, which is the whole answer. Facebook
+auto-describes photos and frequently OCRs the words inside them, so the snippet
+captures alt text and the report prints any that names a day or an hour under an
+`img:` line. Treat it as a pointer to an image worth opening, never as a quote —
+it is machine-read and sometimes wrong.
+
 ## Procedure
 
 For each resort, in worklist order:
@@ -83,8 +124,9 @@ For each resort, in worklist order:
 2. If the resort keeps a news or blog archive on its own site, use that first —
    it is easier than either platform.
 3. Filter to the season's opening month and a day just after it, per **Driving
-   the page** above. Look for the announcement post: "WE OPEN SATURDAY", "WE'RE
-   OPEN", "opening day", "first chair".
+   the page** above, then `harvest()` the view. Look for the announcement post:
+   "WE OPEN SATURDAY", "WE'RE OPEN", "opening day", "first chair" — and open the
+   graphic on any post the report marks with an `img:` line.
 4. Record what exists, per season:
    - `firstLift` — the first day of public lift-served skiing, however small.
      One run, one rope tow, a Friday night park session all count.

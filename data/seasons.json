@@ -953,10 +953,17 @@
   "elm-creek": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-12-18",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Elm Creek Park Reserve Facebook, 16 December 2021: \"1/2 Terrain Park & Bunny Hill Opening this weekend! Closed Monday - Wednesday to make more snow.\" The post’s graphic gives the days and hours — Saturday 18 and Sunday 19 December — which pins the weekend to Saturday rather than Friday. Corroborated by the 22 December post, tagged #reopening, announcing Bunny & North Hill \"opening for the season Thursday, Dec. 23rd at 9:00 AM\" and the Terrain Park at noon: the Monday-Wednesday closure fell on 20-22 December exactly as announced, and a reopening presupposes the weekend ran. Downhill was still shut on 8 December: \"No downhill activities yet but we are working hard to get those hills open.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Elm Creek Park Reserve Facebook, 16 December 2021: \"1/2 Terrain Park & Bunny Hill Opening this weekend! Closed Monday - Wednesday to make more snow.\" The post’s graphic gives the days and hours — Saturday 18 and Sunday 19 December — which pins the weekend to Saturday rather than Friday. Corroborated by the 22 December post, tagged #reopening, announcing Bunny & North Hill \"opening for the season Thursday, Dec. 23rd at 9:00 AM\" and the Terrain Park at noon: the Monday-Wednesday closure fell on 20-22 December exactly as announced, and a reopening presupposes the weekend ran. Downhill was still shut on 8 December: \"No downhill activities yet but we are working hard to get those hills open.\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
