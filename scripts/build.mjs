@@ -12,6 +12,7 @@ const hoursRows = read("data/hours.json");
 // Optional: the site builds without it, and says the forecast is missing
 // rather than printing numbers it does not have.
 const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
+const seasonNotes = existsSync("data/season-notes.json") ? read("data/season-notes.json") : {};
 
 // data/hours.json keys hills by display name, and one of them is shorter than
 // the name in the resort record.
@@ -159,6 +160,15 @@ function wordmark(name) {
 }
 
 const hours = Object.fromEntries(hoursRows.map(h => [slugify(h.hill), h]));
+
+// Statewide context for a season, shown under the table it explains. A hill
+// opening late says nothing on its own; "the winter never came" does.
+function seasonNotesFor(slug) {
+  const rows = Object.keys(seasons[slug] ?? {})
+    .filter(s => seasonNotes[s])
+    .map(s => `        <p class="snote"><b>${esc(s)}</b>${esc(seasonNotes[s])}</p>`);
+  return rows.length ? `\n      <div class="snotes">\n${rows.join("\n")}\n      </div>` : "";
+}
 
 // --------------------------------------------------------------- forecast
 //
@@ -444,6 +454,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     TYPICAL: pretty(o.typical), EARLIEST: pretty(o.earliest), LATEST: pretty(o.latest),
     HOURS: String(hours[slug]?.normal ?? "—"),
     SEASONS: seasonRows(slug),
+    SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,
   }));
 }

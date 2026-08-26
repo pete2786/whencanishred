@@ -69,6 +69,10 @@ the 12th and the halfpipe on the 17th, when the hill called itself "100% open".
 Trollhaugen says it plainly in its own words: "NORMAL HOURS BEGIN 11/28",
 eighteen days after first lift.
 
+`data/season-notes.json` holds statewide context for a season — why a winter ran
+late, or opened fine and then stalled. It renders under the season table on every
+resort page, because an opening date on its own does not explain itself.
+
 
 The dates are not on the internet. The archive sweep filled 5 of 80 season-slots
 and no aggregator carries historical opening dates for hills this small, so the
