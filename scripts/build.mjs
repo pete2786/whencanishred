@@ -396,14 +396,34 @@ const tally = () => {
 };
 
 const t = tally();
-// Only name sources that actually contributed. The plan expected a second,
-// independent social pass; it never ran, so every date here traces to the
-// archive — including the "announced" ones, which are opening notices found
-// on those same archived pages, not a separate source.
+// Only name sources that actually contributed, and work it out from the record
+// rather than describing it by hand. This line has already been wrong once: it
+// credited "the resorts' own announcements" before any such pass had run, and
+// then went stale the other way once hand-sourced dates started arriving.
+// "announced" is not a source of its own — those are opening notices found on
+// the archived pages — so it folds into the archive phrase rather than being
+// listed beside it.
+const kinds = new Set(
+  Object.values(seasons)
+    .flatMap(s => Object.values(s))
+    .flatMap(e => [e.firstLift, e.fullOps, e.close])
+    .filter(x => x?.date)
+    .flatMap(x => (x.sources ?? []).map(s => s.kind))
+);
+const archivePhrase = kinds.has("announced")
+  ? "archived resort pages and the opening announcements on them"
+  : "archived resort pages";
+const parts = [];
+if (kinds.has("wayback") || kinds.has("announced")) parts.push(archivePhrase);
+if (kinds.has("social")) parts.push("the hills' own social posts");
+if (kinds.has("local")) parts.push("hand-recorded posts, news and local knowledge");
+const sourcePhrase = parts.length > 1
+  ? `${parts[0]}, plus ${parts.slice(1).join(" and ")}`
+  : parts[0] ?? "no sources yet";
+
 const provenance =
-  `${t.n} of ${t.total} opening dates sourced from archived resort pages and the opening ` +
-  `announcements on them, ${t.confirmed} corroborated by a second independent source. ` +
-  `Blanks are gaps, not guesses.`;
+  `${t.n} of ${t.total} opening dates sourced from ${sourcePhrase}, ${t.confirmed} ` +
+  `corroborated by a second independent source. Blanks are gaps, not guesses.`;
 
 // The banner states the coverage rather than describing the intent, and it
 // counts the record every build. A hand-written claim about how well the
