@@ -499,10 +499,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-03",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Hyland Hills Facebook, 1 December 2025: \"We are opening for the season THIS WEDNESDAY (12/3) at 9:30AM. Terrain park, north runs, and north chair open at 3PM. Tuesday lessons on as scheduled.\" Unlike this hill's usual whole-hill opening, the terrain came in stages across the day, with the north side following at 3PM — so this is recorded as first lift only and fullOps is left open.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Hyland Hills Facebook, 1 December 2025: \"We are opening for the season THIS WEDNESDAY (12/3) at 9:30AM. Terrain park, north runs, and north chair open at 3PM. Tuesday lessons on as scheduled.\" Unlike this hill's usual whole-hill opening, the terrain came in stages across the day, with the north side following at 3PM — so this is recorded as first lift only and fullOps is left open."
+          }
+        ]
       },
       "fullOps": {
         "date": null,

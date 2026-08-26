@@ -185,6 +185,12 @@
         "date": "2023-12-01",
         "note": "Hyland Hills Facebook, 28 November 2023, the hill announcing its own season: \"Three more sleeps until OPENING DAY: Friday, 12/1/23 at 3pm\", with a graphic repeating \"be the first on the hill, 3pm, December 1st\". Hyland opens the whole hill rather than easing in, so first lift and full operations are the same day. Buck Hill also opened 1 December 2023."
       }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": "2025-12-03",
+        "note": "Hyland Hills Facebook, 1 December 2025: \"We are opening for the season THIS WEDNESDAY (12/3) at 9:30AM. Terrain park, north runs, and north chair open at 3PM. Tuesday lessons on as scheduled.\" Unlike this hill's usual whole-hill opening, the terrain came in stages across the day, with the north side following at 3PM — so this is recorded as first lift only and fullOps is left open."
+      }
     }
   }
 }
