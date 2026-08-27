@@ -1,31 +1,31 @@
 {
   "wild-mountain": {
-    "date": "2026-11-08",
+    "date": "2026-11-10",
     "label": "model"
   },
   "trollhaugen": {
     "date": "2026-11-10",
     "label": "model"
   },
-  "hyland-hills": {
-    "date": "2026-11-16",
+  "andes-tower-hills": {
+    "date": "2026-11-11",
     "label": "model"
+  },
+  "buena-vista": {
+    "date": "2026-11-12",
+    "label": "climate"
+  },
+  "detroit-mountain": {
+    "date": "2026-11-15",
+    "label": "climate"
+  },
+  "spirit-mountain": {
+    "date": "2026-11-17",
+    "label": "climate"
   },
   "afton-alps": {
     "date": "2026-11-21",
     "label": "target"
-  },
-  "welch-village": {
-    "date": "2026-11-22",
-    "label": "model"
-  },
-  "buck-hill": {
-    "date": "2026-11-24",
-    "label": "model"
-  },
-  "elm-creek": {
-    "date": "2026-12-06",
-    "label": "model"
   },
   "lutsen-mountains": {
     "date": "2026-11-22",
@@ -35,32 +35,32 @@
     "date": "2026-11-24",
     "label": "target"
   },
-  "spirit-mountain": {
-    "date": "2026-11-26",
-    "label": "model"
-  },
   "powder-ridge": {
-    "date": "2026-11-26",
+    "date": "2026-11-24",
+    "label": "climate"
+  },
+  "buck-hill": {
+    "date": "2026-11-29",
     "label": "model"
   },
   "mount-kato": {
-    "date": "2026-11-27",
-    "label": "model"
+    "date": "2026-11-29",
+    "label": "climate"
   },
-  "buena-vista": {
-    "date": "2026-11-28",
-    "label": "model"
+  "welch-village": {
+    "date": "2026-11-30",
+    "label": "climate"
   },
-  "detroit-mountain": {
-    "date": "2026-12-03",
-    "label": "model"
-  },
-  "andes-tower-hills": {
-    "date": "2026-12-05",
+  "hyland-hills": {
+    "date": "2026-12-01",
     "label": "model"
   },
   "coffee-mill": {
-    "date": "2026-12-10",
+    "date": "2026-12-13",
+    "label": "model"
+  },
+  "elm-creek": {
+    "date": "2026-12-16",
     "label": "model"
   }
 }

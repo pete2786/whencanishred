@@ -15,6 +15,8 @@ node scripts/allhours.mjs > data/hours.json   # Oct-Nov snowmaking hours per hil
 node scripts/climatology.mjs                  # first-window date, normal/earliest/latest
 node scripts/curve.mjs                        # mean wet-bulb curve for the chart
 node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
+node scripts/project.mjs                      # projected opening dates -> data/projection.json
+node scripts/project.mjs --report              # the working, written nowhere
 node scripts/identity.mjs                     # social/color candidates -> data/raw/identity.json
 node scripts/identity.mjs --report            # the record next to the evidence
 node scripts/identity.mjs --page              # review.html: the whole record as a table
@@ -31,6 +33,26 @@ and the section says the forecast is missing rather than showing stale numbers.
 `review.html` is the page to read while editing: every field as a table, colors as
 swatches, handles as links, gaps in red, and each value sat next to the evidence
 behind it. It is gitignored and never published — regenerate it after each edit.
+
+`data/projection.json` is generated, not hand-owned. `scripts/project.mjs`
+projects each hill's next first lift two ways and labels which is which. A hill
+with at least two recorded seasons gets the **median** of its own first lifts —
+median, so Coffee Mill's 14 January 2024 does not drag it a fortnight late. A
+hill with no record gets a **climate** estimate: normal Oct-Nov snowmaking hours
+regressed against the openings of the hills that do have one.
+
+The fit includes the announced and targeted dates of hills that have no record
+of their own, and this matters. Fitted on the recorded hills alone the line is
+steep enough that extrapolating it puts Buena Vista, at 458 normal hours, in
+mid-October — while Giants Ridge at effectively the same 454 hours targets
+24 November and Lutsen at 386 announces the 22nd. Northern hills are bounded by
+staffing and holiday demand rather than by cold, and the curve flattens where
+the line does not. Feeding those stated dates into the fit buys sane
+extrapolation at the cost of in-sample R2, which is the right trade when the
+whole job is predicting hills that are not in the sample.
+
+A hill's own announced or targeted date always wins over the model. Both
+estimators are weak while the record is half empty; rerun after any backfill.
 
 `data/resorts.json` is hand-owned. `scripts/identity.mjs` only gathers candidate
 handles and colors from the resorts' own pages — archived captures first, then a
