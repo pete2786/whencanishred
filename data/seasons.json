@@ -773,10 +773,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-11-30",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook: \"2025 Welch Village Season Pass Holders ONLY on Sunday, Nov. 30th from Noon - 6PM.\" A pass-holder preview day — lifts spinning for customers on restricted access, six hours.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid02N495MNZcq59fBa1vCfAQ13axCs8RokPKgs7hMCJs9UkcE5HrchZVmafbkvn8ZH4Hl",
+            "evidence": "Welch Village Facebook: \"2025 Welch Village Season Pass Holders ONLY on Sunday, Nov. 30th from Noon - 6PM.\" A pass-holder preview day — lifts spinning for customers on restricted access, six hours."
+          }
+        ]
       },
       "fullOps": {
         "date": null,

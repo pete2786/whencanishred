@@ -322,5 +322,14 @@
         "note": "Recorded as the same day as first lift, provisionally. Andes appears to run a weekend-only schedule, in which case opening weekend is its normal schedule and the two dates coincide by definition. Not confirmed: the earliest posted hours found so far are from 23 January 2026."
       }
     }
+  },
+  "welch-village": {
+    "2025-26": {
+      "firstLift": {
+        "date": "2025-11-30",
+        "url": "https://www.facebook.com/welchvillage/posts/pfbid02N495MNZcq59fBa1vCfAQ13axCs8RokPKgs7hMCJs9UkcE5HrchZVmafbkvn8ZH4Hl",
+        "note": "Welch Village Facebook: \"2025 Welch Village Season Pass Holders ONLY on Sunday, Nov. 30th from Noon - 6PM.\" A pass-holder preview day — lifts spinning for customers on restricted access, six hours."
+      }
+    }
   }
 }
