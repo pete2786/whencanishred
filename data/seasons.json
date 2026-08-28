@@ -1261,10 +1261,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Lutsen Mountains Facebook reel, 28 November 2025: \"The 2025-26 season is officially underway! We’re so excited to welcome you back to the North Shore.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/reel/1832172520734418",
+            "evidence": "Lutsen Mountains Facebook reel, 28 November 2025: \"The 2025-26 season is officially underway! We’re so excited to welcome you back to the North Shore.\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
