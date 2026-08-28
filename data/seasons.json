@@ -1455,16 +1455,30 @@
   "spirit-mountain": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-11-26",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Spirit Mountain Facebook: \"We are currently still on track for an opening day of Friday, November 26, for Thanksgiving Weekend. As long as everything all goes as planned we should be able to open with one run and maybe even a few features.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/SpiritMtDuluth/videos/254984856526592/",
+            "evidence": "Spirit Mountain Facebook: \"We are currently still on track for an opening day of Friday, November 26, for Thanksgiving Weekend. As long as everything all goes as planned we should be able to open with one run and maybe even a few features.\""
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-12-14",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Spirit Mountain Facebook: \"This weekend is the final weekend of early season hours and ticket prices. We will move to regular season hours beginning next Tuesday December 14th.\" The hill priced the staged opening explicitly — early-season tickets until regular hours began.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/SpiritMtDuluth/posts/pfbid02wk8K4Ge9P7Vz496H4PPPXoPu7TZWsQJ1BBZHF8xfjaS6o17sLUmPcq4EHc5r9dCWl",
+            "evidence": "Spirit Mountain Facebook: \"This weekend is the final weekend of early season hours and ticket prices. We will move to regular season hours beginning next Tuesday December 14th.\" The hill priced the staged opening explicitly — early-season tickets until regular hours began."
+          }
+        ]
       },
       "close": {
         "date": null,
