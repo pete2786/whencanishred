@@ -753,10 +753,17 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-11-30",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook: \"Welch Village Season Pass Holders ONLY on Saturday, Nov. 30th. Open to public starting on Sunday, Dec. 1st.\" Counted from the pass-holder day, as at Welch in 2025-26; general public access followed one day later.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid02G8g4RyvR7BuwU8waY8BSBZy9AsDX7yHbQdk5L224ujbnLoh641YjpUkerUfsgzUBl",
+            "evidence": "Welch Village Facebook: \"Welch Village Season Pass Holders ONLY on Saturday, Nov. 30th. Open to public starting on Sunday, Dec. 1st.\" Counted from the pass-holder day, as at Welch in 2025-26; general public access followed one day later."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
