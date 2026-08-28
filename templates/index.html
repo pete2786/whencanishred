@@ -172,6 +172,16 @@
     color:var(--ink-3);
   }
 
+  /* Split on the diagonal so both colours read at 10px. The ring keeps a dot
+     whose half matches the page from dissolving into it — several of these
+     secondaries are white and several primaries are near-black. */
+  .pip {
+    display:inline-block; width:10px; height:10px; border-radius:50%;
+    margin-right:9px; flex:0 0 auto;
+    background:linear-gradient(135deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+    box-shadow:0 0 0 1px var(--line);
+  }
+
   /* A row of text does not read as navigation. The button does, and it is the
      thing the eye lands on at the end of the row. */
   .go-cell { text-align:right; white-space:nowrap; }

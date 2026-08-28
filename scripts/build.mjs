@@ -344,6 +344,16 @@ function heroScenarios(slug) {
 
 const GROUPS = [["twin-cities", "Twin Cities"], ["greater-minnesota", "Greater Minnesota"]];
 
+// The hill's own two colours, split across one dot. Enough to tell sixteen rows
+// apart without putting a logo palette into the type, where several of these
+// fail contrast. Hills with only a primary get a solid dot.
+function pip(r) {
+  const a = r.colors?.primary;
+  if (!a) return "";
+  const b = r.colors?.secondary ?? a;
+  return `<span class="pip" style="--c1:${esc(a)};--c2:${esc(b)}" aria-hidden="true"></span>`;
+}
+
 function tableRows() {
   const out = [];
   let rank = 0;
@@ -371,7 +381,7 @@ function tableRows() {
       const no = String(rank).padStart(2, "0");
       out.push(
         `          <tr${cls}>`,
-        `            <td class="hill"><span class="rank">${no}</span>` +
+        `            <td class="hill"><span class="rank">${no}</span>${pip(r)}` +
           `<a href="resorts/${slug}.html">${esc(r.name)}</a></td>`,
         `            <td class="where" data-label="Where">${esc(r.place)}</td>`,
         `            <td data-label="Projected">${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
