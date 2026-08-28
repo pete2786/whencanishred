@@ -98,6 +98,31 @@
     border-top:1px solid var(--line);
   }
   @media (max-width:640px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+  /* Same treatment as the homepage table: 820px of columns in a horizontal
+     scroller is unusable on a phone, so each season becomes a block and the
+     headers move onto the cells. The chart keeps its scroller — a 700px wide
+     line chart does not stack into anything. */
+  @media (max-width:700px) {
+    table { min-width:0; }
+    .tbl-box { overflow-x:visible; }
+    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    caption { padding:14px 16px 8px; }
+    tbody tr { display:block; border-bottom:1px solid var(--line); padding:10px 16px 12px; }
+    tbody tr:last-child { border-bottom:0; }
+    tbody tr td { display:flex; align-items:baseline; gap:8px;
+                  border:0; padding:4px 0; text-align:right; }
+    tbody tr td::before {
+      content:attr(data-label); text-align:left; flex:1 1 auto;
+      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ink-3); white-space:nowrap;
+    }
+    tbody tr td.season {
+      display:block; text-align:left; font-size:15px; font-weight:600; padding:0 0 6px;
+    }
+    tbody tr td.season::before { content:none; }
+    .rng { display:inline; margin:0 0 0 8px; }
+  }
   .stats dt {
     font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3);
@@ -300,11 +325,11 @@
           <tr><th>Season</th><th>First lift</th><th>Full operations</th><th>Closed</th><th>Sources</th></tr>
         </thead>
         <tbody>
-          <tr><td>2021-22</td><td>Nov 26<span class="rng">single</span></td><td>Nov 26<span class="rng">single</span></td><td>&mdash;</td><td class="where">local</td></tr>
-          <tr><td>2022-23</td><td>Nov 22<span class="rng">single</span></td><td>Nov 22<span class="rng">single</span></td><td>&mdash;</td><td class="where">local</td></tr>
-          <tr><td>2023-24</td><td>Dec 1<span class="rng">single</span></td><td>Dec 1<span class="rng">single</span></td><td>&mdash;</td><td class="where">local</td></tr>
-          <tr><td>2024-25</td><td>Dec 4<span class="rng">single</span></td><td>Dec 4<span class="rng">single</span></td><td>&mdash;</td><td class="where">local</td></tr>
-          <tr><td>2025-26</td><td>Dec 3<span class="rng">single</span></td><td>Dec 3<span class="rng">single</span></td><td>&mdash;</td><td class="where">local</td></tr>
+          <tr><td class="season">2021-22</td><td data-label="First lift">Nov 26<span class="rng">single</span></td><td data-label="Full operations">Nov 26<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
+          <tr><td class="season">2022-23</td><td data-label="First lift">Nov 22<span class="rng">single</span></td><td data-label="Full operations">Nov 22<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
+          <tr><td class="season">2023-24</td><td data-label="First lift">Dec 1<span class="rng">single</span></td><td data-label="Full operations">Dec 1<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
+          <tr><td class="season">2024-25</td><td data-label="First lift">Dec 4<span class="rng">single</span></td><td data-label="Full operations">Dec 4<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
+          <tr><td class="season">2025-26</td><td data-label="First lift">Dec 3<span class="rng">single</span></td><td data-label="Full operations">Dec 3<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
         </tbody>
       </table>
     </div>

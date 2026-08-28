@@ -362,14 +362,19 @@ function tableRows() {
         ? `${h.normal}<span class="rng">${h.lean}&ndash;${h.fat}</span>`
         : `&mdash;`;
 
+      // data-label carries the column header into the stacked mobile layout,
+      // where the real <thead> is hidden. --brand is the hill's own colour,
+      // shown as a stripe so the table is not sixteen identical rows.
+      const brand = r.colors?.primary ? ` style="--brand:${esc(r.colors.primary)}"` : "";
       out.push(
-        `          <tr${cls}>`,
-        `            <td class="hill"><a href="resorts/${slug}.html">${esc(r.name)}</a></td>`,
-        `            <td class="where">${esc(r.place)}</td>`,
-        `            <td>${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
-        `            <td class="num days">${daysUntil(p.date)}</td>`,
-        `            <td class="num">${hrs}</td>`,
-        `            <td>${typical}</td>`,
+        `          <tr${cls}${brand}>`,
+        `            <td class="hill"><a href="resorts/${slug}.html">${esc(r.name)}` +
+          `<span class="go" aria-hidden="true">&rarr;</span></a></td>`,
+        `            <td class="where" data-label="Where">${esc(r.place)}</td>`,
+        `            <td data-label="Projected">${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
+        `            <td class="num days" data-label="Days">${daysUntil(p.date)}</td>`,
+        `            <td class="num" data-label="Snowmaking hrs">${hrs}</td>`,
+        `            <td data-label="Typical opening">${typical}</td>`,
         `          </tr>`,
       );
     }
@@ -385,9 +390,12 @@ function seasonRows(slug) {
       return `${pretty(e.date)}<span class="rng">${tag}</span>`;
     };
     const kinds = [...new Set(ev.firstLift?.sources?.map(s => s.kind) ?? [])];
-    return `          <tr><td>${season}</td><td>${cell(ev.firstLift)}</td>` +
-           `<td>${cell(ev.fullOps)}</td><td>${cell(ev.close)}</td>` +
-           `<td class="where">${esc(kinds.join(", ") || "none")}</td></tr>`;
+    // data-label carries the header onto the cell for the stacked mobile layout.
+    return `          <tr><td class="season">${season}</td>` +
+           `<td data-label="First lift">${cell(ev.firstLift)}</td>` +
+           `<td data-label="Full operations">${cell(ev.fullOps)}</td>` +
+           `<td data-label="Closed">${cell(ev.close)}</td>` +
+           `<td class="where" data-label="Sources">${esc(kinds.join(", ") || "none")}</td></tr>`;
   }).join("\n");
 }
 

@@ -162,6 +162,21 @@
     border-bottom:1px solid var(--line);
   }
   .hill a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  /* The arrow is the affordance: a table of names does not read as navigation
+     until something points off the row. It holds its space so hover does not
+     reflow the column. */
+  .go { display:inline-block; margin-left:6px; opacity:0; transform:translateX(-3px);
+        transition:opacity .12s, transform .12s; border-bottom:0; }
+  tbody tr:hover .go, .hill a:focus-visible .go { opacity:1; transform:none; }
+  .hill a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  /* Each hill's own colour, from data/resorts.json. A stripe rather than text:
+     these are logo colours chosen against their own backgrounds, and several
+     fail contrast as type on this one. */
+  tbody tr[style*="--brand"] td:first-child {
+    box-shadow:inset 3px 0 0 var(--brand, transparent);
+  }
+  tbody tr.grp td:first-child { box-shadow:none; }
   .where { color:var(--ink-3); font-size:13px; white-space:nowrap; }
   .days { font-weight:700; font-variant-numeric:tabular-nums; }
   .grp td {
@@ -253,6 +268,39 @@
   /* Three numbers only mean something next to each other. Left to wrap they
      split two-and-one around 480px, which reads as a mistake, so below that
      they hold a three-up grid and shrink instead. */
+  /* The table is 820px wide at minimum and sat in a horizontal scroller, so a
+     phone showed under half of it and the rest had to be dragged into view.
+     Below 700px each row becomes a block and the column headers move onto the
+     cells as labels. */
+  @media (max-width:700px) {
+    table { min-width:0; }
+    .tbl-box { overflow-x:visible; }
+    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    caption { padding:14px 16px 8px; }
+    tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
+    tbody tr:last-child { border-bottom:0; }
+    tbody tr[style*="--brand"] { border-left:3px solid var(--brand, transparent); }
+    tbody tr[style*="--brand"] td:first-child { box-shadow:none; }
+    tbody tr td { display:flex; align-items:baseline;
+                  gap:8px; border:0; padding:4px 0; text-align:right; }
+    /* The label takes the slack so the value and its sub-value stay together on
+       the right. space-between would strand them at opposite ends of the row. */
+    tbody tr td::before {
+      content:attr(data-label); text-align:left; flex:1 1 auto;
+      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ink-3); white-space:nowrap;
+    }
+    /* The hill name is the row's heading, not another labelled field. */
+    tbody tr td.hill { display:block; text-align:left; font-size:16px; padding:0 0 6px; }
+    tbody tr td.hill::before { content:none; }
+    .go { opacity:1; transform:none; }
+    tbody tr.grp { padding:8px 16px; }
+    tbody tr.grp td { display:block; text-align:left; padding:0; }
+    tbody tr.grp td::before { content:none; }
+    .rng { display:inline; margin:0 0 0 8px; }
+    .hrs span { margin-left:6px; }
+  }
+
   @media (max-width:560px) {
     .scens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
     .scen-num { font-size:34px; }
@@ -267,6 +315,12 @@
     max-width:46ch; text-wrap:balance; margin:0 0 10px;
   }
   .fc-note { margin:0 0 26px; }
+  /* The table is sixteen links that do not look like links. This says so once,
+     above the table, rather than decorating every row. */
+  .sec-cta {
+    font-size:13.5px; color:var(--ink-2); margin:-14px 0 22px;
+    padding-left:11px; border-left:2px solid var(--accent);
+  }
   /* Nothing styled links in body copy, so the first one to appear rendered
      as browser-default #0000EE: 2:1 against the dark page. */
   .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
@@ -427,6 +481,8 @@
       Sorted by how soon you can reasonably expect to be on it. Snowmaking hours are the hours
       under 28&deg; a hill normally gets across October and November.
     </p>
+    <p class="sec-cta">Open any hill for its full record &mdash; every season on file, the words
+      each date came from, and its own snowmaking climate.</p>
 
     <div class="tbl-box">
       <table>
@@ -439,134 +495,134 @@
         </thead>
         <tbody>
           <tr class="grp"><td colspan="6">Twin Cities</td></tr>
-          <tr class="first">
-            <td class="hill"><a href="resorts/wild-mountain.html">Wild Mountain</a></td>
-            <td class="where">Taylors Falls</td>
-            <td>Nov 10<span class="rng">model</span></td>
-            <td class="num days">73</td>
-            <td class="num">337<span class="rng">57&ndash;564</span></td>
-            <td>Nov 10<span class="rng">Oct 18 &ndash; Nov 20</span></td>
+          <tr class="first" style="--brand:#beee07">
+            <td class="hill"><a href="resorts/wild-mountain.html">Wild Mountain<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Taylors Falls</td>
+            <td data-label="Projected">Nov 10<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">73</td>
+            <td class="num" data-label="Snowmaking hrs">337<span class="rng">57&ndash;564</span></td>
+            <td data-label="Typical opening">Nov 10<span class="rng">Oct 18 &ndash; Nov 20</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/trollhaugen.html">Trollhaugen</a></td>
-            <td class="where">Dresser</td>
-            <td>Nov 10<span class="rng">model</span></td>
-            <td class="num days">73</td>
-            <td class="num">334<span class="rng">56&ndash;562</span></td>
-            <td>Nov 10<span class="rng">Oct 19 &ndash; Nov 27</span></td>
+          <tr style="--brand:#005395">
+            <td class="hill"><a href="resorts/trollhaugen.html">Trollhaugen<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Dresser</td>
+            <td data-label="Projected">Nov 10<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">73</td>
+            <td class="num" data-label="Snowmaking hrs">334<span class="rng">56&ndash;562</span></td>
+            <td data-label="Typical opening">Nov 10<span class="rng">Oct 19 &ndash; Nov 27</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/afton-alps.html">Afton Alps</a></td>
-            <td class="where">Afton</td>
-            <td>Nov 29<span class="rng">model</span></td>
-            <td class="num days">92</td>
-            <td class="num">303<span class="rng">32&ndash;555</span></td>
-            <td>Nov 29<span class="rng">Nov 18 &ndash; Dec 4</span></td>
+          <tr style="--brand:#b02621">
+            <td class="hill"><a href="resorts/afton-alps.html">Afton Alps<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Afton</td>
+            <td data-label="Projected">Nov 29<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">92</td>
+            <td class="num" data-label="Snowmaking hrs">303<span class="rng">32&ndash;555</span></td>
+            <td data-label="Typical opening">Nov 29<span class="rng">Nov 18 &ndash; Dec 4</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/buck-hill.html">Buck Hill</a></td>
-            <td class="where">Burnsville</td>
-            <td>Nov 29<span class="rng">model</span></td>
-            <td class="num days">92</td>
-            <td class="num">301<span class="rng">43&ndash;553</span></td>
-            <td>Nov 29<span class="rng">Nov 22 &ndash; Dec 1</span></td>
+          <tr style="--brand:#3db3e3">
+            <td class="hill"><a href="resorts/buck-hill.html">Buck Hill<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Burnsville</td>
+            <td data-label="Projected">Nov 29<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">92</td>
+            <td class="num" data-label="Snowmaking hrs">301<span class="rng">43&ndash;553</span></td>
+            <td data-label="Typical opening">Nov 29<span class="rng">Nov 22 &ndash; Dec 1</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/welch-village.html">Welch Village</a></td>
-            <td class="where">Welch</td>
-            <td>Nov 30<span class="rng">model</span></td>
-            <td class="num days">93</td>
-            <td class="num">296<span class="rng">34&ndash;552</span></td>
-            <td>Nov 30<span class="rng">Nov 25 &ndash; Dec 4</span></td>
+          <tr style="--brand:#1c75bc">
+            <td class="hill"><a href="resorts/welch-village.html">Welch Village<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Welch</td>
+            <td data-label="Projected">Nov 30<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">93</td>
+            <td class="num" data-label="Snowmaking hrs">296<span class="rng">34&ndash;552</span></td>
+            <td data-label="Typical opening">Nov 30<span class="rng">Nov 25 &ndash; Dec 4</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/hyland-hills.html">Hyland Hills</a></td>
-            <td class="where">Bloomington</td>
-            <td>Dec 1<span class="rng">model</span></td>
-            <td class="num days">94</td>
-            <td class="num">292<span class="rng">33&ndash;553</span></td>
-            <td>Dec 1<span class="rng">Nov 22 &ndash; Dec 4</span></td>
+          <tr style="--brand:#5f3894">
+            <td class="hill"><a href="resorts/hyland-hills.html">Hyland Hills<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Bloomington</td>
+            <td data-label="Projected">Dec 1<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">94</td>
+            <td class="num" data-label="Snowmaking hrs">292<span class="rng">33&ndash;553</span></td>
+            <td data-label="Typical opening">Dec 1<span class="rng">Nov 22 &ndash; Dec 4</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/elm-creek.html">Elm Creek</a></td>
-            <td class="where">Maple Grove</td>
-            <td>Dec 16<span class="rng">model</span></td>
-            <td class="num days">109</td>
-            <td class="num">316<span class="rng">45&ndash;558</span></td>
-            <td>Dec 16<span class="rng">Dec 10 &ndash; Dec 19</span></td>
+          <tr style="--brand:#fe3332">
+            <td class="hill"><a href="resorts/elm-creek.html">Elm Creek<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Maple Grove</td>
+            <td data-label="Projected">Dec 16<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">109</td>
+            <td class="num" data-label="Snowmaking hrs">316<span class="rng">45&ndash;558</span></td>
+            <td data-label="Typical opening">Dec 16<span class="rng">Dec 10 &ndash; Dec 19</span></td>
           </tr>
           <tr class="grp"><td colspan="6">Greater Minnesota</td></tr>
-          <tr>
-            <td class="hill"><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td>
-            <td class="where">Kensington</td>
-            <td>Nov 11<span class="rng">model</span></td>
-            <td class="num days">74</td>
-            <td class="num">399<span class="rng">108&ndash;659</span></td>
-            <td>Nov 11<span class="rng">Oct 18 &ndash; Nov 23</span></td>
+          <tr style="--brand:#12592e">
+            <td class="hill"><a href="resorts/andes-tower-hills.html">Andes Tower Hills<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Kensington</td>
+            <td data-label="Projected">Nov 11<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">74</td>
+            <td class="num" data-label="Snowmaking hrs">399<span class="rng">108&ndash;659</span></td>
+            <td data-label="Typical opening">Nov 11<span class="rng">Oct 18 &ndash; Nov 23</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/buena-vista.html">Buena Vista</a></td>
-            <td class="where">Bemidji</td>
-            <td>Nov 20<span class="rng">climate</span></td>
-            <td class="num days">83</td>
-            <td class="num">458<span class="rng">124&ndash;812</span></td>
-            <td>&mdash;<span class="rng">no record yet</span></td>
+          <tr style="--brand:#0c356d">
+            <td class="hill"><a href="resorts/buena-vista.html">Buena Vista<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Bemidji</td>
+            <td data-label="Projected">Nov 20<span class="rng">climate</span></td>
+            <td class="num days" data-label="Days">83</td>
+            <td class="num" data-label="Snowmaking hrs">458<span class="rng">124&ndash;812</span></td>
+            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td>
-            <td class="where">Detroit Lakes</td>
-            <td>Nov 22<span class="rng">climate</span></td>
-            <td class="num days">85</td>
-            <td class="num">434<span class="rng">113&ndash;714</span></td>
-            <td>&mdash;<span class="rng">no record yet</span></td>
+          <tr style="--brand:#fbab54">
+            <td class="hill"><a href="resorts/detroit-mountain.html">Detroit Mountain<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Detroit Lakes</td>
+            <td data-label="Projected">Nov 22<span class="rng">climate</span></td>
+            <td class="num days" data-label="Days">85</td>
+            <td class="num" data-label="Snowmaking hrs">434<span class="rng">113&ndash;714</span></td>
+            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td>
-            <td class="where">Duluth</td>
-            <td>Nov 26<span class="rng">model</span></td>
-            <td class="num days">89</td>
-            <td class="num">410<span class="rng">119&ndash;741</span></td>
-            <td>Nov 26<span class="rng">Nov 25 &ndash; Nov 30</span></td>
+          <tr style="--brand:#2d65b0">
+            <td class="hill"><a href="resorts/spirit-mountain.html">Spirit Mountain<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Duluth</td>
+            <td data-label="Projected">Nov 26<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">89</td>
+            <td class="num" data-label="Snowmaking hrs">410<span class="rng">119&ndash;741</span></td>
+            <td data-label="Typical opening">Nov 26<span class="rng">Nov 25 &ndash; Nov 30</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/powder-ridge.html">Powder Ridge</a></td>
-            <td class="where">Kimball</td>
-            <td>Nov 27<span class="rng">climate</span></td>
-            <td class="num days">90</td>
-            <td class="num">356<span class="rng">104&ndash;572</span></td>
-            <td>&mdash;<span class="rng">no record yet</span></td>
+          <tr style="--brand:#068bc4">
+            <td class="hill"><a href="resorts/powder-ridge.html">Powder Ridge<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Kimball</td>
+            <td data-label="Projected">Nov 27<span class="rng">climate</span></td>
+            <td class="num days" data-label="Days">90</td>
+            <td class="num" data-label="Snowmaking hrs">356<span class="rng">104&ndash;572</span></td>
+            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/giants-ridge.html">Giants Ridge</a></td>
-            <td class="where">Biwabik</td>
-            <td>Nov 29<span class="rng">model</span></td>
-            <td class="num days">92</td>
-            <td class="num">454<span class="rng">109&ndash;839</span></td>
-            <td>Nov 29<span class="rng">Nov 24 &ndash; Dec 2</span></td>
+          <tr style="--brand:#ed2a00">
+            <td class="hill"><a href="resorts/giants-ridge.html">Giants Ridge<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Biwabik</td>
+            <td data-label="Projected">Nov 29<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">92</td>
+            <td class="num" data-label="Snowmaking hrs">454<span class="rng">109&ndash;839</span></td>
+            <td data-label="Typical opening">Nov 29<span class="rng">Nov 24 &ndash; Dec 2</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/mount-kato.html">Mount Kato</a></td>
-            <td class="where">Mankato</td>
-            <td>Nov 30<span class="rng">climate</span></td>
-            <td class="num days">93</td>
-            <td class="num">308<span class="rng">80&ndash;549</span></td>
-            <td>&mdash;<span class="rng">no record yet</span></td>
+          <tr style="--brand:#00487f">
+            <td class="hill"><a href="resorts/mount-kato.html">Mount Kato<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Mankato</td>
+            <td data-label="Projected">Nov 30<span class="rng">climate</span></td>
+            <td class="num days" data-label="Days">93</td>
+            <td class="num" data-label="Snowmaking hrs">308<span class="rng">80&ndash;549</span></td>
+            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td>
-            <td class="where">Lutsen</td>
-            <td>Dec 6<span class="rng">model</span></td>
-            <td class="num days">99</td>
-            <td class="num">386<span class="rng">97&ndash;714</span></td>
-            <td>Dec 6<span class="rng">Nov 28 &ndash; Dec 10</span></td>
+          <tr style="--brand:#00344f">
+            <td class="hill"><a href="resorts/lutsen-mountains.html">Lutsen Mountains<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Lutsen</td>
+            <td data-label="Projected">Dec 6<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">99</td>
+            <td class="num" data-label="Snowmaking hrs">386<span class="rng">97&ndash;714</span></td>
+            <td data-label="Typical opening">Dec 6<span class="rng">Nov 28 &ndash; Dec 10</span></td>
           </tr>
-          <tr>
-            <td class="hill"><a href="resorts/coffee-mill.html">Coffee Mill</a></td>
-            <td class="where">Wabasha</td>
-            <td>Dec 13<span class="rng">model</span></td>
-            <td class="num days">106</td>
-            <td class="num">266<span class="rng">11&ndash;540</span></td>
-            <td>Dec 13<span class="rng">Dec 7 &ndash; Jan 14</span></td>
+          <tr style="--brand:#00a8f0">
+            <td class="hill"><a href="resorts/coffee-mill.html">Coffee Mill<span class="go" aria-hidden="true">&rarr;</span></a></td>
+            <td class="where" data-label="Where">Wabasha</td>
+            <td data-label="Projected">Dec 13<span class="rng">model</span></td>
+            <td class="num days" data-label="Days">106</td>
+            <td class="num" data-label="Snowmaking hrs">266<span class="rng">11&ndash;540</span></td>
+            <td data-label="Typical opening">Dec 13<span class="rng">Dec 7 &ndash; Jan 14</span></td>
           </tr>
         </tbody>
       </table>

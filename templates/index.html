@@ -162,6 +162,21 @@
     border-bottom:1px solid var(--line);
   }
   .hill a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  /* The arrow is the affordance: a table of names does not read as navigation
+     until something points off the row. It holds its space so hover does not
+     reflow the column. */
+  .go { display:inline-block; margin-left:6px; opacity:0; transform:translateX(-3px);
+        transition:opacity .12s, transform .12s; border-bottom:0; }
+  tbody tr:hover .go, .hill a:focus-visible .go { opacity:1; transform:none; }
+  .hill a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  /* Each hill's own colour, from data/resorts.json. A stripe rather than text:
+     these are logo colours chosen against their own backgrounds, and several
+     fail contrast as type on this one. */
+  tbody tr[style*="--brand"] td:first-child {
+    box-shadow:inset 3px 0 0 var(--brand, transparent);
+  }
+  tbody tr.grp td:first-child { box-shadow:none; }
   .where { color:var(--ink-3); font-size:13px; white-space:nowrap; }
   .days { font-weight:700; font-variant-numeric:tabular-nums; }
   .grp td {
@@ -253,6 +268,39 @@
   /* Three numbers only mean something next to each other. Left to wrap they
      split two-and-one around 480px, which reads as a mistake, so below that
      they hold a three-up grid and shrink instead. */
+  /* The table is 820px wide at minimum and sat in a horizontal scroller, so a
+     phone showed under half of it and the rest had to be dragged into view.
+     Below 700px each row becomes a block and the column headers move onto the
+     cells as labels. */
+  @media (max-width:700px) {
+    table { min-width:0; }
+    .tbl-box { overflow-x:visible; }
+    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    caption { padding:14px 16px 8px; }
+    tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
+    tbody tr:last-child { border-bottom:0; }
+    tbody tr[style*="--brand"] { border-left:3px solid var(--brand, transparent); }
+    tbody tr[style*="--brand"] td:first-child { box-shadow:none; }
+    tbody tr td { display:flex; align-items:baseline;
+                  gap:8px; border:0; padding:4px 0; text-align:right; }
+    /* The label takes the slack so the value and its sub-value stay together on
+       the right. space-between would strand them at opposite ends of the row. */
+    tbody tr td::before {
+      content:attr(data-label); text-align:left; flex:1 1 auto;
+      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ink-3); white-space:nowrap;
+    }
+    /* The hill name is the row's heading, not another labelled field. */
+    tbody tr td.hill { display:block; text-align:left; font-size:16px; padding:0 0 6px; }
+    tbody tr td.hill::before { content:none; }
+    .go { opacity:1; transform:none; }
+    tbody tr.grp { padding:8px 16px; }
+    tbody tr.grp td { display:block; text-align:left; padding:0; }
+    tbody tr.grp td::before { content:none; }
+    .rng { display:inline; margin:0 0 0 8px; }
+    .hrs span { margin-left:6px; }
+  }
+
   @media (max-width:560px) {
     .scens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
     .scen-num { font-size:34px; }
@@ -267,6 +315,12 @@
     max-width:46ch; text-wrap:balance; margin:0 0 10px;
   }
   .fc-note { margin:0 0 26px; }
+  /* The table is sixteen links that do not look like links. This says so once,
+     above the table, rather than decorating every row. */
+  .sec-cta {
+    font-size:13.5px; color:var(--ink-2); margin:-14px 0 22px;
+    padding-left:11px; border-left:2px solid var(--accent);
+  }
   /* Nothing styled links in body copy, so the first one to appear rendered
      as browser-default #0000EE: 2:1 against the dark page. */
   .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
@@ -382,6 +436,8 @@
       Sorted by how soon you can reasonably expect to be on it. Snowmaking hours are the hours
       under 28&deg; a hill normally gets across October and November.
     </p>
+    <p class="sec-cta">Open any hill for its full record &mdash; every season on file, the words
+      each date came from, and its own snowmaking climate.</p>
 
     <div class="tbl-box">
       <table>
