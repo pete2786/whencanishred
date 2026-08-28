@@ -346,8 +346,9 @@ const GROUPS = [["twin-cities", "Twin Cities"], ["greater-minnesota", "Greater M
 
 function tableRows() {
   const out = [];
+  let rank = 0;
   for (const [region, title] of GROUPS) {
-    out.push(`          <tr class="grp"><td colspan="6">${title}</td></tr>`);
+    out.push(`          <tr class="grp"><td colspan="7">${title}</td></tr>`);
     const slugs = Object.keys(resorts)
       .filter(s => resorts[s].region === region)
       .sort((a, b) => projection[a].date.localeCompare(projection[b].date));
@@ -363,18 +364,23 @@ function tableRows() {
         : `&mdash;`;
 
       // data-label carries the column header into the stacked mobile layout,
-      // where the real <thead> is hidden. --brand is the hill's own colour,
-      // shown as a stripe so the table is not sixteen identical rows.
-      const brand = r.colors?.primary ? ` style="--brand:${esc(r.colors.primary)}"` : "";
+      // where the real <thead> is hidden. The rank is the row's position in the
+      // opening order, which is the one thing the table is sorted by and the
+      // only number on the row that says so.
+      rank += 1;
+      const no = String(rank).padStart(2, "0");
       out.push(
-        `          <tr${cls}${brand}>`,
-        `            <td class="hill"><a href="resorts/${slug}.html">${esc(r.name)}` +
-          `<span class="go" aria-hidden="true">&rarr;</span></a></td>`,
+        `          <tr${cls}>`,
+        `            <td class="hill"><span class="rank">${no}</span>` +
+          `<a href="resorts/${slug}.html">${esc(r.name)}</a></td>`,
         `            <td class="where" data-label="Where">${esc(r.place)}</td>`,
         `            <td data-label="Projected">${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
         `            <td class="num days" data-label="Days">${daysUntil(p.date)}</td>`,
         `            <td class="num" data-label="Snowmaking hrs">${hrs}</td>`,
         `            <td data-label="Typical opening">${typical}</td>`,
+        `            <td class="go-cell"><a class="btn" href="resorts/${slug}.html"` +
+          ` aria-label="See ${esc(r.name)}'s record">See record` +
+          `<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>`,
         `          </tr>`,
       );
     }

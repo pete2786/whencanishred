@@ -162,21 +162,32 @@
     border-bottom:1px solid var(--line);
   }
   .hill a:hover { color:var(--accent); border-bottom-color:var(--accent); }
-  /* The arrow is the affordance: a table of names does not read as navigation
-     until something points off the row. It holds its space so hover does not
-     reflow the column. */
-  .go { display:inline-block; margin-left:6px; opacity:0; transform:translateX(-3px);
-        transition:opacity .12s, transform .12s; border-bottom:0; }
-  tbody tr:hover .go, .hill a:focus-visible .go { opacity:1; transform:none; }
   .hill a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+  .vh { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
 
-  /* Each hill's own colour, from data/resorts.json. A stripe rather than text:
-     these are logo colours chosen against their own backgrounds, and several
-     fail contrast as type on this one. */
-  tbody tr[style*="--brand"] td:first-child {
-    box-shadow:inset 3px 0 0 var(--brand, transparent);
+  /* Position in the opening order. The table is sorted by it and nothing said so. */
+  .rank {
+    display:inline-block; min-width:1.9em; margin-right:10px;
+    font-size:11.5px; font-weight:600; font-variant-numeric:tabular-nums;
+    color:var(--ink-3);
   }
-  tbody tr.grp td:first-child { box-shadow:none; }
+
+  /* A row of text does not read as navigation. The button does, and it is the
+     thing the eye lands on at the end of the row. */
+  .go-cell { text-align:right; white-space:nowrap; }
+  .btn {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:600; letter-spacing:.03em;
+    padding:5px 11px; border:1px solid var(--line); border-radius:999px;
+    color:var(--ink-2); text-decoration:none;
+    transition:border-color .12s, color .12s, background .12s;
+  }
+  .btn-arrow { transition:transform .12s; }
+  tbody tr:hover .btn {
+    border-color:var(--accent); color:var(--accent); background:var(--accent-soft);
+  }
+  tbody tr:hover .btn-arrow { transform:translateX(2px); }
+  .btn:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .where { color:var(--ink-3); font-size:13px; white-space:nowrap; }
   .days { font-weight:700; font-variant-numeric:tabular-nums; }
   .grp td {
@@ -279,8 +290,6 @@
     caption { padding:14px 16px 8px; }
     tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
     tbody tr:last-child { border-bottom:0; }
-    tbody tr[style*="--brand"] { border-left:3px solid var(--brand, transparent); }
-    tbody tr[style*="--brand"] td:first-child { box-shadow:none; }
     tbody tr td { display:flex; align-items:baseline;
                   gap:8px; border:0; padding:4px 0; text-align:right; }
     /* The label takes the slack so the value and its sub-value stay together on
@@ -293,7 +302,12 @@
     /* The hill name is the row's heading, not another labelled field. */
     tbody tr td.hill { display:block; text-align:left; font-size:16px; padding:0 0 6px; }
     tbody tr td.hill::before { content:none; }
-    .go { opacity:1; transform:none; }
+    /* No hover on a phone, so the button carries its own emphasis and spans the
+       card rather than hiding at the end of a line. */
+    tbody tr td.go-cell { display:block; text-align:center; padding:12px 0 0; }
+    tbody tr td.go-cell::before { content:none; }
+    .btn { display:flex; justify-content:center; width:100%; padding:9px 11px;
+           font-size:12.5px; border-color:var(--accent); color:var(--accent); }
     tbody tr.grp { padding:8px 16px; }
     tbody tr.grp td { display:block; text-align:left; padding:0; }
     tbody tr.grp td::before { content:none; }
@@ -339,10 +353,10 @@
 
   <section class="hero">
     <!--{{HERO_SCENARIOS}}-->
-    <p class="hero-say"><b>Wild Mountain</b> and <b>Trollhaugen</b> try to open first.</p>
+    <p class="hero-say"><b>Wild Mountain</b> opened first three years running.</p>
     <p class="hero-sub">
-      Nothing is announced yet. Wild and Trollhaugen, friendly cross-state rivals, battle
-      each year to open first.
+      Until last season, when <b>Andes Tower Hills</b> beat it by a single day. Nothing is
+      announced yet.
     </p>
 
     <dl class="stats">
@@ -436,8 +450,7 @@
       Sorted by how soon you can reasonably expect to be on it. Snowmaking hours are the hours
       under 28&deg; a hill normally gets across October and November.
     </p>
-    <p class="sec-cta">Open any hill for its full record &mdash; every season on file, the words
-      each date came from, and its own snowmaking climate.</p>
+    <p class="sec-cta">Click or tap any hill for more detail on its historic opening days.</p>
 
     <div class="tbl-box">
       <table>
@@ -446,6 +459,7 @@
           <tr>
             <th>Hill</th><th>Where</th><th>Projected</th>
             <th class="num">Days</th><th class="num">Snowmaking hrs</th><th>Typical opening</th>
+            <th><span class="vh">Link</span></th>
           </tr>
         </thead>
         <tbody>
