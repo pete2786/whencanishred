@@ -727,10 +727,17 @@
     },
     "2022-23": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2022-11-25",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook, 25 November 2022: \"Welcome to a new season! Welch Village is officially open for the 2022-23 season.\" No pass-holder preview mentioned.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid02LuJXe72SpzsHE3iFCM7Z7XXJQNjy5KT3WxiAi4vx7WRoo5sDM7AP1etxRqegZ1Fjl",
+            "evidence": "Welch Village Facebook, 25 November 2022: \"Welcome to a new season! Welch Village is officially open for the 2022-23 season.\" No pass-holder preview mentioned."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
