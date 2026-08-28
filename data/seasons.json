@@ -1181,10 +1181,17 @@
   "lutsen-mountains": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-12-10",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Lutsen Mountains Facebook, 9 December 2021: \"Open daily starting tomorrow, December 10th on 3 mountains.\" Three of the four, after 23in of natural snow in a week.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/LutsenMountains/posts/pfbid034UfPQFDK51VpDFZCnr4cy9ZxD5uU59jQYSS9mNvMq9P7hGn4tZ9sWfH8k5Lm1JQxl",
+            "evidence": "Lutsen Mountains Facebook, 9 December 2021: \"Open daily starting tomorrow, December 10th on 3 mountains.\" Three of the four, after 23in of natural snow in a week."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
