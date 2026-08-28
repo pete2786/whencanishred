@@ -693,16 +693,30 @@
   "welch-village": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-12-04",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook: \"Welch Village is opening for the winter season on Saturday, 12/4 @ 10AM! The resort will be open 10AM-8PM on 12/4 & 12/5 to SEASON PASSHOLDERS ONLY.\" Counted from the pass-holder day, as at Welch in 2024-25 and 2025-26.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid02fRvwsbFsprXFfyfJAGs6Ua18S23J2voZQcZFsDhwsgTDHyMaZA3dBUWPBARrVSqdl",
+            "evidence": "Welch Village Facebook: \"Welch Village is opening for the winter season on Saturday, 12/4 @ 10AM! The resort will be open 10AM-8PM on 12/4 & 12/5 to SEASON PASSHOLDERS ONLY.\" Counted from the pass-holder day, as at Welch in 2024-25 and 2025-26."
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-12-10",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook, 9 December 2021: \"Re-opening today (12/9) 3pm-9pm. Regular season hours begin tomorrow. Open 9am-10pm.\" The hill ran the 4th and 5th for pass holders, shut, came back on the 9th for a six-hour evening, and went to regular hours on the 10th. Full operations dated from the hill saying its regular hours had begun.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid02k9q5wt8eBE8V53ExSDm4dUdqMb46H2XkPyinNN7CxzSwCzhTCupLwE192yLU3cP9l",
+            "evidence": "Welch Village Facebook, 9 December 2021: \"Re-opening today (12/9) 3pm-9pm. Regular season hours begin tomorrow. Open 9am-10pm.\" The hill ran the 4th and 5th for pass holders, shut, came back on the 9th for a six-hour evening, and went to regular hours on the 10th. Full operations dated from the hill saying its regular hours had begun."
+          }
+        ]
       },
       "close": {
         "date": null,
