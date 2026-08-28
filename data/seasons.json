@@ -1515,16 +1515,30 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-11-30",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Spirit Mountain Facebook, 30 November 2024, same day: \"First chair vibes today on our 50th anniversary season! Stoked on the return of winter smiles and a day filled with solid laps!\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/SpiritMtDuluth/videos/1957367358120049/",
+            "evidence": "Spirit Mountain Facebook, 30 November 2024, same day: \"First chair vibes today on our 50th anniversary season! Stoked on the return of winter smiles and a day filled with solid laps!\""
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-12-13",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Spirit Mountain Facebook: \"Full-time hours start next Friday 12/13.\" The hill opened on 30 November and ran a partial schedule for a fortnight before going to full-time hours.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/SpiritMtDuluth/videos/984293736835314/",
+            "evidence": "Spirit Mountain Facebook: \"Full-time hours start next Friday 12/13.\" The hill opened on 30 November and ran a partial schedule for a fortnight before going to full-time hours."
+          }
+        ]
       },
       "close": {
         "date": null,
