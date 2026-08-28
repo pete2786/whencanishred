@@ -507,12 +507,27 @@ const STATES = [
   { id: "ia",    state: "IA", name: "Iowa",                         file: "iowa.html" },
   { id: "il",    state: "IL", name: "Illinois",                     file: "illinois.html" },
   { id: "dak",                name: "The Dakotas",                  file: "dakotas.html" },
+  // Not a state, and deliberately last: a place to find out whether anyone
+  // outside the snowmaking belt wants this at all before building for them.
+  {
+    id: "other", name: "Everywhere else", file: "elsewhere.html",
+    note: "the Rockies, the East \u2014 interested?",
+    eyebrow: "Not planned",
+    headline: "Everywhere else, if anyone wants it.",
+    lead: "This site is built around a question that matters where hills make their own " +
+          "winter: when does it get cold enough to blow snow, and how long after that do " +
+          "they open? Somewhere with real snowfall, the answer may be dull \u2014 the hill " +
+          "opens when it snows. Whether any of this is worth having for the Rockies, the " +
+          "East or anywhere else is genuinely an open question.",
+    cta: "If you want this for your mountains, say so and say what would make it useful.",
+  },
 ];
 
 const countIn = state =>
   state ? Object.values(resorts).filter(r => r.state === state).length : 0;
 
 const regionNote = r => {
+  if (r.note) return r.note;
   const n = countIn(r.state);
   if (r.id === "mn") return `${n} hills, 5 seasons each`;
   if (n === 1) return "1 hill so far \u2014 help wanted";
@@ -572,11 +587,13 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
     STYLE: style,
     PICKER: picker(region.id, ""),
     REGION: esc(region.name),
-    EYEBROW: n ? "Barely started" : "Not covered yet",
-    HEADLINE: n
+    EYEBROW: region.eyebrow ?? (n ? "Barely started" : "Not covered yet"),
+    HEADLINE: region.headline ?? (n
       ? `${region.name} is barely started.`
-      : `${region.name} is not covered yet.`,
-    LEAD: lead,
+      : `${region.name} is not covered yet.`),
+    LEAD: region.lead ?? lead,
+    CTA: region.cta ?? `If you know ${region.name} hills, or want to take on the whole state, ` +
+         `that is the whole job.`,
     TRACKED: String(n),
     MN_COUNT: String(countIn("MN")),
     DATES: `${t.n} of ${t.total}`,
