@@ -1398,10 +1398,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-11-29",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Giants Ridge Facebook: \"Opening Day at Giants Ridge Is Almost Here. The countdown is on and we are getting ready to kick off the season at Giants Ridge next Saturday, November 29th at 9AM!\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/GiantsRidge/posts/pfbid02oVTbfDH4BExkEU63fa5DEG91ZrtwbjWCg5VPbP4xswbMWSyoW3X28PyY39GDYRPsl",
+            "evidence": "Giants Ridge Facebook: \"Opening Day at Giants Ridge Is Almost Here. The countdown is on and we are getting ready to kick off the season at Giants Ridge next Saturday, November 29th at 9AM!\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
