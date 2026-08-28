@@ -161,12 +161,23 @@ function wordmark(name) {
 
 const hours = Object.fromEntries(hoursRows.map(h => [slugify(h.hill), h]));
 
+// How one hill operates, as opposed to what one winter did. Standing quirks
+// that change how its dates should be read — a terrain park that lags the
+// opening, a weekend-only schedule — belong to the hill, not to a season.
+function hillNotesFor(slug) {
+  return (resorts[slug].notes ?? [])
+    .map(n => `        <p class="snote"><b>This hill</b>${esc(n)}</p>`);
+}
+
 // Statewide context for a season, shown under the table it explains. A hill
 // opening late says nothing on its own; "the winter never came" does.
 function seasonNotesFor(slug) {
-  const rows = Object.keys(seasons[slug] ?? {})
-    .filter(s => seasonNotes[s])
-    .map(s => `        <p class="snote"><b>${esc(s)}</b>${esc(seasonNotes[s])}</p>`);
+  const rows = [
+    ...hillNotesFor(slug),
+    ...Object.keys(seasons[slug] ?? {})
+      .filter(s => seasonNotes[s])
+      .map(s => `        <p class="snote"><b>${esc(s)}</b>${esc(seasonNotes[s])}</p>`),
+  ];
   return rows.length ? `\n      <div class="snotes">\n${rows.join("\n")}\n      </div>` : "";
 }
 
