@@ -57,9 +57,13 @@ const median = xs => xs.length % 2 ? xs[(xs.length - 1) / 2]
 // predicted, so they join the fit rather than being corrected for afterwards
 // with a floor. Only for hills with no season history of their own — a hill
 // already in the fit through its record must not be counted twice.
+// Only these two are facts from outside. "model" and "climate" are both this
+// script's own output: treating them as anchors would freeze last run's numbers
+// and feed the fit its own predictions.
+const EXTERNAL = new Set(["announced", "target"]);
 const anchorPoint = slug => {
   const was = prior[slug];
-  return was && was.label !== "model" ? sinceOct(was.date) : null;
+  return was && EXTERNAL.has(was.label) ? sinceOct(was.date) : null;
 };
 
 const fitPoints = Object.keys(resorts).map(slug => {
@@ -92,7 +96,7 @@ for (const slug of Object.keys(resorts)) {
 
   // An announced or targeted date is something a hill said about itself. The
   // model does not get to overrule it.
-  if (was && was.label !== "model") {
+  if (was && EXTERNAL.has(was.label)) {
     out[slug] = { date: was.date, label: was.label };
     rows.push([slug, hours[slug]?.normal, was.label, was.date, "kept"]);
     continue;
