@@ -1535,10 +1535,17 @@
     },
     "2025-26": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-12",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Spirit Mountain Facebook reel: \"We’re opening full time starting December 12! It’s an exciting time at Spirit and it wouldn’t be possible without our incredible team that has been working around the clock.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/reel/1748162076587849/",
+            "evidence": "Spirit Mountain Facebook reel: \"We’re opening full time starting December 12! It’s an exciting time at Spirit and it wouldn’t be possible without our incredible team that has been working around the clock.\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
