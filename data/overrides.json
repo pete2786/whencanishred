@@ -464,9 +464,14 @@
     },
     "2025-26": {
       "firstLift": {
+        "date": "2025-11-30",
+        "url": null,
+        "note": "Spirit Mountain Facebook: \"Opening Day Announcement! Spirit Mountain opens for the 2025-26 season this Sunday, November 30 with the Spirit Express Lift spinning from 10am-5pm.\" One lift, seven hours."
+      },
+      "fullOps": {
         "date": "2025-12-12",
         "url": "https://www.facebook.com/reel/1748162076587849/",
-        "note": "Spirit Mountain Facebook reel: \"We’re opening full time starting December 12! It’s an exciting time at Spirit and it wouldn’t be possible without our incredible team that has been working around the clock.\""
+        "note": "Spirit Mountain Facebook reel: \"We’re opening full time starting December 12! It’s an exciting time at Spirit and it wouldn’t be possible without our incredible team that has been working around the clock.\" A separate, later milestone than first chair, as in 2024-25 when first chair was 30 November and full-time hours began 13 December."
       }
     }
   }
