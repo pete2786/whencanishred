@@ -786,10 +786,17 @@
         ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2025-12-04",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook: fully open 4 December 2025, four days after the 30 November pass-holder preview.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid02uiHkSpvRWZPEyy7Jr9LmEsFdeBQePKEUp49WsrjH9cRcQ7XoSgjfxFpMR5vRNjyfl",
+            "evidence": "Welch Village Facebook: fully open 4 December 2025, four days after the 30 November pass-holder preview."
+          }
+        ]
       },
       "close": {
         "date": null,
