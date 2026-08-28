@@ -432,18 +432,12 @@ const sourcePhrase = parts.length > 1
   ? `${parts[0]}, plus ${parts.slice(1).join(" and ")}`
   : parts[0] ?? "no sources yet";
 
+// States the coverage rather than describing the intent, and counts the record
+// every build. A hand-written claim about how well the backfill went is a claim
+// that goes stale the moment the backfill changes.
 const provenance =
   `${t.n} of ${t.total} opening dates sourced from ${sourcePhrase}, ${t.confirmed} ` +
   `corroborated by a second independent source. Blanks are gaps, not guesses.`;
-
-// The banner states the coverage rather than describing the intent, and it
-// counts the record every build. A hand-written claim about how well the
-// backfill went is a claim that goes stale the moment the backfill changes.
-const notice =
-  `<strong>Part real.</strong> Wet-bulb curve, snowmaking hours and first-window dates are computed ` +
-  `from 31 years of ERA5 data. Real opening dates are mostly still missing: ` +
-  `${t.hills} of ${t.allHills} hills ${t.hills === 1 ? "has" : "have"} a sourced record, and the ` +
-  `rest fall back to a model. The projected column has not been recalibrated yet.`;
 
 const now = new Date();
 const dateline = `${now.getDate()} ${FULL[now.getMonth()]} ${now.getFullYear()}`;
@@ -459,13 +453,11 @@ const lead = observed(leader);
 
 writeFileSync("index.html", fill(readFileSync("templates/index.html", "utf8"), {
   TABLE: tableRows(),
-  NOTICE: notice,
   DATELINE: dateline,
   FORECAST_NOTE: fcSection.NOTE,
   FORECAST_HEADLINE: fcSection.HEADLINE,
   FORECAST_CARDS: fcSection.CARDS,
   HERO_SCENARIOS: heroScenarios(leader),
-  HERO_LEADER: esc(resorts[leader].name),
   HERO_SEASONS: String(lead.n),
   HERO_HILLS: String(Object.keys(resorts).length),
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),
