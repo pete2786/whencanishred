@@ -60,6 +60,8 @@
     padding:28px 0 20px; border-bottom:1px solid var(--line);
   }
   .wordmark { font-family:"Instrument Serif",Georgia,serif; font-size:25px; }
+  .wordmark a { color:inherit; text-decoration:none; }
+  .wordmark a:hover em { color:var(--ink); }
   .wordmark em { font-style:italic; color:var(--accent); }
   .tagline { font-size:15px; font-weight:700; color:var(--ink); letter-spacing:.01em; }
 
@@ -165,18 +167,11 @@
   .hill a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
   .vh { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
 
-  /* Position in the opening order. The table is sorted by it and nothing said so. */
-  .rank {
-    display:inline-block; min-width:1.9em; margin-right:10px;
-    font-size:11.5px; font-weight:600; font-variant-numeric:tabular-nums;
-    color:var(--ink-3);
-  }
-
   /* Split on the diagonal so both colours read at 10px. The ring keeps a dot
      whose half matches the page from dissolving into it — several of these
      secondaries are white and several primaries are near-black. */
   .pip {
-    display:inline-block; width:10px; height:10px; border-radius:50%;
+    display:inline-block; width:10px; height:10px; border-radius:2px;
     margin-right:9px; flex:0 0 auto;
     background:linear-gradient(135deg, var(--c1) 0 50%, var(--c2) 50% 100%);
     box-shadow:0 0 0 1px var(--line);
@@ -289,11 +284,11 @@
   /* Three numbers only mean something next to each other. Left to wrap they
      split two-and-one around 480px, which reads as a mistake, so below that
      they hold a three-up grid and shrink instead. */
-  /* The table is 820px wide at minimum and sat in a horizontal scroller, so a
-     phone showed under half of it and the rest had to be dragged into view.
-     Below 700px each row becomes a block and the column headers move onto the
-     cells as labels. */
-  @media (max-width:700px) {
+  /* The table needs about 860px for its seven columns and sat in a horizontal
+     scroller below that, so anything narrower showed part of a row and hid the
+     rest behind a sideways drag nobody makes. The stack has to start above the
+     width the table actually needs, not at some round phone number. */
+  @media (max-width:920px) {
     table { min-width:0; }
     .tbl-box { overflow-x:visible; }
     thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
@@ -345,10 +340,44 @@
     font-size:13.5px; color:var(--ink-2); margin:-14px 0 22px;
     padding-left:11px; border-left:2px solid var(--accent);
   }
+  /* The negative top margin above tucks the line under a section note. Standing
+     on its own after a block it has to keep its distance instead. */
+  .sec-cta.standalone { margin:22px 0 0; }
+  .sec-cta a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
   /* Nothing styled links in body copy, so the first one to appear rendered
      as browser-default #0000EE: 2:1 against the dark page. */
   .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
   .fc-head b { font-weight:400; color:var(--accent); }
+
+  /* A <details> rather than a <select>: the site ships no JavaScript, and a
+     select cannot navigate without it. Regions are pages, so these are links. */
+  .picker { position:relative; }
+  .picker > summary {
+    list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:7px;
+    font-size:15px; font-weight:700; color:var(--ink); letter-spacing:.01em;
+    padding:3px 9px 3px 10px; border:1px solid var(--line); border-radius:999px;
+  }
+  .picker > summary::-webkit-details-marker { display:none; }
+  .picker > summary::after {
+    content:""; width:5px; height:5px; margin-top:-3px;
+    border-right:1.5px solid var(--ink-3); border-bottom:1.5px solid var(--ink-3);
+    transform:rotate(45deg); transition:transform .12s;
+  }
+  .picker[open] > summary::after { transform:rotate(225deg) translate(-2px,-2px); }
+  .picker > summary:hover { border-color:var(--accent); }
+  .picker-menu {
+    position:absolute; right:0; top:calc(100% + 6px); z-index:20; min-width:230px;
+    background:var(--surface); border:1px solid var(--line); border-radius:5px;
+    box-shadow:var(--shadow); padding:5px; text-align:left;
+  }
+  .picker-menu a {
+    display:block; padding:8px 10px; border-radius:3px; text-decoration:none;
+    font-size:14px; color:var(--ink); line-height:1.3;
+  }
+  .picker-menu a:hover { background:var(--surface-2); }
+  .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
+  .picker-menu a[aria-current] { color:var(--accent); }
+  @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
 </style>
 </head>
 <body>
@@ -356,7 +385,18 @@
 
   <header class="masthead">
     <div class="wordmark">when can i <em>shred</em></div>
-    <div class="tagline">Minnesota</div>
+        <details class="picker">
+      <summary>Minnesota</summary>
+      <nav class="picker-menu">
+      <a href="index.html" aria-current="page">Minnesota<span>15 hills, 5 seasons each</span></a>
+      <a href="wisconsin.html">Wisconsin<span>1 hill so far — help wanted</span></a>
+      <a href="michigan-up.html">Michigan · Upper Peninsula<span>not started — help wanted</span></a>
+      <a href="michigan-lp.html">Michigan · Lower Peninsula<span>not started — help wanted</span></a>
+      <a href="iowa.html">Iowa<span>not started — help wanted</span></a>
+      <a href="illinois.html">Illinois<span>not started — help wanted</span></a>
+      <a href="dakotas.html">The Dakotas<span>not started — help wanted</span></a>
+      </nav>
+    </details>
   </header>
 
   <p class="eyebrow">28 August 2026 · Minnesota</p>
@@ -381,8 +421,8 @@
     </div>
     <p class="hero-say"><b>Wild Mountain</b> opened first three years running.</p>
     <p class="hero-sub">
-      Until last season, when <b>Andes Tower Hills</b> beat it by a single day. Nothing is
-      announced yet.
+      <b>Andes Tower Hills</b> broke the run last season, opening a single day ahead of it.
+      Nothing is announced for the coming winter yet.
     </p>
 
     <dl class="stats">
@@ -520,7 +560,7 @@
         <tbody>
           <tr class="grp"><td colspan="7">Twin Cities</td></tr>
           <tr class="first">
-            <td class="hill"><span class="rank">01</span><span class="pip" style="--c1:#beee07;--c2:#000000" aria-hidden="true"></span><a href="resorts/wild-mountain.html">Wild Mountain</a></td>
+            <td class="hill"><span class="pip" style="--c1:#beee07;--c2:#000000" aria-hidden="true"></span><a href="resorts/wild-mountain.html">Wild Mountain</a></td>
             <td class="where" data-label="Where">Taylors Falls</td>
             <td data-label="Projected">Nov 10<span class="rng">model</span></td>
             <td class="num days" data-label="Days">73</td>
@@ -529,7 +569,7 @@
             <td class="go-cell"><a class="btn" href="resorts/wild-mountain.html" aria-label="See Wild Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">02</span><span class="pip" style="--c1:#005395;--c2:#ffec26" aria-hidden="true"></span><a href="resorts/trollhaugen.html">Trollhaugen</a></td>
+            <td class="hill"><span class="pip" style="--c1:#005395;--c2:#ffec26" aria-hidden="true"></span><a href="resorts/trollhaugen.html">Trollhaugen</a></td>
             <td class="where" data-label="Where">Dresser</td>
             <td data-label="Projected">Nov 10<span class="rng">model</span></td>
             <td class="num days" data-label="Days">73</td>
@@ -538,7 +578,7 @@
             <td class="go-cell"><a class="btn" href="resorts/trollhaugen.html" aria-label="See Trollhaugen's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">03</span><span class="pip" style="--c1:#b02621;--c2:#10325a" aria-hidden="true"></span><a href="resorts/afton-alps.html">Afton Alps</a></td>
+            <td class="hill"><span class="pip" style="--c1:#b02621;--c2:#10325a" aria-hidden="true"></span><a href="resorts/afton-alps.html">Afton Alps</a></td>
             <td class="where" data-label="Where">Afton</td>
             <td data-label="Projected">Nov 29<span class="rng">model</span></td>
             <td class="num days" data-label="Days">92</td>
@@ -547,7 +587,7 @@
             <td class="go-cell"><a class="btn" href="resorts/afton-alps.html" aria-label="See Afton Alps's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">04</span><span class="pip" style="--c1:#3db3e3;--c2:#81d742" aria-hidden="true"></span><a href="resorts/buck-hill.html">Buck Hill</a></td>
+            <td class="hill"><span class="pip" style="--c1:#3db3e3;--c2:#81d742" aria-hidden="true"></span><a href="resorts/buck-hill.html">Buck Hill</a></td>
             <td class="where" data-label="Where">Burnsville</td>
             <td data-label="Projected">Nov 29<span class="rng">model</span></td>
             <td class="num days" data-label="Days">92</td>
@@ -556,7 +596,7 @@
             <td class="go-cell"><a class="btn" href="resorts/buck-hill.html" aria-label="See Buck Hill's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">05</span><span class="pip" style="--c1:#1c75bc;--c2:#fff200" aria-hidden="true"></span><a href="resorts/welch-village.html">Welch Village</a></td>
+            <td class="hill"><span class="pip" style="--c1:#1c75bc;--c2:#fff200" aria-hidden="true"></span><a href="resorts/welch-village.html">Welch Village</a></td>
             <td class="where" data-label="Where">Welch</td>
             <td data-label="Projected">Nov 30<span class="rng">model</span></td>
             <td class="num days" data-label="Days">93</td>
@@ -565,7 +605,7 @@
             <td class="go-cell"><a class="btn" href="resorts/welch-village.html" aria-label="See Welch Village's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">06</span><span class="pip" style="--c1:#5f3894;--c2:#f26522" aria-hidden="true"></span><a href="resorts/hyland-hills.html">Hyland Hills</a></td>
+            <td class="hill"><span class="pip" style="--c1:#5f3894;--c2:#f26522" aria-hidden="true"></span><a href="resorts/hyland-hills.html">Hyland Hills</a></td>
             <td class="where" data-label="Where">Bloomington</td>
             <td data-label="Projected">Dec 1<span class="rng">model</span></td>
             <td class="num days" data-label="Days">94</td>
@@ -574,7 +614,7 @@
             <td class="go-cell"><a class="btn" href="resorts/hyland-hills.html" aria-label="See Hyland Hills's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">07</span><span class="pip" style="--c1:#fe3332;--c2:#ffffff" aria-hidden="true"></span><a href="resorts/elm-creek.html">Elm Creek</a></td>
+            <td class="hill"><span class="pip" style="--c1:#fe3332;--c2:#ffffff" aria-hidden="true"></span><a href="resorts/elm-creek.html">Elm Creek</a></td>
             <td class="where" data-label="Where">Maple Grove</td>
             <td data-label="Projected">Dec 16<span class="rng">model</span></td>
             <td class="num days" data-label="Days">109</td>
@@ -584,7 +624,7 @@
           </tr>
           <tr class="grp"><td colspan="7">Greater Minnesota</td></tr>
           <tr>
-            <td class="hill"><span class="rank">08</span><span class="pip" style="--c1:#12592e;--c2:#213871" aria-hidden="true"></span><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td>
+            <td class="hill"><span class="pip" style="--c1:#12592e;--c2:#213871" aria-hidden="true"></span><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td>
             <td class="where" data-label="Where">Kensington</td>
             <td data-label="Projected">Nov 11<span class="rng">model</span></td>
             <td class="num days" data-label="Days">74</td>
@@ -593,7 +633,7 @@
             <td class="go-cell"><a class="btn" href="resorts/andes-tower-hills.html" aria-label="See Andes Tower Hills's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">09</span><span class="pip" style="--c1:#0c356d;--c2:#c03223" aria-hidden="true"></span><a href="resorts/buena-vista.html">Buena Vista</a></td>
+            <td class="hill"><span class="pip" style="--c1:#0c356d;--c2:#c03223" aria-hidden="true"></span><a href="resorts/buena-vista.html">Buena Vista</a></td>
             <td class="where" data-label="Where">Bemidji</td>
             <td data-label="Projected">Nov 20<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">83</td>
@@ -602,7 +642,7 @@
             <td class="go-cell"><a class="btn" href="resorts/buena-vista.html" aria-label="See Buena Vista's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">10</span><span class="pip" style="--c1:#fbab54;--c2:#009ddd" aria-hidden="true"></span><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td>
+            <td class="hill"><span class="pip" style="--c1:#fbab54;--c2:#009ddd" aria-hidden="true"></span><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td>
             <td class="where" data-label="Where">Detroit Lakes</td>
             <td data-label="Projected">Nov 22<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">85</td>
@@ -611,7 +651,7 @@
             <td class="go-cell"><a class="btn" href="resorts/detroit-mountain.html" aria-label="See Detroit Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">11</span><span class="pip" style="--c1:#2d65b0;--c2:#189f5a" aria-hidden="true"></span><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td>
+            <td class="hill"><span class="pip" style="--c1:#2d65b0;--c2:#189f5a" aria-hidden="true"></span><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td>
             <td class="where" data-label="Where">Duluth</td>
             <td data-label="Projected">Nov 26<span class="rng">model</span></td>
             <td class="num days" data-label="Days">89</td>
@@ -620,7 +660,7 @@
             <td class="go-cell"><a class="btn" href="resorts/spirit-mountain.html" aria-label="See Spirit Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">12</span><span class="pip" style="--c1:#068bc4;--c2:#1a2738" aria-hidden="true"></span><a href="resorts/powder-ridge.html">Powder Ridge</a></td>
+            <td class="hill"><span class="pip" style="--c1:#068bc4;--c2:#1a2738" aria-hidden="true"></span><a href="resorts/powder-ridge.html">Powder Ridge</a></td>
             <td class="where" data-label="Where">Kimball</td>
             <td data-label="Projected">Nov 27<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">90</td>
@@ -629,7 +669,7 @@
             <td class="go-cell"><a class="btn" href="resorts/powder-ridge.html" aria-label="See Powder Ridge's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">13</span><span class="pip" style="--c1:#ed2a00;--c2:#99de74" aria-hidden="true"></span><a href="resorts/giants-ridge.html">Giants Ridge</a></td>
+            <td class="hill"><span class="pip" style="--c1:#ed2a00;--c2:#99de74" aria-hidden="true"></span><a href="resorts/giants-ridge.html">Giants Ridge</a></td>
             <td class="where" data-label="Where">Biwabik</td>
             <td data-label="Projected">Nov 29<span class="rng">model</span></td>
             <td class="num days" data-label="Days">92</td>
@@ -638,7 +678,7 @@
             <td class="go-cell"><a class="btn" href="resorts/giants-ridge.html" aria-label="See Giants Ridge's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">14</span><span class="pip" style="--c1:#00487f;--c2:#fd8204" aria-hidden="true"></span><a href="resorts/mount-kato.html">Mount Kato</a></td>
+            <td class="hill"><span class="pip" style="--c1:#00487f;--c2:#fd8204" aria-hidden="true"></span><a href="resorts/mount-kato.html">Mount Kato</a></td>
             <td class="where" data-label="Where">Mankato</td>
             <td data-label="Projected">Nov 30<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">93</td>
@@ -647,7 +687,7 @@
             <td class="go-cell"><a class="btn" href="resorts/mount-kato.html" aria-label="See Mount Kato's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">15</span><span class="pip" style="--c1:#00344f;--c2:#45697d" aria-hidden="true"></span><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td>
+            <td class="hill"><span class="pip" style="--c1:#00344f;--c2:#45697d" aria-hidden="true"></span><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td>
             <td class="where" data-label="Where">Lutsen</td>
             <td data-label="Projected">Dec 6<span class="rng">model</span></td>
             <td class="num days" data-label="Days">99</td>
@@ -656,7 +696,7 @@
             <td class="go-cell"><a class="btn" href="resorts/lutsen-mountains.html" aria-label="See Lutsen Mountains's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="rank">16</span><span class="pip" style="--c1:#00a8f0;--c2:#000000" aria-hidden="true"></span><a href="resorts/coffee-mill.html">Coffee Mill</a></td>
+            <td class="hill"><span class="pip" style="--c1:#00a8f0;--c2:#000000" aria-hidden="true"></span><a href="resorts/coffee-mill.html">Coffee Mill</a></td>
             <td class="where" data-label="Where">Wabasha</td>
             <td data-label="Projected">Dec 13<span class="rng">model</span></td>
             <td class="num days" data-label="Days">106</td>

@@ -3,16 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Hyland Hills &middot; When Can I Shred</title>
-<meta name="description" content="When Hyland Hills normally opens, and every opening date we could source.">
-<meta property="og:title" content="Hyland Hills">
-<meta property="og:description" content="Opening dates for Hyland Hills, with sources.">
+<title>The Dakotas &middot; When Can I Shred</title>
+<meta name="description" content="Opening dates for The Dakotas ski hills are not gathered yet. Help fill them in.">
+<meta property="og:title" content="When Can I Shred &middot; The Dakotas">
+<meta property="og:description" content="Not covered yet. Help gather the hills and their opening dates.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
-
 <style>
   :root {
     --ground:#EDF1F5; --surface:#FFFFFF; --surface-2:#E2E9F0;
@@ -53,12 +50,6 @@
   }
   .wrap { max-width:1080px; margin:0 auto; padding:0 24px 80px; }
 
-  .notice {
-    background:var(--accent-soft); color:var(--ink);
-    border-bottom:1px solid var(--line);
-    font-size:13px; padding:10px 24px; text-align:center;
-  }
-  .notice strong { color:var(--accent); }
 
   .masthead {
     display:flex; flex-wrap:wrap; align-items:baseline;
@@ -66,8 +57,10 @@
     padding:28px 0 20px; border-bottom:1px solid var(--line);
   }
   .wordmark { font-family:"Instrument Serif",Georgia,serif; font-size:25px; }
+  .wordmark a { color:inherit; text-decoration:none; }
+  .wordmark a:hover em { color:var(--ink); }
   .wordmark em { font-style:italic; color:var(--accent); }
-  .tagline { font-size:13px; color:var(--ink-3); }
+  .tagline { font-size:15px; font-weight:700; color:var(--ink); letter-spacing:.01em; }
 
   .eyebrow {
     font-size:11px; font-weight:600; letter-spacing:.16em;
@@ -98,8 +91,6 @@
     border-top:1px solid var(--line);
   }
   @media (max-width:640px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-
-
   .stats dt {
     font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3);
@@ -117,9 +108,6 @@
     margin:0; text-wrap:balance;
   }
   .sec-note { font-size:14.5px; color:var(--ink-2); max-width:62ch; margin:12px 0 26px; }
-  /* Nothing styled links in body copy, so the first one to appear rendered
-     as browser-default #0000EE: 2:1 against the dark page. */
-  .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
 
   .chart-box {
     background:var(--surface); border:1px solid var(--line); border-radius:4px;
@@ -153,7 +141,7 @@
     background:var(--surface); border:1px solid var(--line);
     border-radius:4px; overflow-x:auto; box-shadow:var(--shadow);
   }
-  table { border-collapse:collapse; width:100%; min-width:560px; }
+  table { border-collapse:collapse; width:100%; min-width:820px; }
   caption {
     text-align:left; font-size:11px; font-weight:600; letter-spacing:.16em;
     text-transform:uppercase; color:var(--ink-3); padding:16px 20px 10px;
@@ -173,9 +161,36 @@
     border-bottom:1px solid var(--line);
   }
   .hill a:hover { color:var(--accent); border-bottom-color:var(--accent); }
+  .hill a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+  .vh { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+
+  /* Split on the diagonal so both colours read at 10px. The ring keeps a dot
+     whose half matches the page from dissolving into it — several of these
+     secondaries are white and several primaries are near-black. */
+  .pip {
+    display:inline-block; width:10px; height:10px; border-radius:2px;
+    margin-right:9px; flex:0 0 auto;
+    background:linear-gradient(135deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+    box-shadow:0 0 0 1px var(--line);
+  }
+
+  /* A row of text does not read as navigation. The button does, and it is the
+     thing the eye lands on at the end of the row. */
+  .go-cell { text-align:right; white-space:nowrap; }
+  .btn {
+    display:inline-flex; align-items:center; gap:6px;
+    font-size:11.5px; font-weight:600; letter-spacing:.03em;
+    padding:5px 11px; border:1px solid var(--line); border-radius:999px;
+    color:var(--ink-2); text-decoration:none;
+    transition:border-color .12s, color .12s, background .12s;
+  }
+  .btn-arrow { transition:transform .12s; }
+  tbody tr:hover .btn {
+    border-color:var(--accent); color:var(--accent); background:var(--accent-soft);
+  }
+  tbody tr:hover .btn-arrow { transform:translateX(2px); }
+  .btn:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .where { color:var(--ink-3); font-size:13px; white-space:nowrap; }
-  .where a { color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--line); }
-  .where a:hover { color:var(--accent); border-bottom-color:var(--accent); }
   .days { font-weight:700; font-variant-numeric:tabular-nums; }
   .grp td {
     background:var(--surface-2); font-size:10.5px; font-weight:600;
@@ -216,7 +231,7 @@
     font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
     color:var(--ink-3); margin:0 0 14px;
   }
-  .big {
+  .card .big {
     font-family:"Instrument Serif",Georgia,serif; font-size:40px;
     line-height:1; font-variant-numeric:tabular-nums; margin:0 0 8px; color:var(--warm);
   }
@@ -235,28 +250,101 @@
   footer a { color:var(--ink-2); }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
-  .hero-sub a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
-  .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; opacity: .75; }
-  .eyebrow a:hover { opacity: 1; }
 
-  .brandbar { display:flex; height:6px; }
-  .brandbar span { flex:1; }
-  .brandbar span:first-child { background:var(--brand-raw-1); }
-  .brandbar span:last-child  { background:var(--brand-raw-2); box-shadow:inset 0 -1px 0 var(--line); }
+  .scens {
+    display:flex; align-items:flex-end; flex-wrap:wrap;
+    gap:clamp(22px,6vw,64px); margin:2px 0 0;
+  }
+  .scen { display:flex; flex-direction:column; }
+  .scen-num {
+    font-family:"Instrument Serif",Georgia,serif; line-height:.86;
+    letter-spacing:-.03em; font-variant-numeric:tabular-nums;
+    font-size:clamp(46px,7vw,80px); color:var(--ink-2);
+  }
+  .scen-real .scen-num { font-size:clamp(80px,13vw,150px); color:var(--ink); }
+  .scen-unit {
+    font-family:"Instrument Serif",Georgia,serif; font-style:italic;
+    font-size:.32em; color:var(--ink-3); margin-left:.22em; letter-spacing:0;
+  }
+  .scen-word { font-size:.62em; font-style:italic; color:var(--ink-3); }
+  .scen-date {
+    font-size:15px; font-weight:600; margin-top:12px; color:var(--ink);
+    font-variant-numeric:tabular-nums;
+  }
+  .scen-real .scen-date { color:var(--accent); }
+  .scen-lede {
+    font-size:11px; font-weight:600; letter-spacing:.11em; text-transform:uppercase;
+    color:var(--ink-3); margin-top:3px;
+  }
+  .scen-yr { display:block; letter-spacing:.06em; opacity:.75; margin-top:1px; }
 
-  .bm-1 { color:var(--brand-ink); }
-  .bm-2 { color:var(--brand-ink-2); }
-  .hero-say.mark { font-size:clamp(30px,5vw,52px); line-height:1.1; margin:14px 0 0; }
-  .hero-say.mark .bm-1, .hero-say.mark .bm-2 { font-weight:400; }
-  .snotes { margin:16px 2px 0; display:grid; gap:9px; }
-  .snote {
-    font-size:13.5px; color:var(--ink-2); margin:0; max-width:74ch;
-    padding-left:13px; border-left:2px solid var(--line);
+  /* Three numbers only mean something next to each other. Left to wrap they
+     split two-and-one around 480px, which reads as a mistake, so below that
+     they hold a three-up grid and shrink instead. */
+  /* The table needs about 860px for its seven columns and sat in a horizontal
+     scroller below that, so anything narrower showed part of a row and hid the
+     rest behind a sideways drag nobody makes. The stack has to start above the
+     width the table actually needs, not at some round phone number. */
+  @media (max-width:920px) {
+    table { min-width:0; }
+    .tbl-box { overflow-x:visible; }
+    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    caption { padding:14px 16px 8px; }
+    tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
+    tbody tr:last-child { border-bottom:0; }
+    tbody tr td { display:flex; align-items:baseline;
+                  gap:8px; border:0; padding:4px 0; text-align:right; }
+    /* The label takes the slack so the value and its sub-value stay together on
+       the right. space-between would strand them at opposite ends of the row. */
+    tbody tr td::before {
+      content:attr(data-label); text-align:left; flex:1 1 auto;
+      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ink-3); white-space:nowrap;
+    }
+    /* The hill name is the row's heading, not another labelled field. */
+    tbody tr td.hill { display:block; text-align:left; font-size:16px; padding:0 0 6px; }
+    tbody tr td.hill::before { content:none; }
+    /* No hover on a phone, so the button carries its own emphasis and spans the
+       card rather than hiding at the end of a line. */
+    tbody tr td.go-cell { display:block; text-align:center; padding:12px 0 0; }
+    tbody tr td.go-cell::before { content:none; }
+    .btn { display:flex; justify-content:center; width:100%; padding:9px 11px;
+           font-size:12.5px; border-color:var(--accent); color:var(--accent); }
+    tbody tr.grp { padding:8px 16px; }
+    tbody tr.grp td { display:block; text-align:left; padding:0; }
+    tbody tr.grp td::before { content:none; }
+    .rng { display:inline; margin:0 0 0 8px; }
+    .hrs span { margin-left:6px; }
   }
-  .snote b {
-    display:block; font-size:10.5px; font-weight:600; letter-spacing:.13em;
-    text-transform:uppercase; color:var(--ink-3); margin-bottom:2px;
+
+  @media (max-width:560px) {
+    .scens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
+    .scen-num { font-size:34px; }
+    .scen-real .scen-num { font-size:48px; }
+    .scen-unit { font-size:.36em; margin-left:.1em; }
+    .scen-date { font-size:13px; margin-top:8px; }
+    .scen-lede { font-size:9.5px; letter-spacing:.07em; }
   }
+  .fc-head {
+    font-family:"Instrument Serif",Georgia,serif;
+    font-size:clamp(22px,3vw,32px); line-height:1.25;
+    max-width:46ch; text-wrap:balance; margin:0 0 10px;
+  }
+  .fc-note { margin:0 0 26px; }
+  /* The table is sixteen links that do not look like links. This says so once,
+     above the table, rather than decorating every row. */
+  .sec-cta {
+    font-size:13.5px; color:var(--ink-2); margin:-14px 0 22px;
+    padding-left:11px; border-left:2px solid var(--accent);
+  }
+  /* The negative top margin above tucks the line under a section note. Standing
+     on its own after a block it has to keep its distance instead. */
+  .sec-cta.standalone { margin:22px 0 0; }
+  .sec-cta a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
+  /* Nothing styled links in body copy, so the first one to appear rendered
+     as browser-default #0000EE: 2:1 against the dark page. */
+  .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
+  .fc-head b { font-weight:400; color:var(--accent); }
 
   /* A <details> rather than a <select>: the site ships no JavaScript, and a
      select cannot navigate without it. Regions are pages, so these are links. */
@@ -287,107 +375,82 @@
   .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
   .picker-menu a[aria-current] { color:var(--accent); }
   @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
-  /* Same treatment as the homepage table. The season table is narrower — four
-     or five short columns — so it survives further down, but it still has to
-     stack before it starts scrolling sideways. The chart keeps its scroller: a
-     700px line chart does not stack into anything. */
-  @media (max-width:700px) {
-    table { min-width:0; }
-    .tbl-box { overflow-x:visible; }
-    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
-    caption { padding:14px 16px 8px; }
-    tbody tr { display:block; border-bottom:1px solid var(--line); padding:10px 16px 12px; }
-    tbody tr:last-child { border-bottom:0; }
-    tbody tr td { display:flex; align-items:baseline; gap:8px;
-                  border:0; padding:4px 0; text-align:right; }
-    tbody tr td::before {
-      content:attr(data-label); text-align:left; flex:1 1 auto;
-      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-      color:var(--ink-3); white-space:nowrap;
-    }
-    tbody tr td.season {
-      display:block; text-align:left; font-size:15px; font-weight:600; padding:0 0 6px;
-    }
-    tbody tr td.season::before { content:none; }
-    .rng { display:inline; margin:0 0 0 8px; }
-  }</style>
-<style>
-  :root { --accent:#5f3894; --accent-soft:#e4daf1;
-          --brand-ink:#5f3894; --brand-ink-2:#f26522;
-          --brand-raw-1:#5f3894; --brand-raw-2:#f26522; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --accent:#9d7acd; --accent-soft:#271d35; --brand-ink:#9d7acd; --brand-ink-2:#f26522; --brand-raw-1:#5f3894; --brand-raw-2:#f26522; } }
-  :root[data-theme="dark"] { --accent:#9d7acd; --accent-soft:#271d35; --brand-ink:#9d7acd; --brand-ink-2:#f26522; --brand-raw-1:#5f3894; --brand-raw-2:#f26522; }
 </style>
 </head>
 <body>
-<div class="brandbar"><span></span><span></span></div>
 <div class="wrap">
 
   <header class="masthead">
-    <div class="wordmark">when can i <em>shred</em></div>
-        <details class="picker">
-      <summary>Minnesota</summary>
+    <div class="wordmark"><a href="index.html">when can i <em>shred</em></a></div>
+    <details class="picker">
+      <summary>The Dakotas</summary>
       <nav class="picker-menu">
-      <a href="../index.html" aria-current="page">Minnesota<span>15 hills, 5 seasons each</span></a>
-      <a href="../wisconsin.html">Wisconsin<span>1 hill so far — help wanted</span></a>
-      <a href="../michigan-up.html">Michigan · Upper Peninsula<span>not started — help wanted</span></a>
-      <a href="../michigan-lp.html">Michigan · Lower Peninsula<span>not started — help wanted</span></a>
-      <a href="../iowa.html">Iowa<span>not started — help wanted</span></a>
-      <a href="../illinois.html">Illinois<span>not started — help wanted</span></a>
-      <a href="../dakotas.html">The Dakotas<span>not started — help wanted</span></a>
+      <a href="index.html">Minnesota<span>15 hills, 5 seasons each</span></a>
+      <a href="wisconsin.html">Wisconsin<span>1 hill so far — help wanted</span></a>
+      <a href="michigan-up.html">Michigan · Upper Peninsula<span>not started — help wanted</span></a>
+      <a href="michigan-lp.html">Michigan · Lower Peninsula<span>not started — help wanted</span></a>
+      <a href="iowa.html">Iowa<span>not started — help wanted</span></a>
+      <a href="illinois.html">Illinois<span>not started — help wanted</span></a>
+      <a href="dakotas.html" aria-current="page">The Dakotas<span>not started — help wanted</span></a>
       </nav>
     </details>
   </header>
 
-  <p class="eyebrow"><a href="../index.html">&larr; every hill</a></p>
-
   <section class="hero">
-    <p class="hero-say mark"><span class="bm-1">Hyland</span> <span class="bm-2">Hills</span></p>
-    <p class="hero-sub">Bloomington, MN &middot;
-      <a href="https://www.threeriversparks.org/location/hyland-hills-ski-area" target="_blank" rel="noopener">Official site</a> &middot; <a href="https://facebook.com/hylandski" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://instagram.com/hylandhills" target="_blank" rel="noopener">Instagram</a>
-    </p>
+    <p class="eyebrow">Not covered yet</p>
+    <h1 class="fc-head">The Dakotas is not covered yet.</h1>
+    <p class="hero-sub">No The Dakotas hills are on the site yet. Everything here is built from dates gathered one post at a time, and nobody has worked this state.</p>
 
     <dl class="stats">
-      <div><dt>Typical first day</dt><dd class="lede">Dec 1</dd></div>
-      <div><dt>Earliest observed</dt><dd>Nov 22</dd></div>
-      <div><dt>Latest observed</dt><dd>Dec 4</dd></div>
-      <div><dt>Normal snowmaking hrs</dt><dd>292</dd></div>
+      <div><dt>The Dakotas hills tracked</dt><dd class="lede">0</dd></div>
+      <div><dt>Seasons wanted</dt><dd>5</dd></div>
+      <div><dt>Tracked in Minnesota</dt><dd>15</dd></div>
+      <div><dt>Dates on file</dt><dd>60 of 80</dd></div>
     </dl>
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">Season by season</h2>
-    <p class="sec-note">Every date carries where it came from. <b>About</b> means the archive
-      placed it in a window without pinning the day; <b>confirmed</b> means two independent
-      sources agreed.</p>
+    <h2 class="sec-title">What a hill needs</h2>
+    <p class="sec-note">
+      Neither of these takes an expert &mdash; just somebody who was there, or who can read
+      back through a hill&rsquo;s own posts. There is no feed to pull and no aggregator that
+      carries opening dates for hills this size, which is why the record is built by hand.
+    </p>
 
     <div class="tbl-box">
       <table>
-        <caption>Observed openings and closings</caption>
+        <caption>How a hill gets added</caption>
         <thead>
-<tr><th>Season</th><th>First lift</th><th>Full operations</th><th>Source</th></tr>
+          <tr><th>Step</th><th>What it means</th></tr>
         </thead>
         <tbody>
-          <tr><td class="season">2021-22</td><td data-label="First lift">Nov 26</td><td data-label="Full operations">Nov 26</td><td class="where" data-label="Source">local</td></tr>
-          <tr><td class="season">2022-23</td><td data-label="First lift">Nov 22</td><td data-label="Full operations">Nov 22</td><td class="where" data-label="Source">local</td></tr>
-          <tr><td class="season">2023-24</td><td data-label="First lift">Dec 1</td><td data-label="Full operations">Dec 1</td><td class="where" data-label="Source">local</td></tr>
-          <tr><td class="season">2024-25</td><td data-label="First lift">Dec 4</td><td data-label="Full operations">Dec 4</td><td class="where" data-label="Source">local</td></tr>
-          <tr><td class="season">2025-26</td><td data-label="First lift">Dec 3</td><td data-label="Full operations">Dec 3</td><td class="where" data-label="Source">local</td></tr>
+          <tr>
+            <td class="season">The hill</td>
+            <td data-label="What it means">Its name, town, website and Facebook page &mdash;
+              enough to find it, and to pull 31 years of wet-bulb climatology for its
+              coordinates.</td>
+          </tr>
+          <tr>
+            <td class="season">The dates</td>
+            <td data-label="What it means">First lift, and where the two can be told apart, the
+              day it reached normal hours &mdash; for as many of the last five seasons as can be
+              found. Every date needs the post it came from.</td>
+          </tr>
         </tbody>
       </table>
     </div>
-      <div class="snotes">
-        <p class="snote"><b>2021-22</b>A poor winter for natural snow in Minnesota. The hills opened on schedule on snow they made themselves, but terrain came slowly: Buck Hill had six of its sixteen runs open on 3 December, and Trollhaugen ran a part-week schedule into the new year without ever announcing normal hours.</p>
-        <p class="snote"><b>2023-24</b>The latest start on record here. Coffee Mill did not turn a lift until 14 January, after posting "still currently closed", "Waiting for Cold!" and "Still Waiting for Cold Weather!" through December. Trollhaugen opened on 2 November and shut again four days later: "Mother Nature wins this round."</p>
-      </div>
+
+    <p class="sec-cta standalone">
+      If you know The Dakotas hills, or want to take on the whole state, email
+      <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>. Dates for hills already listed
+      are just as welcome.
+    </p>
   </section>
 
   <footer>
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span>We are working on entering the rest. If you want to help, email me at
-      <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
   </footer>
 </div>
 </body>

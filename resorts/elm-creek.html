@@ -99,30 +99,7 @@
   }
   @media (max-width:640px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 
-  /* Same treatment as the homepage table: 820px of columns in a horizontal
-     scroller is unusable on a phone, so each season becomes a block and the
-     headers move onto the cells. The chart keeps its scroller — a 700px wide
-     line chart does not stack into anything. */
-  @media (max-width:700px) {
-    table { min-width:0; }
-    .tbl-box { overflow-x:visible; }
-    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
-    caption { padding:14px 16px 8px; }
-    tbody tr { display:block; border-bottom:1px solid var(--line); padding:10px 16px 12px; }
-    tbody tr:last-child { border-bottom:0; }
-    tbody tr td { display:flex; align-items:baseline; gap:8px;
-                  border:0; padding:4px 0; text-align:right; }
-    tbody tr td::before {
-      content:attr(data-label); text-align:left; flex:1 1 auto;
-      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-      color:var(--ink-3); white-space:nowrap;
-    }
-    tbody tr td.season {
-      display:block; text-align:left; font-size:15px; font-weight:600; padding:0 0 6px;
-    }
-    tbody tr td.season::before { content:none; }
-    .rng { display:inline; margin:0 0 0 8px; }
-  }
+
   .stats dt {
     font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3);
@@ -176,7 +153,7 @@
     background:var(--surface); border:1px solid var(--line);
     border-radius:4px; overflow-x:auto; box-shadow:var(--shadow);
   }
-  table { border-collapse:collapse; width:100%; min-width:820px; }
+  table { border-collapse:collapse; width:100%; min-width:560px; }
   caption {
     text-align:left; font-size:11px; font-weight:600; letter-spacing:.16em;
     text-transform:uppercase; color:var(--ink-3); padding:16px 20px 10px;
@@ -197,6 +174,8 @@
   }
   .hill a:hover { color:var(--accent); border-bottom-color:var(--accent); }
   .where { color:var(--ink-3); font-size:13px; white-space:nowrap; }
+  .where a { color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--line); }
+  .where a:hover { color:var(--accent); border-bottom-color:var(--accent); }
   .days { font-weight:700; font-variant-numeric:tabular-nums; }
   .grp td {
     background:var(--surface-2); font-size:10.5px; font-weight:600;
@@ -278,7 +257,60 @@
     display:block; font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3); margin-bottom:2px;
   }
-</style>
+
+  /* A <details> rather than a <select>: the site ships no JavaScript, and a
+     select cannot navigate without it. Regions are pages, so these are links. */
+  .picker { position:relative; }
+  .picker > summary {
+    list-style:none; cursor:pointer; display:inline-flex; align-items:center; gap:7px;
+    font-size:15px; font-weight:700; color:var(--ink); letter-spacing:.01em;
+    padding:3px 9px 3px 10px; border:1px solid var(--line); border-radius:999px;
+  }
+  .picker > summary::-webkit-details-marker { display:none; }
+  .picker > summary::after {
+    content:""; width:5px; height:5px; margin-top:-3px;
+    border-right:1.5px solid var(--ink-3); border-bottom:1.5px solid var(--ink-3);
+    transform:rotate(45deg); transition:transform .12s;
+  }
+  .picker[open] > summary::after { transform:rotate(225deg) translate(-2px,-2px); }
+  .picker > summary:hover { border-color:var(--accent); }
+  .picker-menu {
+    position:absolute; right:0; top:calc(100% + 6px); z-index:20; min-width:230px;
+    background:var(--surface); border:1px solid var(--line); border-radius:5px;
+    box-shadow:var(--shadow); padding:5px; text-align:left;
+  }
+  .picker-menu a {
+    display:block; padding:8px 10px; border-radius:3px; text-decoration:none;
+    font-size:14px; color:var(--ink); line-height:1.3;
+  }
+  .picker-menu a:hover { background:var(--surface-2); }
+  .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
+  .picker-menu a[aria-current] { color:var(--accent); }
+  @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
+  /* Same treatment as the homepage table. The season table is narrower — four
+     or five short columns — so it survives further down, but it still has to
+     stack before it starts scrolling sideways. The chart keeps its scroller: a
+     700px line chart does not stack into anything. */
+  @media (max-width:700px) {
+    table { min-width:0; }
+    .tbl-box { overflow-x:visible; }
+    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    caption { padding:14px 16px 8px; }
+    tbody tr { display:block; border-bottom:1px solid var(--line); padding:10px 16px 12px; }
+    tbody tr:last-child { border-bottom:0; }
+    tbody tr td { display:flex; align-items:baseline; gap:8px;
+                  border:0; padding:4px 0; text-align:right; }
+    tbody tr td::before {
+      content:attr(data-label); text-align:left; flex:1 1 auto;
+      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ink-3); white-space:nowrap;
+    }
+    tbody tr td.season {
+      display:block; text-align:left; font-size:15px; font-weight:600; padding:0 0 6px;
+    }
+    tbody tr td.season::before { content:none; }
+    .rng { display:inline; margin:0 0 0 8px; }
+  }</style>
 <style>
   :root { --accent:#c40201; --accent-soft:#f4d8d7;
           --brand-ink:#c40201; --brand-ink-2:#46596e;
@@ -293,7 +325,18 @@
 
   <header class="masthead">
     <div class="wordmark">when can i <em>shred</em></div>
-    <div class="tagline">For hills that make their own winter.</div>
+        <details class="picker">
+      <summary>Minnesota</summary>
+      <nav class="picker-menu">
+      <a href="../index.html" aria-current="page">Minnesota<span>15 hills, 5 seasons each</span></a>
+      <a href="../wisconsin.html">Wisconsin<span>1 hill so far — help wanted</span></a>
+      <a href="../michigan-up.html">Michigan · Upper Peninsula<span>not started — help wanted</span></a>
+      <a href="../michigan-lp.html">Michigan · Lower Peninsula<span>not started — help wanted</span></a>
+      <a href="../iowa.html">Iowa<span>not started — help wanted</span></a>
+      <a href="../illinois.html">Illinois<span>not started — help wanted</span></a>
+      <a href="../dakotas.html">The Dakotas<span>not started — help wanted</span></a>
+      </nav>
+    </details>
   </header>
 
   <p class="eyebrow"><a href="../index.html">&larr; every hill</a></p>
@@ -322,14 +365,14 @@
       <table>
         <caption>Observed openings and closings</caption>
         <thead>
-          <tr><th>Season</th><th>First lift</th><th>Full operations</th><th>Closed</th><th>Sources</th></tr>
+<tr><th>Season</th><th>First lift</th><th>Full operations</th><th>Source</th></tr>
         </thead>
         <tbody>
-          <tr><td class="season">2021-22</td><td data-label="First lift">Dec 18<span class="rng">single</span></td><td data-label="Full operations">Dec 23<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
-          <tr><td class="season">2022-23</td><td data-label="First lift">Dec 10<span class="rng">single</span></td><td data-label="Full operations">Dec 10<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
-          <tr><td class="season">2023-24</td><td data-label="First lift">Dec 16<span class="rng">single</span></td><td data-label="Full operations">Dec 16<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
-          <tr><td class="season">2024-25</td><td data-label="First lift">Dec 16<span class="rng">single</span></td><td data-label="Full operations">Dec 16<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
-          <tr><td class="season">2025-26</td><td data-label="First lift">Dec 19<span class="rng">single</span></td><td data-label="Full operations">Dec 19<span class="rng">single</span></td><td data-label="Closed">&mdash;</td><td class="where" data-label="Sources">local</td></tr>
+          <tr><td class="season">2021-22</td><td data-label="First lift">Dec 18</td><td data-label="Full operations">Dec 23</td><td class="where" data-label="Source">local</td></tr>
+          <tr><td class="season">2022-23</td><td data-label="First lift">Dec 10</td><td data-label="Full operations">Dec 10</td><td class="where" data-label="Source"><a href="https://www.facebook.com/ElmCreekParkReserve/posts/pfbid022MFmRyywmKc4rQGBG3RxV3yyWRUWAfE91oeTxQ6r7JcUDpXVNM9Pfsk6PP1rnm7Fl" rel="nofollow noopener">Facebook</a></td></tr>
+          <tr><td class="season">2023-24</td><td data-label="First lift">Dec 16</td><td data-label="Full operations">Dec 16</td><td class="where" data-label="Source"><a href="https://www.facebook.com/ElmCreekParkReserve/posts/pfbid02NWtsqKZ6m7qFwzWfQSjuXcBC4YbyR5yiTiqyN3hSvpXSEBMwVzfFrD95e3eGQRUVl" rel="nofollow noopener">Facebook</a></td></tr>
+          <tr><td class="season">2024-25</td><td data-label="First lift">Dec 16</td><td data-label="Full operations">Dec 16</td><td class="where" data-label="Source"><a href="https://www.facebook.com/ElmCreekParkReserve/posts/pfbid024DhcZES9dtb2QZZJgG4jRAjf9HqDVS5uto19sVyqmkemrD8xjZeFy9kwmr9SHTa8l" rel="nofollow noopener">Facebook</a></td></tr>
+          <tr><td class="season">2025-26</td><td data-label="First lift">Dec 19</td><td data-label="Full operations">Dec 19</td><td class="where" data-label="Source"><a href="https://www.facebook.com/ElmCreekParkReserve/posts/pfbid0E98Ub5Piofb7A1sBJuw94xzJrB6trP2QiykAVGkwJ74GztZxjhYk2PyiSDGFEj9xl" rel="nofollow noopener">Facebook</a></td></tr>
         </tbody>
       </table>
     </div>

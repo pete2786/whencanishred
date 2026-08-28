@@ -356,7 +356,6 @@ function pip(r) {
 
 function tableRows() {
   const out = [];
-  let rank = 0;
   for (const [region, title] of GROUPS) {
     out.push(`          <tr class="grp"><td colspan="7">${title}</td></tr>`);
     const slugs = Object.keys(resorts)
@@ -374,14 +373,10 @@ function tableRows() {
         : `&mdash;`;
 
       // data-label carries the column header into the stacked mobile layout,
-      // where the real <thead> is hidden. The rank is the row's position in the
-      // opening order, which is the one thing the table is sorted by and the
-      // only number on the row that says so.
-      rank += 1;
-      const no = String(rank).padStart(2, "0");
+      // where the real <thead> is hidden.
       out.push(
         `          <tr${cls}>`,
-        `            <td class="hill"><span class="rank">${no}</span>${pip(r)}` +
+        `            <td class="hill">${pip(r)}` +
           `<a href="resorts/${slug}.html">${esc(r.name)}</a></td>`,
         `            <td class="where" data-label="Where">${esc(r.place)}</td>`,
         `            <td data-label="Projected">${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
@@ -398,22 +393,57 @@ function tableRows() {
   return out.join("\n");
 }
 
+// The season table used to print "single" under every date, "local" in every
+// Sources cell and an em dash down the whole Closed column. Five columns, three
+// of them the same word repeated. Only say what differs from the default.
 function seasonRows(slug) {
-  return Object.entries(seasons[slug] ?? {}).map(([season, ev]) => {
-    const cell = e => {
-      if (!e?.date) return "&mdash;";
-      const tag = e.precision === "bracket" ? "about" : e.corroboration;
-      return `${pretty(e.date)}<span class="rng">${tag}</span>`;
-    };
-    const kinds = [...new Set(ev.firstLift?.sources?.map(s => s.kind) ?? [])];
-    // data-label carries the header onto the cell for the stacked mobile layout.
-    return `          <tr><td class="season">${season}</td>` +
-           `<td data-label="First lift">${cell(ev.firstLift)}</td>` +
-           `<td data-label="Full operations">${cell(ev.fullOps)}</td>` +
-           `<td data-label="Closed">${cell(ev.close)}</td>` +
-           `<td class="where" data-label="Sources">${esc(kinds.join(", ") || "none")}</td></tr>`;
-  }).join("\n");
+  const rows = Object.entries(seasons[slug] ?? {});
+  const showClose = rows.some(([, ev]) => ev.close?.date);
+
+  const cell = e => {
+    if (!e?.date) return "&mdash;";
+    // "single" is the ordinary case and does not need saying; a bracketed date
+    // or a second agreeing source does.
+    const tag = e.precision === "bracket" ? "about"
+              : e.corroboration === "confirmed" ? "confirmed" : null;
+    return pretty(e.date) + (tag ? `<span class="rng">${tag}</span>` : "");
+  };
+
+  // With a permalink the source is worth following, and worth naming: "local"
+  // is the record's word for how the date was gathered, not something a reader
+  // wants to click. Name the site instead.
+  const host = url => {
+    try {
+      const h = new URL(url).hostname.replace(/^www\./, "");
+      return h === "facebook.com" ? "Facebook"
+           : h === "instagram.com" ? "Instagram"
+           : h.startsWith("web.archive.org") ? "Archive" : h;
+    } catch { return "source"; }
+  };
+  const source = ev => {
+    const src = ev.firstLift?.sources ?? [];
+    const linked = src.find(s => s.url);
+    if (linked) return `<a href="${esc(linked.url)}" rel="nofollow noopener">${esc(host(linked.url))}</a>`;
+    const kinds = [...new Set(src.map(s => s.kind))];
+    return esc(kinds.join(", ") || "none");
+  };
+
+  return rows.map(([season, ev]) =>
+    `          <tr><td class="season">${season}</td>` +
+    `<td data-label="First lift">${cell(ev.firstLift)}</td>` +
+    `<td data-label="Full operations">${cell(ev.fullOps)}</td>` +
+    (showClose ? `<td data-label="Closed">${cell(ev.close)}</td>` : "") +
+    `<td class="where" data-label="Source">${source(ev)}</td></tr>`,
+  ).join("\n");
 }
+
+// The header has to match, so it is built here rather than sat in the template.
+function seasonHead(slug) {
+  const showClose = Object.values(seasons[slug] ?? {}).some(ev => ev.close?.date);
+  return `<tr><th>Season</th><th>First lift</th><th>Full operations</th>` +
+         (showClose ? "<th>Closed</th>" : "") + `<th>Source</th></tr>`;
+}
+
 
 function socialLinks(r) {
   const links = [];
@@ -465,6 +495,42 @@ const dateline = `${now.getDate()} ${FULL[now.getMonth()]} ${now.getFullYear()}`
 
 const fcSection = forecastSection();
 
+// Regions are states, because that is how people group these hills. Minnesota
+// is the only one with a record; the rest get a page that says so and asks for
+// help. Trollhaugen is a Wisconsin hill and is already tracked, so Wisconsin is
+// not empty — it is counted from the record rather than asserted here.
+const STATES = [
+  { id: "mn",    state: "MN", name: "Minnesota",                    file: "index.html" },
+  { id: "wi",    state: "WI", name: "Wisconsin",                    file: "wisconsin.html" },
+  { id: "mi-up",              name: "Michigan \u00b7 Upper Peninsula", file: "michigan-up.html" },
+  { id: "mi-lp",              name: "Michigan \u00b7 Lower Peninsula", file: "michigan-lp.html" },
+  { id: "ia",    state: "IA", name: "Iowa",                         file: "iowa.html" },
+  { id: "il",    state: "IL", name: "Illinois",                     file: "illinois.html" },
+  { id: "dak",                name: "The Dakotas",                  file: "dakotas.html" },
+];
+
+const countIn = state =>
+  state ? Object.values(resorts).filter(r => r.state === state).length : 0;
+
+const regionNote = r => {
+  const n = countIn(r.state);
+  if (r.id === "mn") return `${n} hills, 5 seasons each`;
+  if (n === 1) return "1 hill so far \u2014 help wanted";
+  if (n > 1) return `${n} hills so far \u2014 help wanted`;
+  return "not started \u2014 help wanted";
+};
+
+// "root" is "" from the site root and "../" from resorts/.
+function picker(current, root) {
+  const here = STATES.find(r => r.id === current);
+  const items = STATES.map(r =>
+    `      <a href="${root}${r.file}"${r.id === current ? ' aria-current="page"' : ""}>${r.name}` +
+    `<span>${regionNote(r)}</span></a>`).join("\n");
+  return `    <details class="picker">\n` +
+         `      <summary>${here.name}</summary>\n` +
+         `      <nav class="picker-menu">\n${items}\n      </nav>\n    </details>`;
+}
+
 const fill = (tpl, map) =>
   Object.entries(map).reduce((s, [k, v]) => s.replaceAll(`<!--{{${k}}}-->`, v), tpl);
 
@@ -483,10 +549,42 @@ writeFileSync("index.html", fill(readFileSync("templates/index.html", "utf8"), {
   HERO_HILLS: String(Object.keys(resorts).length),
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),
   FOOTER_PROVENANCE: provenance,
+  PICKER: picker("mn", ""),
 }));
 
 // Resort pages
 mkdirSync("resorts", { recursive: true });
+// One placeholder per state that has no record yet. They borrow the homepage's
+// stylesheet rather than keeping a second copy in step with it.
+const indexTpl = readFileSync("templates/index.html", "utf8");
+const style = indexTpl.slice(indexTpl.indexOf("<style"), indexTpl.indexOf("</style>") + 8);
+const regionTpl = readFileSync("templates/region.html", "utf8");
+
+for (const region of STATES.filter(r => r.id !== "mn")) {
+  const n = countIn(region.state);
+  const lead = n
+    ? `${n === 1 ? "One" : String(n)} ${region.name} hill ${n === 1 ? "is" : "are"} already on ` +
+      `the site, carried over because it sits in the Twin Cities' orbit rather than because ` +
+      `the state is covered. The rest of ${region.name} is not gathered yet.`
+    : `No ${region.name} hills are on the site yet. Everything here is built from dates ` +
+      `gathered one post at a time, and nobody has worked this state.`;
+  writeFileSync(region.file, fill(regionTpl, {
+    STYLE: style,
+    PICKER: picker(region.id, ""),
+    REGION: esc(region.name),
+    EYEBROW: n ? "Barely started" : "Not covered yet",
+    HEADLINE: n
+      ? `${region.name} is barely started.`
+      : `${region.name} is not covered yet.`,
+    LEAD: lead,
+    TRACKED: String(n),
+    MN_COUNT: String(countIn("MN")),
+    DATES: `${t.n} of ${t.total}`,
+    FOOTER_PROVENANCE: provenance,
+  }));
+}
+console.log(`built ${STATES.length - 1} state placeholders`);
+
 const resortTpl = readFileSync("templates/resort.html", "utf8");
 for (const [slug, r] of Object.entries(resorts)) {
   const o = observed(slug);
@@ -498,8 +596,10 @@ for (const [slug, r] of Object.entries(resorts)) {
     TYPICAL: pretty(o.typical), EARLIEST: pretty(o.earliest), LATEST: pretty(o.latest),
     HOURS: String(hours[slug]?.normal ?? "—"),
     SEASONS: seasonRows(slug),
+    SEASON_HEAD: seasonHead(slug),
     SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,
+    PICKER: picker("mn", "../"),
   }));
 }
 
