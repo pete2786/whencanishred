@@ -401,9 +401,8 @@ function socialLinks(r) {
 const tally = () => {
   const all = Object.values(seasons).flatMap(s => Object.values(s)).map(e => e.firstLift);
   const withDate = all.filter(e => e.date);
-  const confirmed = withDate.filter(e => e.corroboration === "confirmed").length;
   const hills = Object.values(seasons).filter(s => Object.values(s).some(e => e.firstLift?.date)).length;
-  return { n: withDate.length, confirmed, total: all.length, hills, allHills: Object.keys(seasons).length };
+  return { n: withDate.length, total: all.length, hills, allHills: Object.keys(seasons).length };
 };
 
 const t = tally();
@@ -435,9 +434,7 @@ const sourcePhrase = parts.length > 1
 // States the coverage rather than describing the intent, and counts the record
 // every build. A hand-written claim about how well the backfill went is a claim
 // that goes stale the moment the backfill changes.
-const provenance =
-  `${t.n} of ${t.total} opening dates sourced from ${sourcePhrase}, ${t.confirmed} ` +
-  `corroborated by a second independent source. Blanks are gaps, not guesses.`;
+const provenance = `${t.n} of ${t.total} opening dates sourced from ${sourcePhrase}.`;
 
 const now = new Date();
 const dateline = `${now.getDate()} ${FULL[now.getMonth()]} ${now.getFullYear()}`;
