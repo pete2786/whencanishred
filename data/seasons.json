@@ -1241,10 +1241,17 @@
     },
     "2024-25": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2024-12-06",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Lutsen Mountains Facebook video, 6 December 2024: \"And we’re off! The 2024-25 season at Lutsen Mountains is officially underway.\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/watch/?v=926889745645779",
+            "evidence": "Lutsen Mountains Facebook video, 6 December 2024: \"And we’re off! The 2024-25 season at Lutsen Mountains is officially underway.\""
+          }
+        ]
       },
       "fullOps": {
         "date": null,
