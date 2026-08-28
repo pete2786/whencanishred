@@ -12,15 +12,7 @@
     "label": "model"
   },
   "buena-vista": {
-    "date": "2026-11-12",
-    "label": "climate"
-  },
-  "detroit-mountain": {
-    "date": "2026-11-15",
-    "label": "climate"
-  },
-  "spirit-mountain": {
-    "date": "2026-11-17",
+    "date": "2026-11-20",
     "label": "climate"
   },
   "afton-alps": {
@@ -31,25 +23,33 @@
     "date": "2026-11-22",
     "label": "announced"
   },
+  "detroit-mountain": {
+    "date": "2026-11-22",
+    "label": "climate"
+  },
   "giants-ridge": {
     "date": "2026-11-24",
     "label": "target"
   },
+  "spirit-mountain": {
+    "date": "2026-11-26",
+    "label": "model"
+  },
   "powder-ridge": {
-    "date": "2026-11-24",
+    "date": "2026-11-27",
     "label": "climate"
   },
   "buck-hill": {
     "date": "2026-11-29",
     "label": "model"
   },
-  "mount-kato": {
-    "date": "2026-11-29",
-    "label": "climate"
-  },
   "welch-village": {
     "date": "2026-11-30",
     "label": "model"
+  },
+  "mount-kato": {
+    "date": "2026-11-30",
+    "label": "climate"
   },
   "hyland-hills": {
     "date": "2026-12-01",
