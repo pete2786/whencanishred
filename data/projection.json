@@ -15,21 +15,9 @@
     "date": "2026-11-20",
     "label": "climate"
   },
-  "afton-alps": {
-    "date": "2026-11-21",
-    "label": "target"
-  },
-  "lutsen-mountains": {
-    "date": "2026-11-22",
-    "label": "announced"
-  },
   "detroit-mountain": {
     "date": "2026-11-22",
     "label": "climate"
-  },
-  "giants-ridge": {
-    "date": "2026-11-24",
-    "label": "target"
   },
   "spirit-mountain": {
     "date": "2026-11-26",
@@ -39,7 +27,15 @@
     "date": "2026-11-27",
     "label": "climate"
   },
+  "afton-alps": {
+    "date": "2026-11-29",
+    "label": "model"
+  },
   "buck-hill": {
+    "date": "2026-11-29",
+    "label": "model"
+  },
+  "giants-ridge": {
     "date": "2026-11-29",
     "label": "model"
   },
@@ -53,6 +49,10 @@
   },
   "hyland-hills": {
     "date": "2026-12-01",
+    "label": "model"
+  },
+  "lutsen-mountains": {
+    "date": "2026-12-06",
     "label": "model"
   },
   "coffee-mill": {

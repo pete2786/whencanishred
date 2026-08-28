@@ -61,10 +61,16 @@ const median = xs => xs.length % 2 ? xs[(xs.length - 1) / 2]
 // script's own output: treating them as anchors would freeze last run's numbers
 // and feed the fit its own predictions.
 const EXTERNAL = new Set(["announced", "target"]);
-const anchorPoint = slug => {
-  const was = prior[slug];
-  return was && EXTERNAL.has(was.label) ? sinceOct(was.date) : null;
-};
+
+// A date a hill states about itself is the best evidence there is right up
+// until the hill has a record, and then it is not. Lutsen's announced 22
+// November and Giants Ridge's targeted 24th were transcribed out of the old
+// hand-typed page and are contradicted by every season since: Lutsen has opened
+// on 6 December at the median and has never once opened before the 28th. Five
+// observed seasons beat a stated intention of unknown vintage.
+const statedWins = slug => EXTERNAL.has(prior[slug]?.label) && observed(slug).length < 2;
+
+const anchorPoint = slug => (statedWins(slug) ? sinceOct(prior[slug].date) : null);
 
 const fitPoints = Object.keys(resorts).map(slug => {
   const x = hours[slug]?.normal;
@@ -96,7 +102,7 @@ for (const slug of Object.keys(resorts)) {
 
   // An announced or targeted date is something a hill said about itself. The
   // model does not get to overrule it.
-  if (was && EXTERNAL.has(was.label)) {
+  if (statedWins(slug)) {
     out[slug] = { date: was.date, label: was.label };
     rows.push([slug, hours[slug]?.normal, was.label, was.date, "kept"]);
     continue;
