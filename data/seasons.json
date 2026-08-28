@@ -1318,10 +1318,17 @@
   "giants-ridge": {
     "2021-22": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2021-11-26",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Giants Ridge Facebook, 26 November 2021: \"It was an amazing opening day! Thank you everyone who came out! Here’s to the rest of the year!\" A retrospective post, so the day is confirmed rather than announced. The Friday after Thanksgiving.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/photo/?fbid=10159124500969934",
+            "evidence": "Giants Ridge Facebook, 26 November 2021: \"It was an amazing opening day! Thank you everyone who came out! Here’s to the rest of the year!\" A retrospective post, so the day is confirmed rather than announced. The Friday after Thanksgiving."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
