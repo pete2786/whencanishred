@@ -1221,10 +1221,17 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-01",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Lutsen Mountains Facebook: \"After a week of ideal snowmaking conditions, we’re launching our 75th Anniversary season this Friday, Dec 1. Ullr Mountain will open with 5 runs and 2 lifts.\" One of four mountains, with gondola sightseeing and Rosie’s Café still finishing renovations — first lift, well short of full operations.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/LutsenMountains/posts/pfbid02Du3P3R3w8hcyACV7rdNBidFCDk8ovKGdfUwMsWQ4wpfGs3K2fmQcpWhwBdLVXL1nl",
+            "evidence": "Lutsen Mountains Facebook: \"After a week of ideal snowmaking conditions, we’re launching our 75th Anniversary season this Friday, Dec 1. Ullr Mountain will open with 5 runs and 2 lifts.\" One of four mountains, with gondola sightseeing and Rosie’s Café still finishing renovations — first lift, well short of full operations."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
