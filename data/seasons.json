@@ -733,16 +733,30 @@
     },
     "2023-24": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-02",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Welch Village Facebook, 2 December 2023: \"12/2 - Opening day in the Village!\"",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid0iEKwaBSujy4sicER5UaV4aDmQeY47qYXpKUxpDkcDuKg9jTnbRZyLLRUo6oyXiBAl",
+            "evidence": "Welch Village Facebook, 2 December 2023: \"12/2 - Opening day in the Village!\""
+          }
+        ]
       },
       "fullOps": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2023-12-02",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Opened fully on day one — no pass-holder preview this season, unlike 2024-25 and 2025-26.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.facebook.com/welchvillage/posts/pfbid0iEKwaBSujy4sicER5UaV4aDmQeY47qYXpKUxpDkcDuKg9jTnbRZyLLRUo6oyXiBAl",
+            "evidence": "Opened fully on day one — no pass-holder preview this season, unlike 2024-25 and 2025-26."
+          }
+        ]
       },
       "close": {
         "date": null,
