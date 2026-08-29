@@ -666,6 +666,7 @@ const fill = (tpl, map) =>
 // SVG drifted from the numbers printed beside it.
 
 const curve = existsSync("data/curve.json") ? read("data/curve.json") : null;
+const places = existsSync("data/places.json") ? read("data/places.json") : {};
 
 // The first workable window is an early cold snap, about three weeks ahead of
 // the day the mean itself crosses. From scripts/climatology.mjs; no data file
@@ -724,7 +725,7 @@ const GEOM = {
   },
 };
 
-function chartSvg(g) {
+function chartSvg(g, d) {
   const X = md => g.x0 + (dayIndex(md) / SPAN) * (g.x1 - g.x0);
   const Y = t => g.yTop + ((60 - t) / 60) * (g.yBase - g.yTop);
   const n = (v) => Math.round(v * 10) / 10;
@@ -739,29 +740,29 @@ function chartSvg(g) {
   // The window: a bar with a dot at the normal date. On a phone the middle
   // label drops a row, because "normally Oct 28" is wider than the gap between
   // the two dates it sits between.
-  const xe = X(WINDOW.earliest), xn = X(WINDOW.normal), xl = X(WINDOW.latest);
+  const xe = X(d.window.earliest), xn = X(d.window.normal), xl = X(d.window.latest);
   o.push(`<text class="lab-rng" x="${n((xe + xl) / 2)}" y="${g.rngTitle}" text-anchor="middle">FIRST WORKABLE WINDOW</text>`,
          `<line class="rangebar" x1="${n(xe)}" y1="${g.rngBar}" x2="${n(xl)}" y2="${g.rngBar}"></line>`,
          `<line class="rangecap" x1="${n(xe)}" y1="${g.rngBar - 7}" x2="${n(xe)}" y2="${g.rngBar + 7}"></line>`,
          `<line class="rangecap" x1="${n(xl)}" y1="${g.rngBar - 7}" x2="${n(xl)}" y2="${g.rngBar + 7}"></line>`,
          `<circle class="rangedot" cx="${n(xn)}" cy="${g.rngBar}" r="5"></circle>`,
-         `<text class="tick-t" x="${n(xe)}" y="${g.rngLab}" text-anchor="middle">${md2(WINDOW.earliest)}</text>`,
-         `<text class="tick-t" x="${n(xn)}" y="${g.rngLab + g.midDrop}" text-anchor="middle">normally ${md2(WINDOW.normal)}</text>`,
-         `<text class="tick-t" x="${n(xl)}" y="${g.rngLab}" text-anchor="middle">${md2(WINDOW.latest)}</text>`);
+         `<text class="tick-t" x="${n(xe)}" y="${g.rngLab}" text-anchor="middle">${md2(d.window.earliest)}</text>`,
+         `<text class="tick-t" x="${n(xn)}" y="${g.rngLab + g.midDrop}" text-anchor="middle">normally ${md2(d.window.normal)}</text>`,
+         `<text class="tick-t" x="${n(xl)}" y="${g.rngLab}" text-anchor="middle">${md2(d.window.latest)}</text>`);
 
   o.push(`<line class="ax" x1="${g.x0}" y1="${g.yBase + 1}" x2="${g.x1}" y2="${g.yBase + 1}"></line>`,
          `<line class="ax" x1="${g.x0}" y1="${g.yTop + 7}" x2="${g.x0}" y2="${g.yBase + 1}"></line>`,
          `<line class="thresh" x1="${g.x0}" y1="${n(yThresh)}" x2="${g.x1}" y2="${n(yThresh)}"></line>`,
          `<text class="lab-cold" x="${g.x0 + 8}" y="${n(yThresh + g.coldDy)}">COLD ENOUGH TO MAKE SNOW</text>`);
 
-  const pts = curve.series.filter((_, i) => i % 2 === 0 || i === curve.series.length - 1)
+  const pts = d.curve.series.filter((_, i) => i % 2 === 0 || i === curve.series.length - 1)
     .map(p => `${n(X(p.md))},${n(Y(p.v))}`).join(" ");
   o.push(`<polyline class="curve" points="${pts}"></polyline>`);
 
-  const xc = X(curve.crossing);
+  const xc = X(d.curve.crossing);
   o.push(`<circle class="dot-cross" cx="${n(xc)}" cy="${n(yThresh)}" r="6"></circle>`,
          `<text class="lab-key" x="${n(xc + g.keyDx)}" y="${n(yThresh + g.keyDy)}" text-anchor="${g.keyAnchor}">` +
-         `Average crosses 28&deg; &middot; ${md2(curve.crossing)}</text>`);
+         `Average crosses 28&deg; &middot; ${md2(d.curve.crossing)}</text>`);
 
   // How far apart the pins land is a fact about the hills, and it changes when
   // the projection does — the metro median and the last hill open seventeen
@@ -771,7 +772,7 @@ function chartSvg(g) {
   // and the drawing grows by exactly the rows it used.
   let rows = 0;
   const placed = [];
-  for (const p of chartPins()) {
+  for (const p of d.pins) {
     const x = X(p.md);
     const w = p.label.length * g.pinFont * 0.52;
     const anchor = x > g.x1 - w / 2 ? "end" : x < g.x0 + w / 2 ? "start" : "middle";
@@ -794,23 +795,23 @@ function chartSvg(g) {
     o.push(`<text class="tick-t" x="${n(X(md))}" y="${g.xLab}" text-anchor="${anchor}">${md2(md)}</text>`);
   });
 
-  const alt = `Mean ${curve.label} wet-bulb temperature falling from ` +
-    `${Math.round(curve.series[0].v)} degrees on ${md2(curve.from)} to ` +
-    `${Math.round(curve.series.at(-1).v)} degrees on ${md2(curve.to)}, crossing 28 degrees on ` +
-    `${md2(curve.crossing)}. The first workable snowmaking window normally arrives ` +
-    `${md2(WINDOW.normal)}, with a historical range of ${md2(WINDOW.earliest)} to ${md2(WINDOW.latest)}.`;
+  const alt = `Mean ${d.label} wet-bulb temperature falling from ` +
+    `${Math.round(d.curve.series[0].v)} degrees on ${md2(d.curve.series[0].md)} to ` +
+    `${Math.round(d.curve.series.at(-1).v)} degrees on ${md2(d.curve.series.at(-1).md)}, crossing 28 degrees on ` +
+    `${md2(d.curve.crossing)}. The first workable snowmaking window normally arrives ` +
+    `${md2(d.window.normal)}, with a historical range of ${md2(d.window.earliest)} to ${md2(d.window.latest)}.`;
 
   return `<svg class="${g.cls}" viewBox="0 0 ${g.w} ${h}" role="img" aria-label="${esc(alt)}">\n  ` +
          o.join("\n  ") + `\n</svg>`;
 }
 
-function chartSection() {
-  if (!curve) return `<p class="sec-note">No curve on file. Run <code>node scripts/curve.mjs</code>.</p>`;
+function chartSection(d) {
+  if (!d?.curve) return `<p class="sec-note">No curve on file. Run <code>node scripts/curve.mjs</code>.</p>`;
   return [
-    chartSvg(GEOM.wide),
-    chartSvg(GEOM.narrow),
+    chartSvg(GEOM.wide, d),
+    chartSvg(GEOM.narrow, d),
     `<div class="legend">`,
-    `  <b><i class="sw"></i> Mean wet-bulb, ${esc(curve.label)}, ${esc(curve.years)}</b>`,
+    `  <b><i class="sw"></i> Mean wet-bulb, ${esc(d.label)}, ${esc(d.years)}</b>`,
     `  <b><i class="sw cold"></i> 28&deg;F snowmaking threshold</b>`,
     `  <b><i class="sw band"></i> Cold enough to make snow</b>`,
     `</div>`,
@@ -1038,6 +1039,130 @@ function heroCopy() {
   return { SAY, SUB };
 }
 
+// ------------------------------------------------- regions without hills
+//
+// A region nobody has gathered dates for still has weather. These pages carry
+// the same wet-bulb chart and the same forecast tiles as Minnesota, taken at
+// reference towns instead of at hills, and stop there: no season table, no
+// projection, no opening date. The estimate is the climatology and says so.
+
+const placesIn = id => Object.entries(places).filter(([, p]) => p.region === id);
+
+// The next time a calendar day comes round, which is what "N days away" means
+// in August when the date in question is in November.
+function daysUntilMd(md) {
+  const [m, d] = md.split("-").map(Number);
+  const today = new Date();
+  let when = new Date(today.getFullYear(), m - 1, d);
+  if (when < today) when = new Date(today.getFullYear() + 1, m - 1, d);
+  return Math.round((when - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
+}
+
+const stat = (label, value, lede = false) =>
+  `      <div><dt>${label}</dt><dd${lede ? ' class="lede"' : ""}>${value}</dd></div>`;
+
+function regionClimate(id) {
+  const list = placesIn(id);
+  // Nothing is tracked on these pages yet, and saying so with a zero beats
+  // borrowing Minnesota's totals, which describe a different state.
+  if (!list.length) {
+    return { CLIMATE: "", HEADLINE: null, LEAD: null, EYEBROW: null,
+             STATS: [stat("Hills tracked", "0"), stat("Opening dates on file", "0")].join("\n") };
+  }
+
+  const [, ref] = list.find(([, p]) => p.curve) ?? list[0];
+
+  const cards = list.map(([pid, p]) => {
+    const f = fc?.places?.[pid];
+    if (!f || f.min === null) {
+      return `      <div class="card"><h3>${esc(p.label)}</h3><p class="big">&mdash;</p>
+        <p>Forecast unavailable for ${esc(p.note)}.</p></div>`;
+    }
+    return `      <div class="card">
+        <h3>${esc(p.label)}</h3>
+        <p class="big">${F(f.min)}</p>
+        <p>Coldest wet bulb the ${fc.horizonDays}-day forecast reaches at ${esc(p.note)}.</p>
+        <dl>
+          <dt>Hours under ${fc.threshold}&deg;</dt><dd>${f.hoursUnder}</dd>
+          <dt>First window</dt><dd>${f.firstWindow ? whenWindow(f.firstWindow) : "&mdash;"}</dd>
+          <dt>Normal Oct&ndash;Nov hours</dt><dd>${p.hours.normal}</dd>
+        </dl>
+      </div>`;
+  }).join("\n");
+
+  // Keep the place with its own forecast rather than matching two arrays by
+  // index: one unreadable forecast would shift them and name the wrong town.
+  const known = list
+    .map(([pid, p]) => ({ p, f: fc?.places?.[pid] }))
+    .filter(({ f }) => f && f.min !== null);
+  const withWindow = known.filter(({ f }) => f.hoursUnder > 0);
+  let answer;
+  if (!fc) answer = "No forecast on file.";
+  else if (!known.length) answer = "The forecast could not be read for any of these.";
+  else if (!withWindow.length) {
+    const cold = known.reduce((a, b) => (b.f.min < a.f.min ? b : a));
+    answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
+      `The coldest any of these gets is ${F(cold.f.min)} at ${esc(cold.p.note)}.`;
+  } else {
+    answer = `${withWindow.length} of ${known.length} get snowmaking weather in the ` +
+      `next ${fc.horizonDays} days.`;
+  }
+
+  const chart = chartSection({
+    curve: ref.curve, window: ref.window, pins: [], label: ref.name, years: ref.years,
+  });
+
+  const CLIMATE = `
+  <section class="sec">
+    <h2 class="sec-title">When the guns can run</h2>
+    <p class="sec-note">
+      Snow guns need a wet-bulb temperature under 28&deg;F. The mean at ${esc(ref.name)}
+      does not get there until ${md2(ref.curve.crossing)}, but the first workable window normally
+      arrives on ${md2(ref.window.normal)}. Hills open on those early cold snaps rather than on
+      the average.
+    </p>
+
+    <div class="chart-box">
+${chart}
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="sec-title">The next ${WORDS[Math.round((fc?.horizonDays ?? 14) / 7)] ?? ""} weeks</h2>
+    <p class="fc-answer">${answer}</p>
+
+    <div class="duo">
+${cards}
+    </div>
+
+    <p class="sec-note fc-note">
+      Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, updated twice a
+      day. Guns can run under ${fc?.threshold ?? 28}&deg;.
+    </p>
+  </section>
+`;
+
+  const days = daysUntilMd(ref.window.normal);
+  return {
+    STATS: [
+      stat("Hills tracked", "0"),
+      stat("Opening dates on file", "0"),
+      stat("Normal first window", md2(ref.window.normal), true),
+      stat(`Normal Oct&ndash;Nov hrs`, String(ref.hours.normal)),
+    ].join("\n"),
+    CLIMATE,
+    EYEBROW: `Normally ${md2(ref.window.normal)}`,
+    HEADLINE: `Snowmaking weather normally reaches ${esc(ref.name)} around ` +
+              `${md2(ref.window.normal)} &mdash; ${days} days away.`,
+    LEAD: `That is the whole estimate, and it is the weather rather than a hill: ` +
+          `no opening date for any hill here is on file yet, so there is nothing to ` +
+          `project from. The chart and the tiles below are the same ones the ` +
+          `Minnesota page runs on, taken at ${list.map(([, p]) => esc(p.name)).join(", ")} ` +
+          `instead of at hills.`,
+  };
+}
+
+
 // Homepage
 const hero = heroCopy();
 const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
@@ -1058,7 +1183,9 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   LAST_UPDATED: lastUpdated,
   PICKER: picker("mn", ""),
   HILL_INK: hillInkCss(),
-  CHART: chartSection(),
+  CHART: chartSection(curve && {
+    curve, window: WINDOW, pins: chartPins(), label: curve.label, years: curve.years,
+  }),
   HELLO: helloCard(),
   HERO_SAY: hero.SAY,
   HERO_SUB: hero.SUB,
@@ -1075,6 +1202,7 @@ const regionTpl = readFileSync("templates/region.html", "utf8");
 
 for (const region of STATES.filter(r => r.id !== "mn")) {
   const n = countIn(region.state);
+  const clim = regionClimate(region.id);
   const lead = n
     ? `${n === 1 ? "One" : String(n)} ${region.name} hill ${n === 1 ? "is" : "are"} already on ` +
       `the site, carried over because it sits in the Twin Cities' orbit rather than because ` +
@@ -1085,16 +1213,17 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
     STYLE: style,
     PICKER: picker(region.id, ""),
     REGION: esc(region.name),
-    EYEBROW: region.eyebrow ?? (n ? "Barely started" : "Not covered yet"),
-    HEADLINE: region.headline ?? (n
+    // A region with climatology leads with the weather; one without still says
+    // plainly that nobody has worked it.
+    EYEBROW: clim.EYEBROW ?? region.eyebrow ?? (n ? "Barely started" : "Not covered yet"),
+    HEADLINE: clim.HEADLINE ?? region.headline ?? (n
       ? `${region.name} is barely started.`
       : `${region.name} is not covered yet.`),
-    LEAD: region.lead ?? lead,
+    LEAD: clim.LEAD ?? region.lead ?? lead,
+    REGION_CLIMATE: clim.CLIMATE,
+    REGION_STATS: clim.STATS,
     CTA: region.cta ?? `If you know ${region.name} hills, or want to take on the whole state, ` +
          `that is the whole job.`,
-    TRACKED: String(n),
-    MN_COUNT: String(countIn("MN")),
-    DATES: `${t.n} of ${t.total}`,
     FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
   }));

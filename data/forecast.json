@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T13:58:54.300Z",
+  "generatedAt": "2026-08-29T14:21:53.855Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
@@ -80,6 +80,23 @@
     },
     "coffee-mill": {
       "min": 45.7,
+      "hoursUnder": 0,
+      "firstWindow": null
+    }
+  },
+  "places": {
+    "madison": {
+      "min": 47,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "wausau": {
+      "min": 43,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "st-croix": {
+      "min": 44.2,
       "hoursUnder": 0,
       "firstWindow": null
     }

@@ -15,6 +15,7 @@ node scripts/allhours.mjs > data/hours.json   # Oct-Nov snowmaking hours per hil
 node scripts/climatology.mjs                  # first-window date, normal/earliest/latest
 node scripts/curve.mjs                        # mean wet-bulb curve -> data/curve.json
 node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
+node scripts/places.mjs                       # climatology for regions with no hills -> data/places.json
 node scripts/project.mjs                      # projected opening dates -> data/projection.json
 node scripts/project.mjs --report              # the working, written nowhere
 node scripts/identity.mjs                     # social/color candidates -> data/raw/identity.json
@@ -127,6 +128,28 @@ The pin captions pack themselves: a caption drops to the next row only when it
 would touch the one beside it, and the drawing grows by exactly the rows used.
 Their positions come from `data/projection.json`, so the layout follows the
 data rather than a set of eyeballed coordinates.
+
+## Regions with no hills yet
+
+A region nobody has gathered dates for still has weather. `scripts/places.mjs`
+does for a handful of reference towns what `curve.mjs`, `climatology.mjs` and
+`allhours.mjs` do for hills — the mean wet-bulb curve, the date sustained
+snowmaking normally first becomes possible, and the October-November hours under
+28°F — and writes them to `data/places.json`. `forecast.mjs` forecasts those
+points too.
+
+The region page then carries the same chart and the same tiles as Minnesota and
+stops there: no season table, no projection, no opening date. The headline is
+the climatology and says so, because there is nothing to project from.
+
+Wisconsin is the worked example. Madison and Milwaukee are close enough in
+wet-bulb terms to share one reading, and the hills trend toward Madison anyway,
+so one point stands for both; the card still names where it was taken. St Croix
+borrows Trollhaugen's existing cache, being the same coordinates, and costs
+nothing to add. Note the spread it exposes: Madison normally gets 225
+snowmaking hours across October and November against St Croix's 334.
+
+Adding a region is three lines in `PLACES` and a run.
 
 ## Opening dates
 

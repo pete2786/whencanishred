@@ -67,6 +67,10 @@
     border-top:1px solid var(--line);
   }
   @media (max-width:640px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  /* Region pages carry two stats or four depending on whether the place has
+     climatology, so the row fits what it has rather than always splitting four
+     ways and stranding two empty columns. */
+  .stats-region { grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); }
   .stats dt {
     font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3);

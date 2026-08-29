@@ -66,6 +66,10 @@
     border-top:1px solid var(--line);
   }
   @media (max-width:640px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  /* Region pages carry two stats or four depending on whether the place has
+     climatology, so the row fits what it has rather than always splitting four
+     ways and stranding two empty columns. */
+  .stats-region { grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); }
   .stats dt {
     font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3);
@@ -615,13 +619,12 @@ footer::before {
     <h1 class="fc-head">Michigan · Upper Peninsula is not covered yet.</h1>
     <p class="hero-sub">No Michigan · Upper Peninsula hills are on the site yet. Everything here is built from dates gathered one post at a time, and nobody has worked this state.</p>
 
-    <dl class="stats">
-      <div><dt>Hills tracked here</dt><dd class="lede">0</dd></div>
-      <div><dt>Seasons wanted</dt><dd>5</dd></div>
-      <div><dt>Tracked in Minnesota</dt><dd>15</dd></div>
-      <div><dt>Dates on file</dt><dd>60 of 80</dd></div>
+    <dl class="stats stats-region">
+      <div><dt>Hills tracked</dt><dd>0</dd></div>
+      <div><dt>Opening dates on file</dt><dd>0</dd></div>
     </dl>
   </section>
+
 
   <section class="sec">
     <h2 class="sec-title">What a hill needs</h2>
@@ -664,7 +667,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-08-29T14:09:36.971Z">29 August 2026, 09:09 CDT</time>. Forecast pulled <time datetime="2026-08-29T13:58:54.300Z">29 August 2026, 08:58 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-08-29T14:28:18.907Z">29 August 2026, 09:28 CDT</time>. Forecast pulled <time datetime="2026-08-29T14:21:53.855Z">29 August 2026, 09:21 CDT</time>.</span>
     <span><a href="about.html">About this site</a></span>
   </footer>
 </div>
