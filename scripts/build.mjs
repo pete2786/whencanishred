@@ -221,7 +221,7 @@ const hours = Object.fromEntries(hoursRows.map(h => [slugify(h.hill), h]));
 // opening, a weekend-only schedule — belong to the hill, not to a season.
 function hillNotesFor(slug) {
   return (resorts[slug].notes ?? [])
-    .map(n => `        <p class="snote"><b>This hill</b>${esc(n)}</p>`);
+    .map(n => `        <p class="snote"><b>This resort</b>${esc(n)}</p>`);
 }
 
 // Statewide context for a season, shown under the table it explains. A hill
@@ -266,7 +266,7 @@ function forecastSection() {
   // A forecast is only a forecast while it is about the future. Past a couple
   // of days it is a stale guess, and the page should say so rather than let
   // the reader assume it is current.
-  const stale = ageDays >= 2 ? ` <b>${ageDays} days old &mdash; the refresh has not run.</b>` : "";
+  const stale = ageDays >= 2 ? ` <b>${ageDays} days old. The refresh has not run.</b>` : "";
 
   const known = Object.entries(fc.hills).filter(([, h]) => h.min !== null);
   const withWindow = known.filter(([, h]) => h.hoursUnder > 0);
@@ -277,14 +277,14 @@ function forecastSection() {
   // plain heading took its place.
   let answer;
   if (!known.length) {
-    answer = "The forecast could not be read for any hill.";
+    answer = "The forecast could not be read for any resort.";
   } else if (!withWindow.length) {
     const [slug, h] = known.reduce((a, b) => (b[1].min < a[1].min ? b : a));
     answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
-      `The coldest any hill gets is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
+      `The coldest any resort gets is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
   } else {
     const first = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
-    answer = `${withWindow.length} of ${known.length} hills get snowmaking weather. ` +
+    answer = `${withWindow.length} of ${known.length} resorts get snowmaking weather. ` +
       `<b>${esc(resorts[first[0]].name)}</b> first, ${whenWindow(first[1].firstWindow)}.`;
   }
 
@@ -558,7 +558,7 @@ const archivePhrase = kinds.has("announced")
   : "archived resort pages";
 const parts = [];
 if (kinds.has("wayback") || kinds.has("announced")) parts.push(archivePhrase);
-if (kinds.has("social")) parts.push("the hills' own social posts");
+if (kinds.has("social")) parts.push("the resorts' own social posts");
 if (kinds.has("local")) parts.push("hand-recorded posts, news and local knowledge");
 const sourcePhrase = parts.length > 1
   ? `${parts[0]}, plus ${parts.slice(1).join(" and ")}`
@@ -617,12 +617,12 @@ const STATES = [
   // outside the snowmaking belt wants this at all before building for them.
   {
     id: "other", name: "Everywhere else", file: "elsewhere.html",
-    note: "the Rockies, the East \u2014 interested?",
+    note: "Colorado, East Coast, interested?",
     eyebrow: "Not planned",
     headline: "Everywhere else, if anyone wants it.",
-    lead: "This site is built around a question that matters where hills make their own " +
+    lead: "This site is built around a question that matters where resorts make their own " +
           "winter: when does it get cold enough to blow snow, and how long after that do " +
-          "they open? Somewhere with real snowfall, the answer may be dull \u2014 the hill " +
+          "they open? Somewhere with real snowfall, the answer may be dull. The resort " +
           "opens when it snows. Whether any of this is worth having for the Rockies, the " +
           "East or anywhere else is genuinely an open question.",
     cta: "If you want this for your mountains, say so and say what would make it useful.",
@@ -632,13 +632,14 @@ const STATES = [
 const countIn = state =>
   state ? Object.values(resorts).filter(r => r.state === state).length : 0;
 
+// The menu names the areas a page covers rather than how far along it is.
+// Somebody opening it wants to know whether their drive is on the list.
+const MN_AREAS = "Twin Cities, Duluth, North Shore";
 const regionNote = r => {
   if (r.note) return r.note;
-  const n = countIn(r.state);
-  if (r.id === "mn") return `${n} hills, 5 seasons each`;
-  if (n === 1) return "1 hill so far \u2014 help wanted";
-  if (n > 1) return `${n} hills so far \u2014 help wanted`;
-  return "not started \u2014 help wanted";
+  if (r.id === "mn") return MN_AREAS;
+  const areas = placesIn(r.id).map(([, p]) => p.label);
+  return areas.length ? areas.join(", ") : "";
 };
 
 // "root" is "" from the site root and "../" from resorts/.
@@ -661,7 +662,7 @@ const fill = (tpl, map) =>
 // as it has always looked. The narrow one fits a phone with no sideways drag,
 // and pays for it in height: the three pins land within 35 units of each other
 // down there, so their labels need three staggered rows or "Wild Mountain"
-// lands on top of "Most metro hills".
+// lands on top of "Most metro resorts".
 //
 // Both come from the same call, so the two cannot drift the way the hand-drawn
 // SVG drifted from the numbers printed beside it.
@@ -691,8 +692,8 @@ function chartPins() {
     .map(s => projection[s].date).sort();
   return [
     { md: first[1].date.slice(5), label: resorts[first[0]].name },
-    { md: metro[Math.floor(metro.length / 2)].slice(5), label: "Most metro hills" },
-    { md: dates.at(-1).slice(5), label: "Last hills open" },
+    { md: metro[Math.floor(metro.length / 2)].slice(5), label: "Most metro resorts" },
+    { md: dates.at(-1).slice(5), label: "Last resorts open" },
   ];
 }
 
@@ -1068,7 +1069,7 @@ function regionClimate(id) {
   // borrowing Minnesota's totals, which describe a different state.
   if (!list.length) {
     return { CLIMATE: "", HEADLINE: null, LEAD: null, EYEBROW: null,
-             STATS: [stat("Hills tracked", "0"), stat("Opening dates on file", "0")].join("\n") };
+             STATS: [stat("Resorts tracked", "0"), stat("Opening dates on file", "0")].join("\n") };
   }
 
   const [, ref] = list.find(([, p]) => p.curve) ?? list[0];
@@ -1119,7 +1120,7 @@ function regionClimate(id) {
     <p class="sec-note">
       Snow guns need a wet-bulb temperature under 28&deg;F. The mean at ${esc(ref.note)}
       does not get there until ${md2(ref.curve.crossing)}, but the first workable window normally
-      arrives on ${md2(ref.window.normal)}. Hills open on those early cold snaps rather than on
+      arrives on ${md2(ref.window.normal)}. Resorts open on those early cold snaps rather than on
       the average.
     </p>
 
@@ -1152,7 +1153,7 @@ ${cards}
   const days = daysUntilMd(soonest.window.normal);
   return {
     STATS: [
-      stat("Hills tracked", "0"),
+      stat("Resorts tracked", "0"),
       stat("Opening dates on file", "0"),
       stat("Earliest normal window", md2(soonest.window.normal), true),
       stat(`Oct&ndash;Nov hrs there`, String(soonest.hours.normal)),
@@ -1160,12 +1161,12 @@ ${cards}
     CLIMATE,
     EYEBROW: `Normally ${md2(soonest.window.normal)}`,
     HEADLINE: `Snowmaking weather normally reaches ${esc(soonest.label)} around ` +
-              `${md2(soonest.window.normal)} &mdash; ${days} days away.`,
-    LEAD: `That is the whole estimate, and it is the weather rather than a hill: ` +
-          `no opening date for any hill here is on file yet, so there is nothing to ` +
+              `${md2(soonest.window.normal)}, ${days} days away.`,
+    LEAD: `That is the whole estimate, and it is the weather rather than a resort. ` +
+          `No opening date for any resort here is on file yet, so there is nothing to ` +
           `project from. The chart and the tiles below are the same ones the ` +
           `Minnesota page runs on, taken at ${listOf(list.map(([, p]) => esc(p.note)))} ` +
-          `instead of at hills. The curve is ${esc(ref.note)}.`,
+          `instead of at resorts. The curve is ${esc(ref.note)}.`,
   };
 }
 
@@ -1211,10 +1212,10 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
   const n = countIn(region.state);
   const clim = regionClimate(region.id);
   const lead = n
-    ? `${n === 1 ? "One" : String(n)} ${region.name} hill ${n === 1 ? "is" : "are"} already on ` +
+    ? `${n === 1 ? "One" : String(n)} ${region.name} resort ${n === 1 ? "is" : "are"} already on ` +
       `the site, carried over because it sits in the Twin Cities' orbit rather than because ` +
       `the state is covered. The rest of ${region.name} is not gathered yet.`
-    : `No ${region.name} hills are on the site yet. Everything here is built from dates ` +
+    : `No ${region.name} resorts are on the site yet. Everything here is built from dates ` +
       `gathered one post at a time, and nobody has worked this state.`;
   writeFileSync(region.file, fill(regionTpl, {
     STYLE: style,
@@ -1229,7 +1230,7 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
     LEAD: clim.LEAD ?? region.lead ?? lead,
     REGION_CLIMATE: clim.CLIMATE,
     REGION_STATS: clim.STATS,
-    CTA: region.cta ?? `If you know ${region.name} hills, or want to take on the whole state, ` +
+    CTA: region.cta ?? `If you know ${region.name} resorts, or want to take on the whole state, ` +
          `that is the whole job.`,
     FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
