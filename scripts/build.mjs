@@ -779,6 +779,44 @@ function chartSection() {
   ].join("\n");
 }
 
+// ------------------------------------------------------------ who made this
+//
+// The about page was reachable only from the footer, which is where things go
+// to not be read. This is the same introduction, sized to sit in the gap beside
+// the hero — the gap being the other half of the problem, since a 62-character
+// measure against an empty half-page reads as a column that failed to load.
+
+const VENMO = "https://account.venmo.com/u/davidehp";
+
+const SHOT = (base, cls, alt, sizes) =>
+  `<img class="${cls}" src="photos/${base}-560.jpg"\n` +
+  `           srcset="photos/${base}-560.jpg 560w, photos/${base}-840.jpg 840w, ` +
+  `photos/${base}-1120.jpg 1120w"\n` +
+  `           sizes="${sizes}"\n` +
+  `           width="1120" height="1492" loading="lazy" decoding="async"\n` +
+  `           alt="${esc(alt)}">`;
+
+const ARMS_ALT = "David in a t-shirt and helmet at a ski hill on a warm spring day, " +
+                 "ski racks and a chairlift behind him.";
+
+function helloCard() {
+  const pay = VENMO
+    ? `<a class="pay" href="${esc(VENMO)}" rel="noopener">Buy me a beer</a>`
+    : "";
+  return `      <aside class="hello">
+        ${SHOT("david-midwest", "hello-shot", ARMS_ALT, "(max-width:600px) calc(100vw - 48px), 220px")}
+        <div class="hello-body">
+          <p class="hello-eyebrow">Who made this</p>
+          <p>I&rsquo;m David. I grew up snowboarding in the mid-90s, peak snowboarding
+             culture, and got back into it five years ago. Now I&rsquo;m counting down from
+             mid-August. Hope this site gets you hyped!!</p>
+          <div class="hello-links">
+            <a href="about.html">More about this</a>${pay}
+          </div>
+        </div>
+      </aside>`;
+}
+
 // Homepage
 const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
 const lead = observed(leader);
@@ -797,6 +835,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   PICKER: picker("mn", ""),
   HILL_INK: hillInkCss(),
   CHART: chartSection(),
+  HELLO: helloCard(),
 })));
 
 // Resort pages
@@ -834,6 +873,22 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
 
+// About page
+const ABOUT_SIZES = "(max-width:520px) calc(100vw - 48px), " +
+                    "(max-width:820px) calc((100vw - 64px) / 2), 380px";
+writeFileSync("about.html", fill(readFileSync("templates/about.html", "utf8"), {
+  STYLE: style,
+  PICKER: picker("mn", ""),
+  FOOTER_PROVENANCE: provenance,
+  SHOT_ARMS: SHOT("david-midwest", "", ARMS_ALT, ABOUT_SIZES),
+  SHOT_PEAKS: SHOT("david-mountains",  "",
+    "David on a groomed run in snowboard gear, snow-covered peaks behind him.", ABOUT_SIZES),
+  PAY: VENMO ? `<div class="pay-block">
+          <p>If the site saved you a search, or just got you hyped, there is a Venmo.</p>
+          <a class="pay" href="${esc(VENMO)}" rel="noopener">Buy me a beer</a>
+        </div>` : "",
+}));
+
 const resortTpl = readFileSync("templates/resort.html", "utf8");
 for (const [slug, r] of Object.entries(resorts)) {
   const o = observed(slug);
@@ -851,6 +906,23 @@ for (const [slug, r] of Object.entries(resorts)) {
     PICKER: picker("mn", "../"),
     HILL_INK: hillInkCss(),
   })));
+}
+
+// Region and about pages carried the preconnect hint but not the stylesheet it
+// was hinting at, so Anton never loaded and they fell back to Impact — close
+// enough in shape to look intentional rather than broken. Every page that asks
+// for a face must also ask for the file.
+const FACES = ["Anton", "Archivo"];
+const built = ["index.html", "about.html", ...STATES.filter(r => r.id !== "mn").map(r => r.file),
+               ...Object.keys(resorts).map(s => `resorts/${s}.html`)];
+const unstyled = built.filter(f => {
+  const html = readFileSync(f, "utf8");
+  return FACES.some(face => html.includes(`font-family:${face}`)) &&
+         !html.includes("fonts.googleapis.com/css2");
+});
+if (unstyled.length) {
+  console.error(`\nERROR: these pages use a webfont but never load one:\n  ${unstyled.join("\n  ")}`);
+  process.exit(1);
 }
 
 console.error(`built index.html and ${Object.keys(resorts).length} resort pages`);
