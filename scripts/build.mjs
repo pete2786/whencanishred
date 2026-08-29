@@ -905,12 +905,20 @@ function helloCard() {
 // any other. One candidate is a winner, several identical exact ones are a tie,
 // anything else is a winter nobody gets to claim.
 
-const FAR_PAST = "0000-00-00";
-
+// A closed bracket is real uncertainty: Wild Mountain's 2024-25 first lift sits
+// somewhere in a seventeen-day window, and nobody can rank inside it.
+//
+// A one-sided bracket is not the same thing. "No closed capture before the first
+// open one" means the archive never looked earlier — absence of evidence, not
+// evidence of an earlier opening. Treating it as unbounded let an archive
+// sampling gap veto Trollhaugen's own post announcing opening weekend on
+// 19 November 2021, which is exactly backwards. It ranks as its recorded date.
 function interval(fl) {
   if (!fl?.date) return null;
-  if (fl.precision === "exact" || !fl.range) return [fl.date, fl.date];
-  return [fl.range[0] ?? FAR_PAST, fl.range[1] ?? fl.date];
+  const r = fl.range;
+  if (fl.precision === "exact" || !r) return [fl.date, fl.date];
+  if (r[0] == null || r[1] == null) return [fl.date, fl.date];
+  return [r[0], r[1]];
 }
 
 function leadersBySeason() {
@@ -929,15 +937,24 @@ function leadersBySeason() {
     const tied = could.length > 1 &&
                  could.every(r => r.exact && r.lo === could[0].lo);
     const settled = could.length === 1 || tied;
+    // Everyone tied for the next place, not whichever one sorted first: Wild
+    // Mountain and Trollhaugen both took their first lift on 10 November 2025,
+    // and naming one of them was an arbitrary choice presented as a fact.
     const rest = rows.filter(r => !could.includes(r)).sort((x, y) => x.lo.localeCompare(y.lo));
+    const nextLo = rest[0]?.lo ?? null;
     out.push({ season, settled, leaders: settled ? could.map(r => r.slug) : [],
-               date: could[0].lo, next: settled ? rest[0] ?? null : null });
+               date: could[0].lo,
+               next: settled && nextLo ? rest.filter(r => r.lo === nextLo) : [] });
   }
   return out;
 }
 
 const WORDS = ["", "one", "two", "three", "four", "five", "six"];
 const TIMES = ["", "once", "twice", "three times", "four times", "five times"];
+// "A and B", "A, B and C" — the runner-up is often a tie.
+const list = xs => xs.length < 2 ? (xs[0] ?? "")
+  : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
+
 const dayGap = (a, b) =>
   Math.round((new Date(`${b}T00:00:00`) - new Date(`${a}T00:00:00`)) / 86400000);
 
@@ -951,25 +968,32 @@ function heroCopy() {
   if (!last.settled) {
     SAY = "Nobody can be said to have opened first last season.";
   } else if (last.leaders.length > 1) {
-    SAY = `${last.leaders.map(bold).join(" and ")} opened first last season, to the day.`;
-  } else if (last.next) {
-    const n = dayGap(last.date, last.next.lo);
+    SAY = `${list(last.leaders.map(bold))} opened first last season, to the day.`;
+  } else if (last.next.length) {
+    const n = dayGap(last.date, last.next[0].lo);
     SAY = `${bold(last.leaders[0])} opened first last season, ` +
-          `${n === 1 ? "a day" : `${n} days`} ahead of ${bold(last.next.slug)}.`;
+          `${n === 1 ? "a day" : `${n} days`} ahead of ${list(last.next.map(r => bold(r.slug)))}.`;
   } else {
     SAY = `${bold(last.leaders[0])} opened first last season.`;
   }
 
   const tally = new Map();
   for (const r of rows) for (const slug of r.leaders) tally.set(slug, (tally.get(slug) ?? 0) + 1);
-  const best = Math.max(0, ...tally.values());
-  const top = [...tally].filter(([, n]) => n === best).map(([slug]) => slug);
   const loose = rows.filter(r => !r.settled).length;
 
+  // Group by how many each has won, so a hill with one is named alongside the
+  // hills with two rather than dropped for not topping the table.
+  const byCount = new Map();
+  for (const [slug, n] of tally) {
+    if (!byCount.has(n)) byCount.set(n, []);
+    byCount.get(n).push(slug);
+  }
+  const groups = [...byCount].sort((a, b) => b[0] - a[0]).map(([n, slugs]) =>
+    `${list(slugs.map(bold))} ${TIMES[n] ?? n + " times"}${slugs.length > 1 ? " each" : ""}`);
+
   let SUB = "";
-  if (top.length) {
-    SUB = `${top.map(bold).join(" and ")} ${top.length > 1 ? "have" : "has"} been first ` +
-          `${TIMES[best] ?? best + " times"}${top.length > 1 ? " each" : ""}`;
+  if (groups.length) {
+    SUB = `First lift has gone to ${list(groups)}`;
     SUB += loose
       ? `; ${WORDS[loose] ?? loose} of the ${WORDS[rows.length] ?? rows.length} winters on ` +
         `record ${loose === 1 ? "is" : "are"} too loosely dated to call. `
