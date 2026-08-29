@@ -669,6 +669,9 @@ const fill = (tpl, map) =>
 
 const curve = existsSync("data/curve.json") ? read("data/curve.json") : null;
 const places = existsSync("data/places.json") ? read("data/places.json") : {};
+// Names only, read off the Midwest Ski Resort Guide. No dates and no
+// coordinates, so it cannot drive a projection; it can say which resorts exist.
+const known = existsSync("data/known-resorts.json") ? read("data/known-resorts.json") : null;
 
 // The first workable window is an early cold snap, about three weeks ahead of
 // the day the mean itself crosses. From scripts/climatology.mjs; no data file
@@ -1050,6 +1053,36 @@ function heroCopy() {
 
 const placesIn = id => Object.entries(places).filter(([, p]) => p.region === id);
 
+// Which resorts a region has, and which of them we already hold dates for.
+// A name on its own is not much, but it is the difference between "nobody has
+// worked this state" and a list somebody can pick a weekend off.
+const TRACKED = new Set(Object.values(resorts).map(r => r.name.toLowerCase()));
+const looksTracked = n => {
+  const k = n.toLowerCase().replace(/ ski area$| mountains?$/,"").trim();
+  for (const t of TRACKED) if (t === k || t.startsWith(k) || k.startsWith(t)) return true;
+  return false;
+};
+
+function roster(id) {
+  const list = known?.regions?.[id] ?? [];
+  if (!list.length) return "";
+  const items = list.map(r => {
+    const on = looksTracked(r.name);
+    return `        <li${on ? ' class="on"' : ""}>${esc(r.name)}` +
+           `<span>${esc(r.state.replace(/^(UP|LP) - Michigan$/, "$1"))}</span></li>`;
+  }).join("\n");
+  const n = list.filter(r => looksTracked(r.name)).length;
+  return `    <p class="sec-note roster-note">${list.length} resorts in this region, ` +
+    `${n ? `${n} with dates on file. The rest have none.` : "none with dates on file yet."} ` +
+    `From the <a href="${esc(known.source.map)}">Midwest Ski Resort Guide</a> ` +
+    `by <a href="${esc(known.source.site)}">Midwest Skiers</a>.</p>
+
+    <ul class="roster">
+${items}
+    </ul>`;
+}
+
+
 // The next time a calendar day comes round, which is what "N days away" means
 // in August when the date in question is in November.
 function daysUntilMd(md) {
@@ -1229,6 +1262,7 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
       : `${region.name} is not covered yet.`),
     LEAD: clim.LEAD ?? region.lead ?? lead,
     REGION_CLIMATE: clim.CLIMATE,
+    ROSTER: roster(region.id),
     REGION_STATS: clim.STATS,
     CTA: region.cta ?? `If you know ${region.name} resorts, or want to take on the whole state, ` +
          `that is the whole job.`,

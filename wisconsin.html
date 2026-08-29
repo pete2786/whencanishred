@@ -437,6 +437,25 @@
   padding:10px 12px 11px; border-top:2px solid var(--line);
 }
 
+/* ---- the resorts a region has ----------------------------------------- */
+.roster-note { margin:12px 0 18px; }
+.roster {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:1px; list-style:none; margin:0; padding:0;
+  background:var(--line); border:2px solid var(--line);
+}
+.roster li {
+  display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+  background:var(--surface); padding:9px 12px; font-size:13.5px; color:var(--ink-2);
+}
+.roster li span {
+  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); white-space:nowrap;
+}
+/* A resort we already hold dates for reads as done rather than as a request. */
+.roster li.on { color:var(--ink); }
+.roster li.on::before { content:"\2713"; color:var(--mark); margin-right:2px; }
+
 /* ---- who made this ---------------------------------------------------- */
 /* It sits after the data, not beside the headline: a photo of the author at
    the top of a page about opening dates reads as a pitch. */
@@ -751,35 +770,41 @@ footer::before {
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">What a resort needs</h2>
+    <h2 class="sec-title">Want resort specific info? We need help!</h2>
     <p class="sec-note">
-      Neither of these takes an expert. Just somebody who was there, or who can read
-      back through a resort&rsquo;s own posts. There is no feed to pull and no aggregator that
-      carries opening dates for resorts this size, which is why the record is built by hand.
+      We need somebody to help find opening dates, closing dates, and where the two can be
+      told apart, the pre-season opening versus the full one. That mostly means trolling
+      their Facebook feeds by hand. Sometimes the websites have it.
+      <a href="index.html">Minnesota</a> shows what a region looks like once it is filled in.
     </p>
 
-    <div class="tbl-box">
-      <table>
-        <caption>How a resort gets added</caption>
-        <thead>
-          <tr><th>Step</th><th>What it means</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="season">The resort</td>
-            <td data-label="What it means">Its name, town, website and Facebook page,
-              enough to find it, and to pull 31 years of wet-bulb climatology for its
-              coordinates.</td>
-          </tr>
-          <tr>
-            <td class="season">The dates</td>
-            <td data-label="What it means">First lift, and where the two can be told apart, the
-              day it reached normal hours, for as many of the last five seasons as can be
-              found. Every date needs the post it came from.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <p class="sec-note roster-note">23 resorts in this region, 1 with dates on file. The rest have none. From the <a href="https://maphub.net/midwestskiers/midwest-ski-resort-guide">Midwest Ski Resort Guide</a> by <a href="https://www.midwestskiers.com/">Midwest Skiers</a>.</p>
+
+    <ul class="roster">
+        <li>Granite Peak<span>Wisconsin</span></li>
+        <li class="on">Trollhaugen<span>Wisconsin</span></li>
+        <li>Cascade Mountain<span>Wisconsin</span></li>
+        <li>Little Switzerland<span>Wisconsin</span></li>
+        <li>Mountain Top at Grand Geneva<span>Wisconsin</span></li>
+        <li>Crystal Ridge<span>Wisconsin</span></li>
+        <li>Alpine Valley (WI)<span>Wisconsin</span></li>
+        <li>Ausblick Ski Hill<span>Wisconsin</span></li>
+        <li>Fox Hill Ski Area<span>Wisconsin</span></li>
+        <li>Sunburst<span>Wisconsin</span></li>
+        <li>Tyrol Basin<span>Wisconsin</span></li>
+        <li>Devils Head<span>Wisconsin</span></li>
+        <li>Christmas Mountain<span>Wisconsin</span></li>
+        <li>Nordic Mountain<span>Wisconsin</span></li>
+        <li>Whitetail Ridge<span>Wisconsin</span></li>
+        <li>Bruce Mound<span>Wisconsin</span></li>
+        <li>Paul Bunyan<span>Wisconsin</span></li>
+        <li>Mt. Lacrosse<span>Wisconsin</span></li>
+        <li>Four Lakes<span>Illinois</span></li>
+        <li>Chestnut Mountain<span>Illinois</span></li>
+        <li>Snow Park at Alpine Hills<span>Illinois</span></li>
+        <li>Ski Snowstar<span>Illinois</span></li>
+        <li>Villa Olivia<span>Illinois</span></li>
+    </ul>
 
     <p class="sec-cta standalone">If you know Wisconsin resorts, or want to take on the whole state, that is the whole job.
       Email <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>. Dates for resorts already
@@ -791,7 +816,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-08-29T14:53:57.057Z">29 August 2026, 09:53 CDT</time>. Forecast pulled <time datetime="2026-08-29T14:41:20.015Z">29 August 2026, 09:41 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-08-29T15:14:33.839Z">29 August 2026, 10:14 CDT</time>. Forecast pulled <time datetime="2026-08-29T14:41:20.015Z">29 August 2026, 09:41 CDT</time>.</span>
     <span><a href="about.html">About this site</a></span>
   </footer>
 </div>

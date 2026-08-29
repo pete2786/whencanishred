@@ -1,0 +1,416 @@
+{
+ "source": {
+  "name": "Midwest Ski Resort Guide",
+  "by": "Midwest Skiers",
+  "map": "https://maphub.net/midwestskiers/midwest-ski-resort-guide",
+  "site": "https://www.midwestskiers.com/",
+  "pulled": "2026-08-29",
+  "note": "Names only. No dates, no coordinates. Read off the map's own item panel."
+ },
+ "regions": {
+  "mn": [
+   {
+    "name": "Afton Alps",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Welch Village",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Wild Mountain",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Coffee Mill",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Buck Hill",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Elm Creek",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Spirit Mountain",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Powder Ridge",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Giants Ridge",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Mount Ski Gull",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Mount Itasca",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Andes Tower Hills",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Lutsen Mountains",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Detroit Mountain",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Buena Vista Ski Area",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Mount Kato",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Hyland Hills",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Chester Bowl",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Como Park",
+    "state": "Minnesota"
+   },
+   {
+    "name": "The Loppet Foundation",
+    "state": "Minnesota"
+   },
+   {
+    "name": "Steeplechase Ski Area",
+    "state": "Minnesota"
+   }
+  ],
+  "wi": [
+   {
+    "name": "Granite Peak",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Trollhaugen",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Cascade Mountain",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Little Switzerland",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Mountain Top at Grand Geneva",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Crystal Ridge",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Alpine Valley (WI)",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Ausblick Ski Hill",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Fox Hill Ski Area",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Sunburst",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Tyrol Basin",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Devils Head",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Christmas Mountain",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Nordic Mountain",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Whitetail Ridge",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Bruce Mound",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Paul Bunyan",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Mt. Lacrosse",
+    "state": "Wisconsin"
+   },
+   {
+    "name": "Four Lakes",
+    "state": "Illinois"
+   },
+   {
+    "name": "Chestnut Mountain",
+    "state": "Illinois"
+   },
+   {
+    "name": "Snow Park at Alpine Hills",
+    "state": "Illinois"
+   },
+   {
+    "name": "Ski Snowstar",
+    "state": "Illinois"
+   },
+   {
+    "name": "Villa Olivia",
+    "state": "Illinois"
+   }
+  ],
+  "mi-up": [
+   {
+    "name": "Crystella Ski Hill",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "John & Melissa Besse Sports Park",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Big Powderhorn",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Jackson Creek Summit",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Marquette Mountain",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Mt. Zion",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Porcupine Mountains",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Ski Brule",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Black River Basin",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Pine Mountain",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Mount Bohemia",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Mont Ripley",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Adventure Mountain",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Covington Ski Hill",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Sault Seal Recreation Area",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Big Valley Ski Hill",
+    "state": "UP - Michigan"
+   },
+   {
+    "name": "Norway Mountain",
+    "state": "UP - Michigan"
+   }
+  ],
+  "mi-lp": [
+   {
+    "name": "Nub's Nob",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Cannonsburg",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Alpine Valley (MI)",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Bittersweet",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "The Highlands",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Boyne Mountain",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Caberfae Peaks",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Hanson Hills",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Mt. Holly",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Mount McSauba",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Mulligan’s Hollow",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Pine Knob",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Schuss Mtn @ Shanty Creek",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Snow Snake",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Swiss Valley",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Bay Mountain at The Homestead",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Treetops",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Crystal Mountain",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Timber Ridge",
+    "state": "LP - Michigan"
+   },
+   {
+    "name": "Mt. Brighton",
+    "state": "LP - Michigan"
+   }
+  ],
+  "dak-ia": [
+   {
+    "name": "Sundown Mountain",
+    "state": "Iowa"
+   },
+   {
+    "name": "Seven Oaks",
+    "state": "Iowa"
+   },
+   {
+    "name": "Crescent Hill at Hitchcock",
+    "state": "Iowa"
+   },
+   {
+    "name": "Great Bear Ski Valley",
+    "state": "South Dakota"
+   },
+   {
+    "name": "Terry Peak",
+    "state": "South Dakota"
+   },
+   {
+    "name": "Bottineau Winter Park",
+    "state": "North Dakota"
+   },
+   {
+    "name": "Frost Fire Park",
+    "state": "North Dakota"
+   },
+   {
+    "name": "Huff Hills",
+    "state": "North Dakota"
+   },
+   {
+    "name": "Thrill Hills",
+    "state": "North Dakota"
+   }
+  ],
+  "oh-in": [
+   {
+    "name": "Boston Mills",
+    "state": "Ohio"
+   },
+   {
+    "name": "Snow Trails",
+    "state": "Ohio"
+   },
+   {
+    "name": "Alpine Valley (OH)",
+    "state": "Ohio"
+   },
+   {
+    "name": "Brandywine",
+    "state": "Ohio"
+   },
+   {
+    "name": "Mad River Mountain",
+    "state": "Ohio"
+   },
+   {
+    "name": "Big Creek Ski Area",
+    "state": "Ohio"
+   },
+   {
+    "name": "Paoli Peaks",
+    "state": "Indiana"
+   },
+   {
+    "name": "Perfect North",
+    "state": "Indiana"
+   }
+  ]
+ }
+}

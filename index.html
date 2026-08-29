@@ -438,6 +438,25 @@
   padding:10px 12px 11px; border-top:2px solid var(--line);
 }
 
+/* ---- the resorts a region has ----------------------------------------- */
+.roster-note { margin:12px 0 18px; }
+.roster {
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:1px; list-style:none; margin:0; padding:0;
+  background:var(--line); border:2px solid var(--line);
+}
+.roster li {
+  display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+  background:var(--surface); padding:9px 12px; font-size:13.5px; color:var(--ink-2);
+}
+.roster li span {
+  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--ink-3); white-space:nowrap;
+}
+/* A resort we already hold dates for reads as done rather than as a request. */
+.roster li.on { color:var(--ink); }
+.roster li.on::before { content:"\2713"; color:var(--mark); margin-right:2px; }
+
 /* ---- who made this ---------------------------------------------------- */
 /* It sits after the data, not beside the headline: a photo of the author at
    the top of a page about opening dates reads as a pitch. */
@@ -1005,7 +1024,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-08-29T14:53:57.057Z">29 August 2026, 09:53 CDT</time>. Forecast pulled <time datetime="2026-08-29T14:41:20.015Z">29 August 2026, 09:41 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-08-29T15:14:33.839Z">29 August 2026, 10:14 CDT</time>. Forecast pulled <time datetime="2026-08-29T14:41:20.015Z">29 August 2026, 09:41 CDT</time>.</span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
     <span>Midwest Skiers has been documenting these resorts for years: the
