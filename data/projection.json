@@ -19,11 +19,19 @@
     "date": "2026-11-22",
     "label": "climate"
   },
+  "mount-ski-gull": {
+    "date": "2026-11-23",
+    "label": "climate"
+  },
   "spirit-mountain": {
     "date": "2026-11-26",
     "label": "model"
   },
   "powder-ridge": {
+    "date": "2026-11-27",
+    "label": "climate"
+  },
+  "chester-bowl": {
     "date": "2026-11-27",
     "label": "climate"
   },
@@ -44,6 +52,10 @@
     "label": "model"
   },
   "mount-kato": {
+    "date": "2026-11-30",
+    "label": "climate"
+  },
+  "steeplechase": {
     "date": "2026-11-30",
     "label": "climate"
   },

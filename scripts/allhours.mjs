@@ -2,7 +2,7 @@ import { mkdirSync, existsSync, readFileSync, writeFileSync } from "node:fs";
 const wb=(T,RH)=>T*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(T+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035;
 const THR=(28-32)*5/9, CACHE="data/cache";
 mkdirSync(CACHE,{recursive:true});
-const HILLS=[["Wild Mountain",45.3897,-92.7143],["Trollhaugen",45.3572,-92.6349],["Hyland Hills",44.8297,-93.3672],["Afton Alps",44.8574,-92.7899],["Welch Village",44.5619,-92.7360],["Buck Hill",44.7433,-93.2872],["Elm Creek",45.1461,-93.4419],["Lutsen",47.6683,-90.7175],["Giants Ridge",47.5583,-92.2830],["Spirit Mountain",46.7183,-92.2200],["Powder Ridge",45.3308,-94.3086],["Mount Kato",44.1372,-94.0186],["Buena Vista",47.5875,-94.8464],["Detroit Mountain",46.8222,-95.7736],["Andes Tower Hills",45.8047,-95.6664],["Coffee Mill",44.3819,-92.0413]];
+const HILLS=[["Wild Mountain",45.3897,-92.7143],["Trollhaugen",45.3572,-92.6349],["Hyland Hills",44.8297,-93.3672],["Afton Alps",44.8574,-92.7899],["Welch Village",44.5619,-92.7360],["Buck Hill",44.7433,-93.2872],["Elm Creek",45.1461,-93.4419],["Lutsen",47.6683,-90.7175],["Giants Ridge",47.5583,-92.2830],["Spirit Mountain",46.7183,-92.2200],["Powder Ridge",45.3308,-94.3086],["Mount Kato",44.1372,-94.0186],["Buena Vista",47.5875,-94.8464],["Detroit Mountain",46.8222,-95.7736],["Andes Tower Hills",45.8047,-95.6664],["Coffee Mill",44.3819,-92.0413],["Mount Ski Gull",46.4449,-94.3785],["Chester Bowl",46.8123,-92.0959],["Steeplechase",44.2449,-92.5156]];
 async function get(n,lat,lon){
   const f=`${CACHE}/${n.replace(/\s+/g,"-")}.json`;
   if(existsSync(f)) return JSON.parse(readFileSync(f,"utf8"));

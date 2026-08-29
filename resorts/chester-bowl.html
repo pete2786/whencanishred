@@ -3,15 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Everywhere else &middot; When Can I Shred</title>
-<meta name="description" content="Opening dates for Everywhere else ski resorts are not gathered yet. Help fill them in.">
-<meta property="og:title" content="When Can I Shred &middot; Everywhere else">
-<meta property="og:description" content="Not covered yet. Help gather the resorts and their opening dates.">
+<title>Chester Bowl &middot; When Can I Shred</title>
+<meta name="description" content="When Chester Bowl normally opens, and every opening date we could source.">
+<meta property="og:title" content="Chester Bowl">
+<meta property="og:description" content="Opening dates for Chester Bowl, with sources.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
+
 <style>
   /* The palette lives with the rest of the look, further down. This file
      carries no light theme: the site commits to dark. */
@@ -25,6 +26,12 @@
   }
   .wrap { max-width:1080px; margin:0 auto; padding:0 24px 80px; }
 
+  .notice {
+    background:var(--accent-soft); color:var(--ink);
+    border-bottom:1px solid var(--line);
+    font-size:13px; padding:10px 24px; text-align:center;
+  }
+  .notice strong { color:var(--accent); }
 
   .masthead {
     display:flex; flex-wrap:wrap; align-items:baseline;
@@ -32,10 +39,8 @@
     padding:28px 0 20px; border-bottom:1px solid var(--line);
   }
   .wordmark { font-family:"Instrument Serif",Georgia,serif; font-size:25px; }
-  .wordmark a { color:inherit; text-decoration:none; }
-  .wordmark a:hover em { color:var(--ink); }
   .wordmark em { font-style:italic; color:var(--accent); }
-  .tagline { font-size:15px; font-weight:700; color:var(--ink); letter-spacing:.01em; }
+  .tagline { font-size:13px; color:var(--ink-3); }
 
   .eyebrow {
     font-size:11px; font-weight:600; letter-spacing:.16em;
@@ -66,10 +71,8 @@
     border-top:1px solid var(--line);
   }
   @media (max-width:640px) { .stats { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-  /* Region pages carry two stats or four depending on whether the place has
-     climatology, so the row fits what it has rather than always splitting four
-     ways and stranding two empty columns. */
-  .stats-region { grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); }
+
+
   .stats dt {
     font-size:10.5px; font-weight:600; letter-spacing:.13em;
     text-transform:uppercase; color:var(--ink-3);
@@ -87,17 +90,15 @@
     margin:0; text-wrap:balance;
   }
   .sec-note { font-size:14.5px; color:var(--ink-2); max-width:62ch; margin:12px 0 26px; }
+  /* Nothing styled links in body copy, so the first one to appear rendered
+     as browser-default #0000EE: 2:1 against the dark page. */
+  .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
 
   .chart-box {
     background:var(--surface); border:1px solid var(--line); border-radius:4px;
     padding:22px 20px 16px; overflow-x:auto; box-shadow:var(--shadow);
   }
-  .chart-box svg { display:block; width:100%; height:auto; }
-  /* Drawn for 300 units. Stretched past about 420px it scales the type up with
-     the drawing and the labels turn into headings, so it stops there and
-     centres instead. Without this the swap to the wide chart reads as the
-     chart suddenly shrinking, when what happened is it stopped being oversized. */
-  .chart-box .chart-narrow { display:none; max-width:400px; margin:0 auto; }
+  .chart-box svg { display:block; min-width:700px; width:100%; height:auto; }
 
   .ax { stroke:var(--line); stroke-width:1; }
   .grid-l { stroke:var(--line-soft); stroke-width:1; }
@@ -125,7 +126,7 @@
     background:var(--surface); border:1px solid var(--line);
     border-radius:4px; overflow-x:auto; box-shadow:var(--shadow);
   }
-  table { border-collapse:collapse; width:100%; min-width:820px; }
+  table { border-collapse:collapse; width:100%; min-width:560px; }
   caption {
     text-align:left; font-size:11px; font-weight:600; letter-spacing:.16em;
     text-transform:uppercase; color:var(--ink-3); padding:16px 20px 10px;
@@ -145,36 +146,9 @@
     border-bottom:1px solid var(--line);
   }
   .hill a:hover { color:var(--accent); border-bottom-color:var(--accent); }
-  .hill a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
-  .vh { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
-
-  /* Split on the diagonal so both colours read at 10px. The ring keeps a dot
-     whose half matches the page from dissolving into it — several of these
-     secondaries are white and several primaries are near-black. */
-  .pip {
-    display:inline-block; width:10px; height:10px; border-radius:2px;
-    margin-right:9px; flex:0 0 auto;
-    background:linear-gradient(135deg, var(--c1) 0 50%, var(--c2) 50% 100%);
-    box-shadow:0 0 0 1px var(--line);
-  }
-
-  /* A row of text does not read as navigation. The button does, and it is the
-     thing the eye lands on at the end of the row. */
-  .go-cell { text-align:right; white-space:nowrap; }
-  .btn {
-    display:inline-flex; align-items:center; gap:6px;
-    font-size:11.5px; font-weight:600; letter-spacing:.03em;
-    padding:5px 11px; border:1px solid var(--line); border-radius:999px;
-    color:var(--ink-2); text-decoration:none;
-    transition:border-color .12s, color .12s, background .12s;
-  }
-  .btn-arrow { transition:transform .12s; }
-  tbody tr:hover .btn {
-    border-color:var(--accent); color:var(--accent); background:var(--accent-soft);
-  }
-  tbody tr:hover .btn-arrow { transform:translateX(2px); }
-  .btn:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
   .where { color:var(--ink-3); font-size:13px; white-space:nowrap; }
+  .where a { color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--line); }
+  .where a:hover { color:var(--accent); border-bottom-color:var(--accent); }
   .days { font-weight:700; font-variant-numeric:tabular-nums; }
   .grp td {
     background:var(--surface-2); font-size:10.5px; font-weight:600;
@@ -215,7 +189,7 @@
     font-size:11px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
     color:var(--ink-3); margin:0 0 14px;
   }
-  .card .big {
+  .big {
     font-family:"Instrument Serif",Georgia,serif; font-size:40px;
     line-height:1; font-variant-numeric:tabular-nums; margin:0 0 8px; color:var(--warm);
   }
@@ -234,128 +208,28 @@
   footer a { color:var(--ink-2); }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
+  .hero-sub a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .eyebrow a { color: inherit; text-decoration: none; border-bottom: 1px solid currentColor; opacity: .75; }
+  .eyebrow a:hover { opacity: 1; }
 
-  .scens {
-    display:flex; align-items:flex-end; flex-wrap:wrap;
-    gap:clamp(22px,6vw,64px); margin:2px 0 0;
-  }
-  .scen { display:flex; flex-direction:column; }
-  .scen-num {
-    font-family:"Instrument Serif",Georgia,serif; line-height:.86;
-    letter-spacing:-.03em; font-variant-numeric:tabular-nums;
-    font-size:clamp(46px,7vw,80px); color:var(--ink-2);
-  }
-  .scen-real .scen-num { font-size:clamp(80px,13vw,150px); color:var(--ink); }
-  .scen-unit {
-    font-family:"Instrument Serif",Georgia,serif; font-style:italic;
-    font-size:.32em; color:var(--ink-3); margin-left:.22em; letter-spacing:0;
-  }
-  .scen-word { font-size:.62em; font-style:italic; color:var(--ink-3); }
-  .scen-date {
-    font-size:15px; font-weight:600; margin-top:12px; color:var(--ink);
-    font-variant-numeric:tabular-nums;
-  }
-  .scen-real .scen-date { color:var(--accent); }
-  .scen-lede {
-    font-size:11px; font-weight:600; letter-spacing:.11em; text-transform:uppercase;
-    color:var(--ink-3); margin-top:3px;
-  }
-  .scen-yr { display:block; letter-spacing:.06em; opacity:.75; margin-top:1px; }
+  .brandbar { display:flex; height:6px; }
+  .brandbar span { flex:1; }
+  .brandbar span:first-child { background:var(--brand-raw-1); }
+  .brandbar span:last-child  { background:var(--brand-raw-2); box-shadow:inset 0 -1px 0 var(--line); }
 
-  /* Three numbers only mean something next to each other. Left to wrap they
-     split two-and-one around 480px, which reads as a mistake, so below that
-     they hold a three-up grid and shrink instead. */
-  /* The table needs about 860px for its seven columns and sat in a horizontal
-     scroller below that, so anything narrower showed part of a row and hid the
-     rest behind a sideways drag nobody makes. The stack has to start above the
-     width the table actually needs, not at some round phone number. */
-  /* Swap where the wide chart stops rendering at 1:1, not where it stops
-     fitting: 900 for the drawing, 40 for the box padding, 48 for the page
-     gutters. Allowed to fit at any width it likes, it was being scaled to
-     0.78 and its labels came out at 9.7px — smaller than the narrow chart's
-     at the same viewport, which is why crossing the breakpoint looked like
-     the chart collapsing. Below this the narrow drawing takes over, capped so
-     the two meet at roughly the same type size instead of stepping. */
-  @media (max-width:988px) {
-    .chart-box .chart-wide { display:none; }
-    .chart-box .chart-narrow { display:block; }
-    .chart-box { padding:18px 14px 12px; }
-    .chart-narrow .tick-t,
-    .chart-narrow .pin-t { font-size:11px; }
-    .chart-narrow .lab-key { font-size:11.5px; }
-    .chart-narrow .lab-cold,
-    .chart-narrow .lab-rng { font-size:10px; letter-spacing:.04em; }
+  .bm-1 { color:var(--brand-ink); }
+  .bm-2 { color:var(--brand-ink-2); }
+  .hero-say.mark { font-size:clamp(30px,5vw,52px); line-height:1.1; margin:14px 0 0; }
+  .hero-say.mark .bm-1, .hero-say.mark .bm-2 { font-weight:400; }
+  .snotes { margin:16px 2px 0; display:grid; gap:9px; }
+  .snote {
+    font-size:13.5px; color:var(--ink-2); margin:0; max-width:74ch;
+    padding-left:13px; border-left:2px solid var(--line);
   }
-
-  @media (max-width:920px) {
-    table { min-width:0; }
-    .tbl-box { overflow-x:visible; }
-    /* The narrow chart is drawn to fit, so the scroller comes off entirely.
-       Its viewBox is 300 units against roughly 272 css px of usable width, so
-       type set at these sizes lands within a pixel of where it does on the
-       wide one rather than shrinking with the drawing. */
-    .chart-box { overflow-x:visible; }
-    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
-    caption { padding:14px 16px 8px; }
-    tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
-    tbody tr:last-child { border-bottom:0; }
-    tbody tr td { display:flex; align-items:baseline;
-                  gap:8px; border:0; padding:4px 0; text-align:right; }
-    /* The label takes the slack so the value and its sub-value stay together on
-       the right. space-between would strand them at opposite ends of the row. */
-    tbody tr td::before {
-      content:attr(data-label); text-align:left; flex:1 1 auto;
-      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
-      color:var(--ink-3); white-space:nowrap;
-    }
-    /* The hill name is the row's heading, not another labelled field. */
-    tbody tr td.hill { display:block; text-align:left; font-size:16px; padding:0 0 6px; }
-    tbody tr td.hill::before { content:none; }
-    /* No hover on a phone, so the button carries its own emphasis and spans the
-       card rather than hiding at the end of a line. */
-    tbody tr td.go-cell { display:block; text-align:center; padding:12px 0 0; }
-    tbody tr td.go-cell::before { content:none; }
-    .btn { display:flex; justify-content:center; width:100%; padding:9px 11px;
-           font-size:12.5px; border-color:var(--accent); color:var(--accent); }
-    tbody tr.grp { padding:8px 16px; }
-    tbody tr.grp td { display:block; text-align:left; padding:0; }
-    tbody tr.grp td::before { content:none; }
-    .rng { display:inline; margin:0 0 0 8px; }
-    .hrs span { margin-left:6px; }
+  .snote b {
+    display:block; font-size:10.5px; font-weight:600; letter-spacing:.13em;
+    text-transform:uppercase; color:var(--ink-3); margin-bottom:2px;
   }
-
-  @media (max-width:560px) {
-    .scens { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; align-items:end; }
-    .scen-num { font-size:34px; }
-    .scen-real .scen-num { font-size:48px; }
-    .scen-unit { font-size:.36em; margin-left:.1em; }
-    .scen-date { font-size:13px; margin-top:8px; }
-    .scen-lede { font-size:9.5px; letter-spacing:.07em; }
-  }
-  .fc-head {
-    font-family:"Instrument Serif",Georgia,serif;
-    font-size:clamp(22px,3vw,32px); line-height:1.25;
-    max-width:46ch; text-wrap:balance; margin:0 0 10px;
-  }
-  .fc-answer {
-    font-size:15.5px; line-height:1.55; color:var(--ink);
-    max-width:62ch; margin:12px 0 26px;
-  }
-  .fc-note { margin:16px 0 0; }
-  /* The table is sixteen links that do not look like links. This says so once,
-     above the table, rather than decorating every row. */
-  .sec-cta {
-    font-size:13.5px; color:var(--ink-2); margin:-14px 0 22px;
-    padding-left:11px; border-left:2px solid var(--accent);
-  }
-  /* The negative top margin above tucks the line under a section note. Standing
-     on its own after a block it has to keep its distance instead. */
-  .sec-cta.standalone { margin:22px 0 0; }
-  .sec-cta a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
-  /* Nothing styled links in body copy, so the first one to appear rendered
-     as browser-default #0000EE: 2:1 against the dark page. */
-  .sec-note a { color:var(--accent); text-decoration:none; border-bottom:1px solid currentColor; }
-  .fc-head b { font-weight:400; color:var(--accent); }
 
   /* A <details> rather than a <select>: the site ships no JavaScript, and a
      select cannot navigate without it. Regions are pages, so these are links. */
@@ -386,50 +260,38 @@
   .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
   .picker-menu a[aria-current] { color:var(--accent); }
   @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
+  /* Same treatment as the homepage table. The season table is narrower — four
+     or five short columns — so it survives further down, but it still has to
+     stack before it starts scrolling sideways. The chart keeps its scroller: a
+     700px line chart does not stack into anything. */
+  @media (max-width:700px) {
+    table { min-width:0; }
+    .tbl-box { overflow-x:visible; }
+    thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+    caption { padding:14px 16px 8px; }
+    tbody tr { display:block; border-bottom:1px solid var(--line); padding:10px 16px 12px; }
+    tbody tr:last-child { border-bottom:0; }
+    tbody tr td { display:flex; align-items:baseline; gap:8px;
+                  border:0; padding:4px 0; text-align:right; }
+    tbody tr td::before {
+      content:attr(data-label); text-align:left; flex:1 1 auto;
+      font-size:10.5px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+      color:var(--ink-3); white-space:nowrap;
+    }
+    tbody tr td.season {
+      display:block; text-align:left; font-size:15px; font-weight:600; padding:0 0 6px;
+    }
+    tbody tr td.season::before { content:none; }
+    .rng { display:inline; margin:0 0 0 8px; }
+  }
 
-/* ---- about ------------------------------------------------------------ */
-.about-split {
-  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,380px);
-  column-gap:48px; align-items:start;
-}
-@media (max-width:820px) { .about-split { grid-template-columns:1fr; row-gap:30px; } }
-.about-copy { max-width:62ch; }
-.about-copy p { font-size:16.5px; line-height:1.62; color:var(--ink-2); margin:0 0 16px; }
-.about-copy p:first-child { color:var(--ink); }
-.about-cta { border-left:3px solid var(--mark); padding-left:14px; }
-
-.pay-block { margin:26px 0 0; padding:18px 0 0; border-top:2px solid var(--line); }
-.pay-block p { font-size:14px; margin:0 0 12px; }
-.pay-block .pay {
-  display:inline-block; font-size:12px; font-weight:700; letter-spacing:.08em;
-  text-transform:uppercase; text-decoration:none; padding:9px 15px;
-  border:2px solid var(--mark); color:var(--mark);
-  transition:background .12s, color .12s;
-}
-.pay-block .pay:hover { background:var(--mark); color:#0B0C0D; }
-
-/* One shot, in the column beside the copy; full width once they stack. */
-.shots { display:grid; gap:14px; }
-.shot { margin:0; border:2px solid var(--line); background:var(--surface); }
-/* Portrait shots of different aspects sit side by side, so they are cropped to
-   one ratio rather than left to set their own heights. */
-.shot img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
-
-
-/* Text on the left, a picture on the right — the arrangement the page wanted
-   all along. Without the picture this was a 62-character column against an
-   empty half-page. */
-.hero-split {
+/* A hill with a photo for the headline gets a second column; one without keeps
+   the full width, so the layout follows the data rather than being declared. */
+.hero:has(.hero-shot) {
   display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px);
-  column-gap:44px; align-items:start; margin:16px 0 0;
+  column-gap:44px; align-items:start;
 }
-@media (max-width:820px) { .hero-split { grid-template-columns:1fr; row-gap:26px; } }
-.hero-split .hero-say { margin-top:0; }
-.hero-split .stats { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 24px; }
-/* Half these labels wrap in a column this narrow and half do not, which left
-   the numbers at two different heights. */
-.hero-split .stats dt { min-height:2.5em; }
-
+@media (max-width:820px) { .hero:has(.hero-shot) { grid-template-columns:1fr; row-gap:24px; } }
 .hero-shot { margin:0; border:2px solid var(--line); background:var(--surface); }
 .hero-shot img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
 .hero-shot figcaption {
@@ -437,55 +299,17 @@
   padding:10px 12px 11px; border-top:2px solid var(--line);
 }
 
-/* ---- the resorts a region has ----------------------------------------- */
-.roster-note { margin:12px 0 18px; }
-.roster {
-  display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
-  gap:1px; list-style:none; margin:0; padding:0;
-  background:var(--line); border:2px solid var(--line);
+/* ---- a hill's own photos ---------------------------------------------- */
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+@media (max-width:560px) { .gallery { grid-template-columns:1fr; } }
+.pic { margin:0; border:2px solid var(--line); background:var(--surface); }
+/* Shot on phones and held every which way, so they are cropped to one ratio
+   rather than left to set their own heights and stagger the row. */
+.pic img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
+.pic figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:11px 13px 12px; border-top:2px solid var(--line);
 }
-.roster li {
-  display:flex; align-items:baseline; justify-content:space-between; gap:10px;
-  background:var(--surface); padding:9px 12px; font-size:13.5px; color:var(--ink-2);
-}
-.roster li span {
-  font-size:10px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--ink-3); white-space:nowrap;
-}
-/* A resort we already hold dates for reads as done rather than as a request. */
-.roster li.on { color:var(--ink); }
-.roster li.on::before { content:"\2713"; color:var(--mark); margin-right:2px; }
-
-/* ---- who made this ---------------------------------------------------- */
-/* It sits after the data, not beside the headline: a photo of the author at
-   the top of a page about opening dates reads as a pitch. */
-.hello {
-  display:grid; grid-template-columns:220px minmax(0,1fr);
-  border:2px solid var(--line); background:var(--surface);
-}
-@media (max-width:600px) { .hello { grid-template-columns:1fr; } }
-/* Portrait shot in a squarer slot, cropped high: the face and the arms are
-   the frame that matters, not the paving stones. */
-.hello-shot {
-  display:block; width:100%; height:100%;
-  aspect-ratio:1/1; object-fit:cover; object-position:center 20%;
-}
-@media (max-width:600px) { .hello-shot { aspect-ratio:16/10; } }
-.hello-body { padding:20px 24px; align-self:center; }
-.hello-eyebrow {
-  font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase;
-  color:var(--mark); margin:0 0 10px;
-}
-.hello-body p { font-size:14.5px; line-height:1.6; color:var(--ink-2); margin:0 0 15px; max-width:64ch; }
-.hello-links { display:flex; flex-wrap:wrap; gap:9px; }
-.hello-links a {
-  font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
-  text-decoration:none; padding:7px 12px; border:2px solid var(--line); color:var(--ink);
-  transition:border-color .12s, color .12s, background .12s;
-}
-.hello-links a:hover { border-color:var(--mark); color:var(--mark); }
-.hello-links .pay { border-color:var(--mark); color:var(--mark); }
-.hello-links .pay:hover { background:var(--mark); color:#0B0C0D; }
 
 /* ---- theme: topsheet ---- */
 /* Topsheet / park graphic.
@@ -612,53 +436,88 @@ footer::before {
 }
 
 </style>
+<style>
+  :root { --accent:#44ae2c; --accent-soft:#21351d; --brand-ink:#44ae2c; --brand-ink-2:#005df8; --brand-raw-1:#41a62a; --brand-raw-2:#003388; }
+</style>
+<style>
+.hm[data-hill="wild-mountain"]{color:#beee07}
+.hm[data-hill="trollhaugen"]{color:#0089f6}
+.hm[data-hill="hyland-hills"]{color:#9a76cb}
+.hm[data-hill="afton-alps"]{color:#e05c57}
+.hm[data-hill="welch-village"]{color:#238bde}
+.hm[data-hill="buck-hill"]{color:#3db3e3}
+.hm[data-hill="elm-creek"]{color:#fe3837}
+.hm[data-hill="lutsen-mountains"]{color:#008fd9}
+.hm[data-hill="giants-ridge"]{color:#ff380d}
+.hm[data-hill="spirit-mountain"]{color:#5289d3}
+.hm[data-hill="powder-ridge"]{color:#068fc9}
+.hm[data-hill="mount-kato"]{color:#008bf4}
+.hm[data-hill="buena-vista"]{color:#3d86ea}
+.hm[data-hill="detroit-mountain"]{color:#fbab54}
+.hm[data-hill="andes-tower-hills"]{color:#209d51}
+.hm[data-hill="coffee-mill"]{color:#00a8f0}
+.hm[data-hill="mount-ski-gull"]{color:#1a9e00}
+.hm[data-hill="chester-bowl"]{color:#41a62a}
+.hm[data-hill="steeplechase"]{color:#eb553c}
+</style>
 </head>
 <body>
+<div class="brandbar"><span></span><span></span></div>
 <div class="wrap">
 
   <header class="masthead">
-    <div class="wordmark"><a href="index.html">when can i <em>shred</em></a></div>
-    <details class="picker">
-      <summary>Everywhere else</summary>
+    <div class="wordmark">when can i <em>shred</em></div>
+        <details class="picker">
+      <summary>Minnesota</summary>
       <nav class="picker-menu">
-      <a href="index.html">Minnesota<span>Twin Cities, Duluth, North Shore</span></a>
-      <a href="wisconsin.html">Wisconsin<span>Chicago, Madison - Milwaukee, Wausau</span></a>
-      <a href="michigan-up.html">Michigan · Upper Peninsula<span>Ironwood, Marquette, Sault Ste Marie</span></a>
-      <a href="michigan-lp.html">Michigan · Lower Peninsula<span>Traverse City, Cadillac, Detroit</span></a>
-      <a href="dakotas-iowa.html">Dakotas & Iowa<span>Black Hills, Bismarck, Dubuque</span></a>
-      <a href="ohio-indiana.html">Ohio & Indiana<span>Cleveland, Mansfield, Cincinnati</span></a>
-      <a href="elsewhere.html" aria-current="page">Everywhere else<span>Colorado, East Coast, interested?</span></a>
+      <a href="../index.html" aria-current="page">Minnesota<span>Twin Cities, Duluth, North Shore</span></a>
+      <a href="../wisconsin.html">Wisconsin<span>Chicago, Madison - Milwaukee, Wausau</span></a>
+      <a href="../michigan-up.html">Michigan · Upper Peninsula<span>Ironwood, Marquette, Sault Ste Marie</span></a>
+      <a href="../michigan-lp.html">Michigan · Lower Peninsula<span>Traverse City, Cadillac, Detroit</span></a>
+      <a href="../dakotas-iowa.html">Dakotas & Iowa<span>Black Hills, Bismarck, Dubuque</span></a>
+      <a href="../ohio-indiana.html">Ohio & Indiana<span>Cleveland, Mansfield, Cincinnati</span></a>
+      <a href="../elsewhere.html">Everywhere else<span>Colorado, East Coast, interested?</span></a>
       </nav>
     </details>
   </header>
 
-  <section class="hero">
-    <p class="eyebrow">Not planned</p>
-    <h1 class="fc-head">Everywhere else, if anyone wants it.</h1>
-    <p class="hero-sub">This site is built around a question that matters where resorts make their own winter: when does it get cold enough to blow snow, and how long after that do they open? Somewhere with real snowfall, the answer may be dull. The resort opens when it snows. Whether any of this is worth having for the Rockies, the East or anywhere else is genuinely an open question.</p>
+  <p class="eyebrow"><a href="../index.html">&larr; every resort</a></p>
 
-    <dl class="stats stats-region">
-      <div><dt>Resorts tracked</dt><dd>0</dd></div>
-      <div><dt>Opening dates on file</dt><dd>0</dd></div>
+  <section class="hero">
+    <div class="hero-main">
+    <p class="hero-say mark"><span class="bm-1">Chester</span> <span class="bm-2">Bowl</span></p>
+    <p class="hero-sub">Duluth, MN &middot;
+      <a href="https://chesterbowl.org/" target="_blank" rel="noopener">Official site</a>
+    </p>
+
+    <dl class="stats">
+      <div><dt>Typical first day</dt><dd class="lede">&mdash;</dd></div>
+      <div><dt>Earliest observed</dt><dd>&mdash;</dd></div>
+      <div><dt>Latest observed</dt><dd>&mdash;</dd></div>
+      <div><dt>Normal snowmaking hrs</dt><dd>342</dd></div>
     </dl>
+    </div>
+
   </section>
 
-
   <section class="sec">
-    <h2 class="sec-title">Want resort specific info? We need help!</h2>
-    <p class="sec-note">
-      We need somebody to help find opening dates, closing dates, and where the two can be
-      told apart, the pre-season opening versus the full one. That mostly means trolling
-      their Facebook feeds by hand. Sometimes the websites have it.
-      <a href="index.html">Minnesota</a> shows what a region looks like once it is filled in.
-    </p>
+    <h2 class="sec-title">Season by season</h2>
+    <p class="sec-note">Every date carries where it came from. <b>About</b> means the archive
+      placed it in a window without pinning the day; <b>confirmed</b> means two independent
+      sources agreed.</p>
 
+    <div class="tbl-box">
+      <table>
+        <caption>Observed openings and closings</caption>
+        <thead>
+<tr><th>Season</th><th>First lift</th><th>Full operations</th><th>Source</th></tr>
+        </thead>
+        <tbody>
 
+        </tbody>
+      </table>
+    </div>
 
-    <p class="sec-cta standalone">If you want this for your mountains, say so and say what would make it useful.
-      Email <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>. Dates for resorts already
-      listed are just as welcome.
-    </p>
   </section>
 
   <footer>
@@ -666,7 +525,9 @@ footer::before {
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
     <span class="updated">Rebuilt <time datetime="2026-08-29T21:10:33.882Z">29 August 2026, 16:10 CDT</time>. Forecast pulled <time datetime="2026-08-29T21:09:30.948Z">29 August 2026, 16:09 CDT</time>.</span>
-    <span><a href="about.html">About this site</a></span>
+    <span><a href="../about.html">About this site</a></span>
+    <span>We are working on entering the rest. If you want to help, email me at
+      <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
   </footer>
 </div>
 </body>

@@ -424,5 +424,65 @@
       "secondary": "#000000"
     },
     "photos": []
+  },
+  "mount-ski-gull": {
+    "name": "Mount Ski Gull",
+    "place": "Nisswa",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 46.4449,
+    "lon": -94.3785,
+    "website": "https://skigull.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": "mtskigull",
+      "instagram": "mtskigull"
+    },
+    "colors": {
+      "primary": "#116600",
+      "secondary": "#4caac9",
+      "source": "probe",
+      "note": "Probed from the site's CSS and not yet checked by eye. The palette a theme ships is not the same thing as a brand: these are candidates only."
+    },
+    "photos": []
+  },
+  "chester-bowl": {
+    "name": "Chester Bowl",
+    "place": "Duluth",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 46.8123,
+    "lon": -92.0959,
+    "website": "https://chesterbowl.org/",
+    "formerDomains": [],
+    "social": {},
+    "colors": {
+      "primary": "#41a62a",
+      "secondary": "#003388",
+      "source": "probe",
+      "note": "Probed from the site's CSS and not yet checked by eye. The palette a theme ships is not the same thing as a brand: these are candidates only. The greens here are WordPress Twenty Fourteen defaults, so they are probably the theme rather than Chester Bowl."
+    },
+    "photos": []
+  },
+  "steeplechase": {
+    "name": "Steeplechase",
+    "place": "Mazeppa",
+    "state": "MN",
+    "region": "greater-minnesota",
+    "lat": 44.2449,
+    "lon": -92.5156,
+    "website": "https://www.steeplechaseevents.com/",
+    "formerDomains": [],
+    "social": {
+      "facebook": "steeplechaseskihill",
+      "instagram": "steeplechasesnow"
+    },
+    "colors": {
+      "primary": "#ea492e",
+      "secondary": "#0f2ccf",
+      "source": "probe",
+      "note": "Probed from the site's CSS and not yet checked by eye. The palette a theme ships is not the same thing as a brand: these are candidates only. The blue that dominates the page is Wix's own #116dff, so it was skipped."
+    },
+    "photos": []
   }
 }
