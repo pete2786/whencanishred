@@ -873,10 +873,9 @@ function SHOT(base, cls, alt, sizes, root = "", eager = false) {
 const ARMS_ALT = "David in a t-shirt and helmet at Wild Mountain on a warm spring day, " +
                  "ski racks and a chairlift behind him.";
 
+// No Venmo here. Asking for money beside the data reads as a pitch; the ask
+// lives on the about page, where somebody has already chosen to read about him.
 function helloCard() {
-  const pay = VENMO
-    ? `<a class="pay" href="${esc(VENMO)}" rel="noopener">Buy me a beer</a>`
-    : "";
   return `      <aside class="hello">
         ${SHOT("david-midwest", "hello-shot", ARMS_ALT, "(max-width:600px) calc(100vw - 48px), 220px")}
         <div class="hello-body">
@@ -885,7 +884,7 @@ function helloCard() {
              culture, and got back into it five years ago. Now I&rsquo;m counting down from
              mid-August. Hope this site gets you hyped!!</p>
           <div class="hello-links">
-            <a href="about.html">More about this</a>${pay}
+            <a href="about.html">More about this</a>
           </div>
         </div>
       </aside>`;
