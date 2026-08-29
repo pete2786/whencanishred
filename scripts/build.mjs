@@ -6,37 +6,10 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
 
-// ------------------------------------------------------------------ themes
-//
-// The pages are pure functions of the JSON, so a visual direction is just a
-// different set of templates over the same data. `--theme=<name>` reads from
-// themes/<name>/ and writes to preview/<name>/ so two directions can be held
-// side by side in a browser. With no flag the build behaves as it always has:
-// templates/ to the repo root, which is what GitHub Pages serves.
-const themeArg = process.argv.find(a => a.startsWith("--theme="));
-const THEME = themeArg ? themeArg.slice("--theme=".length) : null;
-const TPL = THEME ? `themes/${THEME}` : "templates";
-const OUT = THEME ? `preview/${THEME}` : ".";
-if (THEME && !existsSync(TPL)) {
-  console.error(`no such theme: ${TPL}`);
-  process.exit(1);
-}
-mkdirSync(OUT, { recursive: true });
-
-// A theme may commit to one colour scheme rather than following the system:
-// a trail map is printed on white, a topsheet is not. When it does, the page
-// ships that scheme's colours only, with no prefers-color-scheme branch.
-function themeScheme(name) {
-  for (let n = name, hops = 0; n && hops < 8; hops++) {
-    const f = `themes/${n}/theme.json`;
-    if (!existsSync(f)) return null;
-    const cfg = JSON.parse(readFileSync(f, "utf8"));
-    if (cfg.scheme) return cfg.scheme;
-    n = cfg.extends;
-  }
-  return null;
-}
-const SCHEME = THEME ? themeScheme(THEME) : null;
+// The site commits to one colour scheme rather than following the system: a
+// topsheet printed on white is a different product. Generated colours ship for
+// this scheme only, with no prefers-color-scheme branch.
+const SCHEME = "dark";
 const resorts = read("data/resorts.json");
 const seasons = read("data/seasons.json");
 const projection = read("data/projection.json");
@@ -138,9 +111,12 @@ const soft = (hex, dark) => {
 
 // Worst case per theme: the lightest surface a light page paints text on, and
 // the lightest surface the dark page does.
-const LIGHT_BG = "#ffffff", DARK_BG = "#1b2431";
+// The surfaces text actually lands on. DARK_* are the shipped palette's
+// --surface-2 and --ground; correcting against anything else measures a
+// background that is not there.
+const LIGHT_BG = "#ffffff", DARK_BG = "#1d2023";
 const LIGHT_INK = "#8a5108", DARK_INK = "#f2a65a";
-const LIGHT_GROUND = "#edf1f5", DARK_GROUND = "#0b1017";
+const LIGHT_GROUND = "#edf1f5", DARK_GROUND = "#0b0c0d";
 
 // The brand stripe shows the colours raw, which fails when a brand colour is
 // the page background: Wild Mountain's black half vanishes on the dark theme
@@ -173,10 +149,17 @@ function brandCss(r) {
   const darkVars =
     `--accent:${dark}; --accent-soft:${softDark}; --brand-ink:${dark}; --brand-ink-2:${dark2}; ` +
     `--brand-raw-1:${stripe(p, DARK_GROUND)}; --brand-raw-2:${stripe(s, DARK_GROUND)};`;
+  // The page commits to one scheme, so the hill ships one set of colours. Left
+  // branching on prefers-color-scheme, a visitor whose system is in light mode
+  // got the light-corrected brand colour — corrected against a white page —
+  // painted onto the near-black one.
+  if (SCHEME === "dark") return `<style>\n  :root { ${darkVars} }\n</style>`;
+  const lightVars =
+    `--accent:${light}; --accent-soft:${softLight}; --brand-ink:${light}; --brand-ink-2:${light2}; ` +
+    `--brand-raw-1:${stripe(p, LIGHT_GROUND)}; --brand-raw-2:${stripe(s, LIGHT_GROUND)};`;
+  if (SCHEME === "light") return `<style>\n  :root { ${lightVars} }\n</style>`;
   return `<style>
-  :root { --accent:${light}; --accent-soft:${softLight};
-          --brand-ink:${light}; --brand-ink-2:${light2};
-          --brand-raw-1:${stripe(p, LIGHT_GROUND)}; --brand-raw-2:${stripe(s, LIGHT_GROUND)}; }
+  :root { ${lightVars} }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { ${darkVars} } }
   :root[data-theme="dark"] { ${darkVars} }
 </style>`;
@@ -800,7 +783,7 @@ function chartSection() {
 const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
 const lead = observed(leader);
 
-writeFileSync(`${OUT}/index.html`, markHills(fill(readFileSync(`${TPL}/index.html`, "utf8"), {
+writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", "utf8"), {
   TABLE: tableRows(),
   DATELINE: dateline,
   FORECAST_NOTE: fcSection.NOTE,
@@ -817,12 +800,12 @@ writeFileSync(`${OUT}/index.html`, markHills(fill(readFileSync(`${TPL}/index.htm
 })));
 
 // Resort pages
-mkdirSync(`${OUT}/resorts`, { recursive: true });
+mkdirSync("resorts", { recursive: true });
 // One placeholder per state that has no record yet. They borrow the homepage's
 // stylesheet rather than keeping a second copy in step with it.
-const indexTpl = readFileSync(`${TPL}/index.html`, "utf8");
+const indexTpl = readFileSync("templates/index.html", "utf8");
 const style = indexTpl.slice(indexTpl.indexOf("<style"), indexTpl.indexOf("</style>") + 8);
-const regionTpl = readFileSync(`${TPL}/region.html`, "utf8");
+const regionTpl = readFileSync("templates/region.html", "utf8");
 
 for (const region of STATES.filter(r => r.id !== "mn")) {
   const n = countIn(region.state);
@@ -832,7 +815,7 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
       `the state is covered. The rest of ${region.name} is not gathered yet.`
     : `No ${region.name} hills are on the site yet. Everything here is built from dates ` +
       `gathered one post at a time, and nobody has worked this state.`;
-  writeFileSync(`${OUT}/${region.file}`, fill(regionTpl, {
+  writeFileSync(region.file, fill(regionTpl, {
     STYLE: style,
     PICKER: picker(region.id, ""),
     REGION: esc(region.name),
@@ -851,10 +834,10 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
 
-const resortTpl = readFileSync(`${TPL}/resort.html`, "utf8");
+const resortTpl = readFileSync("templates/resort.html", "utf8");
 for (const [slug, r] of Object.entries(resorts)) {
   const o = observed(slug);
-  writeFileSync(`${OUT}/resorts/${slug}.html`, markHills(fill(resortTpl, {
+  writeFileSync(`resorts/${slug}.html`, markHills(fill(resortTpl, {
     NAME: esc(r.name), PLACE: esc(`${r.place}, ${r.state}`), WEBSITE: esc(r.website),
     NAME_MARK: wordmark(r.name),
     BRAND_CSS: brandCss(r),

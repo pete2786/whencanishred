@@ -11,38 +11,11 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
 
 <style>
-  :root {
-    --ground:#EDF1F5; --surface:#FFFFFF; --surface-2:#E2E9F0;
-    --line:#C7D3DF; --line-soft:#DCE4EC;
-    --ink:#10171F; --ink-2:#46596E; --ink-3:#6E8298;
-    --accent:#B4610E; --accent-soft:#F4E2CE;
-    --cold:#0E7C90; --cold-soft:#D2ECF1;
-    --warm:#A8402B;
-    --shadow:0 1px 2px rgba(16,23,31,.06), 0 8px 24px rgba(16,23,31,.06);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground:#0B1017; --surface:#131A24; --surface-2:#1B2431;
-      --line:#2A3646; --line-soft:#202B39;
-      --ink:#E8EEF4; --ink-2:#A6B6C8; --ink-3:#7C8B9E;
-      --accent:#F2A65A; --accent-soft:#3A2A18;
-      --cold:#5FD4E4; --cold-soft:#12313A;
-      --warm:#E07257;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
-    }
-  }
-  :root[data-theme="dark"] {
-    --ground:#0B1017; --surface:#131A24; --surface-2:#1B2431;
-    --line:#2A3646; --line-soft:#202B39;
-    --ink:#E8EEF4; --ink-2:#A6B6C8; --ink-3:#7C8B9E;
-    --accent:#F2A65A; --accent-soft:#3A2A18;
-    --cold:#5FD4E4; --cold-soft:#12313A;
-    --warm:#E07257;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
-  }
+  /* The palette lives with the rest of the look, further down. This file
+     carries no light theme: the site commits to dark. */
 
   * { box-sizing:border-box; }
 
@@ -116,7 +89,12 @@
     background:var(--surface); border:1px solid var(--line); border-radius:4px;
     padding:22px 20px 16px; overflow-x:auto; box-shadow:var(--shadow);
   }
-  .chart-box svg { display:block; min-width:700px; width:100%; height:auto; }
+  .chart-box svg { display:block; width:100%; height:auto; }
+  /* Drawn for 300 units. Stretched past about 420px it scales the type up with
+     the drawing and the labels turn into headings, so it stops there and
+     centres instead. Without this the swap to the wide chart reads as the
+     chart suddenly shrinking, when what happened is it stopped being oversized. */
+  .chart-box .chart-narrow { display:none; max-width:400px; margin:0 auto; }
 
   .ax { stroke:var(--line); stroke-width:1; }
   .grid-l { stroke:var(--line-soft); stroke-width:1; }
@@ -288,9 +266,32 @@
      scroller below that, so anything narrower showed part of a row and hid the
      rest behind a sideways drag nobody makes. The stack has to start above the
      width the table actually needs, not at some round phone number. */
+  /* Swap where the wide chart stops rendering at 1:1, not where it stops
+     fitting: 900 for the drawing, 40 for the box padding, 48 for the page
+     gutters. Allowed to fit at any width it likes, it was being scaled to
+     0.78 and its labels came out at 9.7px — smaller than the narrow chart's
+     at the same viewport, which is why crossing the breakpoint looked like
+     the chart collapsing. Below this the narrow drawing takes over, capped so
+     the two meet at roughly the same type size instead of stepping. */
+  @media (max-width:988px) {
+    .chart-box .chart-wide { display:none; }
+    .chart-box .chart-narrow { display:block; }
+    .chart-box { padding:18px 14px 12px; }
+    .chart-narrow .tick-t,
+    .chart-narrow .pin-t { font-size:11px; }
+    .chart-narrow .lab-key { font-size:11.5px; }
+    .chart-narrow .lab-cold,
+    .chart-narrow .lab-rng { font-size:10px; letter-spacing:.04em; }
+  }
+
   @media (max-width:920px) {
     table { min-width:0; }
     .tbl-box { overflow-x:visible; }
+    /* The narrow chart is drawn to fit, so the scroller comes off entirely.
+       Its viewBox is 300 units against roughly 272 css px of usable width, so
+       type set at these sizes lands within a pixel of where it does on the
+       wide one rather than shrinking with the drawing. */
+    .chart-box { overflow-x:visible; }
     thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
     caption { padding:14px 16px 8px; }
     tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
@@ -378,6 +379,149 @@
   .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
   .picker-menu a[aria-current] { color:var(--accent); }
   @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
+
+/* ---- theme: topsheet ---- */
+/* Topsheet / park graphic.
+   Board art: ultra-condensed caps, square corners, hazard tape, hard black.
+   Committed to dark in both system settings — a topsheet printed on white is a
+   different product — so the light tokens go too.
+
+   The page keeps no brand colour of its own. Snow-white does the accent work
+   and the cold cyan carries the data, which leaves every saturated colour on
+   the page belonging to a hill: its row marker, its own page, and its name
+   wherever the prose says it. An accent here would have been one hill's
+   identity worn by the whole site.
+
+   The cyan in the wordmark is the same cyan as the 28°F threshold line. The
+   site's one colour is the temperature the site is about. */
+
+:root,
+:root:not([data-theme="light"]),
+:root[data-theme="dark"] {
+  --ground:#0B0C0D; --surface:#141618; --surface-2:#1D2023;
+  --line:#33393D; --line-soft:#24282B;
+  --ink:#F3F5F6; --ink-2:#A6AEB3; --ink-3:#7B848A;
+  --accent:#DCE9F0; --accent-soft:#1C2A33;
+  --mark:#37D2E8;   /* the wordmark, and the threshold it points at */
+  --cold:#37D2E8; --cold-soft:#0C2E34;
+  --warm:#FF5B35;
+  --shadow:none;
+}
+
+body { background:var(--ground); }
+
+/* Hazard tape. Used as a rule, never as a fill — it is a boundary marker. */
+.tape, .masthead, footer {
+  --tape:repeating-linear-gradient(45deg,
+    var(--accent) 0 10px, transparent 10px 20px);
+}
+
+/* ---- condensed caps --------------------------------------------------- */
+.wordmark, .count-num, .count-unit, .hero-say, .sec-title,
+.stats dd, .card .big, .scen-num, .scen-unit, .fc-head, .grp td, .btn {
+  font-family:Anton,"Archivo Narrow",Impact,sans-serif !important;
+  font-style:normal !important; font-weight:400 !important;
+}
+.count-num, .scen-num, .stats dd, .card .big {
+  letter-spacing:-.01em;
+}
+.sec-title, .hero-say, .fc-head {
+  text-transform:uppercase; letter-spacing:.005em; line-height:1.05;
+}
+.hero-say b { color:var(--accent); }
+.count-unit, .scen-unit, .scen-word {
+  text-transform:uppercase; font-style:normal; letter-spacing:.02em;
+}
+
+/* ---- masthead as a top edge ------------------------------------------ */
+.masthead {
+  border-bottom:0; padding:22px 0 16px; position:relative;
+}
+.masthead::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:6px;
+  background:var(--tape);
+}
+.masthead .wordmark {
+  font-size:26px; text-transform:uppercase; letter-spacing:.01em;
+}
+.masthead .wordmark em { color:var(--mark); font-style:normal; }
+
+.eyebrow { color:var(--accent); font-weight:700; }
+
+/* ---- everything is square -------------------------------------------- */
+.chart-box, .tbl-box, .card, .btn, .chip, .pip {
+  border-radius:0 !important;
+}
+.chart-box, .tbl-box, .card {
+  border:2px solid var(--line); background:var(--surface);
+}
+
+/* Sticker chips: the hill's two colours split hard down the middle, no ring. */
+.pip {
+  width:12px; height:12px; margin-right:10px;
+  background:linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.35);
+}
+
+/* Group header as a taped-off band. */
+.grp td, tbody tr.grp:hover td {
+  background:var(--accent); color:#0B0C0D;
+  text-transform:uppercase; letter-spacing:.18em; font-size:12px; padding:8px 14px;
+}
+
+th { color:var(--accent); font-weight:700; }
+caption { color:var(--ink-3); font-weight:700; }
+tbody tr:hover td { background:#1A1D20; }
+.days { color:var(--accent); }
+
+/* ---- the button as a decal ------------------------------------------- */
+.btn {
+  background:transparent; border:2px solid var(--accent); color:var(--accent);
+  text-transform:uppercase; letter-spacing:.09em; font-size:11px; padding:4px 12px;
+}
+tbody tr:hover .btn { background:var(--accent); color:#0B0C0D; }
+
+.chip { border:1px solid currentColor; font-weight:700; letter-spacing:.09em; }
+
+/* ---- chart ------------------------------------------------------------ */
+.band { fill:#122A2E; }
+.curve { stroke:var(--accent); stroke-width:3.5; }
+.thresh { stroke:var(--cold); stroke-width:2; stroke-dasharray:8 6; }
+.dot-cross, .rangedot { fill:var(--cold); }
+.rangebar, .rangecap { stroke:var(--accent); stroke-width:2.5; }
+.lab-rng, .lab-cold { font-weight:700; letter-spacing:.1em; }
+.lab-rng { fill:var(--accent); }
+.lab-cold { fill:var(--cold); }
+.grid-l { stroke:#22262A; }
+.sw { background:var(--accent); }
+.sw.cold { background:var(--cold); }
+.sw.band { background:#122A2E; border-color:var(--cold); }
+
+/* ---- footer edge ------------------------------------------------------ */
+footer { border-top:0; position:relative; padding-top:28px; }
+footer::before {
+  content:""; position:absolute; left:0; right:0; top:0; height:6px;
+  background:var(--tape);
+}
+
+</style>
+<style>
+.hm[data-hill="wild-mountain"]{color:#beee07}
+.hm[data-hill="trollhaugen"]{color:#0089f6}
+.hm[data-hill="hyland-hills"]{color:#9a76cb}
+.hm[data-hill="afton-alps"]{color:#e05c57}
+.hm[data-hill="welch-village"]{color:#238bde}
+.hm[data-hill="buck-hill"]{color:#3db3e3}
+.hm[data-hill="elm-creek"]{color:#fe3837}
+.hm[data-hill="lutsen-mountains"]{color:#008fd9}
+.hm[data-hill="giants-ridge"]{color:#ff380d}
+.hm[data-hill="spirit-mountain"]{color:#5289d3}
+.hm[data-hill="powder-ridge"]{color:#068fc9}
+.hm[data-hill="mount-kato"]{color:#008bf4}
+.hm[data-hill="buena-vista"]{color:#3d86ea}
+.hm[data-hill="detroit-mountain"]{color:#fbab54}
+.hm[data-hill="andes-tower-hills"]{color:#209d51}
+.hm[data-hill="coffee-mill"]{color:#00a8f0}
 </style>
 </head>
 <body>
@@ -420,9 +564,9 @@
         <span class="scen-lede">latest on record<span class="scen-yr">2021-22</span></span>
       </div>
     </div>
-    <p class="hero-say"><b>Wild Mountain</b> opened first three years running.</p>
+    <p class="hero-say"><b class="hm" data-hill="wild-mountain">Wild Mountain</b> opened first three years running.</p>
     <p class="hero-sub">
-      <b>Andes Tower Hills</b> broke the run last season, opening a single day ahead of it.
+      <b class="hm" data-hill="andes-tower-hills">Andes Tower Hills</b> broke the run last season, opening a single day ahead of it.
       Nothing is announced for the coming winter yet.
     </p>
 
@@ -443,67 +587,96 @@
     </p>
 
     <div class="chart-box">
-      <svg viewBox="0 0 900 420" role="img"
-           aria-label="Mean Twin Cities wet-bulb temperature falling from 64 degrees on 23 August to 14 degrees on 31 December, crossing 28 degrees on 20 November. The first workable snowmaking window normally arrives 28 October, with a historical range of 9 October to 20 November.">
-        <rect class="band" x="60" y="230" width="800" height="120"></rect>
-        <line class="grid-l" x1="60" y1="93"  x2="860" y2="93"></line>
-        <line class="grid-l" x1="60" y1="157" x2="860" y2="157"></line>
-        <line class="grid-l" x1="60" y1="221" x2="860" y2="221"></line>
-        <line class="grid-l" x1="60" y1="286" x2="860" y2="286"></line>
-        <text class="tick-t" x="50" y="97"  text-anchor="end">60&deg;</text>
-        <text class="tick-t" x="50" y="161" text-anchor="end">45&deg;</text>
-        <text class="tick-t" x="50" y="225" text-anchor="end">30&deg;</text>
-        <text class="tick-t" x="50" y="290" text-anchor="end">15&deg;</text>
-
-        <text class="lab-rng" x="463" y="44" text-anchor="middle">FIRST WORKABLE WINDOW</text>
-        <line class="rangebar" x1="347" y1="62" x2="603" y2="62"></line>
-        <line class="rangecap" x1="347" y1="55" x2="347" y2="69"></line>
-        <line class="rangecap" x1="603" y1="55" x2="603" y2="69"></line>
-        <circle class="rangedot" cx="463" cy="62" r="5"></circle>
-        <text class="tick-t" x="347" y="84" text-anchor="middle">Oct 9</text>
-        <text class="tick-t" x="463" y="84" text-anchor="middle">normally Oct 28</text>
-        <text class="tick-t" x="603" y="84" text-anchor="middle">Nov 20</text>
-
-        <line class="ax" x1="60" y1="350" x2="860" y2="350"></line>
-        <line class="ax" x1="60" y1="100" x2="60"  y2="350"></line>
-        <line class="thresh" x1="60" y1="230" x2="860" y2="230"></line>
-        <text class="lab-cold" x="68" y="249">COLD ENOUGH TO MAKE SNOW</text>
-
-        <polyline class="curve"
-          points="60,74 115,82 200,103 298,128 384,167 487,194 573,212 671,250 756,264 858,289"></polyline>
-
-        <circle class="dot-cross" cx="619" cy="230" r="6"></circle>
-        <text class="lab-key" x="634" y="216" text-anchor="start">Average crosses 28&deg; &middot; Nov 20</text>
-
-        <line class="pin" x1="518" y1="350" x2="518" y2="364"></line>
-        <circle class="pin-dot" cx="518" cy="350" r="3.5"></circle>
-        <text class="pin-t" x="518" y="379" text-anchor="middle">Wild Mountain</text>
-
-        <line class="pin" x1="628" y1="350" x2="628" y2="364"></line>
-        <circle class="pin-dot" cx="628" cy="350" r="3.5"></circle>
-        <text class="pin-t" x="628" y="379" text-anchor="middle">Most metro hills</text>
-
-        <line class="pin" x1="750" y1="350" x2="750" y2="364"></line>
-        <circle class="pin-dot" cx="750" cy="350" r="3.5"></circle>
-        <text class="pin-t" x="750" y="379" text-anchor="middle">Last hills open</text>
-
-        <text class="tick-t" x="60"  y="406" text-anchor="start">Aug 23</text>
-        <text class="tick-t" x="298" y="406" text-anchor="middle">Oct 1</text>
-        <text class="tick-t" x="487" y="406" text-anchor="middle">Nov 1</text>
-        <text class="tick-t" x="671" y="406" text-anchor="middle">Dec 1</text>
-        <text class="tick-t" x="860" y="406" text-anchor="end">Jan 1</text>
-      </svg>
-
-      <div class="legend">
-        <b><i class="sw"></i> Mean wet-bulb, Twin Cities, 1995&ndash;2025</b>
-        <b><i class="sw cold"></i> 28&deg;F snowmaking threshold</b>
-        <b><i class="sw band"></i> Cold enough to make snow</b>
-      </div>
+<svg class="chart-wide" viewBox="0 0 900 441" role="img" aria-label="Mean Twin Cities wet-bulb temperature falling from 65 degrees on Aug 23 to 17 degrees on Dec 31, crossing 28 degrees on Nov 20. The first workable snowmaking window normally arrives Oct 28, with a historical range of Oct 9 to Nov 20.">
+  <rect class="band" x="60" y="229.5" width="800" height="119.5"></rect>
+  <line class="grid-l" x1="60" y1="93" x2="860" y2="93"></line>
+  <text class="tick-t" x="50" y="97" text-anchor="end">60&deg;</text>
+  <line class="grid-l" x1="60" y1="157" x2="860" y2="157"></line>
+  <text class="tick-t" x="50" y="161" text-anchor="end">45&deg;</text>
+  <line class="grid-l" x1="60" y1="221" x2="860" y2="221"></line>
+  <text class="tick-t" x="50" y="225" text-anchor="end">30&deg;</text>
+  <line class="grid-l" x1="60" y1="285" x2="860" y2="285"></line>
+  <text class="tick-t" x="50" y="289" text-anchor="end">15&deg;</text>
+  <text class="lab-rng" x="475.3" y="44" text-anchor="middle">FIRST WORKABLE WINDOW</text>
+  <line class="rangebar" x1="347" y1="62" x2="603.5" y2="62"></line>
+  <line class="rangecap" x1="347" y1="55" x2="347" y2="69"></line>
+  <line class="rangecap" x1="603.5" y1="55" x2="603.5" y2="69"></line>
+  <circle class="rangedot" cx="463.1" cy="62" r="5"></circle>
+  <text class="tick-t" x="347" y="84" text-anchor="middle">Oct 9</text>
+  <text class="tick-t" x="463.1" y="84" text-anchor="middle">normally Oct 28</text>
+  <text class="tick-t" x="603.5" y="84" text-anchor="middle">Nov 20</text>
+  <line class="ax" x1="60" y1="350" x2="860" y2="350"></line>
+  <line class="ax" x1="60" y1="100" x2="60" y2="350"></line>
+  <line class="thresh" x1="60" y1="229.5" x2="860" y2="229.5"></line>
+  <text class="lab-cold" x="68" y="248.5">COLD ENOUGH TO MAKE SNOW</text>
+  <polyline class="curve" points="60,73.1 72.2,73.5 84.4,76 96.6,78.5 108.9,81.4 121.1,83.9 133.3,86.3 145.5,92.2 157.7,95.9 169.9,100.5 182.1,101.9 194.4,102.1 206.6,102.3 218.8,103.7 231,108.3 243.2,112.9 255.4,117.4 267.6,120.9 279.8,123.5 292.1,127.5 304.3,132.1 316.5,138 328.7,141.7 340.9,143.5 353.1,146.7 365.3,153.3 377.6,158.5 389.8,163.9 402,165 414.2,166.2 426.4,169.1 438.6,173.8 450.8,176.4 463.1,180.4 475.3,185.5 487.5,187.2 499.7,190 511.9,191.3 524.1,194.4 536.3,204.2 548.5,210.4 560.8,214.2 573,215.8 585.2,217.2 597.4,223.1 609.6,226.5 621.8,231.6 634,234.4 646.3,238.2 658.5,243.7 670.7,245.6 682.9,253.6 695.1,259.7 707.3,264.9 719.5,270.6 731.8,268.4 744,268.3 756.2,269.3 768.4,270.8 780.6,274.3 792.8,275.5 805,274.2 817.3,270.8 829.5,272.2 841.7,273.1 853.9,275.3"></polyline>
+  <circle class="dot-cross" cx="603.5" cy="229.5" r="6"></circle>
+  <text class="lab-key" x="618.5" y="215.5" text-anchor="start">Average crosses 28&deg; &middot; Nov 20</text>
+  <line class="pin" x1="542.4" y1="350" x2="542.4" y2="364"></line>
+  <circle class="pin-dot" cx="542.4" cy="350" r="3.5"></circle>
+  <text class="pin-t" x="542.4" y="379" text-anchor="middle">Wild Mountain</text>
+  <line class="pin" x1="658.5" y1="350" x2="658.5" y2="364"></line>
+  <circle class="pin-dot" cx="658.5" cy="350" r="3.5"></circle>
+  <text class="pin-t" x="658.5" y="379" text-anchor="middle">Most metro hills</text>
+  <line class="pin" x1="762.3" y1="350" x2="762.3" y2="385"></line>
+  <circle class="pin-dot" cx="762.3" cy="350" r="3.5"></circle>
+  <text class="pin-t" x="762.3" y="400" text-anchor="middle">Last hills open</text>
+  <text class="tick-t" x="60" y="406" text-anchor="start">Aug 23</text>
+  <text class="tick-t" x="298.2" y="406" text-anchor="middle">Oct 1</text>
+  <text class="tick-t" x="487.5" y="406" text-anchor="middle">Nov 1</text>
+  <text class="tick-t" x="670.7" y="406" text-anchor="middle">Dec 1</text>
+  <text class="tick-t" x="860" y="406" text-anchor="end">Jan 1</text>
+</svg>
+<svg class="chart-narrow" viewBox="0 0 300 462" role="img" aria-label="Mean Twin Cities wet-bulb temperature falling from 65 degrees on Aug 23 to 17 degrees on Dec 31, crossing 28 degrees on Nov 20. The first workable snowmaking window normally arrives Oct 28, with a historical range of Oct 9 to Nov 20.">
+  <rect class="band" x="32" y="223.2" width="260" height="128.8"></rect>
+  <line class="grid-l" x1="32" y1="76" x2="292" y2="76"></line>
+  <text class="tick-t" x="22" y="80" text-anchor="end">60&deg;</text>
+  <line class="grid-l" x1="32" y1="145" x2="292" y2="145"></line>
+  <text class="tick-t" x="22" y="149" text-anchor="end">45&deg;</text>
+  <line class="grid-l" x1="32" y1="214" x2="292" y2="214"></line>
+  <text class="tick-t" x="22" y="218" text-anchor="end">30&deg;</text>
+  <line class="grid-l" x1="32" y1="283" x2="292" y2="283"></line>
+  <text class="tick-t" x="22" y="287" text-anchor="end">15&deg;</text>
+  <text class="lab-rng" x="167" y="12" text-anchor="middle">FIRST WORKABLE WINDOW</text>
+  <line class="rangebar" x1="125.3" y1="28" x2="208.6" y2="28"></line>
+  <line class="rangecap" x1="125.3" y1="21" x2="125.3" y2="35"></line>
+  <line class="rangecap" x1="208.6" y1="21" x2="208.6" y2="35"></line>
+  <circle class="rangedot" cx="163" cy="28" r="5"></circle>
+  <text class="tick-t" x="125.3" y="45" text-anchor="middle">Oct 9</text>
+  <text class="tick-t" x="163" y="60" text-anchor="middle">normally Oct 28</text>
+  <text class="tick-t" x="208.6" y="45" text-anchor="middle">Nov 20</text>
+  <line class="ax" x1="32" y1="353" x2="292" y2="353"></line>
+  <line class="ax" x1="32" y1="83" x2="32" y2="353"></line>
+  <line class="thresh" x1="32" y1="223.2" x2="292" y2="223.2"></line>
+  <text class="lab-cold" x="40" y="261.2">COLD ENOUGH TO MAKE SNOW</text>
+  <polyline class="curve" points="32,54.6 36,54.9 39.9,57.6 43.9,60.4 47.9,63.5 51.8,66.2 55.8,68.8 59.8,75.1 63.8,79.1 67.7,84.1 71.7,85.6 75.7,85.8 79.6,86.1 83.6,87.5 87.6,92.5 91.5,97.4 95.5,102.3 99.5,106.1 103.5,108.9 107.4,113.2 111.4,118.1 115.4,124.5 119.3,128.5 123.3,130.5 127.3,133.9 131.2,141 135.2,146.6 139.2,152.4 143.1,153.6 147.1,154.9 151.1,158.1 155.1,163.1 159,165.9 163,170.2 167,175.8 170.9,177.6 174.9,180.6 178.9,182 182.8,185.3 186.8,195.9 190.8,202.6 194.7,206.6 198.7,208.4 202.7,209.9 206.7,216.3 210.6,219.9 214.6,225.5 218.6,228.4 222.5,232.6 226.5,238.4 230.5,240.5 234.4,249.1 238.4,255.7 242.4,261.3 246.4,267.5 250.3,265.2 254.3,265 258.3,266.1 262.2,267.7 266.2,271.5 270.2,272.7 274.1,271.4 278.1,267.7 282.1,269.2 286,270.1 290,272.6"></polyline>
+  <circle class="dot-cross" cx="208.6" cy="223.2" r="6"></circle>
+  <text class="lab-key" x="208.6" y="240.2" text-anchor="end">Average crosses 28&deg; &middot; Nov 20</text>
+  <line class="pin" x1="188.8" y1="378" x2="188.8" y2="390"></line>
+  <circle class="pin-dot" cx="188.8" cy="353" r="3.5"></circle>
+  <text class="pin-t" x="188.8" y="402" text-anchor="middle">Wild Mountain</text>
+  <line class="pin" x1="226.5" y1="378" x2="226.5" y2="412"></line>
+  <circle class="pin-dot" cx="226.5" cy="353" r="3.5"></circle>
+  <text class="pin-t" x="226.5" y="424" text-anchor="middle">Most metro hills</text>
+  <line class="pin" x1="260.2" y1="378" x2="260.2" y2="434"></line>
+  <circle class="pin-dot" cx="260.2" cy="353" r="3.5"></circle>
+  <text class="pin-t" x="260.2" y="446" text-anchor="end">Last hills open</text>
+  <text class="tick-t" x="32" y="368" text-anchor="start">Aug 23</text>
+  <text class="tick-t" x="109.4" y="368" text-anchor="middle">Oct 1</text>
+  <text class="tick-t" x="170.9" y="368" text-anchor="middle">Nov 1</text>
+  <text class="tick-t" x="230.5" y="368" text-anchor="middle">Dec 1</text>
+  <text class="tick-t" x="292" y="368" text-anchor="end">Jan 1</text>
+</svg>
+<div class="legend">
+  <b><i class="sw"></i> Mean wet-bulb, Twin Cities, 1995–2025</b>
+  <b><i class="sw cold"></i> 28&deg;F snowmaking threshold</b>
+  <b><i class="sw band"></i> Cold enough to make snow</b>
+</div>
     </div>
   </section>
 
   <section class="sec">
-    <p class="fc-head">No snowmaking weather in the next 16 days. Coldest is <b>Giants Ridge</b> at 42.2&deg;.</p>
+    <p class="fc-head">No snowmaking weather in the next 16 days. Coldest is <b class="hm" data-hill="giants-ridge">Giants Ridge</b> at 42.2&deg;.</p>
     <p class="sec-note fc-note">16-day wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, made 28 August. Guns can run under 28&deg;.</p>
 
     <div class="duo">
@@ -561,7 +734,7 @@
         <tbody>
           <tr class="grp"><td colspan="7">Twin Cities</td></tr>
           <tr class="first">
-            <td class="hill"><span class="pip" style="--c1:#beee07;--c2:#000000" aria-hidden="true"></span><a href="resorts/wild-mountain.html">Wild Mountain</a></td>
+            <td class="hill"><span class="pip" data-tier="green" style="--c1:#beee07;--c2:#000000" aria-hidden="true"></span><a href="resorts/wild-mountain.html">Wild Mountain</a></td>
             <td class="where" data-label="Where">Taylors Falls</td>
             <td data-label="Projected">Nov 10<span class="rng">model</span></td>
             <td class="num days" data-label="Days">73</td>
@@ -570,7 +743,7 @@
             <td class="go-cell"><a class="btn" href="resorts/wild-mountain.html" aria-label="See Wild Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#005395;--c2:#ffec26" aria-hidden="true"></span><a href="resorts/trollhaugen.html">Trollhaugen</a></td>
+            <td class="hill"><span class="pip" data-tier="green" style="--c1:#005395;--c2:#ffec26" aria-hidden="true"></span><a href="resorts/trollhaugen.html">Trollhaugen</a></td>
             <td class="where" data-label="Where">Dresser</td>
             <td data-label="Projected">Nov 10<span class="rng">model</span></td>
             <td class="num days" data-label="Days">73</td>
@@ -579,7 +752,7 @@
             <td class="go-cell"><a class="btn" href="resorts/trollhaugen.html" aria-label="See Trollhaugen's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#b02621;--c2:#10325a" aria-hidden="true"></span><a href="resorts/afton-alps.html">Afton Alps</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#b02621;--c2:#10325a" aria-hidden="true"></span><a href="resorts/afton-alps.html">Afton Alps</a></td>
             <td class="where" data-label="Where">Afton</td>
             <td data-label="Projected">Nov 29<span class="rng">model</span></td>
             <td class="num days" data-label="Days">92</td>
@@ -588,7 +761,7 @@
             <td class="go-cell"><a class="btn" href="resorts/afton-alps.html" aria-label="See Afton Alps's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#3db3e3;--c2:#81d742" aria-hidden="true"></span><a href="resorts/buck-hill.html">Buck Hill</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#3db3e3;--c2:#81d742" aria-hidden="true"></span><a href="resorts/buck-hill.html">Buck Hill</a></td>
             <td class="where" data-label="Where">Burnsville</td>
             <td data-label="Projected">Nov 29<span class="rng">model</span></td>
             <td class="num days" data-label="Days">92</td>
@@ -597,7 +770,7 @@
             <td class="go-cell"><a class="btn" href="resorts/buck-hill.html" aria-label="See Buck Hill's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#1c75bc;--c2:#fff200" aria-hidden="true"></span><a href="resorts/welch-village.html">Welch Village</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#1c75bc;--c2:#fff200" aria-hidden="true"></span><a href="resorts/welch-village.html">Welch Village</a></td>
             <td class="where" data-label="Where">Welch</td>
             <td data-label="Projected">Nov 30<span class="rng">model</span></td>
             <td class="num days" data-label="Days">93</td>
@@ -606,7 +779,7 @@
             <td class="go-cell"><a class="btn" href="resorts/welch-village.html" aria-label="See Welch Village's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#5f3894;--c2:#f26522" aria-hidden="true"></span><a href="resorts/hyland-hills.html">Hyland Hills</a></td>
+            <td class="hill"><span class="pip" data-tier="black" style="--c1:#5f3894;--c2:#f26522" aria-hidden="true"></span><a href="resorts/hyland-hills.html">Hyland Hills</a></td>
             <td class="where" data-label="Where">Bloomington</td>
             <td data-label="Projected">Dec 1<span class="rng">model</span></td>
             <td class="num days" data-label="Days">94</td>
@@ -615,7 +788,7 @@
             <td class="go-cell"><a class="btn" href="resorts/hyland-hills.html" aria-label="See Hyland Hills's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#fe3332;--c2:#ffffff" aria-hidden="true"></span><a href="resorts/elm-creek.html">Elm Creek</a></td>
+            <td class="hill"><span class="pip" data-tier="black" style="--c1:#fe3332;--c2:#ffffff" aria-hidden="true"></span><a href="resorts/elm-creek.html">Elm Creek</a></td>
             <td class="where" data-label="Where">Maple Grove</td>
             <td data-label="Projected">Dec 16<span class="rng">model</span></td>
             <td class="num days" data-label="Days">109</td>
@@ -625,7 +798,7 @@
           </tr>
           <tr class="grp"><td colspan="7">Greater Minnesota</td></tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#12592e;--c2:#213871" aria-hidden="true"></span><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td>
+            <td class="hill"><span class="pip" data-tier="green" style="--c1:#12592e;--c2:#213871" aria-hidden="true"></span><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td>
             <td class="where" data-label="Where">Kensington</td>
             <td data-label="Projected">Nov 11<span class="rng">model</span></td>
             <td class="num days" data-label="Days">74</td>
@@ -634,7 +807,7 @@
             <td class="go-cell"><a class="btn" href="resorts/andes-tower-hills.html" aria-label="See Andes Tower Hills's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#0c356d;--c2:#c03223" aria-hidden="true"></span><a href="resorts/buena-vista.html">Buena Vista</a></td>
+            <td class="hill"><span class="pip" data-tier="green" style="--c1:#0c356d;--c2:#c03223" aria-hidden="true"></span><a href="resorts/buena-vista.html">Buena Vista</a></td>
             <td class="where" data-label="Where">Bemidji</td>
             <td data-label="Projected">Nov 20<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">83</td>
@@ -643,7 +816,7 @@
             <td class="go-cell"><a class="btn" href="resorts/buena-vista.html" aria-label="See Buena Vista's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#fbab54;--c2:#009ddd" aria-hidden="true"></span><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td>
+            <td class="hill"><span class="pip" data-tier="green" style="--c1:#fbab54;--c2:#009ddd" aria-hidden="true"></span><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td>
             <td class="where" data-label="Where">Detroit Lakes</td>
             <td data-label="Projected">Nov 22<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">85</td>
@@ -652,7 +825,7 @@
             <td class="go-cell"><a class="btn" href="resorts/detroit-mountain.html" aria-label="See Detroit Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#2d65b0;--c2:#189f5a" aria-hidden="true"></span><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#2d65b0;--c2:#189f5a" aria-hidden="true"></span><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td>
             <td class="where" data-label="Where">Duluth</td>
             <td data-label="Projected">Nov 26<span class="rng">model</span></td>
             <td class="num days" data-label="Days">89</td>
@@ -661,7 +834,7 @@
             <td class="go-cell"><a class="btn" href="resorts/spirit-mountain.html" aria-label="See Spirit Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#068bc4;--c2:#1a2738" aria-hidden="true"></span><a href="resorts/powder-ridge.html">Powder Ridge</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#068bc4;--c2:#1a2738" aria-hidden="true"></span><a href="resorts/powder-ridge.html">Powder Ridge</a></td>
             <td class="where" data-label="Where">Kimball</td>
             <td data-label="Projected">Nov 27<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">90</td>
@@ -670,7 +843,7 @@
             <td class="go-cell"><a class="btn" href="resorts/powder-ridge.html" aria-label="See Powder Ridge's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#ed2a00;--c2:#99de74" aria-hidden="true"></span><a href="resorts/giants-ridge.html">Giants Ridge</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#ed2a00;--c2:#99de74" aria-hidden="true"></span><a href="resorts/giants-ridge.html">Giants Ridge</a></td>
             <td class="where" data-label="Where">Biwabik</td>
             <td data-label="Projected">Nov 29<span class="rng">model</span></td>
             <td class="num days" data-label="Days">92</td>
@@ -679,7 +852,7 @@
             <td class="go-cell"><a class="btn" href="resorts/giants-ridge.html" aria-label="See Giants Ridge's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#00487f;--c2:#fd8204" aria-hidden="true"></span><a href="resorts/mount-kato.html">Mount Kato</a></td>
+            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#00487f;--c2:#fd8204" aria-hidden="true"></span><a href="resorts/mount-kato.html">Mount Kato</a></td>
             <td class="where" data-label="Where">Mankato</td>
             <td data-label="Projected">Nov 30<span class="rng">climate</span></td>
             <td class="num days" data-label="Days">93</td>
@@ -688,7 +861,7 @@
             <td class="go-cell"><a class="btn" href="resorts/mount-kato.html" aria-label="See Mount Kato's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#00344f;--c2:#45697d" aria-hidden="true"></span><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td>
+            <td class="hill"><span class="pip" data-tier="black" style="--c1:#00344f;--c2:#45697d" aria-hidden="true"></span><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td>
             <td class="where" data-label="Where">Lutsen</td>
             <td data-label="Projected">Dec 6<span class="rng">model</span></td>
             <td class="num days" data-label="Days">99</td>
@@ -697,7 +870,7 @@
             <td class="go-cell"><a class="btn" href="resorts/lutsen-mountains.html" aria-label="See Lutsen Mountains's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
           </tr>
           <tr>
-            <td class="hill"><span class="pip" style="--c1:#00a8f0;--c2:#000000" aria-hidden="true"></span><a href="resorts/coffee-mill.html">Coffee Mill</a></td>
+            <td class="hill"><span class="pip" data-tier="black" style="--c1:#00a8f0;--c2:#000000" aria-hidden="true"></span><a href="resorts/coffee-mill.html">Coffee Mill</a></td>
             <td class="where" data-label="Where">Wabasha</td>
             <td data-label="Projected">Dec 13<span class="rng">model</span></td>
             <td class="num days" data-label="Days">106</td>

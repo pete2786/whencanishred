@@ -13,7 +13,7 @@ Opening dates are still placeholders.
 ```sh
 node scripts/allhours.mjs > data/hours.json   # Oct-Nov snowmaking hours per hill
 node scripts/climatology.mjs                  # first-window date, normal/earliest/latest
-node scripts/curve.mjs                        # mean wet-bulb curve for the chart
+node scripts/curve.mjs                        # mean wet-bulb curve -> data/curve.json
 node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
 node scripts/project.mjs                      # projected opening dates -> data/projection.json
 node scripts/project.mjs --report              # the working, written nowhere
@@ -70,58 +70,47 @@ them `locked`. Do not "correct" them to match the probe's evidence.
 
 `index.html` is the whole site. No build step.
 
-## Themes
+## The look
 
-The pages are a pure function of the JSON, so a visual direction is just a
-different stylesheet over the same data. A theme is one override sheet in
-`themes/<name>/theme.css` plus an optional `theme.json`. The base templates in
-`templates/` hold the structure — the responsive table, the chart geometry, the
-stacked mobile layout — so directions cannot drift apart structurally while
-they are being compared.
+The site commits to one colour scheme rather than following the system, so the
+generated colours ship for that scheme only, with no `prefers-color-scheme`
+branch. `SCHEME` in `scripts/build.mjs` is the switch.
 
-```sh
-node scripts/theme.mjs topsheet          # templates/ + override -> themes/topsheet/*.html
-node scripts/build.mjs --theme=topsheet  # -> preview/topsheet/
-python3 -m http.server 8899 --directory preview
-```
-
-`preview/` is gitignored. Building with no `--theme` behaves as it always has:
-`templates/` to the repo root, which is what GitHub Pages serves. Nothing in
-the published site changes until a direction is promoted into `templates/`.
-
-`theme.json` takes three keys. `fonts` replaces the Google Fonts query.
-`inject` is a list of plain-string patches applied to the body. `extends` names
-a parent theme, whose sheet lands first so the child only says what differs —
-the chain resolves to its root, so a grandchild still gets its grandparent's
-sheet.
-
-`scheme` is the one key `build.mjs` reads rather than `theme.mjs`. A theme that
-commits to `"light"` or `"dark"` ships that scheme's generated colours only,
-with no `prefers-color-scheme` branch. Themes that omit it follow the system as
-the site always has.
-
-### Hills wear their own colours
-
-A hill named in a sentence is printed in that hill's own colour — the same
-colour its marker carries in the table and its name carries on its own page.
-
-The marking runs over the rendered HTML in `build.mjs`, not in the templates,
-so copy written later is covered without remembering to tag it. Only a `<b>`
-whose entire text is exactly a hill's name matches; the other `<b>` on these
-pages hold numbers and a chart legend. Colours go through the same `readable()`
-correction as everything else, against the backgrounds of whichever scheme the
-theme ships.
-
-This is why `topsheet` has no brand colour of its own. Snow-white does the
-accent work and the cold cyan carries the data, which leaves every saturated
-colour on the page belonging to a hill. An accent there would have been one
-hill's identity worn by the whole site — the chartreuse that first version used
-is Wild Mountain's park colour.
+The page keeps no brand colour of its own. Snow-white does the accent work and
+the cold cyan carries the data, which leaves every saturated colour on the page
+belonging to a hill: its marker in the table, its name on its own page, and its
+name wherever the prose says it. An accent here would have been one hill's
+identity worn by the whole site — the first draft used chartreuse, which is
+Wild Mountain's park colour.
 
 The cyan in the wordmark is the same cyan as the 28°F threshold line.
 
-Three themes exist: `current` (an empty override sheet, so it reproduces the
-live site), `trailmap` and `topsheet`.
+### Hills wear their own colours
+
+A hill named in a sentence is printed in that hill's own colour. The marking
+runs over the rendered HTML in `build.mjs`, not in the templates, so copy
+written later is covered without remembering to tag it. Only a `<b>` whose
+entire text is exactly a hill's name matches; the other `<b>` on these pages
+hold numbers and a chart legend. Colours go through the same `readable()`
+correction as everything else.
+
+### The chart
+
+`data/curve.json` drives it, and `build.mjs` renders the SVG at two geometries
+from one function, so the phone chart and the desktop chart cannot disagree.
+The wide one appears only at viewports where it renders at 1:1 or better —
+988px, being 900 for the drawing, 40 for the box padding and 48 for the page
+gutters. Below that the narrow drawing takes over, capped at 400px so the two
+meet at roughly the same type size instead of stepping.
+
+That is the chart's own breakpoint, not the table's 920px. The table stacks
+where seven columns stop fitting; the chart swaps where it would start being
+shrunk. Different content, different threshold.
+
+The pin captions pack themselves: a caption drops to the next row only when it
+would touch the one beside it, and the drawing grows by exactly the rows used.
+Their positions come from `data/projection.json`, so the layout follows the
+data rather than a set of eyeballed coordinates.
 
 ## Opening dates
 

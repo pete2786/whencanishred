@@ -11,35 +11,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <style>
-  :root {
-    --ground:#EDF1F5; --surface:#FFFFFF; --surface-2:#E2E9F0;
-    --line:#C7D3DF; --line-soft:#DCE4EC;
-    --ink:#10171F; --ink-2:#46596E; --ink-3:#6E8298;
-    --accent:#B4610E; --accent-soft:#F4E2CE;
-    --cold:#0E7C90; --cold-soft:#D2ECF1;
-    --warm:#A8402B;
-    --shadow:0 1px 2px rgba(16,23,31,.06), 0 8px 24px rgba(16,23,31,.06);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground:#0B1017; --surface:#131A24; --surface-2:#1B2431;
-      --line:#2A3646; --line-soft:#202B39;
-      --ink:#E8EEF4; --ink-2:#A6B6C8; --ink-3:#7C8B9E;
-      --accent:#F2A65A; --accent-soft:#3A2A18;
-      --cold:#5FD4E4; --cold-soft:#12313A;
-      --warm:#E07257;
-      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
-    }
-  }
-  :root[data-theme="dark"] {
-    --ground:#0B1017; --surface:#131A24; --surface-2:#1B2431;
-    --line:#2A3646; --line-soft:#202B39;
-    --ink:#E8EEF4; --ink-2:#A6B6C8; --ink-3:#7C8B9E;
-    --accent:#F2A65A; --accent-soft:#3A2A18;
-    --cold:#5FD4E4; --cold-soft:#12313A;
-    --warm:#E07257;
-    --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 28px rgba(0,0,0,.35);
-  }
+  /* The palette lives with the rest of the look, further down. This file
+     carries no light theme: the site commits to dark. */
 
   * { box-sizing:border-box; }
 
@@ -113,7 +86,12 @@
     background:var(--surface); border:1px solid var(--line); border-radius:4px;
     padding:22px 20px 16px; overflow-x:auto; box-shadow:var(--shadow);
   }
-  .chart-box svg { display:block; min-width:700px; width:100%; height:auto; }
+  .chart-box svg { display:block; width:100%; height:auto; }
+  /* Drawn for 300 units. Stretched past about 420px it scales the type up with
+     the drawing and the labels turn into headings, so it stops there and
+     centres instead. Without this the swap to the wide chart reads as the
+     chart suddenly shrinking, when what happened is it stopped being oversized. */
+  .chart-box .chart-narrow { display:none; max-width:400px; margin:0 auto; }
 
   .ax { stroke:var(--line); stroke-width:1; }
   .grid-l { stroke:var(--line-soft); stroke-width:1; }
@@ -285,9 +263,32 @@
      scroller below that, so anything narrower showed part of a row and hid the
      rest behind a sideways drag nobody makes. The stack has to start above the
      width the table actually needs, not at some round phone number. */
+  /* Swap where the wide chart stops rendering at 1:1, not where it stops
+     fitting: 900 for the drawing, 40 for the box padding, 48 for the page
+     gutters. Allowed to fit at any width it likes, it was being scaled to
+     0.78 and its labels came out at 9.7px — smaller than the narrow chart's
+     at the same viewport, which is why crossing the breakpoint looked like
+     the chart collapsing. Below this the narrow drawing takes over, capped so
+     the two meet at roughly the same type size instead of stepping. */
+  @media (max-width:988px) {
+    .chart-box .chart-wide { display:none; }
+    .chart-box .chart-narrow { display:block; }
+    .chart-box { padding:18px 14px 12px; }
+    .chart-narrow .tick-t,
+    .chart-narrow .pin-t { font-size:11px; }
+    .chart-narrow .lab-key { font-size:11.5px; }
+    .chart-narrow .lab-cold,
+    .chart-narrow .lab-rng { font-size:10px; letter-spacing:.04em; }
+  }
+
   @media (max-width:920px) {
     table { min-width:0; }
     .tbl-box { overflow-x:visible; }
+    /* The narrow chart is drawn to fit, so the scroller comes off entirely.
+       Its viewBox is 300 units against roughly 272 css px of usable width, so
+       type set at these sizes lands within a pixel of where it does on the
+       wide one rather than shrinking with the drawing. */
+    .chart-box { overflow-x:visible; }
     thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
     caption { padding:14px 16px 8px; }
     tbody tr { display:block; border-bottom:1px solid var(--line); padding:12px 16px 14px; }
@@ -375,6 +376,131 @@
   .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
   .picker-menu a[aria-current] { color:var(--accent); }
   @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
+
+/* ---- theme: topsheet ---- */
+/* Topsheet / park graphic.
+   Board art: ultra-condensed caps, square corners, hazard tape, hard black.
+   Committed to dark in both system settings — a topsheet printed on white is a
+   different product — so the light tokens go too.
+
+   The page keeps no brand colour of its own. Snow-white does the accent work
+   and the cold cyan carries the data, which leaves every saturated colour on
+   the page belonging to a hill: its row marker, its own page, and its name
+   wherever the prose says it. An accent here would have been one hill's
+   identity worn by the whole site.
+
+   The cyan in the wordmark is the same cyan as the 28°F threshold line. The
+   site's one colour is the temperature the site is about. */
+
+:root,
+:root:not([data-theme="light"]),
+:root[data-theme="dark"] {
+  --ground:#0B0C0D; --surface:#141618; --surface-2:#1D2023;
+  --line:#33393D; --line-soft:#24282B;
+  --ink:#F3F5F6; --ink-2:#A6AEB3; --ink-3:#7B848A;
+  --accent:#DCE9F0; --accent-soft:#1C2A33;
+  --mark:#37D2E8;   /* the wordmark, and the threshold it points at */
+  --cold:#37D2E8; --cold-soft:#0C2E34;
+  --warm:#FF5B35;
+  --shadow:none;
+}
+
+body { background:var(--ground); }
+
+/* Hazard tape. Used as a rule, never as a fill — it is a boundary marker. */
+.tape, .masthead, footer {
+  --tape:repeating-linear-gradient(45deg,
+    var(--accent) 0 10px, transparent 10px 20px);
+}
+
+/* ---- condensed caps --------------------------------------------------- */
+.wordmark, .count-num, .count-unit, .hero-say, .sec-title,
+.stats dd, .card .big, .scen-num, .scen-unit, .fc-head, .grp td, .btn {
+  font-family:Anton,"Archivo Narrow",Impact,sans-serif !important;
+  font-style:normal !important; font-weight:400 !important;
+}
+.count-num, .scen-num, .stats dd, .card .big {
+  letter-spacing:-.01em;
+}
+.sec-title, .hero-say, .fc-head {
+  text-transform:uppercase; letter-spacing:.005em; line-height:1.05;
+}
+.hero-say b { color:var(--accent); }
+.count-unit, .scen-unit, .scen-word {
+  text-transform:uppercase; font-style:normal; letter-spacing:.02em;
+}
+
+/* ---- masthead as a top edge ------------------------------------------ */
+.masthead {
+  border-bottom:0; padding:22px 0 16px; position:relative;
+}
+.masthead::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:6px;
+  background:var(--tape);
+}
+.masthead .wordmark {
+  font-size:26px; text-transform:uppercase; letter-spacing:.01em;
+}
+.masthead .wordmark em { color:var(--mark); font-style:normal; }
+
+.eyebrow { color:var(--accent); font-weight:700; }
+
+/* ---- everything is square -------------------------------------------- */
+.chart-box, .tbl-box, .card, .btn, .chip, .pip {
+  border-radius:0 !important;
+}
+.chart-box, .tbl-box, .card {
+  border:2px solid var(--line); background:var(--surface);
+}
+
+/* Sticker chips: the hill's two colours split hard down the middle, no ring. */
+.pip {
+  width:12px; height:12px; margin-right:10px;
+  background:linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.35);
+}
+
+/* Group header as a taped-off band. */
+.grp td, tbody tr.grp:hover td {
+  background:var(--accent); color:#0B0C0D;
+  text-transform:uppercase; letter-spacing:.18em; font-size:12px; padding:8px 14px;
+}
+
+th { color:var(--accent); font-weight:700; }
+caption { color:var(--ink-3); font-weight:700; }
+tbody tr:hover td { background:#1A1D20; }
+.days { color:var(--accent); }
+
+/* ---- the button as a decal ------------------------------------------- */
+.btn {
+  background:transparent; border:2px solid var(--accent); color:var(--accent);
+  text-transform:uppercase; letter-spacing:.09em; font-size:11px; padding:4px 12px;
+}
+tbody tr:hover .btn { background:var(--accent); color:#0B0C0D; }
+
+.chip { border:1px solid currentColor; font-weight:700; letter-spacing:.09em; }
+
+/* ---- chart ------------------------------------------------------------ */
+.band { fill:#122A2E; }
+.curve { stroke:var(--accent); stroke-width:3.5; }
+.thresh { stroke:var(--cold); stroke-width:2; stroke-dasharray:8 6; }
+.dot-cross, .rangedot { fill:var(--cold); }
+.rangebar, .rangecap { stroke:var(--accent); stroke-width:2.5; }
+.lab-rng, .lab-cold { font-weight:700; letter-spacing:.1em; }
+.lab-rng { fill:var(--accent); }
+.lab-cold { fill:var(--cold); }
+.grid-l { stroke:#22262A; }
+.sw { background:var(--accent); }
+.sw.cold { background:var(--cold); }
+.sw.band { background:#122A2E; border-color:var(--cold); }
+
+/* ---- footer edge ------------------------------------------------------ */
+footer { border-top:0; position:relative; padding-top:28px; }
+footer::before {
+  content:""; position:absolute; left:0; right:0; top:0; height:6px;
+  background:var(--tape);
+}
+
 </style>
 </head>
 <body>
