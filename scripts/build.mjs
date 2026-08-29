@@ -891,7 +891,96 @@ function helloCard() {
       </aside>`;
 }
 
+// ------------------------------------------------------- who opened first
+//
+// This was two hardcoded sentences asserting a fact the data already knew, and
+// it had drifted twice over. It counted a dead heat with Andes Tower Hills in
+// 2022-23 as a win, and it counted 2024-25, where Wild Mountain's first lift is
+// bracketed to a seventeen-day window running to 2 December — Andes opened on
+// 23 November inside it, so nobody can say who was first.
+//
+// A date here is an interval, not a point. `exact` is a single day; `bracket`
+// carries a range, and a null bound is unbounded. A hill could have been first
+// if its earliest possible day is not after the earliest last-possible day of
+// any other. One candidate is a winner, several identical exact ones are a tie,
+// anything else is a winter nobody gets to claim.
+
+const FAR_PAST = "0000-00-00";
+
+function interval(fl) {
+  if (!fl?.date) return null;
+  if (fl.precision === "exact" || !fl.range) return [fl.date, fl.date];
+  return [fl.range[0] ?? FAR_PAST, fl.range[1] ?? fl.date];
+}
+
+function leadersBySeason() {
+  const all = new Set();
+  for (const h of Object.values(seasons)) for (const s of Object.keys(h)) all.add(s);
+  const out = [];
+  for (const season of [...all].sort()) {
+    const rows = [];
+    for (const [slug, hs] of Object.entries(seasons)) {
+      const iv = interval(hs[season]?.firstLift);
+      if (iv && resorts[slug]) rows.push({ slug, lo: iv[0], hi: iv[1], exact: iv[0] === iv[1] });
+    }
+    if (!rows.length) continue;
+    const earliestHi = rows.reduce((m, r) => (r.hi < m ? r.hi : m), rows[0].hi);
+    const could = rows.filter(r => r.lo <= earliestHi);
+    const tied = could.length > 1 &&
+                 could.every(r => r.exact && r.lo === could[0].lo);
+    const settled = could.length === 1 || tied;
+    const rest = rows.filter(r => !could.includes(r)).sort((x, y) => x.lo.localeCompare(y.lo));
+    out.push({ season, settled, leaders: settled ? could.map(r => r.slug) : [],
+               date: could[0].lo, next: settled ? rest[0] ?? null : null });
+  }
+  return out;
+}
+
+const WORDS = ["", "one", "two", "three", "four", "five", "six"];
+const TIMES = ["", "once", "twice", "three times", "four times", "five times"];
+const dayGap = (a, b) =>
+  Math.round((new Date(`${b}T00:00:00`) - new Date(`${a}T00:00:00`)) / 86400000);
+
+function heroCopy() {
+  const rows = leadersBySeason();
+  if (!rows.length) return { SAY: "", SUB: "" };
+  const bold = slug => `<b>${esc(resorts[slug].name)}</b>`;
+  const last = rows.at(-1);
+
+  let SAY;
+  if (!last.settled) {
+    SAY = "Nobody can be said to have opened first last season.";
+  } else if (last.leaders.length > 1) {
+    SAY = `${last.leaders.map(bold).join(" and ")} opened first last season, to the day.`;
+  } else if (last.next) {
+    const n = dayGap(last.date, last.next.lo);
+    SAY = `${bold(last.leaders[0])} opened first last season, ` +
+          `${n === 1 ? "a day" : `${n} days`} ahead of ${bold(last.next.slug)}.`;
+  } else {
+    SAY = `${bold(last.leaders[0])} opened first last season.`;
+  }
+
+  const tally = new Map();
+  for (const r of rows) for (const slug of r.leaders) tally.set(slug, (tally.get(slug) ?? 0) + 1);
+  const best = Math.max(0, ...tally.values());
+  const top = [...tally].filter(([, n]) => n === best).map(([slug]) => slug);
+  const loose = rows.filter(r => !r.settled).length;
+
+  let SUB = "";
+  if (top.length) {
+    SUB = `${top.map(bold).join(" and ")} ${top.length > 1 ? "have" : "has"} been first ` +
+          `${TIMES[best] ?? best + " times"}${top.length > 1 ? " each" : ""}`;
+    SUB += loose
+      ? `; ${WORDS[loose] ?? loose} of the ${WORDS[rows.length] ?? rows.length} winters on ` +
+        `record ${loose === 1 ? "is" : "are"} too loosely dated to call. `
+      : `. `;
+  }
+  SUB += "Nothing is announced for the coming winter yet.";
+  return { SAY, SUB };
+}
+
 // Homepage
+const hero = heroCopy();
 const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
 const lead = observed(leader);
 
@@ -910,6 +999,8 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   HILL_INK: hillInkCss(),
   CHART: chartSection(),
   HELLO: helloCard(),
+  HERO_SAY: hero.SAY,
+  HERO_SUB: hero.SUB,
   HERO_SHOT: indexHeroShot(),
 })));
 
