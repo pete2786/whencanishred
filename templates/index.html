@@ -336,9 +336,9 @@
   }
   .fc-answer {
     font-size:15.5px; line-height:1.55; color:var(--ink);
-    max-width:62ch; margin:12px 0 6px;
+    max-width:62ch; margin:12px 0 26px;
   }
-  .fc-note { margin:0 0 26px; }
+  .fc-note { margin:16px 0 0; }
   /* The table is sixteen links that do not look like links. This says so once,
      above the table, rather than decorating every row. */
   .sec-cta {
@@ -636,11 +636,12 @@ footer::before {
   <section class="sec">
     <h2 class="sec-title"><!--{{FORECAST_TITLE}}--></h2>
     <p class="fc-answer"><!--{{FORECAST_ANSWER}}--></p>
-    <p class="sec-note fc-note"><!--{{FORECAST_NOTE}}--></p>
 
     <div class="duo">
 <!--{{FORECAST_CARDS}}-->
     </div>
+
+    <p class="sec-note fc-note"><!--{{FORECAST_NOTE}}--></p>
   </section>
 
   <section class="sec">

@@ -257,7 +257,7 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function forecastSection() {
   if (!fc) {
-    return { TITLE: "The next 16 days", ANSWER: "No forecast on file.",
+    return { TITLE: "The next two weeks", ANSWER: "No forecast on file.",
              NOTE: "Run <code>node scripts/forecast.mjs</code>.", CARDS: "" };
   }
   const made = new Date(fc.generatedAt);
@@ -307,13 +307,22 @@ function forecastSection() {
   }).join("\n");
 
   return {
-    TITLE: `The next ${fc.horizonDays} days`,
+    // Rounded to whole weeks on purpose: a heading reads better in the unit
+    // people actually think in, and the exact horizon appears twice directly
+    // beneath it, in the answer and again in the note.
+    TITLE: `The next ${WORDS[Math.round(fc.horizonDays / 7)] ?? Math.round(fc.horizonDays / 7)} ` +
+           `${Math.round(fc.horizonDays / 7) === 1 ? "week" : "weeks"}`,
     ANSWER: answer,
     NOTE: `Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, ` +
       `made ${madeStr}. Guns can run under ${fc.threshold}&deg;.${stale}`,
     CARDS: cards,
   };
 }
+
+// Small numbers read better as words in prose. Declared up here because both
+// the forecast heading and the hero copy want them, and they sit 400 lines apart.
+const WORDS = ["", "one", "two", "three", "four", "five", "six"];
+const TIMES = ["", "once", "twice", "three times", "four times", "five times"];
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const FULL = ["January","February","March","April","May","June","July","August",
@@ -976,8 +985,6 @@ function leadersBySeason() {
   return out;
 }
 
-const WORDS = ["", "one", "two", "three", "four", "five", "six"];
-const TIMES = ["", "once", "twice", "three times", "four times", "five times"];
 // "A and B", "A, B and C" — the runner-up is often a tie.
 const list = xs => xs.length < 2 ? (xs[0] ?? "")
   : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
