@@ -41,7 +41,7 @@ const PLACES = [
   // Geneva, which is the belt Chicago actually skis.
   { id: "chicago",    region: "wi", label: "Chicago",  name: "Lake Geneva",
     note: "Lake Geneva", lat: 42.5917, lon: -88.4334 },
-  { id: "madison",    region: "wi", label: "Madison & Milwaukee", name: "Madison",
+  { id: "madison",    region: "wi", label: "Madison - Milwaukee", name: "Madison",
     note: "Madison", lat: 43.0731, lon: -89.4012, curve: true },
   { id: "wausau",     region: "wi", label: "Wausau",   name: "Wausau",
     note: "Wausau", lat: 44.9591, lon: -89.6301 },
