@@ -266,7 +266,7 @@ function forecastSection() {
   // A forecast is only a forecast while it is about the future. Past a couple
   // of days it is a stale guess, and the page should say so rather than let
   // the reader assume it is current.
-  const stale = ageDays >= 2 ? ` <b>${ageDays} days old &mdash; rerun the forecast.</b>` : "";
+  const stale = ageDays >= 2 ? ` <b>${ageDays} days old &mdash; the refresh has not run.</b>` : "";
 
   const known = Object.entries(fc.hills).filter(([, h]) => h.min !== null);
   const withWindow = known.filter(([, h]) => h.hoursUnder > 0);
@@ -314,7 +314,8 @@ function forecastSection() {
            `${Math.round(fc.horizonDays / 7) === 1 ? "week" : "weeks"}`,
     ANSWER: answer,
     NOTE: `Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, ` +
-      `made ${madeStr}. Guns can run under ${fc.threshold}&deg;.${stale}`,
+      `updated twice a day and last pulled ${madeStr}. ` +
+      `Guns can run under ${fc.threshold}&deg;.${stale}`,
     CARDS: cards,
   };
 }
