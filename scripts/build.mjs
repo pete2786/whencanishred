@@ -606,12 +606,13 @@ const fcSection = forecastSection();
 // not empty — it is counted from the record rather than asserted here.
 const STATES = [
   { id: "mn",    state: "MN", name: "Minnesota",                    file: "index.html" },
+  // Illinois has no page of its own: Chicago drives north, so its hills belong
+  // to the same page as the southern Wisconsin ones they share a car park with.
   { id: "wi",    state: "WI", name: "Wisconsin",                    file: "wisconsin.html" },
   { id: "mi-up",              name: "Michigan \u00b7 Upper Peninsula", file: "michigan-up.html" },
   { id: "mi-lp",              name: "Michigan \u00b7 Lower Peninsula", file: "michigan-lp.html" },
-  { id: "ia",    state: "IA", name: "Iowa",                         file: "iowa.html" },
-  { id: "il",    state: "IL", name: "Illinois",                     file: "illinois.html" },
-  { id: "dak",                name: "The Dakotas",                  file: "dakotas.html" },
+  { id: "dak-ia",             name: "Dakotas & Iowa",               file: "dakotas-iowa.html" },
+  { id: "oh-in",              name: "Ohio & Indiana",               file: "ohio-indiana.html" },
   // Not a state, and deliberately last: a place to find out whether anyone
   // outside the snowmaking belt wants this at all before building for them.
   {
@@ -988,7 +989,7 @@ function leadersBySeason() {
 }
 
 // "A and B", "A, B and C" — the runner-up is often a tie.
-const list = xs => xs.length < 2 ? (xs[0] ?? "")
+const listOf = xs => xs.length < 2 ? (xs[0] ?? "")
   : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
 
 const dayGap = (a, b) =>
@@ -1004,11 +1005,11 @@ function heroCopy() {
   if (!last.settled) {
     SAY = "Nobody can be said to have opened first last season.";
   } else if (last.leaders.length > 1) {
-    SAY = `${list(last.leaders.map(bold))} opened first last season, to the day.`;
+    SAY = `${listOf(last.leaders.map(bold))} opened first last season, to the day.`;
   } else if (last.next.length) {
     const n = dayGap(last.date, last.next[0].lo);
     SAY = `${bold(last.leaders[0])} opened first last season, ` +
-          `${n === 1 ? "a day" : `${n} days`} ahead of ${list(last.next.map(r => bold(r.slug)))}.`;
+          `${n === 1 ? "a day" : `${n} days`} ahead of ${listOf(last.next.map(r => bold(r.slug)))}.`;
   } else {
     SAY = `${bold(last.leaders[0])} opened first last season.`;
   }
@@ -1025,11 +1026,11 @@ function heroCopy() {
     byCount.get(n).push(slug);
   }
   const groups = [...byCount].sort((a, b) => b[0] - a[0]).map(([n, slugs]) =>
-    `${list(slugs.map(bold))} ${TIMES[n] ?? n + " times"}${slugs.length > 1 ? " each" : ""}`);
+    `${listOf(slugs.map(bold))} ${TIMES[n] ?? n + " times"}${slugs.length > 1 ? " each" : ""}`);
 
   let SUB = "";
   if (groups.length) {
-    SUB = `First lift has gone to ${list(groups)}`;
+    SUB = `First lift has gone to ${listOf(groups)}`;
     SUB += loose
       ? `; ${WORDS[loose] ?? loose} of the ${WORDS[rows.length] ?? rows.length} winters on ` +
         `record ${loose === 1 ? "is" : "are"} too loosely dated to call. `
@@ -1109,14 +1110,14 @@ function regionClimate(id) {
   }
 
   const chart = chartSection({
-    curve: ref.curve, window: ref.window, pins: [], label: ref.name, years: ref.years,
+    curve: ref.curve, window: ref.window, pins: [], label: ref.note, years: ref.years,
   });
 
   const CLIMATE = `
   <section class="sec">
     <h2 class="sec-title">When the guns can run</h2>
     <p class="sec-note">
-      Snow guns need a wet-bulb temperature under 28&deg;F. The mean at ${esc(ref.name)}
+      Snow guns need a wet-bulb temperature under 28&deg;F. The mean at ${esc(ref.note)}
       does not get there until ${md2(ref.curve.crossing)}, but the first workable window normally
       arrives on ${md2(ref.window.normal)}. Hills open on those early cold snaps rather than on
       the average.
@@ -1142,23 +1143,29 @@ ${cards}
   </section>
 `;
 
-  const days = daysUntilMd(ref.window.normal);
+  // The headline answers "when can I first ride here", so it takes the soonest
+  // of the region's points rather than the one the chart happens to be drawn
+  // for. In the Dakotas that is a 700-mile difference: the Black Hills cross
+  // four weeks before Dubuque.
+  const soonest = list.reduce((a, b) =>
+    (b[1].window.normal < a[1].window.normal ? b : a))[1];
+  const days = daysUntilMd(soonest.window.normal);
   return {
     STATS: [
       stat("Hills tracked", "0"),
       stat("Opening dates on file", "0"),
-      stat("Normal first window", md2(ref.window.normal), true),
-      stat(`Normal Oct&ndash;Nov hrs`, String(ref.hours.normal)),
+      stat("Earliest normal window", md2(soonest.window.normal), true),
+      stat(`Oct&ndash;Nov hrs there`, String(soonest.hours.normal)),
     ].join("\n"),
     CLIMATE,
-    EYEBROW: `Normally ${md2(ref.window.normal)}`,
-    HEADLINE: `Snowmaking weather normally reaches ${esc(ref.name)} around ` +
-              `${md2(ref.window.normal)} &mdash; ${days} days away.`,
+    EYEBROW: `Normally ${md2(soonest.window.normal)}`,
+    HEADLINE: `Snowmaking weather normally reaches ${esc(soonest.label)} around ` +
+              `${md2(soonest.window.normal)} &mdash; ${days} days away.`,
     LEAD: `That is the whole estimate, and it is the weather rather than a hill: ` +
           `no opening date for any hill here is on file yet, so there is nothing to ` +
           `project from. The chart and the tiles below are the same ones the ` +
-          `Minnesota page runs on, taken at ${list.map(([, p]) => esc(p.name)).join(", ")} ` +
-          `instead of at hills.`,
+          `Minnesota page runs on, taken at ${listOf(list.map(([, p]) => esc(p.note)))} ` +
+          `instead of at hills. The curve is ${esc(ref.note)}.`,
   };
 }
 

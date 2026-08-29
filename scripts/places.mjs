@@ -32,13 +32,51 @@ const THRESHOLD_C = (THRESHOLD_F - 32) * 5 / 9;
 // and Milwaukee are close enough in wet-bulb terms to share a point, and the
 // hills trend towards Madison anyway, so one reading stands for both — but the
 // card still says where it was taken.
+// `label` heads the tile, `name` is the coordinate actually measured, `note` is
+// how the card refers to it. Points sit where the hills are rather than in the
+// city centre they are named for: a reading taken downtown is warmer than the
+// ground anybody rides on.
 const PLACES = [
-  { id: "madison",  region: "wi", label: "Madison \u2013 Milwaukee", name: "Madison",
+  // Wisconsin, anchored on who drives where. Chicago is measured at Lake
+  // Geneva, which is the belt Chicago actually skis.
+  { id: "chicago",    region: "wi", label: "Chicago",  name: "Lake Geneva",
+    note: "Lake Geneva", lat: 42.5917, lon: -88.4334 },
+  { id: "madison",    region: "wi", label: "Madison \u2013 Milwaukee", name: "Madison",
     note: "Madison", lat: 43.0731, lon: -89.4012, curve: true },
-  { id: "wausau",   region: "wi", label: "Wausau",        name: "Wausau",
+  { id: "wausau",     region: "wi", label: "Wausau",   name: "Wausau",
     note: "Wausau", lat: 44.9591, lon: -89.6301 },
-  { id: "st-croix", region: "wi", label: "St Croix",      name: "St Croix",
-    note: "the St Croix valley", lat: 45.3572, lon: -92.6349, cache: "Trollhaugen" },
+
+  // Upper Peninsula: the Big Snow cluster in the west, Marquette, and the east.
+  { id: "ironwood",   region: "mi-up", label: "Ironwood", name: "Ironwood",
+    note: "Ironwood", lat: 46.4547, lon: -90.1710, curve: true },
+  { id: "marquette",  region: "mi-up", label: "Marquette", name: "Marquette",
+    note: "Marquette", lat: 46.5436, lon: -87.3954 },
+  { id: "sault",      region: "mi-up", label: "Sault Ste Marie", name: "Sault Ste Marie",
+    note: "Sault Ste Marie", lat: 46.4953, lon: -84.3453 },
+
+  // Lower Peninsula: the three knots that show up on the map.
+  { id: "traverse",   region: "mi-lp", label: "Traverse City", name: "Traverse City",
+    note: "Traverse City", lat: 44.7631, lon: -85.6206, curve: true },
+  { id: "cadillac",   region: "mi-lp", label: "Cadillac", name: "Cadillac",
+    note: "Cadillac", lat: 44.2520, lon: -85.4012 },
+  { id: "detroit",    region: "mi-lp", label: "Detroit", name: "Brighton",
+    note: "Brighton", lat: 42.5303, lon: -83.7802 },
+
+  // Dakotas and Iowa: the thinnest region, and the widest.
+  { id: "black-hills", region: "dak-ia", label: "Black Hills", name: "Lead",
+    note: "Lead, SD", lat: 44.3525, lon: -103.7652 },
+  { id: "bismarck",    region: "dak-ia", label: "Bismarck", name: "Bismarck",
+    note: "Bismarck", lat: 46.8083, lon: -100.7837 },
+  { id: "dubuque",     region: "dak-ia", label: "Dubuque", name: "Dubuque",
+    note: "Dubuque", lat: 42.5006, lon: -90.6646, curve: true },
+
+  // Ohio and Indiana, the warm edge of the belt.
+  { id: "cleveland",  region: "oh-in", label: "Cleveland", name: "Peninsula",
+    note: "Peninsula, OH", lat: 41.2320, lon: -81.5590, curve: true },
+  { id: "mansfield",  region: "oh-in", label: "Mansfield", name: "Mansfield",
+    note: "Mansfield", lat: 40.7584, lon: -82.5154 },
+  { id: "cincinnati", region: "oh-in", label: "Cincinnati", name: "Lawrenceburg",
+    note: "Lawrenceburg, IN", lat: 39.1445, lon: -84.8608 },
 ];
 
 async function hourly(p) {

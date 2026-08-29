@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T14:21:53.855Z",
+  "generatedAt": "2026-08-29T14:41:20.015Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
@@ -85,6 +85,11 @@
     }
   },
   "places": {
+    "chicago": {
+      "min": 47.9,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
     "madison": {
       "min": 47,
       "hoursUnder": 0,
@@ -95,8 +100,63 @@
       "hoursUnder": 0,
       "firstWindow": null
     },
-    "st-croix": {
-      "min": 44.2,
+    "ironwood": {
+      "min": 43.2,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "marquette": {
+      "min": 46.9,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "sault": {
+      "min": 44.9,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "traverse": {
+      "min": 46.5,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "cadillac": {
+      "min": 42.2,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "detroit": {
+      "min": 43.6,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "black-hills": {
+      "min": 41.5,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "bismarck": {
+      "min": 43,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "dubuque": {
+      "min": 46.6,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "cleveland": {
+      "min": 47.7,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "mansfield": {
+      "min": 49.5,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "cincinnati": {
+      "min": 50.1,
       "hoursUnder": 0,
       "firstWindow": null
     }
