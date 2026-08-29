@@ -284,6 +284,33 @@
     tbody tr td.season::before { content:none; }
     .rng { display:inline; margin:0 0 0 8px; }
   }
+
+/* A hill with a photo for the headline gets a second column; one without keeps
+   the full width, so the layout follows the data rather than being declared. */
+.hero:has(.hero-shot) {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px);
+  column-gap:44px; align-items:start;
+}
+@media (max-width:820px) { .hero:has(.hero-shot) { grid-template-columns:1fr; row-gap:24px; } }
+.hero-shot { margin:0; border:2px solid var(--line); background:var(--surface); }
+.hero-shot img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+.hero-shot figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:10px 12px 11px; border-top:2px solid var(--line);
+}
+
+/* ---- a hill's own photos ---------------------------------------------- */
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+@media (max-width:560px) { .gallery { grid-template-columns:1fr; } }
+.pic { margin:0; border:2px solid var(--line); background:var(--surface); }
+/* Shot on phones and held every which way, so they are cropped to one ratio
+   rather than left to set their own heights and stagger the row. */
+.pic img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
+.pic figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:11px 13px 12px; border-top:2px solid var(--line);
+}
+
 /* ---- theme: topsheet ---- */
 /* Topsheet / park graphic.
    Board art: ultra-condensed caps, square corners, hazard tape, hard black.
@@ -455,6 +482,7 @@ footer::before {
   <p class="eyebrow"><a href="../index.html">&larr; every hill</a></p>
 
   <section class="hero">
+    <div class="hero-main">
     <p class="hero-say mark"><span class="bm-1">Wild</span> <span class="bm-2">Mountain</span></p>
     <p class="hero-sub">Taylors Falls, MN &middot;
       <a href="https://wildmountain.com/" target="_blank" rel="noopener">Official site</a> &middot; <a href="https://facebook.com/wildmtnskisnowboardwaterpark" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://instagram.com/skiwildmtn" target="_blank" rel="noopener">Instagram</a>
@@ -466,6 +494,15 @@ footer::before {
       <div><dt>Latest observed</dt><dd>Nov 20</dd></div>
       <div><dt>Normal snowmaking hrs</dt><dd>337</dd></div>
     </dl>
+    </div>
+    <figure class="hero-shot">
+      <img class="" src="../photos/wild-mountain-lowsun-560.jpg"
+           srcset="../photos/wild-mountain-lowsun-560.jpg 560w, ../photos/wild-mountain-lowsun-840.jpg 840w, ../photos/wild-mountain-lowsun-1120.jpg 1120w"
+           sizes="(max-width:820px) calc(100vw - 48px), 300px"
+           loading="eager" fetchpriority="high" decoding="async"
+           alt="Wild Mountain open on a thin strip of man-made snow at its preseason opening, low sun behind the hill, a few riders on the surface lift and grass showing at the edges.">
+      <figcaption>Preseason opening, November 2025.</figcaption>
+    </figure>
   </section>
 
   <section class="sec">
@@ -493,6 +530,53 @@ footer::before {
         <p class="snote"><b>2021-22</b>A poor winter for natural snow in Minnesota. The hills opened on schedule on snow they made themselves, but terrain came slowly: Buck Hill had six of its sixteen runs open on 3 December, and Trollhaugen ran a part-week schedule into the new year without ever announcing normal hours.</p>
         <p class="snote"><b>2023-24</b>The latest start on record here. Coffee Mill did not turn a lift until 14 January, after posting "still currently closed", "Waiting for Cold!" and "Still Waiting for Cold Weather!" through December. Trollhaugen opened on 2 November and shut again four days later: "Mother Nature wins this round."</p>
       </div>
+
+  <section class="sec">
+    <h2 class="sec-title">Photos</h2>
+    <div class="gallery">
+        <figure class="pic">
+          <img class="" src="../photos/wild-mountain-sign-560.jpg"
+           srcset="../photos/wild-mountain-sign-560.jpg 560w, ../photos/wild-mountain-sign-840.jpg 840w, ../photos/wild-mountain-sign-1120.jpg 1120w"
+           sizes="(max-width:560px) calc(100vw - 48px), (max-width:900px) calc((100vw - 64px) / 2), 330px"
+           loading="lazy" decoding="async"
+           alt="The wooden entrance sign at Wild Mountain, the name in blue and green with an eagle, and a CarbonNeutral Certified banner beneath it.">
+          <figcaption>The sign on the way in.</figcaption>
+        </figure>
+        <figure class="pic">
+          <img class="" src="../photos/wild-mountain-pondskim-560.jpg"
+           srcset="../photos/wild-mountain-pondskim-560.jpg 560w, ../photos/wild-mountain-pondskim-726.jpg 726w"
+           sizes="(max-width:560px) calc(100vw - 48px), (max-width:900px) calc((100vw - 64px) / 2), 330px"
+           loading="lazy" decoding="async"
+           alt="David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green water, a crowd watching from the fence and the lift tower behind.">
+          <figcaption>The pond skim, not cleared.</figcaption>
+        </figure>
+        <figure class="pic">
+          <img class="" src="../photos/wild-mountain-you-betcha-560.jpg"
+           srcset="../photos/wild-mountain-you-betcha-560.jpg 560w, ../photos/wild-mountain-you-betcha-840.jpg 840w, ../photos/wild-mountain-you-betcha-1120.jpg 1120w"
+           sizes="(max-width:560px) calc(100vw - 48px), (max-width:900px) calc((100vw - 64px) / 2), 330px"
+           loading="lazy" decoding="async"
+           alt="A blue and gold sign at Wild Mountain reading Cold? You Betcha!, framed by two spruces with the car park behind.">
+          <figcaption>Cold? You Betcha.</figcaption>
+        </figure>
+        <figure class="pic">
+          <img class="" src="../photos/wild-mountain-rack-560.jpg"
+           srcset="../photos/wild-mountain-rack-560.jpg 560w, ../photos/wild-mountain-rack-840.jpg 840w, ../photos/wild-mountain-rack-1120.jpg 1120w"
+           sizes="(max-width:560px) calc(100vw - 48px), (max-width:900px) calc((100vw - 64px) / 2), 330px"
+           loading="lazy" decoding="async"
+           alt="A snowboard standing in a wooden rack outside the chalet at Wild Mountain, skis either side and slush underfoot.">
+          <figcaption>In the rack outside the chalet.</figcaption>
+        </figure>
+        <figure class="pic">
+          <img class="" src="../photos/wild-mountain-night-560.jpg"
+           srcset="../photos/wild-mountain-night-560.jpg 560w, ../photos/wild-mountain-night-840.jpg 840w, ../photos/wild-mountain-night-1120.jpg 1120w"
+           sizes="(max-width:560px) calc(100vw - 48px), (max-width:900px) calc((100vw - 64px) / 2), 330px"
+           loading="lazy" decoding="async"
+           alt="Wild Mountain under the lights at night, the chairlift running and tracked-out snow across the base area.">
+          <figcaption>Under the lights.</figcaption>
+        </figure>
+    </div>
+  </section>
+
   </section>
 
   <footer>

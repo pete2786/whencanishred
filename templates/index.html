@@ -401,15 +401,34 @@
 }
 .pay-block .pay:hover { background:var(--mark); color:#0B0C0D; }
 
-/* Two portraits, stacked in the column beside the copy. */
+/* One shot, in the column beside the copy; full width once they stack. */
 .shots { display:grid; gap:14px; }
-@media (max-width:820px) { .shots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (max-width:520px) { .shots { grid-template-columns:1fr; } }
 .shot { margin:0; border:2px solid var(--line); background:var(--surface); }
 /* Portrait shots of different aspects sit side by side, so they are cropped to
    one ratio rather than left to set their own heights. */
 .shot img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
 
+
+/* Text on the left, a picture on the right — the arrangement the page wanted
+   all along. Without the picture this was a 62-character column against an
+   empty half-page. */
+.hero-split {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px);
+  column-gap:44px; align-items:start; margin:16px 0 0;
+}
+@media (max-width:820px) { .hero-split { grid-template-columns:1fr; row-gap:26px; } }
+.hero-split .hero-say { margin-top:0; }
+.hero-split .stats { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 24px; }
+/* Half these labels wrap in a column this narrow and half do not, which left
+   the numbers at two different heights. */
+.hero-split .stats dt { min-height:2.5em; }
+
+.hero-shot { margin:0; border:2px solid var(--line); background:var(--surface); }
+.hero-shot img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+.hero-shot figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:10px 12px 11px; border-top:2px solid var(--line);
+}
 
 /* ---- who made this ---------------------------------------------------- */
 /* It sits after the data, not beside the headline: a photo of the author at
@@ -581,18 +600,23 @@ footer::before {
 
   <section class="hero">
     <!--{{HERO_SCENARIOS}}-->
-    <p class="hero-say"><b>Wild Mountain</b> opened first three years running.</p>
-    <p class="hero-sub">
-      <b>Andes Tower Hills</b> broke the run last season, opening a single day ahead of it.
-      Nothing is announced for the coming winter yet.
-    </p>
+    <div class="hero-split">
+      <div>
+        <p class="hero-say"><b>Wild Mountain</b> opened first three years running.</p>
+        <p class="hero-sub">
+          <b>Andes Tower Hills</b> broke the run last season, opening a single day ahead of
+          it. Nothing is announced for the coming winter yet.
+        </p>
 
-    <dl class="stats">
-      <div><dt>Seasons on record</dt><dd class="lede"><!--{{HERO_SEASONS}}--></dd></div>
-      <div><dt>Guns can first run</dt><dd>Oct 28</dd></div>
-      <div><dt>Normal snowmaking hrs</dt><dd><!--{{HERO_HOURS}}--></dd></div>
-      <div><dt>Hills tracked</dt><dd><!--{{HERO_HILLS}}--></dd></div>
-    </dl>
+        <dl class="stats">
+          <div><dt>Seasons on record</dt><dd class="lede"><!--{{HERO_SEASONS}}--></dd></div>
+          <div><dt>Guns can first run</dt><dd>Oct 28</dd></div>
+          <div><dt>Normal snowmaking hrs</dt><dd><!--{{HERO_HOURS}}--></dd></div>
+          <div><dt>Hills tracked</dt><dd><!--{{HERO_HILLS}}--></dd></div>
+        </dl>
+      </div>
+<!--{{HERO_SHOT}}-->
+    </div>
   </section>
 
   <section class="sec">

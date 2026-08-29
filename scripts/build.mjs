@@ -2,7 +2,7 @@
 // substitution, no dependencies. Output is committed; GitHub Pages serves the
 // repo root.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
 
@@ -779,6 +779,58 @@ function chartSection() {
   ].join("\n");
 }
 
+// ------------------------------------------------------------------ photos
+//
+// A hill's own photos, from data/resorts.json. Hills with none render nothing
+// at all rather than an empty heading — fifteen of the sixteen are still empty,
+// and a section that says "Photos" above a blank strip is worse than silence.
+
+const GALLERY_SIZES =
+  "(max-width:560px) calc(100vw - 48px), (max-width:900px) calc((100vw - 64px) / 2), 330px";
+
+// One photo may be marked `"hero": true`, which lifts it out of the gallery and
+// into the headline column. It appears once or the page shows the same picture
+// twice on one screen.
+function heroShot(slug) {
+  const ph = (resorts[slug].photos ?? []).find(p => p.hero);
+  if (!ph) return "";
+  return `    <figure class="hero-shot">
+      ${SHOT(ph.file, "", ph.alt, "(max-width:820px) calc(100vw - 48px), 300px", "../", true)}
+      <figcaption>${esc(ph.caption)}</figcaption>
+    </figure>`;
+}
+
+function photoSection(slug) {
+  const shots = (resorts[slug].photos ?? []).filter(p => !p.hero);
+  if (!shots.length) return "";
+  const figs = shots.map(ph => `        <figure class="pic">
+          ${SHOT(ph.file, "", ph.alt, GALLERY_SIZES, "../")}
+          <figcaption>${esc(ph.caption)}</figcaption>
+        </figure>`).join("\n");
+  return `
+  <section class="sec">
+    <h2 class="sec-title">Photos</h2>
+    <div class="gallery">
+${figs}
+    </div>
+  </section>
+`;
+}
+
+// The homepage headline says Wild Mountain opens first; this is Wild Mountain
+// opening. It follows whichever photo that hill has marked as its hero, so the
+// two cannot drift apart.
+const INDEX_HERO = "wild-mountain";
+
+function indexHeroShot() {
+  const ph = (resorts[INDEX_HERO].photos ?? []).find(p => p.hero);
+  if (!ph) return "";
+  return `      <figure class="hero-shot">
+        ${SHOT(ph.file, "", ph.alt, "(max-width:820px) calc(100vw - 48px), 300px", "", true)}
+        <figcaption>${esc(resorts[INDEX_HERO].name)}&rsquo;s ${esc(ph.caption[0].toLowerCase() + ph.caption.slice(1))}</figcaption>
+      </figure>`;
+}
+
 // ------------------------------------------------------------ who made this
 //
 // The about page was reachable only from the footer, which is where things go
@@ -788,15 +840,37 @@ function chartSection() {
 
 const VENMO = "https://account.venmo.com/u/davidehp";
 
-const SHOT = (base, cls, alt, sizes) =>
-  `<img class="${cls}" src="photos/${base}-560.jpg"\n` +
-  `           srcset="photos/${base}-560.jpg 560w, photos/${base}-840.jpg 840w, ` +
-  `photos/${base}-1120.jpg 1120w"\n` +
-  `           sizes="${sizes}"\n` +
-  `           width="1120" height="1492" loading="lazy" decoding="async"\n` +
-  `           alt="${esc(alt)}">`;
+// The srcset lists the widths that exist rather than the widths we wish
+// existed. scripts/photos.mjs refuses to enlarge a photo past its source, so
+// which variants a shot has depends on what came out of the camera — or out of
+// whatever resized it on the way here. Read them off disk rather than assuming
+// a fixed set: a 726px-wide source ships a 726w file, and nothing else would
+// know to offer it.
+const PHOTO_WIDTHS = new Map();
+for (const f of existsSync("photos") ? readdirSync("photos") : []) {
+  const m = /^(.+)-(\d+)\.jpg$/.exec(f);
+  if (!m) continue;
+  if (!PHOTO_WIDTHS.has(m[1])) PHOTO_WIDTHS.set(m[1], []);
+  PHOTO_WIDTHS.get(m[1]).push(Number(m[2]));
+}
+for (const a of PHOTO_WIDTHS.values()) a.sort((x, y) => x - y);
 
-const ARMS_ALT = "David in a t-shirt and helmet at a ski hill on a warm spring day, " +
+// `eager` is for the one photo above the fold. Deferring that one costs the
+// page its largest paint for no saving — nobody scrolls past it.
+function SHOT(base, cls, alt, sizes, root = "", eager = false) {
+  const have = PHOTO_WIDTHS.get(base) ?? [];
+  if (!have.length) throw new Error(`no photo files for "${base}" — run scripts/photos.mjs`);
+  const srcset = have.map(w => `${root}photos/${base}-${w}.jpg ${w}w`).join(", ");
+  const load = eager ? `loading="eager" fetchpriority="high" decoding="async"`
+                     : `loading="lazy" decoding="async"`;
+  return `<img class="${cls}" src="${root}photos/${base}-${have[0]}.jpg"\n` +
+         `           srcset="${srcset}"\n` +
+         `           sizes="${sizes}"\n` +
+         `           ${load}\n` +
+         `           alt="${esc(alt)}">`;
+}
+
+const ARMS_ALT = "David in a t-shirt and helmet at Wild Mountain on a warm spring day, " +
                  "ski racks and a chairlift behind him.";
 
 function helloCard() {
@@ -836,6 +910,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   HILL_INK: hillInkCss(),
   CHART: chartSection(),
   HELLO: helloCard(),
+  HERO_SHOT: indexHeroShot(),
 })));
 
 // Resort pages
@@ -874,15 +949,17 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
 console.log(`built ${STATES.length - 1} state placeholders`);
 
 // About page
-const ABOUT_SIZES = "(max-width:520px) calc(100vw - 48px), " +
-                    "(max-width:820px) calc((100vw - 64px) / 2), 380px";
+const ABOUT_SIZES = "(max-width:820px) calc(100vw - 48px), 380px";
 writeFileSync("about.html", fill(readFileSync("templates/about.html", "utf8"), {
   STYLE: style,
   PICKER: picker("mn", ""),
   FOOTER_PROVENANCE: provenance,
-  SHOT_ARMS: SHOT("david-midwest", "", ARMS_ALT, ABOUT_SIZES),
-  SHOT_PEAKS: SHOT("david-mountains",  "",
-    "David on a groomed run in snowboard gear, snow-covered peaks behind him.", ABOUT_SIZES),
+  SHOT_POND: SHOT("wild-mountain-pondskim", "",
+    "David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green " +
+    "water, a crowd watching from the fence and the lift tower behind.", ABOUT_SIZES),
+  SHOT_PEAKS: SHOT("david-mountains", "",
+    "David on a groomed run at Copper Mountain in snowboard gear, " +
+    "the snow-covered Tenmile Range behind him.", ABOUT_SIZES),
   PAY: VENMO ? `<div class="pay-block">
           <p>If the site saved you a search, or just got you hyped, there is a Venmo.</p>
           <a class="pay" href="${esc(VENMO)}" rel="noopener">Buy me a beer</a>
@@ -905,6 +982,8 @@ for (const [slug, r] of Object.entries(resorts)) {
     FOOTER_PROVENANCE: provenance,
     PICKER: picker("mn", "../"),
     HILL_INK: hillInkCss(),
+    PHOTOS: photoSection(slug),
+    HERO_SHOT: heroShot(slug),
   })));
 }
 

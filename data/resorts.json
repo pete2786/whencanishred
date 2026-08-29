@@ -18,7 +18,39 @@
       "source": "manual",
       "note": "Terrain park green and black, chosen by hand. The site uses inconsistent colours, so nothing on it is authoritative."
     },
-    "photos": []
+    "photos": [
+      {
+        "file": "wild-mountain-sign",
+        "alt": "The wooden entrance sign at Wild Mountain, the name in blue and green with an eagle, and a CarbonNeutral Certified banner beneath it.",
+        "caption": "The sign on the way in."
+      },
+      {
+        "file": "wild-mountain-pondskim",
+        "alt": "David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green water, a crowd watching from the fence and the lift tower behind.",
+        "caption": "The pond skim, not cleared."
+      },
+      {
+        "file": "wild-mountain-you-betcha",
+        "alt": "A blue and gold sign at Wild Mountain reading Cold? You Betcha!, framed by two spruces with the car park behind.",
+        "caption": "Cold? You Betcha."
+      },
+      {
+        "file": "wild-mountain-rack",
+        "alt": "A snowboard standing in a wooden rack outside the chalet at Wild Mountain, skis either side and slush underfoot.",
+        "caption": "In the rack outside the chalet."
+      },
+      {
+        "file": "wild-mountain-lowsun",
+        "alt": "Wild Mountain open on a thin strip of man-made snow at its preseason opening, low sun behind the hill, a few riders on the surface lift and grass showing at the edges.",
+        "caption": "Preseason opening, November 2025.",
+        "hero": true
+      },
+      {
+        "file": "wild-mountain-night",
+        "alt": "Wild Mountain under the lights at night, the chairlift running and tracked-out snow across the base area.",
+        "caption": "Under the lights."
+      }
+    ]
   },
   "trollhaugen": {
     "name": "Trollhaugen",
@@ -37,7 +69,34 @@
       "primary": "#005395",
       "secondary": "#ffec26"
     },
-    "photos": []
+    "photos": [
+      {
+        "file": "trollhaugen-corduroy",
+        "alt": "Fresh corduroy at the top of a run at Trollhaugen, blue lift towers either side and Wisconsin farmland in the valley below.",
+        "caption": "Fresh corduroy, top of the hill."
+      },
+      {
+        "file": "trollhaugen-dusk",
+        "alt": "Trollhaugen at dusk from above the base, runs lit, a terrain park on the right, skiers and boarders on the snow.",
+        "caption": "Lights on, park to the right."
+      },
+      {
+        "file": "trollhaugen-neon",
+        "alt": "A neon Trollhaugen sign in mixed colours on the gable of the wooden chalet at night.",
+        "caption": "The neon on the chalet.",
+        "hero": true
+      },
+      {
+        "file": "trollhaugen-toolbench",
+        "alt": "A snowboard laid on a wooden tool bench under a sign reading Tool Bench, tools provided by the Trollhaugen Ski and Snowboard Shop, with leather gloves and a brush beside it.",
+        "caption": "The tool bench outside the shop."
+      },
+      {
+        "file": "trollhaugen-ticket",
+        "alt": "A Trollhaugen lift ticket reading Valhalla, JAN 16 2026, Full Night.",
+        "caption": "Valhalla, Full Night, 16 January 2026."
+      }
+    ]
   },
   "hyland-hills": {
     "name": "Hyland Hills",
@@ -58,7 +117,29 @@
       "source": "manual",
       "note": "Park purple and orange, chosen by hand. Shares threeriversparks.org with Elm Creek, so site CSS cannot tell the two hills apart."
     },
-    "photos": []
+    "photos": [
+      {
+        "file": "hyland-hills-feature",
+        "hero": true,
+        "alt": "A snowboarder riding a feature in the terrain park at Hyland Hills under a clear blue sky, bare oaks behind.",
+        "caption": "The park, bluebird."
+      },
+      {
+        "file": "hyland-hills-summer",
+        "alt": "David in a helmet and a football shirt at Hyland Hills in June, riders on cached snow kept over for the event, rails and boxes set across it and green trees behind.",
+        "caption": "Cached snow, saved for a June event."
+      },
+      {
+        "file": "hyland-hills-rail",
+        "alt": "A rail set in the snow at Hyland Hills on a flat grey day, a group waiting at the top by the lift shack and pines behind.",
+        "caption": "Flat light, rail in the middle of the run."
+      },
+      {
+        "file": "hyland-hills-mitten",
+        "alt": "A leather mitten worn through at the palm with the lining pulled out, held up at night with the lit hill behind.",
+        "caption": "Rope laps..."
+      }
+    ]
   },
   "afton-alps": {
     "name": "Afton Alps",
@@ -115,7 +196,34 @@
       "primary": "#3db3e3",
       "secondary": "#81d742"
     },
-    "photos": []
+    "photos": [
+      {
+        "file": "buck-hill-overlook",
+        "alt": "The view from the top of Buck Hill on a bright day, the chairlift on the right and the Twin Cities plain, a lake and a highway spread out below.",
+        "caption": "The metro from the top.",
+        "hero": true
+      },
+      {
+        "file": "buck-hill-park",
+        "alt": "The terrain park at Buck Hill under a blue sky, a groomer parked mid-slope, blue and orange fencing and a black tube feature on the snow.",
+        "caption": "Park build, groomer still on it."
+      },
+      {
+        "file": "buck-hill-sunset",
+        "alt": "Riders and skiers at the top of Buck Hill at sunset, a snowmaking gun beside them and the sun low over the treeline.",
+        "caption": "Sunset from the top."
+      },
+      {
+        "file": "buck-hill-snowing",
+        "alt": "Snowed-in patio tables and chairs at Buck Hill at night, seen through glass, with the lit runs and the chairlift behind.",
+        "caption": "The patio, mid-storm."
+      },
+      {
+        "file": "buck-hill-clocktower",
+        "alt": "The clock tower at the base of Buck Hill on an overcast day, with a sign listing the ticket office, ski patrol, chalets, the school and the tubing area.",
+        "caption": "The clock tower at the base."
+      }
+    ]
   },
   "elm-creek": {
     "name": "Elm Creek",

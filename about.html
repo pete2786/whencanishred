@@ -8,7 +8,7 @@
 <meta property="og:title" content="About &middot; When Can I Shred">
 <meta property="og:description" content="Counting down since mid-August. Opening dates gathered by hand.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="photos/david-midwest-1120.jpg">
+<meta property="og:image" content="photos/david-mountains-840.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -401,15 +401,34 @@
 }
 .pay-block .pay:hover { background:var(--mark); color:#0B0C0D; }
 
-/* Two portraits, stacked in the column beside the copy. */
+/* One shot, in the column beside the copy; full width once they stack. */
 .shots { display:grid; gap:14px; }
-@media (max-width:820px) { .shots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (max-width:520px) { .shots { grid-template-columns:1fr; } }
 .shot { margin:0; border:2px solid var(--line); background:var(--surface); }
 /* Portrait shots of different aspects sit side by side, so they are cropped to
    one ratio rather than left to set their own heights. */
 .shot img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
 
+
+/* Text on the left, a picture on the right — the arrangement the page wanted
+   all along. Without the picture this was a 62-character column against an
+   empty half-page. */
+.hero-split {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px);
+  column-gap:44px; align-items:start; margin:16px 0 0;
+}
+@media (max-width:820px) { .hero-split { grid-template-columns:1fr; row-gap:26px; } }
+.hero-split .hero-say { margin-top:0; }
+.hero-split .stats { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 24px; }
+/* Half these labels wrap in a column this narrow and half do not, which left
+   the numbers at two different heights. */
+.hero-split .stats dt { min-height:2.5em; }
+
+.hero-shot { margin:0; border:2px solid var(--line); background:var(--surface); }
+.hero-shot img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+.hero-shot figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:10px 12px 11px; border-top:2px solid var(--line);
+}
 
 /* ---- who made this ---------------------------------------------------- */
 /* It sits after the data, not beside the headline: a photo of the author at
@@ -619,16 +638,16 @@ footer::before {
       </div>
 
       <div class="shots">
-        <figure class="shot"><img class="" src="photos/david-midwest-560.jpg"
-           srcset="photos/david-midwest-560.jpg 560w, photos/david-midwest-840.jpg 840w, photos/david-midwest-1120.jpg 1120w"
-           sizes="(max-width:520px) calc(100vw - 48px), (max-width:820px) calc((100vw - 64px) / 2), 380px"
-           width="1120" height="1492" loading="lazy" decoding="async"
-           alt="David in a t-shirt and helmet at a ski hill on a warm spring day, ski racks and a chairlift behind him."></figure>
+        <figure class="shot"><img class="" src="photos/wild-mountain-pondskim-560.jpg"
+           srcset="photos/wild-mountain-pondskim-560.jpg 560w, photos/wild-mountain-pondskim-726.jpg 726w"
+           sizes="(max-width:820px) calc(100vw - 48px), 380px"
+           loading="lazy" decoding="async"
+           alt="David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green water, a crowd watching from the fence and the lift tower behind."></figure>
         <figure class="shot"><img class="" src="photos/david-mountains-560.jpg"
-           srcset="photos/david-mountains-560.jpg 560w, photos/david-mountains-840.jpg 840w, photos/david-mountains-1120.jpg 1120w"
-           sizes="(max-width:520px) calc(100vw - 48px), (max-width:820px) calc((100vw - 64px) / 2), 380px"
-           width="1120" height="1492" loading="lazy" decoding="async"
-           alt="David on a groomed run in snowboard gear, snow-covered peaks behind him."></figure>
+           srcset="photos/david-mountains-560.jpg 560w, photos/david-mountains-840.jpg 840w"
+           sizes="(max-width:820px) calc(100vw - 48px), 380px"
+           loading="lazy" decoding="async"
+           alt="David on a groomed run at Copper Mountain in snowboard gear, the snow-covered Tenmile Range behind him."></figure>
       </div>
     </div>
 

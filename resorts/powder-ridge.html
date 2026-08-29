@@ -284,6 +284,33 @@
     tbody tr td.season::before { content:none; }
     .rng { display:inline; margin:0 0 0 8px; }
   }
+
+/* A hill with a photo for the headline gets a second column; one without keeps
+   the full width, so the layout follows the data rather than being declared. */
+.hero:has(.hero-shot) {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px);
+  column-gap:44px; align-items:start;
+}
+@media (max-width:820px) { .hero:has(.hero-shot) { grid-template-columns:1fr; row-gap:24px; } }
+.hero-shot { margin:0; border:2px solid var(--line); background:var(--surface); }
+.hero-shot img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+.hero-shot figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:10px 12px 11px; border-top:2px solid var(--line);
+}
+
+/* ---- a hill's own photos ---------------------------------------------- */
+.gallery { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:16px; }
+@media (max-width:560px) { .gallery { grid-template-columns:1fr; } }
+.pic { margin:0; border:2px solid var(--line); background:var(--surface); }
+/* Shot on phones and held every which way, so they are cropped to one ratio
+   rather than left to set their own heights and stagger the row. */
+.pic img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
+.pic figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:11px 13px 12px; border-top:2px solid var(--line);
+}
+
 /* ---- theme: topsheet ---- */
 /* Topsheet / park graphic.
    Board art: ultra-condensed caps, square corners, hazard tape, hard black.
@@ -455,6 +482,7 @@ footer::before {
   <p class="eyebrow"><a href="../index.html">&larr; every hill</a></p>
 
   <section class="hero">
+    <div class="hero-main">
     <p class="hero-say mark"><span class="bm-1">Powder</span> <span class="bm-2">Ridge</span></p>
     <p class="hero-sub">Kimball, MN &middot;
       <a href="https://powderridge.com/" target="_blank" rel="noopener">Official site</a> &middot; <a href="https://facebook.com/powderridge" target="_blank" rel="noopener">Facebook</a> &middot; <a href="https://instagram.com/powder_ridge" target="_blank" rel="noopener">Instagram</a>
@@ -466,6 +494,8 @@ footer::before {
       <div><dt>Latest observed</dt><dd>&mdash;</dd></div>
       <div><dt>Normal snowmaking hrs</dt><dd>356</dd></div>
     </dl>
+    </div>
+
   </section>
 
   <section class="sec">
@@ -493,6 +523,7 @@ footer::before {
         <p class="snote"><b>2021-22</b>A poor winter for natural snow in Minnesota. The hills opened on schedule on snow they made themselves, but terrain came slowly: Buck Hill had six of its sixteen runs open on 3 December, and Trollhaugen ran a part-week schedule into the new year without ever announcing normal hours.</p>
         <p class="snote"><b>2023-24</b>The latest start on record here. Coffee Mill did not turn a lift until 14 January, after posting "still currently closed", "Waiting for Cold!" and "Still Waiting for Cold Weather!" through December. Trollhaugen opened on 2 November and shut again four days later: "Mother Nature wins this round."</p>
       </div>
+
   </section>
 
   <footer>

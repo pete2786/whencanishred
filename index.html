@@ -401,15 +401,34 @@
 }
 .pay-block .pay:hover { background:var(--mark); color:#0B0C0D; }
 
-/* Two portraits, stacked in the column beside the copy. */
+/* One shot, in the column beside the copy; full width once they stack. */
 .shots { display:grid; gap:14px; }
-@media (max-width:820px) { .shots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (max-width:520px) { .shots { grid-template-columns:1fr; } }
 .shot { margin:0; border:2px solid var(--line); background:var(--surface); }
 /* Portrait shots of different aspects sit side by side, so they are cropped to
    one ratio rather than left to set their own heights. */
 .shot img { display:block; width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; }
 
+
+/* Text on the left, a picture on the right — the arrangement the page wanted
+   all along. Without the picture this was a 62-character column against an
+   empty half-page. */
+.hero-split {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px);
+  column-gap:44px; align-items:start; margin:16px 0 0;
+}
+@media (max-width:820px) { .hero-split { grid-template-columns:1fr; row-gap:26px; } }
+.hero-split .hero-say { margin-top:0; }
+.hero-split .stats { grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px 24px; }
+/* Half these labels wrap in a column this narrow and half do not, which left
+   the numbers at two different heights. */
+.hero-split .stats dt { min-height:2.5em; }
+
+.hero-shot { margin:0; border:2px solid var(--line); background:var(--surface); }
+.hero-shot img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+.hero-shot figcaption {
+  font-size:12px; line-height:1.45; color:var(--ink-2);
+  padding:10px 12px 11px; border-top:2px solid var(--line);
+}
 
 /* ---- who made this ---------------------------------------------------- */
 /* It sits after the data, not beside the headline: a photo of the author at
@@ -626,18 +645,30 @@ footer::before {
         <span class="scen-lede">latest on record<span class="scen-yr">2021-22</span></span>
       </div>
     </div>
-    <p class="hero-say"><b class="hm" data-hill="wild-mountain">Wild Mountain</b> opened first three years running.</p>
-    <p class="hero-sub">
-      <b class="hm" data-hill="andes-tower-hills">Andes Tower Hills</b> broke the run last season, opening a single day ahead of it.
-      Nothing is announced for the coming winter yet.
-    </p>
+    <div class="hero-split">
+      <div>
+        <p class="hero-say"><b class="hm" data-hill="wild-mountain">Wild Mountain</b> opened first three years running.</p>
+        <p class="hero-sub">
+          <b class="hm" data-hill="andes-tower-hills">Andes Tower Hills</b> broke the run last season, opening a single day ahead of
+          it. Nothing is announced for the coming winter yet.
+        </p>
 
-    <dl class="stats">
-      <div><dt>Seasons on record</dt><dd class="lede">5</dd></div>
-      <div><dt>Guns can first run</dt><dd>Oct 28</dd></div>
-      <div><dt>Normal snowmaking hrs</dt><dd>337</dd></div>
-      <div><dt>Hills tracked</dt><dd>16</dd></div>
-    </dl>
+        <dl class="stats">
+          <div><dt>Seasons on record</dt><dd class="lede">5</dd></div>
+          <div><dt>Guns can first run</dt><dd>Oct 28</dd></div>
+          <div><dt>Normal snowmaking hrs</dt><dd>337</dd></div>
+          <div><dt>Hills tracked</dt><dd>16</dd></div>
+        </dl>
+      </div>
+      <figure class="hero-shot">
+        <img class="" src="photos/wild-mountain-lowsun-560.jpg"
+           srcset="photos/wild-mountain-lowsun-560.jpg 560w, photos/wild-mountain-lowsun-840.jpg 840w, photos/wild-mountain-lowsun-1120.jpg 1120w"
+           sizes="(max-width:820px) calc(100vw - 48px), 300px"
+           loading="eager" fetchpriority="high" decoding="async"
+           alt="Wild Mountain open on a thin strip of man-made snow at its preseason opening, low sun behind the hill, a few riders on the surface lift and grass showing at the edges.">
+        <figcaption>Wild Mountain&rsquo;s preseason opening, November 2025.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="sec">
@@ -950,8 +981,8 @@ footer::before {
         <img class="hello-shot" src="photos/david-midwest-560.jpg"
            srcset="photos/david-midwest-560.jpg 560w, photos/david-midwest-840.jpg 840w, photos/david-midwest-1120.jpg 1120w"
            sizes="(max-width:600px) calc(100vw - 48px), 220px"
-           width="1120" height="1492" loading="lazy" decoding="async"
-           alt="David in a t-shirt and helmet at a ski hill on a warm spring day, ski racks and a chairlift behind him.">
+           loading="lazy" decoding="async"
+           alt="David in a t-shirt and helmet at Wild Mountain on a warm spring day, ski racks and a chairlift behind him.">
         <div class="hello-body">
           <p class="hello-eyebrow">Who made this</p>
           <p>I&rsquo;m David. I grew up snowboarding in the mid-90s, peak snowboarding
