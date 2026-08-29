@@ -70,6 +70,59 @@ them `locked`. Do not "correct" them to match the probe's evidence.
 
 `index.html` is the whole site. No build step.
 
+## Themes
+
+The pages are a pure function of the JSON, so a visual direction is just a
+different stylesheet over the same data. A theme is one override sheet in
+`themes/<name>/theme.css` plus an optional `theme.json`. The base templates in
+`templates/` hold the structure — the responsive table, the chart geometry, the
+stacked mobile layout — so directions cannot drift apart structurally while
+they are being compared.
+
+```sh
+node scripts/theme.mjs topsheet          # templates/ + override -> themes/topsheet/*.html
+node scripts/build.mjs --theme=topsheet  # -> preview/topsheet/
+python3 -m http.server 8899 --directory preview
+```
+
+`preview/` is gitignored. Building with no `--theme` behaves as it always has:
+`templates/` to the repo root, which is what GitHub Pages serves. Nothing in
+the published site changes until a direction is promoted into `templates/`.
+
+`theme.json` takes three keys. `fonts` replaces the Google Fonts query.
+`inject` is a list of plain-string patches applied to the body. `extends` names
+a parent theme, whose sheet lands first so the child only says what differs —
+the chain resolves to its root, so a grandchild still gets its grandparent's
+sheet.
+
+`scheme` is the one key `build.mjs` reads rather than `theme.mjs`. A theme that
+commits to `"light"` or `"dark"` ships that scheme's generated colours only,
+with no `prefers-color-scheme` branch. Themes that omit it follow the system as
+the site always has.
+
+### Hills wear their own colours
+
+A hill named in a sentence is printed in that hill's own colour — the same
+colour its marker carries in the table and its name carries on its own page.
+
+The marking runs over the rendered HTML in `build.mjs`, not in the templates,
+so copy written later is covered without remembering to tag it. Only a `<b>`
+whose entire text is exactly a hill's name matches; the other `<b>` on these
+pages hold numbers and a chart legend. Colours go through the same `readable()`
+correction as everything else, against the backgrounds of whichever scheme the
+theme ships.
+
+This is why `topsheet` has no brand colour of its own. Snow-white does the
+accent work and the cold cyan carries the data, which leaves every saturated
+colour on the page belonging to a hill. An accent there would have been one
+hill's identity worn by the whole site — the chartreuse that first version used
+is Wild Mountain's park colour.
+
+The cyan in the wordmark is the same cyan as the 28°F threshold line.
+
+Three themes exist: `current` (an empty override sheet, so it reproduces the
+live site), `trailmap` and `topsheet`.
+
 ## Opening dates
 
 Each season carries two dates, and the difference between them is the point.

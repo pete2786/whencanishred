@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
 
 <style>
   :root {
@@ -406,6 +406,139 @@
   .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
   .picker-menu a[aria-current] { color:var(--accent); }
   @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
+
+/* ---- theme: trailmap ---- */
+/* Trail map & lift signage.
+   A ski area's own graphic language: the three difficulty marks, contour
+   lines, and the flat enamelled signs bolted to the lift shack. Committed to
+   a light ground — a trail map is printed on white paper — so the dark tokens
+   are overridden rather than left to the system. */
+
+:root,
+:root:not([data-theme="light"]),
+:root[data-theme="dark"] {
+  --ground:#EAEEF0; --surface:#FFFFFF; --surface-2:#E0E6E9;
+  --line:#C0CAD0; --line-soft:#DBE2E6;
+  --ink:#12171A; --ink-2:#465158; --ink-3:#73808A;
+  --accent:#9A5300; --accent-soft:#FBE9CE;
+  --cold:#1667B8; --cold-soft:#DCE9F6;
+  --warm:#A8402B;
+
+  --green:#0F7A44; --blue:#1667B8; --black:#12171A;
+  --sign:#1B3A2E;          /* the enamel green of a real trail sign */
+  --sign-ink:#F2F5F3;
+  --shadow:0 1px 0 rgba(18,23,26,.06), 0 6px 18px rgba(18,23,26,.07);
+}
+
+/* Faint topography under the whole page. Two passes at different scales so it
+   reads as terrain rather than as a repeating tile. */
+body {
+  background-color:var(--ground);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='620' height='420'%3E%3Cg fill='none' stroke='%2312171A' stroke-opacity='.055' stroke-width='1.1'%3E%3Cpath d='M-40 96C90 34 200 150 330 88S560 40 660 112'/%3E%3Cpath d='M-40 140C90 78 200 194 330 132S560 84 660 156'/%3E%3Cpath d='M-40 184C90 122 200 238 330 176S560 128 660 200'/%3E%3Cpath d='M-40 232C110 178 210 286 350 228S570 186 660 252'/%3E%3Cpath d='M-40 286C110 232 210 340 350 282S570 240 660 306'/%3E%3Cpath d='M-40 344C110 290 210 398 350 340S570 298 660 364'/%3E%3C/g%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='980' height='700'%3E%3Cg fill='none' stroke='%2312171A' stroke-opacity='.04' stroke-width='1.4'%3E%3Cpath d='M-60 520C200 400 420 610 660 470S980 380 1060 460'/%3E%3Cpath d='M-60 600C200 480 420 690 660 550S980 460 1060 540'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment:fixed;
+}
+
+/* ---- signage type ---------------------------------------------------- */
+/* The italic display serif was the house tell. Everything numeric moves to
+   Archivo 800: the face on a lift-shack sign, not on a book jacket. */
+.wordmark, .count-num, .count-unit, .hero-say, .sec-title,
+.stats dd, .card .big, .scen-num, .scen-unit, .fc-head {
+  font-family:Archivo,"Helvetica Neue",Arial,sans-serif !important;
+  font-style:normal !important;
+}
+.count-num, .scen-num, .stats dd, .card .big {
+  font-weight:900; letter-spacing:-.035em;
+}
+.sec-title, .hero-say, .fc-head {
+  font-weight:800; letter-spacing:-.018em;
+}
+.count-unit, .scen-unit { font-weight:600; letter-spacing:0; }
+.scen-word { font-style:normal; font-weight:600; }
+.hero-say b { font-weight:900; }
+
+/* ---- the sign at the top --------------------------------------------- */
+.masthead {
+  background:var(--sign); color:var(--sign-ink);
+  border-bottom:0; border-radius:3px;
+  margin:18px 0 0; padding:14px 18px;
+  align-items:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.09), var(--shadow);
+}
+.masthead .wordmark {
+  font-size:19px; font-weight:800; text-transform:uppercase; letter-spacing:.06em;
+}
+.masthead .wordmark em { color:#F5B301; font-style:normal; }
+.masthead .wordmark a:hover em { color:#FFD25E; }
+.masthead .tagline { color:rgba(242,245,243,.75); font-weight:500; }
+/* The region picker sits on the dark sign, so its own tokens no longer fit. */
+.masthead .picker > summary {
+  color:var(--sign-ink); border-color:rgba(255,255,255,.28);
+  background:rgba(255,255,255,.07);
+}
+.masthead .picker > summary:hover { border-color:rgba(255,255,255,.5); }
+
+.eyebrow { color:var(--ink-3); font-weight:700; }
+
+/* ---- difficulty marks ------------------------------------------------- */
+/* Circle, square, diamond: the one piece of graphic language every skier
+   already reads without a legend. The hill's own two colours stay inside the
+   mark, so the row is still identifiable at a glance. */
+.pip {
+  width:13px; height:13px; margin-right:10px; border-radius:50%;
+  box-shadow:0 0 0 2px var(--green), 0 0 0 3px var(--surface);
+}
+.pip[data-tier="blue"]  { border-radius:1px; box-shadow:0 0 0 2px var(--blue),  0 0 0 3px var(--surface); }
+.pip[data-tier="black"] { border-radius:1px; transform:rotate(45deg); margin-right:12px;
+                          box-shadow:0 0 0 2px var(--black), 0 0 0 3px var(--surface); }
+
+.key {
+  display:flex; flex-wrap:wrap; gap:8px 22px;
+  list-style:none; margin:-10px 0 22px; padding:0;
+  font-size:12px; font-weight:600; color:var(--ink-2);
+}
+.key li { display:flex; align-items:center; gap:9px; }
+.key-m { width:11px; height:11px; border-radius:50%; background:var(--green); flex:0 0 auto; }
+.key-m[data-tier="blue"]  { border-radius:1px; background:var(--blue); }
+.key-m[data-tier="black"] { border-radius:1px; background:var(--black); transform:rotate(45deg); }
+
+/* ---- panels ----------------------------------------------------------- */
+.chart-box, .tbl-box, .card {
+  border-radius:3px; border-color:var(--line);
+}
+caption, th, .stats dt, .card h3 { font-weight:700; }
+
+/* Group headers read as the sign at the top of a lift, not as a table row. */
+.grp td, tbody tr.grp:hover td {
+  background:var(--sign); color:var(--sign-ink);
+  font-weight:700; letter-spacing:.16em;
+}
+
+/* ---- the button as a sign -------------------------------------------- */
+.btn {
+  border-radius:2px; background:var(--surface-2); border-color:var(--line);
+  font-weight:700; text-transform:uppercase; letter-spacing:.07em; font-size:10.5px;
+}
+tbody tr:hover .btn {
+  background:var(--sign); border-color:var(--sign); color:var(--sign-ink);
+}
+
+.chip { border-radius:2px; font-weight:700; }
+
+/* ---- the chart as terrain -------------------------------------------- */
+.band { fill:#D9E8F5; }
+.curve { stroke:#9A5300; stroke-width:3.2; }
+.thresh { stroke:var(--blue); stroke-width:1.6; }
+.dot-cross, .rangedot { fill:var(--blue); }
+.rangebar, .rangecap { stroke:var(--green); }
+.lab-rng { fill:var(--green); font-weight:700; }
+.lab-cold { fill:var(--blue); font-weight:700; }
+.sw.cold { background:var(--blue); }
+.sw.band { background:#D9E8F5; border-color:var(--blue); }
+
+footer { border-top:2px solid var(--line); }
+
 </style>
 <!--{{HILL_INK}}-->
 </head>
@@ -464,6 +597,11 @@
       under 28&deg; a hill normally gets across October and November.
     </p>
     <p class="sec-cta">Click or tap any hill for more detail on its historic opening days.</p>
+    <ul class="key">
+      <li><i class="key-m" data-tier="green"></i>Opens before 25 Nov</li>
+      <li><i class="key-m" data-tier="blue"></i>Last week of Nov</li>
+      <li><i class="key-m" data-tier="black"></i>December</li>
+    </ul>
 
     <div class="tbl-box">
       <table>

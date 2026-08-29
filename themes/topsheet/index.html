@@ -11,7 +11,7 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
 
 <style>
   :root {
@@ -406,6 +406,131 @@
   .picker-menu a span { display:block; font-size:11.5px; color:var(--ink-3); margin-top:2px; }
   .picker-menu a[aria-current] { color:var(--accent); }
   @media (max-width:560px) { .picker-menu { right:auto; left:0; } }
+
+/* ---- theme: topsheet ---- */
+/* Topsheet / park graphic.
+   Board art: ultra-condensed caps, square corners, hazard tape, hard black.
+   Committed to dark in both system settings — a topsheet printed on white is a
+   different product — so the light tokens go too.
+
+   The page keeps no brand colour of its own. Snow-white does the accent work
+   and the cold cyan carries the data, which leaves every saturated colour on
+   the page belonging to a hill: its row marker, its own page, and its name
+   wherever the prose says it. An accent here would have been one hill's
+   identity worn by the whole site.
+
+   The cyan in the wordmark is the same cyan as the 28°F threshold line. The
+   site's one colour is the temperature the site is about. */
+
+:root,
+:root:not([data-theme="light"]),
+:root[data-theme="dark"] {
+  --ground:#0B0C0D; --surface:#141618; --surface-2:#1D2023;
+  --line:#33393D; --line-soft:#24282B;
+  --ink:#F3F5F6; --ink-2:#A6AEB3; --ink-3:#7B848A;
+  --accent:#DCE9F0; --accent-soft:#1C2A33;
+  --mark:#37D2E8;   /* the wordmark, and the threshold it points at */
+  --cold:#37D2E8; --cold-soft:#0C2E34;
+  --warm:#FF5B35;
+  --shadow:none;
+}
+
+body { background:var(--ground); }
+
+/* Hazard tape. Used as a rule, never as a fill — it is a boundary marker. */
+.tape, .masthead, footer {
+  --tape:repeating-linear-gradient(45deg,
+    var(--accent) 0 10px, transparent 10px 20px);
+}
+
+/* ---- condensed caps --------------------------------------------------- */
+.wordmark, .count-num, .count-unit, .hero-say, .sec-title,
+.stats dd, .card .big, .scen-num, .scen-unit, .fc-head, .grp td, .btn {
+  font-family:Anton,"Archivo Narrow",Impact,sans-serif !important;
+  font-style:normal !important; font-weight:400 !important;
+}
+.count-num, .scen-num, .stats dd, .card .big {
+  letter-spacing:-.01em;
+}
+.sec-title, .hero-say, .fc-head {
+  text-transform:uppercase; letter-spacing:.005em; line-height:1.05;
+}
+.hero-say b { color:var(--accent); }
+.count-unit, .scen-unit, .scen-word {
+  text-transform:uppercase; font-style:normal; letter-spacing:.02em;
+}
+
+/* ---- masthead as a top edge ------------------------------------------ */
+.masthead {
+  border-bottom:0; padding:22px 0 16px; position:relative;
+}
+.masthead::after {
+  content:""; position:absolute; left:0; right:0; bottom:0; height:6px;
+  background:var(--tape);
+}
+.masthead .wordmark {
+  font-size:26px; text-transform:uppercase; letter-spacing:.01em;
+}
+.masthead .wordmark em { color:var(--mark); font-style:normal; }
+
+.eyebrow { color:var(--accent); font-weight:700; }
+
+/* ---- everything is square -------------------------------------------- */
+.chart-box, .tbl-box, .card, .btn, .chip, .pip {
+  border-radius:0 !important;
+}
+.chart-box, .tbl-box, .card {
+  border:2px solid var(--line); background:var(--surface);
+}
+
+/* Sticker chips: the hill's two colours split hard down the middle, no ring. */
+.pip {
+  width:12px; height:12px; margin-right:10px;
+  background:linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+  box-shadow:0 0 0 1px rgba(255,255,255,.35);
+}
+
+/* Group header as a taped-off band. */
+.grp td, tbody tr.grp:hover td {
+  background:var(--accent); color:#0B0C0D;
+  text-transform:uppercase; letter-spacing:.18em; font-size:12px; padding:8px 14px;
+}
+
+th { color:var(--accent); font-weight:700; }
+caption { color:var(--ink-3); font-weight:700; }
+tbody tr:hover td { background:#1A1D20; }
+.days { color:var(--accent); }
+
+/* ---- the button as a decal ------------------------------------------- */
+.btn {
+  background:transparent; border:2px solid var(--accent); color:var(--accent);
+  text-transform:uppercase; letter-spacing:.09em; font-size:11px; padding:4px 12px;
+}
+tbody tr:hover .btn { background:var(--accent); color:#0B0C0D; }
+
+.chip { border:1px solid currentColor; font-weight:700; letter-spacing:.09em; }
+
+/* ---- chart ------------------------------------------------------------ */
+.band { fill:#122A2E; }
+.curve { stroke:var(--accent); stroke-width:3.5; }
+.thresh { stroke:var(--cold); stroke-width:2; stroke-dasharray:8 6; }
+.dot-cross, .rangedot { fill:var(--cold); }
+.rangebar, .rangecap { stroke:var(--accent); stroke-width:2.5; }
+.lab-rng, .lab-cold { font-weight:700; letter-spacing:.1em; }
+.lab-rng { fill:var(--accent); }
+.lab-cold { fill:var(--cold); }
+.grid-l { stroke:#22262A; }
+.sw { background:var(--accent); }
+.sw.cold { background:var(--cold); }
+.sw.band { background:#122A2E; border-color:var(--cold); }
+
+/* ---- footer edge ------------------------------------------------------ */
+footer { border-top:0; position:relative; padding-top:28px; }
+footer::before {
+  content:""; position:absolute; left:0; right:0; top:0; height:6px;
+  background:var(--tape);
+}
+
 </style>
 <!--{{HILL_INK}}-->
 </head>

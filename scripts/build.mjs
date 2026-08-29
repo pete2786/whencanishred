@@ -5,6 +5,38 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
+
+// ------------------------------------------------------------------ themes
+//
+// The pages are pure functions of the JSON, so a visual direction is just a
+// different set of templates over the same data. `--theme=<name>` reads from
+// themes/<name>/ and writes to preview/<name>/ so two directions can be held
+// side by side in a browser. With no flag the build behaves as it always has:
+// templates/ to the repo root, which is what GitHub Pages serves.
+const themeArg = process.argv.find(a => a.startsWith("--theme="));
+const THEME = themeArg ? themeArg.slice("--theme=".length) : null;
+const TPL = THEME ? `themes/${THEME}` : "templates";
+const OUT = THEME ? `preview/${THEME}` : ".";
+if (THEME && !existsSync(TPL)) {
+  console.error(`no such theme: ${TPL}`);
+  process.exit(1);
+}
+mkdirSync(OUT, { recursive: true });
+
+// A theme may commit to one colour scheme rather than following the system:
+// a trail map is printed on white, a topsheet is not. When it does, the page
+// ships that scheme's colours only, with no prefers-color-scheme branch.
+function themeScheme(name) {
+  for (let n = name, hops = 0; n && hops < 8; hops++) {
+    const f = `themes/${n}/theme.json`;
+    if (!existsSync(f)) return null;
+    const cfg = JSON.parse(readFileSync(f, "utf8"));
+    if (cfg.scheme) return cfg.scheme;
+    n = cfg.extends;
+  }
+  return null;
+}
+const SCHEME = THEME ? themeScheme(THEME) : null;
 const resorts = read("data/resorts.json");
 const seasons = read("data/seasons.json");
 const projection = read("data/projection.json");
@@ -157,6 +189,46 @@ function wordmark(name) {
   if (parts.length < 2) return `<span class="bm-1">${esc(name)}</span>`;
   const head = parts.slice(0, -1).join(" "), tail = parts.at(-1);
   return `<span class="bm-1">${esc(head)}</span> <span class="bm-2">${esc(tail)}</span>`;
+}
+
+// --------------------------------------------- hills named in the prose
+//
+// A hill mentioned in a sentence wears its own colour, the same colour its row
+// carries in the table and its name carries on its own page. The site keeps no
+// accent of its own in that position, so nothing borrows one hill's identity
+// for the whole page.
+//
+// Marking happens on the rendered HTML rather than in the templates so that any
+// copy written later is covered without remembering to tag it. Only an exact
+// <b> whose whole text is a hill's name matches; the other <b> on these pages
+// hold numbers and a chart legend.
+const HILL_BY_NAME = new Map(Object.entries(resorts).map(([slug, r]) => [r.name, slug]));
+
+const markHills = html => html.replace(/<b>([^<]+)<\/b>/g, (m, text) =>
+  HILL_BY_NAME.has(text.trim())
+    ? `<b class="hm" data-hill="${HILL_BY_NAME.get(text.trim())}">${text}</b>`
+    : m);
+
+function hillInkCss() {
+  const rule = (slug, c, prefix = "") => `${prefix}.hm[data-hill="${slug}"]{color:${c}}`;
+  const light = [], dark = [];
+  for (const [slug, r] of Object.entries(resorts)) {
+    const p = r.colors?.primary;
+    if (!p) continue;
+    light.push(rule(slug, readable(p, [LIGHT_BG, LIGHT_GROUND], 4.5, LIGHT_INK)));
+    dark.push(rule(slug, readable(p, [DARK_BG, DARK_GROUND], 4.5, DARK_INK)));
+  }
+  const body =
+    SCHEME === "dark"  ? dark.join("\n") :
+    SCHEME === "light" ? light.join("\n") :
+    [
+      light.join("\n"),
+      `@media (prefers-color-scheme:dark){`,
+      dark.map(r => "  :root:not([data-theme=\"light\"]) " + r).join("\n"),
+      `}`,
+      dark.map(r => ':root[data-theme="dark"] ' + r).join("\n"),
+    ].join("\n");
+  return `<style>\n${body}\n</style>`;
 }
 
 const hours = Object.fromEntries(hoursRows.map(h => [slugify(h.hill), h]));
@@ -347,11 +419,23 @@ const GROUPS = [["twin-cities", "Twin Cities"], ["greater-minnesota", "Greater M
 // The hill's own two colours, split across one dot. Enough to tell sixteen rows
 // apart without putting a logo palette into the type, where several of these
 // fail contrast. Hills with only a primary get a solid dot.
-function pip(r) {
+// How soon the hill opens, as the three marks every skier already reads. The
+// cut points are the natural gaps in the projection: six hills before the last
+// week of November, six inside it, four in December. Purely presentational —
+// themes that do not draw markers ignore the attribute.
+const tierOf = iso => {
+  const [, m, d] = iso.split("-").map(Number);
+  if (m <= 11 && d <= 24) return "green";
+  if (m <= 11) return "blue";
+  return "black";
+};
+
+function pip(r, tier) {
   const a = r.colors?.primary;
   if (!a) return "";
   const b = r.colors?.secondary ?? a;
-  return `<span class="pip" style="--c1:${esc(a)};--c2:${esc(b)}" aria-hidden="true"></span>`;
+  const t = tier ? ` data-tier="${tier}"` : "";
+  return `<span class="pip"${t} style="--c1:${esc(a)};--c2:${esc(b)}" aria-hidden="true"></span>`;
 }
 
 function tableRows() {
@@ -376,7 +460,7 @@ function tableRows() {
       // where the real <thead> is hidden.
       out.push(
         `          <tr${cls}>`,
-        `            <td class="hill">${pip(r)}` +
+        `            <td class="hill">${pip(r, tierOf(p.date))}` +
           `<a href="resorts/${slug}.html">${esc(r.name)}</a></td>`,
         `            <td class="where" data-label="Where">${esc(r.place)}</td>`,
         `            <td data-label="Projected">${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
@@ -549,11 +633,174 @@ function picker(current, root) {
 const fill = (tpl, map) =>
   Object.entries(map).reduce((s, [k, v]) => s.replaceAll(`<!--{{${k}}}-->`, v), tpl);
 
+// ------------------------------------------------------------------- chart
+//
+// Rendered from data/curve.json at two geometries. The wide one is the chart
+// as it has always looked. The narrow one fits a phone with no sideways drag,
+// and pays for it in height: the three pins land within 35 units of each other
+// down there, so their labels need three staggered rows or "Wild Mountain"
+// lands on top of "Most metro hills".
+//
+// Both come from the same call, so the two cannot drift the way the hand-drawn
+// SVG drifted from the numbers printed beside it.
+
+const curve = existsSync("data/curve.json") ? read("data/curve.json") : null;
+
+// The first workable window is an early cold snap, about three weeks ahead of
+// the day the mean itself crosses. From scripts/climatology.mjs; no data file
+// carries these three yet, so they are stated here rather than in the markup.
+const WINDOW = { earliest: "10-09", normal: "10-28", latest: "11-20" };
+
+const AXIS_TO = "01-01";
+const dayIndex = md => {
+  const [m, d] = md.split("-").map(Number);
+  return Math.round((Date.UTC(m < 6 ? 2002 : 2001, m - 1, d) - Date.UTC(2001, 7, 23)) / 86400000);
+};
+const SPAN = dayIndex(AXIS_TO);
+const md2 = md => `${MONTHS[Number(md.slice(0, 2)) - 1]} ${Number(md.slice(3, 5))}`;
+
+// Where the three pins sit is a fact about the hills, not a drawing decision.
+// The hand-drawn chart eyeballed them; these follow the projection.
+function chartPins() {
+  const dates = Object.values(projection).map(p => p.date).sort();
+  const first = Object.entries(projection).sort((a, b) => a[1].date.localeCompare(b[1].date))[0];
+  const metro = Object.keys(resorts).filter(s => resorts[s].region === "twin-cities")
+    .map(s => projection[s].date).sort();
+  return [
+    { md: first[1].date.slice(5), label: resorts[first[0]].name },
+    { md: metro[Math.floor(metro.length / 2)].slice(5), label: "Most metro hills" },
+    { md: dates.at(-1).slice(5), label: "Last hills open" },
+  ];
+}
+
+const GEOM = {
+  wide: {
+    cls: "chart-wide", hBase: 420, w: 900, x0: 60, x1: 860, yTop: 93, yBase: 349,
+    rngTitle: 44, rngBar: 62, rngLab: 84, midDrop: 0,
+    xLab: 406, pinTip: 364, pinLab: 379, pinStep: 21, pinFont: 12,
+    keyDx: 15, keyDy: -14, keyAnchor: "start", coldDy: 19,
+    xTicks: ["08-23", "10-01", "11-01", "12-01", "01-01"],
+  },
+  // Everything the wide chart says, stacked instead of spread. Three things
+  // need their own row down here that share one on the wide chart: the middle
+  // window label, the crossing note, and each pin caption.
+  narrow: {
+    cls: "chart-narrow", hBase: 418, w: 300, x0: 32, x1: 292, yTop: 76, yBase: 352,
+    rngTitle: 12, rngBar: 28, rngLab: 45, midDrop: 15,
+    xLab: 368, pinTip: 390, pinLab: 402, pinStep: 22, pinFont: 11,
+    // The pins cluster inside 70 units of each other, so their lines would run
+    // straight through the month labels. The line picks up below that row; the
+    // dot on the axis is what actually marks the date.
+    pinLineFrom: 378,
+    // Above-right of the dot is where this sits on the wide chart, and there
+    // is no room for it there at 300 units — it would run off the edge, and
+    // anchoring it back over the dot lays it on the curve. It goes below the
+    // line instead, still ending at the dot: the band left of the crossing is
+    // empty by definition, because that is what being left of the crossing
+    // means. Sending it to the top of the drawing made it jump on resize.
+    keyDx: 0, keyDy: 17, keyAnchor: "end", coldDy: 38,
+    xTicks: ["08-23", "10-01", "11-01", "12-01", "01-01"],
+  },
+};
+
+function chartSvg(g) {
+  const X = md => g.x0 + (dayIndex(md) / SPAN) * (g.x1 - g.x0);
+  const Y = t => g.yTop + ((60 - t) / 60) * (g.yBase - g.yTop);
+  const n = (v) => Math.round(v * 10) / 10;
+  const o = [];
+  const yThresh = Y(28);
+
+  o.push(`<rect class="band" x="${g.x0}" y="${n(yThresh)}" width="${g.x1 - g.x0}" height="${n(g.yBase - yThresh)}"></rect>`);
+  for (const t of [60, 45, 30, 15])
+    o.push(`<line class="grid-l" x1="${g.x0}" y1="${n(Y(t))}" x2="${g.x1}" y2="${n(Y(t))}"></line>`,
+           `<text class="tick-t" x="${g.x0 - 10}" y="${n(Y(t) + 4)}" text-anchor="end">${t}&deg;</text>`);
+
+  // The window: a bar with a dot at the normal date. On a phone the middle
+  // label drops a row, because "normally Oct 28" is wider than the gap between
+  // the two dates it sits between.
+  const xe = X(WINDOW.earliest), xn = X(WINDOW.normal), xl = X(WINDOW.latest);
+  o.push(`<text class="lab-rng" x="${n((xe + xl) / 2)}" y="${g.rngTitle}" text-anchor="middle">FIRST WORKABLE WINDOW</text>`,
+         `<line class="rangebar" x1="${n(xe)}" y1="${g.rngBar}" x2="${n(xl)}" y2="${g.rngBar}"></line>`,
+         `<line class="rangecap" x1="${n(xe)}" y1="${g.rngBar - 7}" x2="${n(xe)}" y2="${g.rngBar + 7}"></line>`,
+         `<line class="rangecap" x1="${n(xl)}" y1="${g.rngBar - 7}" x2="${n(xl)}" y2="${g.rngBar + 7}"></line>`,
+         `<circle class="rangedot" cx="${n(xn)}" cy="${g.rngBar}" r="5"></circle>`,
+         `<text class="tick-t" x="${n(xe)}" y="${g.rngLab}" text-anchor="middle">${md2(WINDOW.earliest)}</text>`,
+         `<text class="tick-t" x="${n(xn)}" y="${g.rngLab + g.midDrop}" text-anchor="middle">normally ${md2(WINDOW.normal)}</text>`,
+         `<text class="tick-t" x="${n(xl)}" y="${g.rngLab}" text-anchor="middle">${md2(WINDOW.latest)}</text>`);
+
+  o.push(`<line class="ax" x1="${g.x0}" y1="${g.yBase + 1}" x2="${g.x1}" y2="${g.yBase + 1}"></line>`,
+         `<line class="ax" x1="${g.x0}" y1="${g.yTop + 7}" x2="${g.x0}" y2="${g.yBase + 1}"></line>`,
+         `<line class="thresh" x1="${g.x0}" y1="${n(yThresh)}" x2="${g.x1}" y2="${n(yThresh)}"></line>`,
+         `<text class="lab-cold" x="${g.x0 + 8}" y="${n(yThresh + g.coldDy)}">COLD ENOUGH TO MAKE SNOW</text>`);
+
+  const pts = curve.series.filter((_, i) => i % 2 === 0 || i === curve.series.length - 1)
+    .map(p => `${n(X(p.md))},${n(Y(p.v))}`).join(" ");
+  o.push(`<polyline class="curve" points="${pts}"></polyline>`);
+
+  const xc = X(curve.crossing);
+  o.push(`<circle class="dot-cross" cx="${n(xc)}" cy="${n(yThresh)}" r="6"></circle>`,
+         `<text class="lab-key" x="${n(xc + g.keyDx)}" y="${n(yThresh + g.keyDy)}" text-anchor="${g.keyAnchor}">` +
+         `Average crosses 28&deg; &middot; ${md2(curve.crossing)}</text>`);
+
+  // How far apart the pins land is a fact about the hills, and it changes when
+  // the projection does — the metro median and the last hill open seventeen
+  // days apart this year, which is not enough room for both captions on one
+  // line. So the rows are packed here rather than declared in the geometry: a
+  // caption drops to the next row only when it would touch the one beside it,
+  // and the drawing grows by exactly the rows it used.
+  let rows = 0;
+  const placed = [];
+  for (const p of chartPins()) {
+    const x = X(p.md);
+    const w = p.label.length * g.pinFont * 0.52;
+    const anchor = x > g.x1 - w / 2 ? "end" : x < g.x0 + w / 2 ? "start" : "middle";
+    const left = anchor === "end" ? x - w : anchor === "start" ? x : x - w / 2;
+    let row = 0;
+    while (placed.some(q => q.row === row && left < q.right + 8 && left + w > q.left - 8)) row++;
+    rows = Math.max(rows, row);
+    placed.push({ x, label: p.label, anchor, row, left, right: left + w });
+  }
+  for (const q of placed) {
+    const tip = g.pinTip + q.row * g.pinStep, lab = g.pinLab + q.row * g.pinStep;
+    o.push(`<line class="pin" x1="${n(q.x)}" y1="${g.pinLineFrom ?? g.yBase + 1}" x2="${n(q.x)}" y2="${tip}"></line>`,
+           `<circle class="pin-dot" cx="${n(q.x)}" cy="${g.yBase + 1}" r="3.5"></circle>`,
+           `<text class="pin-t" x="${n(q.x)}" y="${lab}" text-anchor="${q.anchor}">${esc(q.label)}</text>`);
+  }
+  const h = g.hBase + rows * g.pinStep;
+
+  g.xTicks.forEach((md, i) => {
+    const anchor = i === 0 ? "start" : i === g.xTicks.length - 1 ? "end" : "middle";
+    o.push(`<text class="tick-t" x="${n(X(md))}" y="${g.xLab}" text-anchor="${anchor}">${md2(md)}</text>`);
+  });
+
+  const alt = `Mean ${curve.label} wet-bulb temperature falling from ` +
+    `${Math.round(curve.series[0].v)} degrees on ${md2(curve.from)} to ` +
+    `${Math.round(curve.series.at(-1).v)} degrees on ${md2(curve.to)}, crossing 28 degrees on ` +
+    `${md2(curve.crossing)}. The first workable snowmaking window normally arrives ` +
+    `${md2(WINDOW.normal)}, with a historical range of ${md2(WINDOW.earliest)} to ${md2(WINDOW.latest)}.`;
+
+  return `<svg class="${g.cls}" viewBox="0 0 ${g.w} ${h}" role="img" aria-label="${esc(alt)}">\n  ` +
+         o.join("\n  ") + `\n</svg>`;
+}
+
+function chartSection() {
+  if (!curve) return `<p class="sec-note">No curve on file. Run <code>node scripts/curve.mjs</code>.</p>`;
+  return [
+    chartSvg(GEOM.wide),
+    chartSvg(GEOM.narrow),
+    `<div class="legend">`,
+    `  <b><i class="sw"></i> Mean wet-bulb, ${esc(curve.label)}, ${esc(curve.years)}</b>`,
+    `  <b><i class="sw cold"></i> 28&deg;F snowmaking threshold</b>`,
+    `  <b><i class="sw band"></i> Cold enough to make snow</b>`,
+    `</div>`,
+  ].join("\n");
+}
+
 // Homepage
 const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
 const lead = observed(leader);
 
-writeFileSync("index.html", fill(readFileSync("templates/index.html", "utf8"), {
+writeFileSync(`${OUT}/index.html`, markHills(fill(readFileSync(`${TPL}/index.html`, "utf8"), {
   TABLE: tableRows(),
   DATELINE: dateline,
   FORECAST_NOTE: fcSection.NOTE,
@@ -565,15 +812,17 @@ writeFileSync("index.html", fill(readFileSync("templates/index.html", "utf8"), {
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),
   FOOTER_PROVENANCE: provenance,
   PICKER: picker("mn", ""),
-}));
+  HILL_INK: hillInkCss(),
+  CHART: chartSection(),
+})));
 
 // Resort pages
-mkdirSync("resorts", { recursive: true });
+mkdirSync(`${OUT}/resorts`, { recursive: true });
 // One placeholder per state that has no record yet. They borrow the homepage's
 // stylesheet rather than keeping a second copy in step with it.
-const indexTpl = readFileSync("templates/index.html", "utf8");
+const indexTpl = readFileSync(`${TPL}/index.html`, "utf8");
 const style = indexTpl.slice(indexTpl.indexOf("<style"), indexTpl.indexOf("</style>") + 8);
-const regionTpl = readFileSync("templates/region.html", "utf8");
+const regionTpl = readFileSync(`${TPL}/region.html`, "utf8");
 
 for (const region of STATES.filter(r => r.id !== "mn")) {
   const n = countIn(region.state);
@@ -583,7 +832,7 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
       `the state is covered. The rest of ${region.name} is not gathered yet.`
     : `No ${region.name} hills are on the site yet. Everything here is built from dates ` +
       `gathered one post at a time, and nobody has worked this state.`;
-  writeFileSync(region.file, fill(regionTpl, {
+  writeFileSync(`${OUT}/${region.file}`, fill(regionTpl, {
     STYLE: style,
     PICKER: picker(region.id, ""),
     REGION: esc(region.name),
@@ -602,10 +851,10 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
 
-const resortTpl = readFileSync("templates/resort.html", "utf8");
+const resortTpl = readFileSync(`${TPL}/resort.html`, "utf8");
 for (const [slug, r] of Object.entries(resorts)) {
   const o = observed(slug);
-  writeFileSync(`resorts/${slug}.html`, fill(resortTpl, {
+  writeFileSync(`${OUT}/resorts/${slug}.html`, markHills(fill(resortTpl, {
     NAME: esc(r.name), PLACE: esc(`${r.place}, ${r.state}`), WEBSITE: esc(r.website),
     NAME_MARK: wordmark(r.name),
     BRAND_CSS: brandCss(r),
@@ -617,7 +866,8 @@ for (const [slug, r] of Object.entries(resorts)) {
     SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,
     PICKER: picker("mn", "../"),
-  }));
+    HILL_INK: hillInkCss(),
+  })));
 }
 
 console.error(`built index.html and ${Object.keys(resorts).length} resort pages`);
