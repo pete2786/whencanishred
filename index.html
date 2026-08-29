@@ -334,6 +334,10 @@
     font-size:clamp(22px,3vw,32px); line-height:1.25;
     max-width:46ch; text-wrap:balance; margin:0 0 10px;
   }
+  .fc-answer {
+    font-size:15.5px; line-height:1.55; color:var(--ink);
+    max-width:62ch; margin:12px 0 6px;
+  }
   .fc-note { margin:0 0 26px; }
   /* The table is sixteen links that do not look like links. This says so once,
      above the table, rather than decorating every row. */
@@ -766,13 +770,14 @@ footer::before {
   </section>
 
   <section class="sec">
-    <p class="fc-head">No snowmaking weather in the next 16 days. Coldest is <b class="hm" data-hill="giants-ridge">Giants Ridge</b> at 42.2&deg;.</p>
-    <p class="sec-note fc-note">16-day wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, made 28 August. Guns can run under 28&deg;.</p>
+    <h2 class="sec-title">The next 16 days</h2>
+    <p class="fc-answer">No snowmaking weather in the next 16 days. The coldest any hill gets is <b class="hm" data-hill="giants-ridge">Giants Ridge</b> at 42.0&deg;.</p>
+    <p class="sec-note fc-note">Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, made 29 August. Guns can run under 28&deg;.</p>
 
     <div class="duo">
       <div class="card">
         <h3>Metro</h3>
-        <p class="big">46.5&deg;</p>
+        <p class="big">49.1&deg;</p>
         <p>Coldest wet bulb the 16-day forecast reaches at Bloomington.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>0</dd>
@@ -782,7 +787,7 @@ footer::before {
       </div>
       <div class="card">
         <h3>Duluth</h3>
-        <p class="big">43.9&deg;</p>
+        <p class="big">42.3&deg;</p>
         <p>Coldest wet bulb the 16-day forecast reaches at Spirit Mountain.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>0</dd>
@@ -792,7 +797,7 @@ footer::before {
       </div>
       <div class="card">
         <h3>North Shore</h3>
-        <p class="big">44.9&deg;</p>
+        <p class="big">43.2&deg;</p>
         <p>Coldest wet bulb the 16-day forecast reaches at Lutsen.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>0</dd>
@@ -996,6 +1001,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
+    <span class="updated">Rebuilt <time datetime="2026-08-29T13:58:06.000Z">29 August 2026, 08:58 CDT</time>. Forecast pulled <time datetime="2026-08-29T13:56:41.204Z">29 August 2026, 08:56 CDT</time>.</span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
     <span><a href="about.html">About this site</a></span>

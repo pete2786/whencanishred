@@ -257,8 +257,8 @@ const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 function forecastSection() {
   if (!fc) {
-    return { NOTE: "No forecast on file. Run <code>node scripts/forecast.mjs</code>.",
-             HEADLINE: "&mdash;", CARDS: "" };
+    return { TITLE: "The next 16 days", ANSWER: "No forecast on file.",
+             NOTE: "Run <code>node scripts/forecast.mjs</code>.", CARDS: "" };
   }
   const made = new Date(fc.generatedAt);
   const ageDays = Math.floor((new Date() - made) / 86400000);
@@ -271,16 +271,20 @@ function forecastSection() {
   const known = Object.entries(fc.hills).filter(([, h]) => h.min !== null);
   const withWindow = known.filter(([, h]) => h.hoursUnder > 0);
 
-  let headline;
+  // The answer, which used to be set as the section's heading. At display size
+  // and with no label above it, it read as the page making a pronouncement
+  // rather than reporting a forecast, so it moved down into the text and a
+  // plain heading took its place.
+  let answer;
   if (!known.length) {
-    headline = "The forecast could not be read for any hill.";
+    answer = "The forecast could not be read for any hill.";
   } else if (!withWindow.length) {
     const [slug, h] = known.reduce((a, b) => (b[1].min < a[1].min ? b : a));
-    headline = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
-      `Coldest is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
+    answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
+      `The coldest any hill gets is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
   } else {
     const first = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
-    headline = `${withWindow.length} of ${known.length} hills get snowmaking weather. ` +
+    answer = `${withWindow.length} of ${known.length} hills get snowmaking weather. ` +
       `<b>${esc(resorts[first[0]].name)}</b> first, ${whenWindow(first[1].firstWindow)}.`;
   }
 
@@ -303,12 +307,10 @@ function forecastSection() {
   }).join("\n");
 
   return {
-    // No heading sits above this any more, so the note carries what the
-    // numbers are, where they come from, and when they were made.
-    NOTE: `${fc.horizonDays}-day wet-bulb forecast from ` +
-      `<a href="https://open-meteo.com/">Open-Meteo</a>, made ${madeStr}. ` +
-      `Guns can run under ${fc.threshold}&deg;.${stale}`,
-    HEADLINE: headline,
+    TITLE: `The next ${fc.horizonDays} days`,
+    ANSWER: answer,
+    NOTE: `Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, ` +
+      `made ${madeStr}. Guns can run under ${fc.threshold}&deg;.${stale}`,
     CARDS: cards,
   };
 }
@@ -559,6 +561,32 @@ const provenance = `${t.n} of ${t.total} opening dates sourced from ${sourcePhra
 
 const now = new Date();
 const dateline = `${now.getDate()} ${FULL[now.getMonth()]} ${now.getFullYear()}`;
+
+// The countdown, the forecast age and the projection are all computed at build
+// time, so how fresh the page is *is* when it was last built. Say it in the
+// hills' own time zone rather than the build machine's, which is UTC in CI.
+const CT = "America/Chicago";
+const clock = d => new Intl.DateTimeFormat("en-GB", {
+  timeZone: CT, hour: "2-digit", minute: "2-digit", hour12: false,
+}).format(d);
+const zone = d => new Intl.DateTimeFormat("en-US", {
+  timeZone: CT, timeZoneName: "short",
+}).formatToParts(d).find(p => p.type === "timeZoneName").value;
+const onDay = d => {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-GB", {
+    timeZone: CT, day: "numeric", month: "long", year: "numeric",
+  }).formatToParts(d).map(x => [x.type, x.value]));
+  return `${p.day} ${p.month} ${p.year}`;
+};
+
+const lastUpdated = (() => {
+  const built = `<time datetime="${now.toISOString()}">${onDay(now)}, ` +
+                `${clock(now)} ${zone(now)}</time>`;
+  if (!fc) return `Rebuilt ${built}. No forecast on file.`;
+  const made = new Date(fc.generatedAt);
+  return `Rebuilt ${built}. Forecast pulled ` +
+         `<time datetime="${made.toISOString()}">${onDay(made)}, ${clock(made)} ${zone(made)}</time>.`;
+})();
 
 const fcSection = forecastSection();
 
@@ -1010,14 +1038,16 @@ const lead = observed(leader);
 writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", "utf8"), {
   TABLE: tableRows(),
   DATELINE: dateline,
+  FORECAST_TITLE: fcSection.TITLE,
+  FORECAST_ANSWER: fcSection.ANSWER,
   FORECAST_NOTE: fcSection.NOTE,
-  FORECAST_HEADLINE: fcSection.HEADLINE,
   FORECAST_CARDS: fcSection.CARDS,
   HERO_SCENARIOS: heroScenarios(leader),
   HERO_SEASONS: String(lead.n),
   HERO_HILLS: String(Object.keys(resorts).length),
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),
   FOOTER_PROVENANCE: provenance,
+  LAST_UPDATED: lastUpdated,
   PICKER: picker("mn", ""),
   HILL_INK: hillInkCss(),
   CHART: chartSection(),
@@ -1058,6 +1088,7 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
     MN_COUNT: String(countIn("MN")),
     DATES: `${t.n} of ${t.total}`,
     FOOTER_PROVENANCE: provenance,
+  LAST_UPDATED: lastUpdated,
   }));
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
@@ -1068,6 +1099,7 @@ writeFileSync("about.html", fill(readFileSync("templates/about.html", "utf8"), {
   STYLE: style,
   PICKER: picker("mn", ""),
   FOOTER_PROVENANCE: provenance,
+  LAST_UPDATED: lastUpdated,
   SHOT_POND: SHOT("wild-mountain-pondskim", "",
     "David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green " +
     "water, a crowd watching from the fence and the lift tower behind.", ABOUT_SIZES),
@@ -1094,6 +1126,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     SEASON_HEAD: seasonHead(slug),
     SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,
+  LAST_UPDATED: lastUpdated,
     PICKER: picker("mn", "../"),
     HILL_INK: hillInkCss(),
     PHOTOS: photoSection(slug),

@@ -25,6 +25,22 @@ node scripts/identity.mjs --page              # review.html: the whole record as
 Raw pulls cache to `data/cache/` (~108MB, gitignored). First run is slow and
 rate-limited; reruns are free.
 
+## Staying current
+
+`.github/workflows/refresh.yml` pulls the forecast and rebuilds twice a day, at
+11:00 and 23:00 UTC — early morning and evening in the hills' own time zone. It
+commits the result to `main`, which is what GitHub Pages serves.
+
+The rebuild matters on its own, not only for the forecast. The countdown, the
+days-until column and the forecast's own staleness note are all computed at
+build time, so a page left alone keeps saying whatever it said when it was
+built. Every page carries the build time and the forecast pull time in its
+footer, in Central rather than the build machine's UTC.
+
+If Open-Meteo is unreachable the forecast step is allowed to fail and the build
+runs anyway: a stale forecast that says how stale it is beats a frozen
+countdown. The run leaves a warning when that happens.
+
 The forecast is the one thing on the page that goes out of date. Rerun
 `scripts/forecast.mjs` before building; the page prints the date it was made and
 says so in the copy once it is two days old. Build it without `data/forecast.json`

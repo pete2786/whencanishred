@@ -1,0 +1,70 @@
+# Pulls the forecast and rebuilds the site twice a day.
+#
+# The rebuild matters on its own, not just for the forecast: the countdown, the
+# days-until column and the forecast's own staleness note are all computed at
+# build time. Left alone, a page that says "73 days" keeps saying it.
+#
+# 11:00 and 23:00 UTC — early morning and evening in the hills' own time zone.
+name: Refresh
+
+on:
+  schedule:
+    - cron: "0 11,23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+# Never let two refreshes race each other onto main.
+concurrency:
+  group: refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      # Open-Meteo being down should not stop the rebuild. The countdown still
+      # needs moving, and the page already says how old the forecast is and
+      # tells the reader to rerun it once it is two days past.
+      - name: Pull the forecast
+        id: forecast
+        continue-on-error: true
+        run: node scripts/forecast.mjs
+
+      - name: Rebuild the site
+        run: node scripts/build.mjs
+
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "nothing changed"
+            exit 0
+          fi
+          if [ "${{ steps.forecast.outcome }}" = "success" ]; then
+            git commit -m "Refresh the forecast and rebuild"
+          else
+            git commit -m "Rebuild (forecast fetch failed)"
+          fi
+          # A human may have pushed while this ran.
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main && git push origin HEAD:main && exit 0
+            echo "push $i failed, retrying"
+            sleep 5
+          done
+          exit 1
+
+      - name: Say if the forecast failed
+        if: steps.forecast.outcome != 'success'
+        run: |
+          echo "::warning::Forecast fetch failed; site rebuilt on the previous forecast."

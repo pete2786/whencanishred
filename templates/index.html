@@ -334,6 +334,10 @@
     font-size:clamp(22px,3vw,32px); line-height:1.25;
     max-width:46ch; text-wrap:balance; margin:0 0 10px;
   }
+  .fc-answer {
+    font-size:15.5px; line-height:1.55; color:var(--ink);
+    max-width:62ch; margin:12px 0 6px;
+  }
   .fc-note { margin:0 0 26px; }
   /* The table is sixteen links that do not look like links. This says so once,
      above the table, rather than decorating every row. */
@@ -630,7 +634,8 @@ footer::before {
   </section>
 
   <section class="sec">
-    <p class="fc-head"><!--{{FORECAST_HEADLINE}}--></p>
+    <h2 class="sec-title"><!--{{FORECAST_TITLE}}--></h2>
+    <p class="fc-answer"><!--{{FORECAST_ANSWER}}--></p>
     <p class="sec-note fc-note"><!--{{FORECAST_NOTE}}--></p>
 
     <div class="duo">
@@ -671,6 +676,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span><!--{{FOOTER_PROVENANCE}}--></span>
+    <span class="updated"><!--{{LAST_UPDATED}}--></span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
     <span><a href="about.html">About this site</a></span>
