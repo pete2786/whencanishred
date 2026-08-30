@@ -1,142 +1,142 @@
 {
-  "generatedAt": "2026-08-29T21:09:30.948Z",
+  "generatedAt": "2026-08-30T01:10:43.141Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
     "wild-mountain": {
-      "min": 36.6,
+      "min": 34.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "trollhaugen": {
-      "min": 36.6,
+      "min": 34.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "hyland-hills": {
-      "min": 41,
+      "min": 40,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "afton-alps": {
-      "min": 37.2,
+      "min": 35.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "welch-village": {
-      "min": 37.3,
+      "min": 36.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buck-hill": {
-      "min": 38.2,
+      "min": 37.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "elm-creek": {
-      "min": 39.1,
+      "min": 34.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "lutsen-mountains": {
-      "min": 36.4,
+      "min": 34.8,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "giants-ridge": {
-      "min": 33.7,
+      "min": 33,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "spirit-mountain": {
-      "min": 36.7,
+      "min": 33.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "powder-ridge": {
-      "min": 37.4,
+      "min": 34.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mount-kato": {
-      "min": 38.9,
+      "min": 35.6,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buena-vista": {
-      "min": 37.9,
+      "min": 35.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "detroit-mountain": {
-      "min": 38.5,
+      "min": 32.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "andes-tower-hills": {
-      "min": 37.8,
+      "min": 33.4,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "coffee-mill": {
-      "min": 36.7,
+      "min": 34.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mount-ski-gull": {
-      "min": 37.8,
+      "min": 34.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "chester-bowl": {
-      "min": 38.6,
+      "min": 35.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "steeplechase": {
-      "min": 36.4,
+      "min": 35.4,
       "hoursUnder": 0,
       "firstWindow": null
     }
   },
   "places": {
     "chicago": {
-      "min": 34.9,
+      "min": 35.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "madison": {
-      "min": 34.5,
+      "min": 34.8,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "wausau": {
-      "min": 33.6,
+      "min": 32.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "ironwood": {
-      "min": 33.4,
+      "min": 32.4,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "marquette": {
-      "min": 40.1,
+      "min": 38.4,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "sault": {
-      "min": 33.3,
+      "min": 33.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "traverse": {
-      "min": 42.3,
+      "min": 41.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cadillac": {
-      "min": 38.7,
+      "min": 37.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
@@ -146,22 +146,22 @@
       "firstWindow": null
     },
     "black-hills": {
-      "min": 37.4,
+      "min": 41.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "bismarck": {
-      "min": 38.1,
+      "min": 35,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "dubuque": {
-      "min": 36.3,
+      "min": 37.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cleveland": {
-      "min": 40.4,
+      "min": 43.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
@@ -171,7 +171,7 @@
       "firstWindow": null
     },
     "cincinnati": {
-      "min": 43.6,
+      "min": 41.7,
       "hoursUnder": 0,
       "firstWindow": null
     }
