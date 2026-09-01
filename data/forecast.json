@@ -1,177 +1,177 @@
 {
-  "generatedAt": "2026-09-01T01:44:52.809Z",
+  "generatedAt": "2026-09-01T15:26:14.500Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
     "wild-mountain": {
-      "min": 38,
+      "min": 44.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "trollhaugen": {
-      "min": 38,
+      "min": 45.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "hyland-hills": {
-      "min": 40.7,
+      "min": 48.6,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "afton-alps": {
-      "min": 40.2,
+      "min": 45.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "welch-village": {
-      "min": 41.3,
+      "min": 44.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buck-hill": {
-      "min": 39.5,
+      "min": 45.6,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "elm-creek": {
-      "min": 37.9,
+      "min": 45.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "lutsen-mountains": {
-      "min": 37.5,
+      "min": 41.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "giants-ridge": {
-      "min": 37.3,
+      "min": 42.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "spirit-mountain": {
-      "min": 35.7,
+      "min": 43.4,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "powder-ridge": {
-      "min": 34.2,
+      "min": 45.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mount-kato": {
-      "min": 40.2,
+      "min": 47,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buena-vista": {
-      "min": 36.6,
+      "min": 43.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "detroit-mountain": {
-      "min": 35.1,
+      "min": 45.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "andes-tower-hills": {
-      "min": 32.7,
+      "min": 44.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "coffee-mill": {
-      "min": 44,
+      "min": 45.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mount-ski-gull": {
-      "min": 35.5,
+      "min": 44.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "chester-bowl": {
-      "min": 37.6,
+      "min": 45.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "steeplechase": {
-      "min": 41.7,
+      "min": 45.7,
       "hoursUnder": 0,
       "firstWindow": null
     }
   },
   "places": {
     "chicago": {
-      "min": 46.7,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "madison": {
-      "min": 44.1,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "wausau": {
-      "min": 41.7,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "ironwood": {
-      "min": 37,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "marquette": {
-      "min": 46.5,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "sault": {
-      "min": 47.7,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "traverse": {
-      "min": 50.6,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "cadillac": {
-      "min": 48.1,
-      "hoursUnder": 0,
-      "firstWindow": null
-    },
-    "detroit": {
       "min": 47.6,
       "hoursUnder": 0,
       "firstWindow": null
     },
+    "madison": {
+      "min": 47.5,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "wausau": {
+      "min": 43.8,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "ironwood": {
+      "min": 41.6,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "marquette": {
+      "min": 43.9,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "sault": {
+      "min": 36,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "traverse": {
+      "min": 43.5,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "cadillac": {
+      "min": 39.6,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
+    "detroit": {
+      "min": 40.5,
+      "hoursUnder": 0,
+      "firstWindow": null
+    },
     "black-hills": {
-      "min": 31.7,
+      "min": 40.6,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "bismarck": {
-      "min": 32.3,
+      "min": 45.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "dubuque": {
-      "min": 44.9,
+      "min": 49.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cleveland": {
-      "min": 50.4,
+      "min": 44.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mansfield": {
-      "min": 49,
+      "min": 44.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cincinnati": {
-      "min": 53.3,
+      "min": 50.9,
       "hoursUnder": 0,
       "firstWindow": null
     }
