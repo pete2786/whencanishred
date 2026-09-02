@@ -20,10 +20,14 @@ name: Refresh
 on:
   schedule:
     - cron: "15 6,18 * * *"
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 # Never let two refreshes race each other onto main.
 concurrency:
@@ -33,6 +37,8 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    outputs:
+      staged: ${{ steps.stage.outcome }}
     steps:
       - uses: actions/checkout@v4
 
@@ -78,3 +84,52 @@ jobs:
         if: steps.forecast.outcome != 'success'
         run: |
           echo "::warning::Forecast fetch failed; site rebuilt on the previous forecast."
+
+      # ---- publish, and only the site -----------------------------------
+      #
+      # Pages served straight off the branch until now, which meant the whole
+      # repo was fetchable on the domain: scripts, templates, raw data, docs,
+      # the social tooling. None of that is the site.
+      #
+      # The pages are self-contained (build.mjs inlines the CSS, the SVG and
+      # the numbers, nothing is fetched at runtime), so photos/ is the only
+      # asset directory the HTML actually points at.
+      - name: Stage the site
+        id: stage
+        run: |
+          set -euo pipefail
+          rm -rf _site && mkdir -p _site/resorts
+          cp ./*.html _site/
+          cp resorts/*.html _site/resorts/
+          cp -R photos _site/photos
+          cp CNAME _site/CNAME
+          cp .nojekyll _site/.nojekyll
+          echo "staged $(find _site -type f | wc -l | tr -d ' ') files"
+
+      # Fail loudly rather than quietly republishing the whole repo.
+      - name: Refuse to publish anything that is not the site
+        run: |
+          set -euo pipefail
+          for path in scripts templates data docs social README.md; do
+            if [ -e "_site/$path" ]; then
+              echo "::error::_site/$path should not be deployed"
+              exit 1
+            fi
+          done
+          grep -q "when can i" _site/index.html || {
+            echo "::error::_site/index.html does not look like the site"; exit 1; }
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: refresh
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

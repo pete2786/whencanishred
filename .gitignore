@@ -18,3 +18,6 @@ social/picks/
 # these on a schedule the way forecast.json is refreshed, so a committed copy
 # would sit stale; make.mjs runs without it.
 data/powder.json
+
+# Staged for the Pages deploy in CI.
+_site/
