@@ -3,6 +3,7 @@
 // repo root.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { daysUntil } from "./lib/days.mjs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
 
@@ -351,7 +352,8 @@ function observed(slug) {
 }
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const daysUntil = iso => Math.round((new Date(`${iso}T00:00:00`) - new Date()) / 86400000);
+// Whole calendar days in the resorts' own zone, so the countdown holds still
+// through a reader's day and ticks at local midnight. See lib/days.mjs.
 
 // ------------------------------------------------------------------- hero
 //

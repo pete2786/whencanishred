@@ -4,12 +4,22 @@
 # days-until column and the forecast's own staleness note are all computed at
 # build time. Left alone, a page that says "73 days" keeps saying it.
 #
-# 11:00 and 23:00 UTC — early morning and evening in the hills' own time zone.
+# Timed to the readers, who are almost all in US Central. The countdown counts
+# whole calendar days in that zone (see scripts/lib/days.mjs), so it ticks over
+# at Central midnight and then holds still. The first run publishes that new
+# number while everyone is still asleep.
+#
+# 06:15 UTC is 12:15am CST and 1:15am CDT, so it lands after Central midnight
+# whichever side of the DST change we are on. Cron here cannot follow DST.
+# 18:15 UTC is early afternoon Central, a second forecast pull during the day.
+#
+# Not on the hour: scheduled Actions queue behind everyone else's top-of-hour
+# jobs and can be held up half an hour or more.
 name: Refresh
 
 on:
   schedule:
-    - cron: "0 11,23 * * *"
+    - cron: "15 6,18 * * *"
   workflow_dispatch:
 
 permissions:
