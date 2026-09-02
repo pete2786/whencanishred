@@ -1042,7 +1042,7 @@ function heroCopy() {
 
   let SUB = "";
   if (groups.length) {
-    SUB = `First lift has gone to ${listOf(groups)}`;
+    SUB = `First open has gone to ${listOf(groups)}`;
     SUB += loose
       ? `; ${WORDS[loose] ?? loose} of the ${WORDS[rows.length] ?? rows.length} winters on ` +
         `record ${loose === 1 ? "is" : "are"} too loosely dated to call. `
