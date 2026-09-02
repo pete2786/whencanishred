@@ -600,6 +600,12 @@ const lastUpdated = (() => {
          `<time datetime="${made.toISOString()}">${onDay(made)}, ${clock(made)} ${zone(made)}</time>.`;
 })();
 
+// The year comes from Central like the rest of the footer, so the notice does
+// not roll over on New Year's Eve on a UTC runner.
+const copyright = "&copy; " + new Intl.DateTimeFormat("en-CA", {
+  timeZone: CT, year: "numeric",
+}).format(now) + " DP Labs, LLC";
+
 const fcSection = forecastSection();
 
 // Regions are states, because that is how people group these hills. Minnesota
@@ -1224,6 +1230,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),
   FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
   PICKER: picker("mn", ""),
   HILL_INK: hillInkCss(),
   CHART: chartSection(curve && {
@@ -1270,6 +1277,7 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
          `state?`,
     FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
   }));
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
@@ -1281,6 +1289,7 @@ writeFileSync("about.html", fill(readFileSync("templates/about.html", "utf8"), {
   PICKER: picker("mn", ""),
   FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
   SHOT_POND: SHOT("wild-mountain-pondskim", "",
     "David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green " +
     "water, a crowd watching from the fence and the lift tower behind.", ABOUT_SIZES),
@@ -1308,6 +1317,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
     PICKER: picker("mn", "../"),
     HILL_INK: hillInkCss(),
     PHOTOS: photoSection(slug),

@@ -232,6 +232,8 @@
     display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
   }
   footer a { color:var(--ink-2); }
+  /* A legal notice reads as its own line, not as another footnote in the row. */
+  footer .copy { flex-basis:100%; margin-top:4px; }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
 
@@ -709,6 +711,7 @@ footer::before {
       <a href="https://maphub.net/midwestskiers/midwest-ski-resort-guide">Midwest Ski
       Resort Guide</a> map, and <a href="https://www.midwestskiers.com/">midwestskiers.com</a>.</span>
     <span><a href="about.html">About this site</a></span>
+    <span class="copy"><!--{{COPYRIGHT}}--></span>
   </footer>
 </div>
 </body>
