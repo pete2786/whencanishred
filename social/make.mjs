@@ -205,7 +205,7 @@ const dataUri = rel => {
 };
 
 // The site's wordmark, lowercase, "shred" in the accent.
-const MARK = `<span class="wm">when can i <em>shred</em></span>`;
+const MARK = `<span class="wm">when can i <em>shred</em>?</span>`;
 const DOMAIN = `whencanishred.com`;
 
 // A projected date must never appear without the site's own label for how it
@@ -1562,7 +1562,7 @@ footer.foot-r{
 <body>
 <div class="shell">
   <header class="head">
-    <span class="h-mark">when can i <em>shred</em></span>
+    <span class="h-mark">when can i <em>shred</em>?</span>
     <span class="h-meta">Instagram &middot; batch one &middot; for review</span>
   </header>
   <div class="head-rule"></div>
