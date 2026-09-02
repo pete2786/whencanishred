@@ -377,17 +377,27 @@ const card = (o) => { cards.push(o); return o; };
 
 // -- 0 -------------------------------------- best, median, worst for Minnesota
 //
-// The homepage hero, as a frame. Same resort the site leads with (the one
-// projected earliest) and the same three scenarios: its earliest first lift on
-// record, the median of its seasons, and its latest. Carries a live day count,
-// so regenerate on the day it is posted.
-const leader = Object.keys(projection)
-  .sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
+// Minnesota's opening day, as a frame. The card used to run one resort's
+// record, which put Wild Mountain's name and colour on the state's headline
+// card. The state is the subject now: for each recorded season, the day the
+// earliest Minnesota resort took its first lift, then the earliest, median and
+// latest of those. No resort is named, so none is featured.
+//
+// Carries a live day count, so regenerate on the day it is posted.
+const MN = Object.keys(resorts).filter(s => resorts[s].state === "MN");
 
 const scenarios = (() => {
-  const seen = Object.entries(seasons[leader] ?? {})
-    .map(([season, s]) => ({ season, date: s.firstLift?.date }))
-    .filter(e => e.date)
+  // One entry per season: whichever Minnesota resort opened first that year.
+  const firstOf = new Map();
+  for (const slug of MN) {
+    for (const [season, ev] of Object.entries(seasons[slug] ?? {})) {
+      const date = ev.firstLift?.date;
+      if (!date) continue;
+      const held = firstOf.get(season);
+      if (!held || seasonRank(date) < seasonRank(held.date)) firstOf.set(season, { season, date });
+    }
+  }
+  const seen = [...firstOf.values()]
     .sort((a, b) => seasonRank(a.date).localeCompare(seasonRank(b.date)));
   if (seen.length < 2) return null;
   return [
@@ -417,7 +427,7 @@ if (scenarios) card({
     <div class="pad col">
     <div class="top">${MARK}</div>
     <div class="grow col ctr" style="gap:24px; justify-content:center">
-      <p class="kicker cyan">Opening day at <span style="color:${ink(leader)}">${esc(nameOf(leader))}</span> is in&hellip;</p>
+      <p class="kicker cyan">Opening day in <span style="color:${TOKENS.ink}">Minnesota</span> is in&hellip;</p>
       <div class="scens">
         ${scenarios.map(s => {
           const iso = thisSeason(s.date);
