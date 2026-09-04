@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dakotas &amp; Iowa &middot; When Can I Shred</title>
+<title>Dakotas &amp; Iowa &middot; When Can I Shred?</title>
 <meta name="description" content="Opening dates for Dakotas &amp; Iowa ski resorts are not gathered yet. Help fill them in.">
-<meta property="og:title" content="When Can I Shred &middot; Dakotas &amp; Iowa">
+<meta property="og:title" content="When Can I Shred? &middot; Dakotas &amp; Iowa">
 <meta property="og:description" content="Not covered yet. Help gather the resorts and their opening dates.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
@@ -232,14 +231,19 @@
     display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
   }
   footer a { color:var(--ink-2); }
+  /* A legal notice reads as its own line, not as another footnote in the row. */
+  footer .copy { flex-basis:100%; margin-top:4px; }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
 
   .scens {
-    display:flex; align-items:flex-end; flex-wrap:wrap;
+    display:flex; align-items:flex-end; justify-content:center; flex-wrap:wrap;
     gap:clamp(22px,6vw,64px); margin:2px 0 0;
   }
-  .scen { display:flex; flex-direction:column; }
+  /* Each scenario centres on its own number rather than ranging left: the
+     middle one is twice the size of its neighbours, so a left edge put the
+     three dates in a line the eye could not connect to them. */
+  .scen { display:flex; flex-direction:column; align-items:center; text-align:center; }
   .scen-num {
     font-family:"Instrument Serif",Georgia,serif; line-height:.86;
     letter-spacing:-.03em; font-variant-numeric:tabular-nums;
@@ -617,12 +621,12 @@ footer::before {
 <div class="wrap">
 
   <header class="masthead">
-    <div class="wordmark"><a href="index.html">when can i <em>shred</em></a></div>
+    <div class="wordmark"><a href="index.html">when can i <em>shred</em>?</a></div>
     <details class="picker">
       <summary>Dakotas & Iowa</summary>
       <nav class="picker-menu">
       <a href="index.html">Minnesota<span>Twin Cities, Duluth, North Shore</span></a>
-      <a href="wisconsin.html">Wisconsin<span>Chicago, Madison - Milwaukee, Wausau</span></a>
+      <a href="wisconsin.html">Wisconsin<span>Chicago, Madison & Milwaukee, Wausau</span></a>
       <a href="michigan-up.html">Michigan · Upper Peninsula<span>Ironwood, Marquette, Sault Ste Marie</span></a>
       <a href="michigan-lp.html">Michigan · Lower Peninsula<span>Traverse City, Cadillac, Detroit</span></a>
       <a href="dakotas-iowa.html" aria-current="page">Dakotas & Iowa<span>Black Hills, Bismarck, Dubuque</span></a>
@@ -634,8 +638,8 @@ footer::before {
 
   <section class="hero">
     <p class="eyebrow">Normally Oct 11</p>
-    <h1 class="fc-head">Snowmaking weather normally reaches Black Hills around Oct 11, 42 days away.</h1>
-    <p class="hero-sub">That is the whole estimate, and it is the weather rather than a resort. No opening date for any resort here is on file yet, so there is nothing to project from. The chart and the tiles below are the same ones the Minnesota page runs on, taken at Lead, SD, Bismarck and Dubuque instead of at resorts. The curve is Dubuque.</p>
+    <h1 class="fc-head">Snowmaking weather normally reaches Black Hills around Oct 11, 37 days away.</h1>
+    <p class="hero-sub">That is the whole estimate, and it describes the weather at a reference town. Nobody has filed an opening date for a resort here, so there is nothing to project from. The chart and the tiles below are the same ones the Minnesota page runs on, taken at Lead, SD, Bismarck and Dubuque instead of at resorts. The curve shown is Dubuque's.</p>
 
     <dl class="stats stats-region">
       <div><dt>Resorts tracked</dt><dd>0</dd></div>
@@ -728,12 +732,12 @@ footer::before {
 
   <section class="sec">
     <h2 class="sec-title">The next two weeks</h2>
-    <p class="fc-answer">No snowmaking weather in the next 16 days. The coldest any of these gets is 35.4&deg; at Lead, SD.</p>
+    <p class="fc-answer">No snowmaking weather in the next 16 days. The coldest any of these gets is 43.9&deg; at Lead, SD.</p>
 
     <div class="duo">
       <div class="card">
         <h3>Black Hills</h3>
-        <p class="big">35.4&deg;</p>
+        <p class="big">43.9&deg;</p>
         <p>Coldest wet bulb the 16-day forecast reaches at Lead, SD.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>0</dd>
@@ -743,7 +747,7 @@ footer::before {
       </div>
       <div class="card">
         <h3>Bismarck</h3>
-        <p class="big">38.9&deg;</p>
+        <p class="big">45.7&deg;</p>
         <p>Coldest wet bulb the 16-day forecast reaches at Bismarck.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>0</dd>
@@ -753,7 +757,7 @@ footer::before {
       </div>
       <div class="card">
         <h3>Dubuque</h3>
-        <p class="big">37.5&deg;</p>
+        <p class="big">51.1&deg;</p>
         <p>Coldest wet bulb the 16-day forecast reaches at Dubuque.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>0</dd>
@@ -770,11 +774,11 @@ footer::before {
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">Want resort specific info? We need help!</h2>
+    <h2 class="sec-title">Want resort-specific info? We need help!</h2>
     <p class="sec-note">
-      We need somebody to help find opening dates, closing dates, and where the two can be
-      told apart, the pre-season opening versus the full one. That mostly means trolling
-      their Facebook feeds by hand. Sometimes the websites have it.
+      We need somebody to find opening and closing dates, and to tell the pre-season
+      opening apart from the full one where the two differ. That mostly means digging
+      through Facebook feeds by hand. Sometimes the website has it.
       <a href="index.html">Minnesota</a> shows what a region looks like once it is filled in.
     </p>
 
@@ -792,7 +796,7 @@ footer::before {
         <li>Thrill Hills<span>North Dakota</span></li>
     </ul>
 
-    <p class="sec-cta standalone">If you know Dakotas & Iowa resorts, or want to take on the whole state, that is the whole job.
+    <p class="sec-cta standalone">Know a Dakotas & Iowa resort's dates, or want to take on the whole state?
       Email <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>. Dates for resorts already
       listed are just as welcome.
     </p>
@@ -802,8 +806,9 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-08-30T16:51:01.556Z">30 August 2026, 11:51 CDT</time>. Forecast pulled <time datetime="2026-08-30T15:17:03.763Z">30 August 2026, 10:17 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-09-04T11:18:25.209Z">4 September 2026, 06:18 CDT</time>. Forecast pulled <time datetime="2026-09-04T11:18:00.818Z">4 September 2026, 06:18 CDT</time>.</span>
     <span><a href="about.html">About this site</a></span>
+    <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
 </div>
 </body>

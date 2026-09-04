@@ -29,8 +29,19 @@ rate-limited; reruns are free.
 ## Staying current
 
 `.github/workflows/refresh.yml` pulls the forecast and rebuilds twice a day, at
-11:00 and 23:00 UTC — early morning and evening in the hills' own time zone. It
-commits the result to `main`, which is what GitHub Pages serves.
+06:15 and 18:15 UTC. It commits the result to `main`, which is what GitHub Pages
+serves.
+
+Those times are set by where the readers are, not by where the runner is. The
+countdown counts whole calendar days in US Central (`scripts/lib/days.mjs`), so
+it ticks over at Central midnight and then holds still all day. 06:15 UTC lands
+just after that midnight on either side of the DST change, which cron cannot
+follow, so the new number is published before anyone is awake to see the old
+one.
+
+It used to measure from the instant of the build and round, which put the
+rounding boundary in the middle of the reader's afternoon: the 11:00 run said 69
+days and the 23:00 run said 68, on the same day.
 
 The rebuild matters on its own, not only for the forecast. The countdown, the
 days-until column and the forecast's own staleness note are all computed at

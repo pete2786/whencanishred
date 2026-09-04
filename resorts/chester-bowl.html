@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chester Bowl &middot; When Can I Shred</title>
+<title>Chester Bowl &middot; When Can I Shred?</title>
 <meta name="description" content="When Chester Bowl normally opens, and every opening date we could source.">
 <meta property="og:title" content="Chester Bowl">
 <meta property="og:description" content="Opening dates for Chester Bowl, with sources.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
@@ -206,6 +205,8 @@
     display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
   }
   footer a { color:var(--ink-2); }
+  /* A legal notice reads as its own line, not as another footnote in the row. */
+  footer .copy { flex-basis:100%; margin-top:4px; }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
   .hero-sub a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
@@ -466,12 +467,12 @@ footer::before {
 <div class="wrap">
 
   <header class="masthead">
-    <div class="wordmark">when can i <em>shred</em></div>
+    <div class="wordmark">when can i <em>shred</em>?</div>
         <details class="picker">
       <summary>Minnesota</summary>
       <nav class="picker-menu">
       <a href="../index.html" aria-current="page">Minnesota<span>Twin Cities, Duluth, North Shore</span></a>
-      <a href="../wisconsin.html">Wisconsin<span>Chicago, Madison - Milwaukee, Wausau</span></a>
+      <a href="../wisconsin.html">Wisconsin<span>Chicago, Madison & Milwaukee, Wausau</span></a>
       <a href="../michigan-up.html">Michigan · Upper Peninsula<span>Ironwood, Marquette, Sault Ste Marie</span></a>
       <a href="../michigan-lp.html">Michigan · Lower Peninsula<span>Traverse City, Cadillac, Detroit</span></a>
       <a href="../dakotas-iowa.html">Dakotas & Iowa<span>Black Hills, Bismarck, Dubuque</span></a>
@@ -502,7 +503,7 @@ footer::before {
 
   <section class="sec">
     <h2 class="sec-title">Season by season</h2>
-    <p class="sec-note">Every date carries where it came from. <b>About</b> means the archive
+    <p class="sec-note">Each date says where it came from. <b>About</b> means the archive
       placed it in a window without pinning the day; <b>confirmed</b> means two independent
       sources agreed.</p>
 
@@ -524,10 +525,11 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-08-30T16:51:01.556Z">30 August 2026, 11:51 CDT</time>. Forecast pulled <time datetime="2026-08-30T15:17:03.763Z">30 August 2026, 10:17 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-09-04T11:18:25.209Z">4 September 2026, 06:18 CDT</time>. Forecast pulled <time datetime="2026-09-04T11:18:00.818Z">4 September 2026, 06:18 CDT</time>.</span>
     <span><a href="../about.html">About this site</a></span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
+    <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
 </div>
 </body>

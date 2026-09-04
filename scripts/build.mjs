@@ -3,6 +3,7 @@
 // repo root.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+import { daysUntil } from "./lib/days.mjs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
 
@@ -277,7 +278,7 @@ function forecastSection() {
   // plain heading took its place.
   let answer;
   if (!known.length) {
-    answer = "The forecast could not be read for any resort.";
+    answer = "The forecast did not load for any resort.";
   } else if (!withWindow.length) {
     const [slug, h] = known.reduce((a, b) => (b[1].min < a[1].min ? b : a));
     answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
@@ -351,7 +352,8 @@ function observed(slug) {
 }
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const daysUntil = iso => Math.round((new Date(`${iso}T00:00:00`) - new Date()) / 86400000);
+// Whole calendar days in the resorts' own zone, so the countdown holds still
+// through a reader's day and ticks at local midnight. See lib/days.mjs.
 
 // ------------------------------------------------------------------- hero
 //
@@ -598,6 +600,12 @@ const lastUpdated = (() => {
          `<time datetime="${made.toISOString()}">${onDay(made)}, ${clock(made)} ${zone(made)}</time>.`;
 })();
 
+// The year comes from Central like the rest of the footer, so the notice does
+// not roll over on New Year's Eve on a UTC runner.
+const copyright = "&copy; " + new Intl.DateTimeFormat("en-CA", {
+  timeZone: CT, year: "numeric",
+}).format(now) + " DP Labs, LLC";
+
 const fcSection = forecastSection();
 
 // Regions are states, because that is how people group these hills. Minnesota
@@ -620,11 +628,11 @@ const STATES = [
     note: "Colorado, East Coast, interested?",
     eyebrow: "Not planned",
     headline: "Everywhere else, if anyone wants it.",
-    lead: "This site is built around a question that matters where resorts make their own " +
-          "winter: when does it get cold enough to blow snow, and how long after that do " +
-          "they open? Somewhere with real snowfall, the answer may be dull. The resort " +
-          "opens when it snows. Whether any of this is worth having for the Rockies, the " +
-          "East or anywhere else is genuinely an open question.",
+    lead: "This site answers one question: when does it get cold enough to blow snow, and " +
+          "how long after that do resorts open? That matters where resorts make their own " +
+          "winter. Where it snows for real, the answer is probably just that " +
+          "the resort opens when it snows. I do not know whether this is worth having for " +
+          "the Rockies, the East or anywhere else.",
     cta: "If you want this for your mountains, say so and say what would make it useful.",
   },
 ];
@@ -903,7 +911,7 @@ for (const a of PHOTO_WIDTHS.values()) a.sort((x, y) => x - y);
 // page its largest paint for no saving — nobody scrolls past it.
 function SHOT(base, cls, alt, sizes, root = "", eager = false) {
   const have = PHOTO_WIDTHS.get(base) ?? [];
-  if (!have.length) throw new Error(`no photo files for "${base}" — run scripts/photos.mjs`);
+  if (!have.length) throw new Error(`no photo files for "${base}"; run scripts/photos.mjs`);
   const srcset = have.map(w => `${root}photos/${base}-${w}.jpg ${w}w`).join(", ");
   const load = eager ? `loading="eager" fetchpriority="high" decoding="async"`
                      : `loading="lazy" decoding="async"`;
@@ -1007,7 +1015,7 @@ function heroCopy() {
 
   let SAY;
   if (!last.settled) {
-    SAY = "Nobody can be said to have opened first last season.";
+    SAY = "Last season's dates are too loose to say who opened first.";
   } else if (last.leaders.length > 1) {
     SAY = `${listOf(last.leaders.map(bold))} opened first last season, to the day.`;
   } else if (last.next.length) {
@@ -1034,13 +1042,13 @@ function heroCopy() {
 
   let SUB = "";
   if (groups.length) {
-    SUB = `First lift has gone to ${listOf(groups)}`;
+    SUB = `First open has gone to ${listOf(groups)}`;
     SUB += loose
       ? `; ${WORDS[loose] ?? loose} of the ${WORDS[rows.length] ?? rows.length} winters on ` +
         `record ${loose === 1 ? "is" : "are"} too loosely dated to call. `
       : `. `;
   }
-  SUB += "Nothing is announced for the coming winter yet.";
+  SUB += "No resort has announced a date for the coming winter.";
   return { SAY, SUB };
 }
 
@@ -1133,7 +1141,7 @@ function regionClimate(id) {
   const withWindow = known.filter(({ f }) => f.hoursUnder > 0);
   let answer;
   if (!fc) answer = "No forecast on file.";
-  else if (!known.length) answer = "The forecast could not be read for any of these.";
+  else if (!known.length) answer = "The forecast did not load for any of these.";
   else if (!withWindow.length) {
     const cold = known.reduce((a, b) => (b.f.min < a.f.min ? b : a));
     answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
@@ -1195,11 +1203,11 @@ ${cards}
     EYEBROW: `Normally ${md2(soonest.window.normal)}`,
     HEADLINE: `Snowmaking weather normally reaches ${esc(soonest.label)} around ` +
               `${md2(soonest.window.normal)}, ${days} days away.`,
-    LEAD: `That is the whole estimate, and it is the weather rather than a resort. ` +
-          `No opening date for any resort here is on file yet, so there is nothing to ` +
+    LEAD: `That is the whole estimate, and it describes the weather at a reference town. ` +
+          `Nobody has filed an opening date for a resort here, so there is nothing to ` +
           `project from. The chart and the tiles below are the same ones the ` +
           `Minnesota page runs on, taken at ${listOf(list.map(([, p]) => esc(p.note)))} ` +
-          `instead of at resorts. The curve is ${esc(ref.note)}.`,
+          `instead of at resorts. The curve shown is ${esc(ref.note)}'s.`,
   };
 }
 
@@ -1222,6 +1230,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),
   FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
   PICKER: picker("mn", ""),
   HILL_INK: hillInkCss(),
   CHART: chartSection(curve && {
@@ -1246,8 +1255,8 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
   const clim = regionClimate(region.id);
   const lead = n
     ? `${n === 1 ? "One" : String(n)} ${region.name} resort ${n === 1 ? "is" : "are"} already on ` +
-      `the site, carried over because it sits in the Twin Cities' orbit rather than because ` +
-      `the state is covered. The rest of ${region.name} is not gathered yet.`
+      `the site, carried over because it sits in the Twin Cities' orbit. That does not mean ` +
+      `the state is covered: nobody has gathered the rest of ${region.name} yet.`
     : `No ${region.name} resorts are on the site yet. Everything here is built from dates ` +
       `gathered one post at a time, and nobody has worked this state.`;
   writeFileSync(region.file, fill(regionTpl, {
@@ -1264,10 +1273,11 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
     REGION_CLIMATE: clim.CLIMATE,
     ROSTER: roster(region.id),
     REGION_STATS: clim.STATS,
-    CTA: region.cta ?? `If you know ${region.name} resorts, or want to take on the whole state, ` +
-         `that is the whole job.`,
+    CTA: region.cta ?? `Know a ${region.name} resort's dates, or want to take on the whole ` +
+         `state?`,
     FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
   }));
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
@@ -1279,6 +1289,7 @@ writeFileSync("about.html", fill(readFileSync("templates/about.html", "utf8"), {
   PICKER: picker("mn", ""),
   FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
   SHOT_POND: SHOT("wild-mountain-pondskim", "",
     "David going down in the pond skim at Wild Mountain, mid-wipeout in a spray of green " +
     "water, a crowd watching from the fence and the lift tower behind.", ABOUT_SIZES),
@@ -1306,6 +1317,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
+  COPYRIGHT: copyright,
     PICKER: picker("mn", "../"),
     HILL_INK: hillInkCss(),
     PHOTOS: photoSection(slug),

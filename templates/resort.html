@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><!--{{NAME}}--> &middot; When Can I Shred</title>
+<title><!--{{NAME}}--> &middot; When Can I Shred?</title>
 <meta name="description" content="When <!--{{NAME}}--> normally opens, and every opening date we could source.">
 <meta property="og:title" content="<!--{{NAME}}-->">
 <meta property="og:description" content="Opening dates for <!--{{NAME}}-->, with sources.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
@@ -206,6 +205,8 @@
     display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
   }
   footer a { color:var(--ink-2); }
+  /* A legal notice reads as its own line, not as another footnote in the row. */
+  footer .copy { flex-basis:100%; margin-top:4px; }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
   .hero-sub a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
@@ -444,7 +445,7 @@ footer::before {
 <div class="wrap">
 
   <header class="masthead">
-    <div class="wordmark">when can i <em>shred</em></div>
+    <div class="wordmark">when can i <em>shred</em>?</div>
     <!--{{PICKER}}-->
   </header>
 
@@ -469,7 +470,7 @@ footer::before {
 
   <section class="sec">
     <h2 class="sec-title">Season by season</h2>
-    <p class="sec-note">Every date carries where it came from. <b>About</b> means the archive
+    <p class="sec-note">Each date says where it came from. <b>About</b> means the archive
       placed it in a window without pinning the day; <b>confirmed</b> means two independent
       sources agreed.</p>
 
@@ -495,6 +496,7 @@ footer::before {
     <span><a href="../about.html">About this site</a></span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
+    <span class="copy"><!--{{COPYRIGHT}}--></span>
   </footer>
 </div>
 </body>

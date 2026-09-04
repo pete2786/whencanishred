@@ -3,12 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>When Can I Shred &middot; Minnesota</title>
+<title>When Can I Shred? &middot; Minnesota</title>
 <meta name="description" content="When Minnesota ski resorts can start making snow, and when they normally open. Built on 31 years of wet-bulb data.">
-<meta property="og:title" content="When Can I Shred">
+<meta property="og:title" content="When Can I Shred?">
 <meta property="og:description" content="When Minnesota ski resorts can start making snow, and when they normally open.">
 <meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>&#127938;</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap">
@@ -233,14 +232,19 @@
     display:flex; flex-wrap:wrap; gap:8px 28px; justify-content:space-between;
   }
   footer a { color:var(--ink-2); }
+  /* A legal notice reads as its own line, not as another footnote in the row. */
+  footer .copy { flex-basis:100%; margin-top:4px; }
 
   @media (prefers-reduced-motion:reduce) { * { animation:none !important; transition:none !important; } }
 
   .scens {
-    display:flex; align-items:flex-end; flex-wrap:wrap;
+    display:flex; align-items:flex-end; justify-content:center; flex-wrap:wrap;
     gap:clamp(22px,6vw,64px); margin:2px 0 0;
   }
-  .scen { display:flex; flex-direction:column; }
+  /* Each scenario centres on its own number rather than ranging left: the
+     middle one is twice the size of its neighbours, so a left edge put the
+     three dates in a line the eye could not connect to them. */
+  .scen { display:flex; flex-direction:column; align-items:center; text-align:center; }
   .scen-num {
     font-family:"Instrument Serif",Georgia,serif; line-height:.86;
     letter-spacing:-.03em; font-variant-numeric:tabular-nums;
@@ -619,7 +623,7 @@ footer::before {
 <div class="wrap">
 
   <header class="masthead">
-    <div class="wordmark">when can i <em>shred</em></div>
+    <div class="wordmark">when can i <em>shred</em>?</div>
     <!--{{PICKER}}-->
   </header>
 
@@ -668,12 +672,12 @@ footer::before {
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">All Minnesota/WI Region</h2>
+    <h2 class="sec-title">Every resort we track</h2>
     <p class="sec-note">
-      Sorted by how soon you can reasonably expect to be on it. Snowmaking hours are the hours
-      under 28&deg; a resort normally gets across October and November.
+      Sorted by how soon you can expect to be on it. Snowmaking hours are the hours under
+      28&deg; a resort normally gets across October and November.
     </p>
-    <p class="sec-cta">Click or tap any resort for more detail on its historic opening days.</p>
+    <p class="sec-cta">Click any resort to see its past opening dates.</p>
 
     <div class="tbl-box">
       <table>
@@ -707,6 +711,7 @@ footer::before {
       <a href="https://maphub.net/midwestskiers/midwest-ski-resort-guide">Midwest Ski
       Resort Guide</a> map, and <a href="https://www.midwestskiers.com/">midwestskiers.com</a>.</span>
     <span><a href="about.html">About this site</a></span>
+    <span class="copy"><!--{{COPYRIGHT}}--></span>
   </footer>
 </div>
 </body>
