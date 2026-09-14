@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-14T12:47:09.885Z",
+  "generatedAt": "2026-09-14T21:49:31.283Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
@@ -44,12 +44,12 @@
       "firstWindow": null
     },
     "giants-ridge": {
-      "min": 31.7,
+      "min": 31.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "spirit-mountain": {
-      "min": 33.7,
+      "min": 33.4,
       "hoursUnder": 0,
       "firstWindow": null
     },
@@ -84,12 +84,13 @@
       "firstWindow": null
     },
     "mount-ski-gull": {
-      "min": 38.7,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": null,
+      "hoursUnder": null,
+      "firstWindow": null,
+      "error": "Unexpected token 'U', \"Unexpected\"... is not valid JSON"
     },
     "chester-bowl": {
-      "min": 35.9,
+      "min": 36.9,
       "hoursUnder": 0,
       "firstWindow": null
     },
@@ -106,7 +107,7 @@
       "firstWindow": null
     },
     "madison": {
-      "min": 43.4,
+      "min": 43,
       "hoursUnder": 0,
       "firstWindow": null
     },
@@ -131,7 +132,7 @@
       "firstWindow": null
     },
     "traverse": {
-      "min": 41.1,
+      "min": 41.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
@@ -156,22 +157,22 @@
       "firstWindow": null
     },
     "dubuque": {
-      "min": 46,
+      "min": 47.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cleveland": {
-      "min": 46.1,
+      "min": 47.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mansfield": {
-      "min": 48,
+      "min": 49.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cincinnati": {
-      "min": 52.2,
+      "min": 52.5,
       "hoursUnder": 0,
       "firstWindow": null
     }
