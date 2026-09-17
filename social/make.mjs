@@ -85,6 +85,25 @@ import { daysUntil } from "../scripts/lib/days.mjs";
 // The claims the cards make, each computed rather than asserted.
 
 // Who the record says went first, per season, and how sure we are.
+// A date in this record is an interval, not always a day, and the winner has to
+// be worked out that way. This used to compare raw dates and hand the season to
+// whichever string sorted first, which called 2024-25 for Wild Mountain off a
+// first lift the archive only places somewhere in a seventeen-day window -- with
+// Andes opening on the 23rd, inside it. The site refuses to call that season
+// (interval() in scripts/build.mjs); the card printed a winner in its own colour
+// anyway, which is the one thing this file is not allowed to do.
+//
+// A one-sided bracket is not the same as a window. "No closed capture before the
+// first open one" means the archive never looked earlier, which is absence of
+// evidence, not evidence of an earlier opening. It ranks as its recorded date.
+const spanOf = f => {
+  if (!f?.date) return null;
+  const r = f.range;
+  if (f.precision === "exact" || !r) return [f.date, f.date];
+  if (r[0] == null || r[1] == null) return [f.date, f.date];
+  return [r[0], r[1]];
+};
+
 function firstLiftTable(slugs) {
   const all = new Set();
   for (const s of slugs) for (const k of Object.keys(seasons[s] ?? {})) all.add(k);
@@ -92,11 +111,19 @@ function firstLiftTable(slugs) {
   return list.map(season => {
     const cells = slugs.map(slug => {
       const f = seasons[slug]?.[season]?.firstLift;
-      return f?.date ? { slug, date: f.date, precision: f.precision } : { slug, date: null };
+      if (!f?.date) return { slug, date: null };
+      const [lo, hi] = spanOf(f);
+      return { slug, date: f.date, lo, hi, soft: lo !== hi };
     });
     const dated = cells.filter(c => c.date);
-    const best = dated.length ? dated.reduce((a, b) => (b.date < a.date ? b : a)).date : null;
-    return { season, cells, winners: dated.filter(c => c.date === best).map(c => c.slug) };
+    if (!dated.length) return { season, cells, settled: false, winners: [] };
+    // A resort could have been first if its earliest possible day is not after
+    // the earliest last-possible day of any other.
+    const earliestHi = dated.reduce((m, c) => (c.hi < m ? c.hi : m), dated[0].hi);
+    const could = dated.filter(c => c.lo <= earliestHi);
+    const tied = could.length > 1 && could.every(c => !c.soft && c.lo === could[0].lo);
+    const settled = could.length === 1 || tied;
+    return { season, cells, settled, winners: settled ? could.map(c => c.slug) : [] };
   });
 }
 
@@ -600,8 +627,29 @@ card({
 });
 
 // -- 4 ------------------------------------------------- the battle for first
+//
+// The three that actually contend. Trollhaugen is over the Wisconsin border and
+// races anyway, which the kicker says rather than quietly calling it Minnesota.
 const RACERS = ["wild-mountain", "trollhaugen", "andes-tower-hills"];
 const race = firstLiftTable(RACERS);
+
+const andList = xs => xs.length < 2 ? (xs[0] ?? "")
+  : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
+
+// Why a season has no winner, read off the record rather than written by hand.
+// If the brackets ever get pinned down this line disappears on its own.
+const raceKey = (() => {
+  const open = race.filter(r => !r.settled && r.cells.some(c => c.soft));
+  if (!open.length) return "";
+  return open.map(r => {
+    const soft = r.cells.find(c => c.soft);
+    const days = Math.round((new Date(soft.hi) - new Date(soft.lo)) / 86400000);
+    const inside = r.cells.filter(c => c.date && !c.soft && c.lo >= soft.lo && c.lo <= soft.hi);
+    return `<b>${esc(r.season)}</b> has no winner. The archive only places ` +
+      `${esc(nameOf(soft.slug))}&rsquo;s first lift inside a ${days}-day window, and ` +
+      `${esc(andList(inside.map(c => nameOf(c.slug))))} opened inside it.`;
+  }).join(" ");
+})();
 card({
   post: 4, name: "battle-for-first", kind: "Feed · single", w: 1080, h: 1080,
   title: "The battle for first",
@@ -609,7 +657,7 @@ card({
   <div class="c col pad">
     <div class="top">${MARK}</div>
     <div class="grow col gap">
-      <p class="kicker cyan">First chair in Minnesota</p>
+      <p class="kicker cyan">First chair in Minnesota, and one from Wisconsin</p>
       <h2 class="mid">Three resorts battle it out.</h2>
       <table class="race">
         <thead><tr><th></th>${RACERS.map(s =>
@@ -619,12 +667,18 @@ card({
           <td class="ry">${esc(r.season)}</td>
           ${r.cells.map(c => {
             const win = r.winners.includes(c.slug);
-            return `<td class="${win ? "rw" : ""}"${win ? ` style="color:${ink(c.slug)}"` : ""}>${
-              c.date ? esc(shortDate(c.date)) : "--"}</td>`;
+            if (!c.date) return `<td>--</td>`;
+            // A window is shown as a window. Printing only its first day reads
+            // as a known date, which is exactly what it is not.
+            const body = c.soft
+              ? `${esc(shortDate(c.lo))}<i class="win">to ${esc(shortDate(c.hi))}</i>`
+              : esc(shortDate(c.date));
+            return `<td class="${win ? "rw" : ""}"${win ? ` style="color:${ink(c.slug)}"` : ""}>${body}</td>`;
           }).join("")}
         </tr>`).join("\n")}
         </tbody>
       </table>
+      ${raceKey ? `<p class="rkey">${raceKey}</p>` : ""}
     </div>
     <div class="rule tape"></div>
     <p class="foot">${DOMAIN}</p>
@@ -1135,6 +1189,12 @@ const CARD_CSS = `
 .race th:first-child{text-align:left;}
 .race td{font-size:34px; text-align:right; padding:12px 0; border-bottom:1px solid var(--line-soft); color:var(--ink-3);}
 .race td.rw{color:var(--ink);}
+.race td .win{
+  display:block; font-family:Archivo,sans-serif; font-style:normal; font-size:17px;
+  font-weight:600; letter-spacing:.04em; color:var(--ink-3); margin-top:1px;
+}
+.rkey{font-size:23px; line-height:1.45; color:var(--ink-3); margin:22px 0 0;}
+.rkey b{color:var(--ink-2); font-weight:700;}
 .race .ry{
   font-family:Archivo,sans-serif; font-size:23px; font-weight:700; text-align:left; color:var(--ink-2);
   letter-spacing:.02em;
