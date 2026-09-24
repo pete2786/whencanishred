@@ -18,6 +18,15 @@ const hoursRows = read("data/hours.json");
 // Optional: the site builds without it, and says the forecast is missing
 // rather than printing numbers it does not have.
 const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
+// The Xweather second opinion, from scripts/forecast-xweather.mjs. Also
+// optional, and dropped once it is two days old: its step can fail on its own,
+// and a stale second opinion next to a fresh first one would compare two
+// different weeks.
+const xw = (() => {
+  if (!existsSync("data/forecast-xweather.json")) return null;
+  const x = read("data/forecast-xweather.json");
+  return (new Date() - new Date(x.generatedAt)) / 86400000 < 2 ? x : null;
+})();
 const seasonNotes = existsSync("data/season-notes.json") ? read("data/season-notes.json") : {};
 
 // data/hours.json keys hills by display name, and one of them is shorter than
@@ -256,6 +265,34 @@ const whenWindow = iso => {
 };
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+// One line of Xweather in a card, or nothing when it has no reading there.
+const xwRow = f => {
+  if (!f || f.min === null) return "";
+  const when = f.firstWindow ? whenWindow(f.firstWindow) : "none";
+  return `\n          <dt>Xweather first window</dt><dd>${when}, ${f.hoursUnder} hrs</dd>`;
+};
+
+// What Xweather says about the same set of points, as one sentence after the
+// Open-Meteo answer. Said only where the two differ on how many points get a
+// window or on which day the first one comes.
+function xwSentence(ids, pick, fcWith, fcFirst) {
+  const known = ids.map(id => [id, pick(id)]).filter(([, f]) => f && f.min !== null);
+  if (!known.length) return "";
+  const withWindow = known.filter(([, f]) => f.hoursUnder > 0);
+  if (!withWindow.length) {
+    return fcWith ? ` Xweather has no snowmaking weather at any of them in ${xw.horizonDays} days.` : "";
+  }
+  const first = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
+  const sameDay = fcFirst && fcFirst.slice(0, 10) === first[1].firstWindow.slice(0, 10);
+  if (withWindow.length === fcWith && sameDay) return " Xweather agrees.";
+  return ` Xweather has ${withWindow.length} of ${known.length}. Its first window is ${whenWindow(first[1].firstWindow)}.`;
+}
+
+const xwNote = () => xw
+  ? ` <a href="https://www.xweather.com/">Xweather</a> gives a second opinion over ${xw.horizonDays} days. ` +
+    `Its wet bulb is worked out from temperature and humidity with the formula Open-Meteo uses.`
+  : "";
+
 function forecastSection() {
   if (!fc) {
     return { TITLE: "The next two weeks", ANSWER: "No forecast on file.",
@@ -288,6 +325,11 @@ function forecastSection() {
     answer = `${withWindow.length} of ${known.length} resorts get snowmaking weather. ` +
       `<b>${esc(resorts[first[0]].name)}</b> first, ${whenWindow(first[1].firstWindow)}.`;
   }
+  if (xw && known.length) {
+    const first = withWindow.length
+      ? withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b))[1].firstWindow : null;
+    answer += xwSentence(Object.keys(fc.hills), id => xw.hills[id], withWindow.length, first);
+  }
 
   const cards = REGIONS.map(({ slug, label, note }) => {
     const h = fc.hills[slug];
@@ -302,7 +344,7 @@ function forecastSection() {
         <dl>
           <dt>Hours under ${fc.threshold}&deg;</dt><dd>${h.hoursUnder}</dd>
           <dt>First window</dt><dd>${h.firstWindow ? whenWindow(h.firstWindow) : "&mdash;"}</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>${hours[slug]?.normal ?? "&mdash;"}</dd>
+          <dt>Normal Oct&ndash;Nov hours</dt><dd>${hours[slug]?.normal ?? "&mdash;"}</dd>${xwRow(xw?.hills?.[slug])}
         </dl>
       </div>`;
   }).join("\n");
@@ -316,7 +358,7 @@ function forecastSection() {
     ANSWER: answer,
     NOTE: `Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, ` +
       `updated twice a day and last pulled ${madeStr}. ` +
-      `Guns can run under ${fc.threshold}&deg;.${stale}`,
+      `Guns can run under ${fc.threshold}&deg;.${xwNote()}${stale}`,
     CARDS: cards,
   };
 }
@@ -1128,7 +1170,7 @@ function regionClimate(id) {
         <dl>
           <dt>Hours under ${fc.threshold}&deg;</dt><dd>${f.hoursUnder}</dd>
           <dt>First window</dt><dd>${f.firstWindow ? whenWindow(f.firstWindow) : "&mdash;"}</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>${p.hours.normal}</dd>
+          <dt>Normal Oct&ndash;Nov hours</dt><dd>${p.hours.normal}</dd>${xwRow(xw?.places?.[pid])}
         </dl>
       </div>`;
   }).join("\n");
@@ -1149,6 +1191,11 @@ function regionClimate(id) {
   } else {
     answer = `${withWindow.length} of ${known.length} get snowmaking weather in the ` +
       `next ${fc.horizonDays} days.`;
+  }
+  if (xw && known.length) {
+    const first = withWindow.length
+      ? withWindow.reduce((a, b) => (a.f.firstWindow <= b.f.firstWindow ? a : b)).f.firstWindow : null;
+    answer += xwSentence(list.map(([pid]) => pid), pid => xw.places[pid], withWindow.length, first);
   }
 
   const chart = chartSection({
@@ -1180,7 +1227,7 @@ ${cards}
 
     <p class="sec-note fc-note">
       Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, updated twice a
-      day. Guns can run under ${fc?.threshold ?? 28}&deg;.
+      day. Guns can run under ${fc?.threshold ?? 28}&deg;.${xwNote()}
     </p>
   </section>
 `;
