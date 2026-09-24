@@ -1,177 +1,177 @@
 {
-  "generatedAt": "2026-09-23T21:30:23.286Z",
+  "generatedAt": "2026-09-24T11:45:52.957Z",
   "horizonDays": 16,
   "threshold": 28,
   "hills": {
     "wild-mountain": {
-      "min": 28,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 24.3,
+      "hoursUnder": 14,
+      "firstWindow": "2026-10-06T05:00"
     },
     "trollhaugen": {
-      "min": 28.1,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 23.9,
+      "hoursUnder": 14,
+      "firstWindow": "2026-10-06T05:00"
     },
     "hyland-hills": {
-      "min": 31.7,
+      "min": 30.2,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "afton-alps": {
-      "min": 29.5,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.1,
+      "hoursUnder": 6,
+      "firstWindow": "2026-10-07T02:00"
     },
     "welch-village": {
-      "min": 28.6,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 25.5,
+      "hoursUnder": 8,
+      "firstWindow": "2026-10-06T06:00"
     },
     "buck-hill": {
-      "min": 29.3,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.6,
+      "hoursUnder": 4,
+      "firstWindow": "2026-10-07T04:00"
     },
     "elm-creek": {
-      "min": 28.6,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.7,
+      "hoursUnder": 7,
+      "firstWindow": "2026-10-06T06:00"
     },
     "lutsen-mountains": {
-      "min": 28.2,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.2,
+      "hoursUnder": 8,
+      "firstWindow": "2026-10-07T01:00"
     },
     "giants-ridge": {
-      "min": 27.6,
-      "hoursUnder": 4,
-      "firstWindow": "2026-10-05T06:00"
+      "min": 23.2,
+      "hoursUnder": 12,
+      "firstWindow": "2026-10-06T21:00"
     },
     "spirit-mountain": {
-      "min": 27.6,
-      "hoursUnder": 2,
-      "firstWindow": "2026-10-05T06:00"
+      "min": 24.5,
+      "hoursUnder": 10,
+      "firstWindow": "2026-10-06T23:00"
     },
     "powder-ridge": {
-      "min": 28.1,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 25.7,
+      "hoursUnder": 10,
+      "firstWindow": "2026-10-06T05:00"
     },
     "mount-kato": {
-      "min": 29.7,
+      "min": 28.1,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "buena-vista": {
-      "min": 26.6,
-      "hoursUnder": 5,
-      "firstWindow": "2026-10-05T03:00"
+      "min": 25.6,
+      "hoursUnder": 17,
+      "firstWindow": "2026-10-06T02:00"
     },
     "detroit-mountain": {
-      "min": 27.2,
-      "hoursUnder": 3,
-      "firstWindow": "2026-10-05T05:00"
+      "min": 25.9,
+      "hoursUnder": 19,
+      "firstWindow": "2026-10-06T00:00"
     },
     "andes-tower-hills": {
-      "min": 28,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 25.3,
+      "hoursUnder": 14,
+      "firstWindow": "2026-10-06T04:00"
     },
     "coffee-mill": {
-      "min": 28,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 24.7,
+      "hoursUnder": 11,
+      "firstWindow": "2026-10-06T06:00"
     },
     "mount-ski-gull": {
-      "min": 26.3,
-      "hoursUnder": 3,
-      "firstWindow": "2026-10-05T05:00"
+      "min": 25.4,
+      "hoursUnder": 17,
+      "firstWindow": "2026-10-06T02:00"
     },
     "chester-bowl": {
-      "min": 29.3,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 27.5,
+      "hoursUnder": 3,
+      "firstWindow": "2026-10-07T05:00"
     },
     "steeplechase": {
-      "min": 28,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 24.7,
+      "hoursUnder": 11,
+      "firstWindow": "2026-10-06T06:00"
     }
   },
   "places": {
     "chicago": {
-      "min": 30.6,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 27.7,
+      "hoursUnder": 1,
+      "firstWindow": "2026-10-07T06:00"
     },
     "madison": {
-      "min": 29.6,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.5,
+      "hoursUnder": 4,
+      "firstWindow": "2026-10-07T04:00"
     },
     "wausau": {
-      "min": 28.1,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 24.6,
+      "hoursUnder": 14,
+      "firstWindow": "2026-10-06T05:00"
     },
     "ironwood": {
-      "min": 29.6,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 24.6,
+      "hoursUnder": 12,
+      "firstWindow": "2026-10-06T21:00"
     },
     "marquette": {
-      "min": 32,
+      "min": 31.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "sault": {
-      "min": 31.1,
+      "min": 32.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "traverse": {
-      "min": 37,
+      "min": 33.7,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cadillac": {
-      "min": 30.7,
+      "min": 28.6,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "detroit": {
-      "min": 29.7,
+      "min": 29.3,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "black-hills": {
-      "min": 28.7,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 18.2,
+      "hoursUnder": 29,
+      "firstWindow": "2026-10-04T19:00"
     },
     "bismarck": {
-      "min": 29.5,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.4,
+      "hoursUnder": 6,
+      "firstWindow": "2026-10-06T02:00"
     },
     "dubuque": {
-      "min": 30.4,
-      "hoursUnder": 0,
-      "firstWindow": null
+      "min": 26.5,
+      "hoursUnder": 4,
+      "firstWindow": "2026-10-07T04:00"
     },
     "cleveland": {
-      "min": 34.6,
+      "min": 32.8,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "mansfield": {
-      "min": 31.1,
+      "min": 28.5,
       "hoursUnder": 0,
       "firstWindow": null
     },
     "cincinnati": {
-      "min": 33.6,
+      "min": 31.8,
       "hoursUnder": 0,
       "firstWindow": null
     }
