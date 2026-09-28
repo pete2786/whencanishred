@@ -267,6 +267,18 @@ const whenWindow = iso => {
 };
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
+// The hour behind the big number: when the coldest wet bulb comes, and the
+// air temperature and humidity it is worked out from. Forecasts pulled before
+// forecast.mjs recorded these have no coldest hour, and get no rows.
+const coldestRows = f => {
+  const c = f.coldest;
+  if (!c) return "";
+  const rows = [`\n          <dt>Coldest hour</dt><dd>${whenWindow(c.time)}</dd>`];
+  if (c.temp !== null) rows.push(`\n          <dt>Air temperature then</dt><dd>${F(c.temp)}</dd>`);
+  if (c.humidity !== null) rows.push(`\n          <dt>Humidity then</dt><dd>${Math.round(c.humidity)}%</dd>`);
+  return rows.join("");
+};
+
 // One line of Xweather in a card, or nothing when it has no reading there.
 const xwRow = f => {
   if (!f || f.min === null) return "";
@@ -343,7 +355,7 @@ function forecastSection() {
         <h3>${label}</h3>
         <p class="big">${F(h.min)}</p>
         <p>Coldest wet bulb the ${fc.horizonDays}-day forecast reaches at ${esc(note)}.</p>
-        <dl>
+        <dl>${coldestRows(h)}
           <dt>Hours under ${fc.threshold}&deg;</dt><dd>${h.hoursUnder}</dd>
           <dt>First window</dt><dd>${h.firstWindow ? whenWindow(h.firstWindow) : "&mdash;"}</dd>
           <dt>Normal Oct&ndash;Nov hours</dt><dd>${hours[slug]?.normal ?? "&mdash;"}</dd>${xwRow(xw?.hills?.[slug])}
@@ -1190,7 +1202,7 @@ function regionClimate(id) {
         <h3>${esc(p.label)}</h3>
         <p class="big">${F(f.min)}</p>
         <p>Coldest wet bulb the ${fc.horizonDays}-day forecast reaches at ${esc(p.note)}.</p>
-        <dl>
+        <dl>${coldestRows(f)}
           <dt>Hours under ${fc.threshold}&deg;</dt><dd>${f.hoursUnder}</dd>
           <dt>First window</dt><dd>${f.firstWindow ? whenWindow(f.firstWindow) : "&mdash;"}</dd>
           <dt>Normal Oct&ndash;Nov hours</dt><dd>${p.hours.normal}</dd>${xwRow(xw?.places?.[pid])}

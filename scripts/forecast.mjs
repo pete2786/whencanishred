@@ -28,7 +28,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function forecast(lat, lon) {
   const q = new URLSearchParams({
     latitude: String(lat), longitude: String(lon),
-    hourly: "wet_bulb_temperature_2m",
+    // Air temperature and humidity too, so the page can show what the wet bulb
+    // at the coldest hour was worked out from.
+    hourly: "wet_bulb_temperature_2m,temperature_2m,relative_humidity_2m",
     temperature_unit: "fahrenheit",
     forecast_days: String(HORIZON),
     timezone: "America/Chicago",
@@ -40,21 +42,29 @@ async function forecast(lat, lon) {
   return h;
 }
 
+function summarise(h) {
+  const wb = h.wet_bulb_temperature_2m;
+  const cold = wb.map((v, i) => [v, i]).filter(([v]) => v !== null && v < THRESHOLD);
+  const known = wb.map((v, i) => [v, i]).filter(([v]) => v !== null);
+  if (!known.length) throw new Error("wet bulb all null");
+  const [min, at] = known.reduce((a, b) => (b[0] < a[0] ? b : a));
+  return {
+    min,
+    hoursUnder: cold.length,
+    // The first hour the guns could run, which is the fact anyone waiting
+    // on the season actually wants.
+    firstWindow: cold.length ? h.time[cold[0][1]] : null,
+    coldest: { time: h.time[at], temp: h.temperature_2m?.[at] ?? null,
+               humidity: h.relative_humidity_2m?.[at] ?? null },
+  };
+}
+
 const out = { generatedAt: new Date().toISOString(), horizonDays: HORIZON, threshold: THRESHOLD, hills: {}, places: {} };
 
 for (const [slug, r] of Object.entries(resorts)) {
   try {
-    const h = await forecast(r.lat, r.lon);
-    const wb = h.wet_bulb_temperature_2m;
-    const cold = wb.map((v, i) => [v, i]).filter(([v]) => v !== null && v < THRESHOLD);
-    out.hills[slug] = {
-      min: Math.min(...wb.filter(v => v !== null)),
-      hoursUnder: cold.length,
-      // The first hour the guns could run, which is the fact anyone waiting
-      // on the season actually wants.
-      firstWindow: cold.length ? h.time[cold[0][1]] : null,
-    };
-    process.stderr.write(`${slug.padEnd(19)} min ${out.hills[slug].min.toFixed(1)}F  ${cold.length}h under ${THRESHOLD}\n`);
+    out.hills[slug] = summarise(await forecast(r.lat, r.lon));
+    process.stderr.write(`${slug.padEnd(19)} min ${out.hills[slug].min.toFixed(1)}F  ${out.hills[slug].hoursUnder}h under ${THRESHOLD}\n`);
   } catch (e) {
     // A hill that fails is recorded as unknown rather than as zero hours,
     // which would read as "no snowmaking weather" — a claim we did not earn.
@@ -66,15 +76,8 @@ for (const [slug, r] of Object.entries(resorts)) {
 
 for (const [id, p] of Object.entries(places)) {
   try {
-    const h = await forecast(p.lat, p.lon);
-    const wb = h.wet_bulb_temperature_2m;
-    const cold = wb.map((v, i) => [v, i]).filter(([v]) => v !== null && v < THRESHOLD);
-    out.places[id] = {
-      min: Math.min(...wb.filter(v => v !== null)),
-      hoursUnder: cold.length,
-      firstWindow: cold.length ? h.time[cold[0][1]] : null,
-    };
-    process.stderr.write(`${id.padEnd(19)} min ${out.places[id].min.toFixed(1)}F  ${cold.length}h under ${THRESHOLD}\n`);
+    out.places[id] = summarise(await forecast(p.lat, p.lon));
+    process.stderr.write(`${id.padEnd(19)} min ${out.places[id].min.toFixed(1)}F  ${out.places[id].hoursUnder}h under ${THRESHOLD}\n`);
   } catch (e) {
     out.places[id] = { min: null, hoursUnder: null, firstWindow: null, error: String(e.message) };
     process.stderr.write(`${id.padEnd(19)} ! ${e.message}\n`);
