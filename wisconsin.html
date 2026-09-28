@@ -110,6 +110,8 @@
   .pin { stroke:var(--ink-3); stroke-width:1; stroke-dasharray:2 3; }
   .pin-dot { fill:var(--ink-2); }
   .pin-t { fill:var(--ink-2); font-size:12px; font-family:Archivo,sans-serif; }
+  .today { stroke:var(--ink-2); stroke-width:1.5; }
+  .lab-today { fill:var(--ink); font-size:12.5px; font-weight:600; font-family:Archivo,sans-serif; }
 
   .legend {
     display:flex; flex-wrap:wrap; gap:20px; font-size:12.5px; color:var(--ink-2);
@@ -603,6 +605,11 @@ tbody tr:hover .btn { background:var(--accent); color:#0B0C0D; }
 .lab-rng, .lab-cold { font-weight:700; letter-spacing:.1em; }
 .lab-rng { fill:var(--accent); }
 .lab-cold { fill:var(--cold); }
+/* The today line runs under these, so each carries an outline in whatever it
+   sits on: the band for the two below the threshold, the box for the one above. */
+.lab-cold, .lab-key { paint-order:stroke; stroke-width:5px; stroke-linejoin:round; }
+.lab-cold, .chart-narrow .lab-key { stroke:#122A2E; }
+.chart-wide .lab-key { stroke:var(--surface); }
 .grid-l { stroke:#22262A; }
 .sw { background:var(--accent); }
 .sw.cold { background:var(--cold); }
@@ -662,6 +669,7 @@ footer::before {
     <div class="chart-box">
 <svg class="chart-wide" viewBox="0 0 900 420" role="img" aria-label="Mean Madison wet-bulb temperature falling from 65 degrees on Aug 23 to 22 degrees on Dec 31, crossing 28 degrees on Dec 1. The first workable snowmaking window normally arrives Nov 2, with a historical range of Oct 10 to Nov 20.">
   <rect class="band" x="60" y="229.5" width="800" height="119.5"></rect>
+  <line class="today" x1="279.8" y1="93" x2="279.8" y2="350"></line>
   <line class="grid-l" x1="60" y1="93" x2="860" y2="93"></line>
   <text class="tick-t" x="50" y="97" text-anchor="end">60&deg;</text>
   <line class="grid-l" x1="60" y1="157" x2="860" y2="157"></line>
@@ -685,6 +693,7 @@ footer::before {
   <polyline class="curve" points="60,71.8 72.2,71.8 84.4,74.1 96.6,77.4 108.9,80.5 121.1,84.1 133.3,85.7 145.5,90.1 157.7,93.4 169.9,96.8 182.1,100 194.4,101.3 206.6,102 218.8,102.1 231,105.1 243.2,109 255.4,114.1 267.6,118.4 279.8,120.9 292.1,124.1 304.3,127.5 316.5,131.1 328.7,134.5 340.9,137.5 353.1,140.1 365.3,145.7 377.6,151.8 389.8,158.3 402,160.8 414.2,162 426.4,163.1 438.6,166 450.8,169.5 463.1,172.6 475.3,177.9 487.5,179.2 499.7,181.5 511.9,184 524.1,185.1 536.3,194.4 548.5,201.7 560.8,205.6 573,208.1 585.2,207.9 597.4,212.1 609.6,215 621.8,218 634,221 646.3,223.3 658.5,228.1 670.7,229.2 682.9,236.3 695.1,242.8 707.3,248.1 719.5,253.4 731.8,251 744,250.9 756.2,252.8 768.4,254.3 780.6,257.9 792.8,259.4 805,258.5 817.3,256.1 829.5,256.1 841.7,254.7 853.9,254.9"></polyline>
   <circle class="dot-cross" cx="670.7" cy="229.5" r="6"></circle>
   <text class="lab-key" x="685.7" y="215.5" text-anchor="start">Average crosses 28&deg; &middot; Dec 1</text>
+  <text class="lab-today" x="285.8" y="341" text-anchor="start">Today &middot; Sep 28</text>
   <text class="tick-t" x="60" y="406" text-anchor="start">Aug 23</text>
   <text class="tick-t" x="298.2" y="406" text-anchor="middle">Oct 1</text>
   <text class="tick-t" x="487.5" y="406" text-anchor="middle">Nov 1</text>
@@ -693,6 +702,7 @@ footer::before {
 </svg>
 <svg class="chart-narrow" viewBox="0 0 300 418" role="img" aria-label="Mean Madison wet-bulb temperature falling from 65 degrees on Aug 23 to 22 degrees on Dec 31, crossing 28 degrees on Dec 1. The first workable snowmaking window normally arrives Nov 2, with a historical range of Oct 10 to Nov 20.">
   <rect class="band" x="32" y="223.2" width="260" height="128.8"></rect>
+  <line class="today" x1="103.5" y1="76" x2="103.5" y2="353"></line>
   <line class="grid-l" x1="32" y1="76" x2="292" y2="76"></line>
   <text class="tick-t" x="22" y="80" text-anchor="end">60&deg;</text>
   <line class="grid-l" x1="32" y1="145" x2="292" y2="145"></line>
@@ -716,6 +726,7 @@ footer::before {
   <polyline class="curve" points="32,53.2 36,53.1 39.9,55.7 43.9,59.2 47.9,62.5 51.8,66.4 55.8,68.1 59.8,72.9 63.8,76.5 67.7,80.1 71.7,83.5 75.7,85 79.6,85.7 83.6,85.8 87.6,89.1 91.5,93.2 95.5,98.8 99.5,103.4 103.5,106.1 107.4,109.5 111.4,113.2 115.4,117.1 119.3,120.7 123.3,124 127.3,126.8 131.2,132.9 135.2,139.3 139.2,146.4 143.1,149.1 147.1,150.4 151.1,151.5 155.1,154.7 159,158.5 163,161.8 167,167.5 170.9,169 174.9,171.4 178.9,174.1 182.8,175.3 186.8,185.3 190.8,193.2 194.7,197.3 198.7,200.1 202.7,199.9 206.7,204.4 210.6,207.5 214.6,210.8 218.6,214 222.5,216.5 226.5,221.6 230.5,222.9 234.4,230.5 238.4,237.5 242.4,243.2 246.4,248.9 250.3,246.3 254.3,246.2 258.3,248.3 262.2,249.9 266.2,253.8 270.2,255.4 274.1,254.4 278.1,251.8 282.1,251.9 286,250.4 290,250.6"></polyline>
   <circle class="dot-cross" cx="230.5" cy="223.2" r="6"></circle>
   <text class="lab-key" x="230.5" y="240.2" text-anchor="end">Average crosses 28&deg; &middot; Dec 1</text>
+  <text class="lab-today" x="109.5" y="344" text-anchor="start">Today &middot; Sep 28</text>
   <text class="tick-t" x="32" y="368" text-anchor="start">Aug 23</text>
   <text class="tick-t" x="109.4" y="368" text-anchor="middle">Oct 1</text>
   <text class="tick-t" x="170.9" y="368" text-anchor="middle">Nov 1</text>
@@ -741,7 +752,7 @@ footer::before {
         <p>Coldest wet bulb the 16-day forecast reaches at Lake Geneva.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>3</dd>
-          <dt>First window</dt><dd>Sat 6am</dd>
+          <dt>First window</dt><dd>Sat 10 Oct, 6am</dd>
           <dt>Normal Oct&ndash;Nov hours</dt><dd>191</dd>
         </dl>
       </div>
@@ -751,7 +762,7 @@ footer::before {
         <p>Coldest wet bulb the 16-day forecast reaches at Madison.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>4</dd>
-          <dt>First window</dt><dd>Sat 5am</dd>
+          <dt>First window</dt><dd>Sat 10 Oct, 5am</dd>
           <dt>Normal Oct&ndash;Nov hours</dt><dd>225</dd>
         </dl>
       </div>
@@ -761,7 +772,7 @@ footer::before {
         <p>Coldest wet bulb the 16-day forecast reaches at Wausau.</p>
         <dl>
           <dt>Hours under 28&deg;</dt><dd>15</dd>
-          <dt>First window</dt><dd>Sat 1am</dd>
+          <dt>First window</dt><dd>Sat 10 Oct, 1am</dd>
           <dt>Normal Oct&ndash;Nov hours</dt><dd>329</dd>
         </dl>
       </div>
@@ -820,7 +831,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-09-28T13:55:14.162Z">28 September 2026, 08:55 CDT</time>. Forecast pulled <time datetime="2026-09-28T13:54:49.840Z">28 September 2026, 08:54 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-09-28T15:27:42.798Z">28 September 2026, 10:27 CDT</time>. Forecast pulled <time datetime="2026-09-28T13:54:49.840Z">28 September 2026, 08:54 CDT</time>.</span>
     <span><a href="about.html">About this site</a></span>
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>

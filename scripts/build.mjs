@@ -252,7 +252,9 @@ const whenWindow = iso => {
   const d = new Date(`${iso}:00`);
   const hour = d.getHours();
   const h12 = hour % 12 === 0 ? 12 : hour % 12;
-  return `${DAYS[d.getDay()]} ${h12}${hour < 12 ? "am" : "pm"}`;
+  // The date as well as the weekday: sixteen days holds two or three of every
+  // weekday, and "Fri" alone reads as this Friday.
+  return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}, ${h12}${hour < 12 ? "am" : "pm"}`;
 };
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -693,6 +695,13 @@ const dayIndex = md => {
 };
 const SPAN = dayIndex(AXIS_TO);
 const md2 = md => `${MONTHS[Number(md.slice(0, 2)) - 1]} ${Number(md.slice(3, 5))}`;
+// Today as "MM-DD" in Central, the zone the countdown counts in.
+const todayMd = () => {
+  const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Chicago", month: "2-digit", day: "2-digit",
+  }).formatToParts(new Date()).map(x => [x.type, x.value]));
+  return `${p.month}-${p.day}`;
+};
 
 // Where the three pins sit is a fact about the hills, not a drawing decision.
 // The hand-drawn chart eyeballed them; these follow the projection.
@@ -776,6 +785,20 @@ function chartSvg(g, d) {
   o.push(`<circle class="dot-cross" cx="${n(xc)}" cy="${n(yThresh)}" r="6"></circle>`,
          `<text class="lab-key" x="${n(xc + g.keyDx)}" y="${n(yThresh + g.keyDy)}" text-anchor="${g.keyAnchor}">` +
          `Average crosses 28&deg; &middot; ${md2(d.curve.crossing)}</text>`);
+
+  // Where today falls, so the chart reads as a season in progress rather than
+  // a fixed picture. Central date, like the countdown, and only while today is
+  // on the axis. The label sits at the foot of the plot because the curve
+  // never gets down there, whatever the date.
+  const today = todayMd();
+  if (dayIndex(today) >= 0 && dayIndex(today) <= SPAN) {
+    const xt = X(today);
+    const flip = xt > g.x1 - 90;
+    // Drawn straight after the band, under the gridlines and every label.
+    o.splice(1, 0, `<line class="today" x1="${n(xt)}" y1="${g.yTop}" x2="${n(xt)}" y2="${g.yBase + 1}"></line>`);
+    o.push(`<text class="lab-today" x="${n(xt + (flip ? -6 : 6))}" y="${g.yBase - 8}" ` +
+           `text-anchor="${flip ? "end" : "start"}">Today &middot; ${md2(today)}</text>`);
+  }
 
   // How far apart the pins land is a fact about the hills, and it changes when
   // the projection does — the metro median and the last hill open seventeen
