@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-28T22:02:30.268Z",
+  "generatedAt": "2026-09-28T22:04:37.018Z",
   "horizonDays": 16,
   "threshold": 28,
   "models": {
@@ -53,6 +53,7 @@
           "min": 29.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             50.3,
@@ -77,6 +78,7 @@
           "min": 36.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             52.1,
@@ -101,6 +103,7 @@
           "min": 32.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             50.1,
@@ -125,6 +128,7 @@
           "min": 30.1,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             53.4,
@@ -161,6 +165,7 @@
           "min": 29.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             49.4,
@@ -185,6 +190,7 @@
           "min": 38.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             52.8,
@@ -209,6 +215,7 @@
           "min": 32.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             54.4,
@@ -233,6 +240,7 @@
           "min": 30.1,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             53.4,
@@ -269,6 +277,7 @@
           "min": 35.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             53.7,
@@ -293,6 +302,7 @@
           "min": 39,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             55.6,
@@ -317,6 +327,7 @@
           "min": 34.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             53.4,
@@ -341,6 +352,7 @@
           "min": 35.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             55.9,
@@ -377,6 +389,7 @@
           "min": 31,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             52.5,
@@ -401,6 +414,7 @@
           "min": 39.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             54.8,
@@ -425,6 +439,7 @@
           "min": 33.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             51,
@@ -449,6 +464,7 @@
           "min": 33.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             54.6,
@@ -485,6 +501,7 @@
           "min": 31,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             55,
@@ -509,6 +526,7 @@
           "min": 38.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             58.8,
@@ -533,6 +551,7 @@
           "min": 34.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             51.7,
@@ -557,6 +576,7 @@
           "min": 34.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             54.9,
@@ -593,6 +613,7 @@
           "min": 32.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             52.5,
@@ -617,6 +638,7 @@
           "min": 38.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             55.2,
@@ -641,6 +663,7 @@
           "min": 33.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             53.1,
@@ -665,6 +688,7 @@
           "min": 34.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             54.7,
@@ -701,6 +725,7 @@
           "min": 33.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             50.5,
@@ -725,6 +750,7 @@
           "min": 37.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             52.7,
@@ -749,6 +775,7 @@
           "min": 33.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             49.4,
@@ -773,6 +800,7 @@
           "min": 33.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             55.3,
@@ -809,6 +837,7 @@
           "min": 24.2,
           "hoursUnder": 13,
           "longestRun": 7,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             46.8,
@@ -833,6 +862,7 @@
           "min": 34.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             46.7,
@@ -857,6 +887,7 @@
           "min": 37,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             48.4,
@@ -881,6 +912,7 @@
           "min": 31.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             49.9,
@@ -917,6 +949,7 @@
           "min": 24.4,
           "hoursUnder": 10,
           "longestRun": 5,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             37.2,
@@ -941,6 +974,7 @@
           "min": 35.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             43.1,
@@ -965,6 +999,7 @@
           "min": 33.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             40.6,
@@ -989,6 +1024,7 @@
           "min": 27.5,
           "hoursUnder": 2,
           "longestRun": 2,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             38.7,
@@ -1025,6 +1061,7 @@
           "min": 27.4,
           "hoursUnder": 3,
           "longestRun": 3,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             41.9,
@@ -1049,6 +1086,7 @@
           "min": 35,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             43.7,
@@ -1073,6 +1111,7 @@
           "min": 31.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             44.6,
@@ -1097,6 +1136,7 @@
           "min": 29.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             43.1,
@@ -1133,6 +1173,7 @@
           "min": 33.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             49.8,
@@ -1157,6 +1198,7 @@
           "min": 38.1,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             53.3,
@@ -1181,6 +1223,7 @@
           "min": 33.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             50.3,
@@ -1205,6 +1248,7 @@
           "min": 32.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             56.6,
@@ -1241,6 +1285,7 @@
           "min": 34.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             55.8,
@@ -1265,6 +1310,7 @@
           "min": 39.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             58.6,
@@ -1289,6 +1335,7 @@
           "min": 34,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             58.8,
@@ -1313,6 +1360,7 @@
           "min": 35.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             56.5,
@@ -1349,6 +1397,7 @@
           "min": 28.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             41.2,
@@ -1373,6 +1422,7 @@
           "min": 37.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             47.2,
@@ -1397,6 +1447,7 @@
           "min": 36.1,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             45,
@@ -1421,6 +1472,7 @@
           "min": 33.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             48.5,
@@ -1457,6 +1509,7 @@
           "min": 31.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             44.3,
@@ -1481,6 +1534,7 @@
           "min": 38.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             46.5,
@@ -1505,6 +1559,7 @@
           "min": 35.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             46.4,
@@ -1529,6 +1584,7 @@
           "min": 34.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             48.6,
@@ -1565,6 +1621,7 @@
           "min": 33.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             48.3,
@@ -1589,6 +1646,7 @@
           "min": 39.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             51.4,
@@ -1613,6 +1671,7 @@
           "min": 33.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             51.1,
@@ -1637,6 +1696,7 @@
           "min": 35.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             50.9,
@@ -1673,6 +1733,7 @@
           "min": 29.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             53.8,
@@ -1697,6 +1758,7 @@
           "min": 38,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             57.3,
@@ -1721,6 +1783,7 @@
           "min": 37.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             55.4,
@@ -1745,6 +1808,7 @@
           "min": 36.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             54.1,
@@ -1781,6 +1845,7 @@
           "min": 31.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             41.5,
@@ -1805,6 +1870,7 @@
           "min": 34.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             46.3,
@@ -1829,6 +1895,7 @@
           "min": 33.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             44.6,
@@ -1853,6 +1920,7 @@
           "min": 30.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             47.3,
@@ -1889,6 +1957,7 @@
           "min": 29.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             46.1,
@@ -1913,6 +1982,7 @@
           "min": 35.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             44.1,
@@ -1937,6 +2007,7 @@
           "min": 37,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             45.2,
@@ -1961,6 +2032,7 @@
           "min": 26.6,
           "hoursUnder": 3,
           "longestRun": 3,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             44.9,
@@ -1997,6 +2069,7 @@
           "min": 30.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             57.1,
@@ -2021,6 +2094,7 @@
           "min": 37.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             58.6,
@@ -2045,6 +2119,7 @@
           "min": 33,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             52.5,
@@ -2069,6 +2144,7 @@
           "min": 32.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             54.3,
@@ -2107,6 +2183,7 @@
           "min": 31.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             42.8,
@@ -2131,6 +2208,7 @@
           "min": 36,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             49.1,
@@ -2155,6 +2233,7 @@
           "min": 38,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             47.2,
@@ -2179,6 +2258,7 @@
           "min": 36.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             45.2,
@@ -2215,6 +2295,7 @@
           "min": 30.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             49.5,
@@ -2239,6 +2320,7 @@
           "min": 36.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             51.2,
@@ -2263,6 +2345,7 @@
           "min": 39.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             55.5,
@@ -2287,6 +2370,7 @@
           "min": 34.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             53.7,
@@ -2323,6 +2407,7 @@
           "min": 25.8,
           "hoursUnder": 15,
           "longestRun": 9,
+          "firstNight": "2026-10-10T23:00",
           "lastHour": "2026-10-13T23:00",
           "daily": [
             49.2,
@@ -2347,6 +2432,7 @@
           "min": 35.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             49.9,
@@ -2371,6 +2457,7 @@
           "min": 33.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             52.7,
@@ -2395,6 +2482,7 @@
           "min": 33,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             50.5,
@@ -2431,6 +2519,7 @@
           "min": 25.3,
           "hoursUnder": 19,
           "longestRun": 13,
+          "firstNight": "2026-10-10T19:00",
           "lastHour": "2026-10-13T23:00",
           "daily": [
             42.9,
@@ -2455,6 +2544,7 @@
           "min": 34.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             48.2,
@@ -2479,6 +2569,7 @@
           "min": 36.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             47.3,
@@ -2503,6 +2594,7 @@
           "min": 34.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             46.4,
@@ -2539,6 +2631,7 @@
           "min": 28.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             49.5,
@@ -2563,6 +2656,7 @@
           "min": 35.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             52.1,
@@ -2587,6 +2681,7 @@
           "min": 39.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             50,
@@ -2611,6 +2706,7 @@
           "min": 29.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             50.6,
@@ -2647,6 +2743,7 @@
           "min": 27.7,
           "hoursUnder": 3,
           "longestRun": 2,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             43.7,
@@ -2671,6 +2768,7 @@
           "min": 32.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             46.7,
@@ -2695,6 +2793,7 @@
           "min": 39.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             45.4,
@@ -2719,6 +2818,7 @@
           "min": 38.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             48.1,
@@ -2755,6 +2855,7 @@
           "min": 32,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             42.7,
@@ -2779,6 +2880,7 @@
           "min": 35.1,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             50.6,
@@ -2803,6 +2905,7 @@
           "min": 39.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             53.3,
@@ -2827,6 +2930,7 @@
           "min": 39.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             49.3,
@@ -2863,6 +2967,7 @@
           "min": 27.9,
           "hoursUnder": 1,
           "longestRun": 1,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             39.4,
@@ -2887,6 +2992,7 @@
           "min": 30.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             47.6,
@@ -2911,6 +3017,7 @@
           "min": 35.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             46.4,
@@ -2935,6 +3042,7 @@
           "min": 32.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             45.5,
@@ -2971,6 +3079,7 @@
           "min": 30.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             47.3,
@@ -2995,6 +3104,7 @@
           "min": 31.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             49.1,
@@ -3019,6 +3129,7 @@
           "min": 31.3,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             50.8,
@@ -3043,6 +3154,7 @@
           "min": 36.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             46,
@@ -3079,6 +3191,7 @@
           "min": 30.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             53,
@@ -3103,6 +3216,7 @@
           "min": 39.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             55.6,
@@ -3127,6 +3241,7 @@
           "min": 39.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             53.6,
@@ -3151,6 +3266,7 @@
           "min": 35.1,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             53.7,
@@ -3187,6 +3303,7 @@
           "min": 35.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             49.2,
@@ -3211,6 +3328,7 @@
           "min": 39.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             50.5,
@@ -3235,6 +3353,7 @@
           "min": 32.4,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             51,
@@ -3259,6 +3378,7 @@
           "min": 37.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             50.6,
@@ -3295,6 +3415,7 @@
           "min": 32.7,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             55.6,
@@ -3319,6 +3440,7 @@
           "min": 40.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             57,
@@ -3343,6 +3465,7 @@
           "min": 37.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             55.2,
@@ -3367,6 +3490,7 @@
           "min": 37,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             56.9,
@@ -3403,6 +3527,7 @@
           "min": 35.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             48.6,
@@ -3427,6 +3552,7 @@
           "min": 35.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             53.3,
@@ -3451,6 +3577,7 @@
           "min": 38.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             51.4,
@@ -3475,6 +3602,7 @@
           "min": 42.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             52.9,
@@ -3511,6 +3639,7 @@
           "min": 32.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             48.7,
@@ -3535,6 +3664,7 @@
           "min": 35.5,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             50.1,
@@ -3559,6 +3689,7 @@
           "min": 37.2,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             51.8,
@@ -3583,6 +3714,7 @@
           "min": 42.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             50.3,
@@ -3619,6 +3751,7 @@
           "min": 35.8,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T23:00",
           "daily": [
             45,
@@ -3643,6 +3776,7 @@
           "min": 38.6,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-13T09:00",
           "daily": [
             48.9,
@@ -3667,6 +3801,7 @@
           "min": 37.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-08T07:00",
           "daily": [
             50.3,
@@ -3691,6 +3826,7 @@
           "min": 43.9,
           "hoursUnder": 0,
           "longestRun": 0,
+          "firstNight": null,
           "lastHour": "2026-10-05T19:00",
           "daily": [
             43.9,

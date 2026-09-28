@@ -266,6 +266,10 @@ const whenWindow = iso => {
   return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}, ${h12}${hour < 12 ? "am" : "pm"}`;
 };
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const whenDay = iso => {
+  const d = new Date(`${iso}:00`);
+  return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
+};
 
 // The hour behind the big number: when the coldest wet bulb comes, and the
 // air temperature and humidity it is worked out from. Forecasts pulled before
@@ -335,16 +339,19 @@ function forecastSection() {
     answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
       `The coldest any resort gets is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
   } else {
-    const first = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
-    answer = `${withWindow.length} of ${known.length} resorts get snowmaking weather. ` +
-      `<b>${esc(resorts[first[0]].name)}</b> first, ${whenWindow(first[1].firstWindow)}.`;
+    // One sentence. A night of snowmaking is eight hours in a row, the same
+    // test as the climatology; colder hours than that are only a dip.
+    const nights = withWindow.filter(([, h]) => h.models?.gfs?.firstNight);
+    if (nights.length) {
+      const [slug, h] = nights.reduce((a, b) => (a[1].models.gfs.firstNight <= b[1].models.gfs.firstNight ? a : b));
+      answer = `${nights.length} of ${known.length} resorts get a night cold enough to make snow, ` +
+        `<b>${esc(resorts[slug].name)}</b> first on ${whenDay(h.models.gfs.firstNight)}.`;
+    } else {
+      const [slug, h] = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
+      answer = `<b>${esc(resorts[slug].name)}</b> dips under ${fc.threshold}&deg; on ${whenDay(h.firstWindow)}, ` +
+        `but nowhere stays cold long enough to make snow.`;
+    }
   }
-  if (xw && known.length) {
-    const first = withWindow.length
-      ? withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b))[1].firstWindow : null;
-    answer += xwSentence(Object.keys(fc.hills), id => xw.hills[id], withWindow.length, first);
-  }
-  answer += modelSentence(known.map(([, h]) => h));
 
   const cards = REGIONS.map(({ slug, label, note }) => {
     const h = fc.hills[slug];

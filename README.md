@@ -68,8 +68,8 @@ file is still `best_match`, which is GFS here. The models run out at different
 horizons (GEM near day ten, ICON near day seven), and past that the file holds
 null, not a warm number.
 
-Each resort page gets the day-by-day grid, and the homepage forecast sentence
-says which models see the cold. Built because of the 28 September run: GFS put
+Each resort page gets the day-by-day grid. The homepage keeps to one sentence,
+and counts a window the way the climatology does: eight hours in a row. Built because of the 28 September run: GFS put
 18 of 19 hills under 28° on 10 October, which would have tied the earliest
 window in 31 years, ECMWF never had it, and the next GFS run dropped it.
 

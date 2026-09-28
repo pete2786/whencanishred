@@ -18,6 +18,7 @@ const API = "https://api.open-meteo.com/v1/forecast";
 const OUT = "data/forecast.json";
 const THRESHOLD = 28;          // °F wet bulb: snow guns can run below this
 const HORIZON = 16;            // days; the most Open-Meteo forecasts
+const NIGHT = 8;               // hours in a row: what the climatology counts as a window
 
 // The same points through four models, so a cold snap one model invents at
 // day twelve can be checked against the others. Open-Meteo's best_match is
@@ -72,7 +73,7 @@ async function forecast(lat, lon) {
 // more, so it is what makes a cold hour a night of snowmaking.
 function perModel(time, wb) {
   const days = [];
-  let min = null, hoursUnder = 0, run = 0, longest = 0, lastHour = null;
+  let min = null, hoursUnder = 0, run = 0, longest = 0, lastHour = null, firstNight = null;
   for (let i = 0; i < time.length; i++) {
     const v = wb[i] ?? null;
     const day = time[i].slice(0, 10);
@@ -82,9 +83,12 @@ function perModel(time, wb) {
     if (min === null || v < min) min = v;
     const d = days.at(-1);
     if (d.low === null || v < d.low) d.low = v;
-    if (v < THRESHOLD) { hoursUnder++; longest = Math.max(longest, ++run); } else run = 0;
+    if (v < THRESHOLD) {
+      hoursUnder++; longest = Math.max(longest, ++run);
+      if (run === NIGHT && !firstNight) firstNight = time[i - NIGHT + 1];
+    } else run = 0;
   }
-  return { min, hoursUnder, longestRun: longest, lastHour, daily: days.map(d => d.low) };
+  return { min, hoursUnder, longestRun: longest, firstNight, lastHour, daily: days.map(d => d.low) };
 }
 
 function summarise(h) {
