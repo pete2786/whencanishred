@@ -375,7 +375,6 @@ function forecastSection() {
       `updated twice a day and last pulled ${madeStr}. ` +
       `Guns can run under ${fc.threshold}&deg;.${xwNote()}${stale}`,
     CARDS: cards,
-    MODELS: modelTable(),
   };
 }
 
@@ -409,40 +408,6 @@ function modelSentence(points) {
     ? ` The longest stretch under ${fc.threshold}&deg; is ${longest} hours straight.`
     : ` None of it holds for ${RUN} hours straight. The longest is ${longest}.`;
   return ` ${who}${run}`;
-}
-
-// Every resort against every model: the coldest wet bulb each one reaches,
-// and the hours under the line where there are any. The hill names link to
-// the resort pages, which carry the day-by-day.
-function modelTable() {
-  if (!MODEL_KEYS.length) return "";
-  const rows = Object.entries(fc.hills).filter(([, h]) => hasModels(h))
-    .sort((a, b) => (a[1].min ?? 99) - (b[1].min ?? 99));
-  if (!rows.length) return "";
-  const cell = m => m.min === null ? `<td class="num mcell">&mdash;</td>`
-    : `<td class="num mcell${cold(m.min) ? " cold" : ""}">${m.min.toFixed(1)}&deg;` +
-      (m.hoursUnder ? `<span>${m.hoursUnder} hrs, ${m.longestRun} straight</span>` : "") + `</td>`;
-  return `
-    <div class="tbl-box mtbl">
-      <table>
-        <caption>Coldest wet bulb, by model</caption>
-        <thead><tr><th>Resort</th>${MODEL_KEYS.map(k =>
-          `<th class="num">${fc.models[k].name}<span>${fc.models[k].who}, ${modelReach(k)}</span></th>`).join("")}</tr></thead>
-        <tbody>
-${rows.map(([slug, h]) => `          <tr><td class="hill"><a href="resorts/${slug}.html">${esc(resorts[slug].name)}</a></td>` +
-  MODEL_KEYS.map(k => cell(h.models[k])).join("") + `</tr>`).join("\n")}
-        </tbody>
-      </table>
-    </div>`;
-}
-
-// How far a model runs, read off the data rather than assumed: GEM and ICON
-// stop well short of sixteen days, and a blank past that point is not warmth.
-function modelReach(k) {
-  const any = Object.values(fc.hills).find(h => hasModels(h))?.models[k];
-  if (!any?.lastHour) return "no data";
-  const days = Math.round((new Date(`${any.lastHour}:00`) - new Date(`${fc.days[0]}T00:00`)) / 86400000);
-  return `${days} days`;
 }
 
 // One resort, day by day: each model's low for each day, cold cells lit.
@@ -1436,7 +1401,6 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   FORECAST_ANSWER: fcSection.ANSWER,
   FORECAST_NOTE: fcSection.NOTE,
   FORECAST_CARDS: fcSection.CARDS,
-  FORECAST_MODELS: fcSection.MODELS ?? "",
   HERO_SCENARIOS: heroScenarios(leader),
   HERO_SEASONS: String(lead.n),
   HERO_HILLS: String(Object.keys(resorts).length),

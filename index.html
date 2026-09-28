@@ -624,37 +624,6 @@ footer::before {
 }
 
 
-  /* The model tables. Cold cells take the threshold line's cyan, so anything
-     under 28 reads the same everywhere on the site. */
-  .mtbl, .grid-box { margin-top:18px; }
-  .mtbl table { min-width:600px; }
-  .mtbl th span, .dgrid th span, .mcell span {
-    display:block; font-size:10.5px; font-weight:500; letter-spacing:.02em;
-    text-transform:none; color:var(--ink-3); margin-top:2px;
-  }
-  .mcell.cold, .dcell.cold { color:var(--cold); font-weight:700; }
-  .dgrid { min-width:720px; }
-  .dgrid th, .dgrid td { padding:8px 6px; text-align:center; }
-  .dgrid th[scope="row"] { text-align:left; padding-left:14px; color:var(--ink); letter-spacing:.08em; }
-  .dgrid tbody th { border-bottom:1px solid var(--line-soft); }
-  .dcell { font-size:13px; }
-  .dcell.cold { background:var(--cold-soft); }
-  .dcell.none { color:var(--ink-3); }
-  .dcell.run { border-left:1px solid var(--line); }
-  /* Too many columns to stack like the other tables, so on a phone these keep
-     their grid and scroll inside the box, with the row names pinned. */
-  .mtbl td.hill, .dgrid th[scope="row"] { position:sticky; left:0; background:var(--surface); z-index:1; }
-  @media (max-width:700px) {
-    .mtbl table { min-width:600px; }
-    .grid-box .dgrid { min-width:720px; }
-    .mtbl thead, .grid-box thead { position:static; width:auto; height:auto; overflow:visible; clip-path:none; }
-    .mtbl tbody tr, .grid-box tbody tr { display:table-row; padding:0; border-bottom:0; }
-    .mtbl tbody tr td, .grid-box tbody tr td { display:table-cell; font-size:13px; }
-    .mtbl tbody tr td { padding:10px 12px; }
-    .mtbl tbody tr td.hill { font-size:14px; }
-    .grid-box tbody tr td { padding:8px 6px; }
-    .mtbl tbody tr td::before, .grid-box tbody tr td::before { content:none; }
-  }
 </style>
 <style>
 .hm[data-hill="wild-mountain"]{color:#beee07}
@@ -887,34 +856,6 @@ footer::before {
       </div>
     </div>
 
-    <div class="tbl-box mtbl">
-      <table>
-        <caption>Coldest wet bulb, by model</caption>
-        <thead><tr><th>Resort</th><th class="num">GFS<span>American, 16 days</span></th><th class="num">ECMWF<span>European, 15 days</span></th><th class="num">GEM<span>Canadian, 10 days</span></th><th class="num">ICON<span>German, 8 days</span></th></tr></thead>
-        <tbody>
-          <tr><td class="hill"><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td><td class="num mcell cold">24.2&deg;<span>13 hrs, 7 straight</span></td><td class="num mcell">34.9&deg;</td><td class="num mcell">37.0&deg;</td><td class="num mcell">31.3&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/giants-ridge.html">Giants Ridge</a></td><td class="num mcell cold">24.4&deg;<span>10 hrs, 5 straight</span></td><td class="num mcell">35.4&deg;</td><td class="num mcell">33.6&deg;</td><td class="num mcell cold">27.5&deg;<span>2 hrs, 2 straight</span></td></tr>
-          <tr><td class="hill"><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td><td class="num mcell cold">27.4&deg;<span>3 hrs, 3 straight</span></td><td class="num mcell">35.0&deg;</td><td class="num mcell">31.5&deg;</td><td class="num mcell">29.9&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/buena-vista.html">Buena Vista</a></td><td class="num mcell">28.2&deg;</td><td class="num mcell">37.6&deg;</td><td class="num mcell">36.1&deg;</td><td class="num mcell">33.3&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/trollhaugen.html">Trollhaugen</a></td><td class="num mcell">29.2&deg;</td><td class="num mcell">38.2&deg;</td><td class="num mcell">32.4&deg;</td><td class="num mcell">30.1&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/wild-mountain.html">Wild Mountain</a></td><td class="num mcell">29.4&deg;</td><td class="num mcell">36.3&deg;</td><td class="num mcell">32.9&deg;</td><td class="num mcell">30.1&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/chester-bowl.html">Chester Bowl</a></td><td class="num mcell">29.4&deg;</td><td class="num mcell">35.4&deg;</td><td class="num mcell">37.0&deg;</td><td class="num mcell cold">26.6&deg;<span>3 hrs, 3 straight</span></td></tr>
-          <tr><td class="hill"><a href="resorts/coffee-mill.html">Coffee Mill</a></td><td class="num mcell">29.8&deg;</td><td class="num mcell">38.0&deg;</td><td class="num mcell">37.2&deg;</td><td class="num mcell">36.9&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/steeplechase.html">Steeplechase</a></td><td class="num mcell">30.5&deg;</td><td class="num mcell">37.3&deg;</td><td class="num mcell">33.0&deg;</td><td class="num mcell">32.9&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/afton-alps.html">Afton Alps</a></td><td class="num mcell">31.0&deg;</td><td class="num mcell">39.5&deg;</td><td class="num mcell">33.8&deg;</td><td class="num mcell">33.5&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/welch-village.html">Welch Village</a></td><td class="num mcell">31.0&deg;</td><td class="num mcell">38.7&deg;</td><td class="num mcell">34.5&deg;</td><td class="num mcell">34.5&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/mount-ski-gull.html">Mount Ski Gull</a></td><td class="num mcell">31.2&deg;</td><td class="num mcell">34.8&deg;</td><td class="num mcell">33.7&deg;</td><td class="num mcell">30.5&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td><td class="num mcell">31.6&deg;</td><td class="num mcell">38.5&deg;</td><td class="num mcell">35.8&deg;</td><td class="num mcell">34.3&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/buck-hill.html">Buck Hill</a></td><td class="num mcell">32.9&deg;</td><td class="num mcell">38.6&deg;</td><td class="num mcell">33.8&deg;</td><td class="num mcell">34.6&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td><td class="num mcell">33.6&deg;</td><td class="num mcell">39.4&deg;</td><td class="num mcell">33.9&deg;</td><td class="num mcell">35.6&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/powder-ridge.html">Powder Ridge</a></td><td class="num mcell">33.7&deg;</td><td class="num mcell">38.1&deg;</td><td class="num mcell">33.4&deg;</td><td class="num mcell">32.6&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/elm-creek.html">Elm Creek</a></td><td class="num mcell">33.8&deg;</td><td class="num mcell">37.7&deg;</td><td class="num mcell">33.4&deg;</td><td class="num mcell">33.6&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/mount-kato.html">Mount Kato</a></td><td class="num mcell">34.6&deg;</td><td class="num mcell">39.2&deg;</td><td class="num mcell">34.0&deg;</td><td class="num mcell">35.8&deg;</td></tr>
-          <tr><td class="hill"><a href="resorts/hyland-hills.html">Hyland Hills</a></td><td class="num mcell">35.5&deg;</td><td class="num mcell">39.0&deg;</td><td class="num mcell">34.8&deg;</td><td class="num mcell">35.7&deg;</td></tr>
-        </tbody>
-      </table>
-    </div>
-
     <p class="sec-note fc-note">Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, updated twice a day and last pulled 28 September. Guns can run under 28&deg;.</p>
   </section>
 
@@ -1138,7 +1079,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-09-28T21:57:07.338Z">28 September 2026, 16:57 CDT</time>. Forecast pulled <time datetime="2026-09-28T21:56:44.747Z">28 September 2026, 16:56 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-09-28T22:02:12.253Z">28 September 2026, 17:02 CDT</time>. Forecast pulled <time datetime="2026-09-28T21:56:44.747Z">28 September 2026, 16:56 CDT</time>.</span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
     <span>Midwest Skiers has been documenting these resorts for years: the
