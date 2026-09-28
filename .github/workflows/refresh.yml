@@ -54,6 +54,17 @@ jobs:
         continue-on-error: true
         run: node scripts/forecast.mjs
 
+      # The Xweather second opinion. Separate step, separate failure: without
+      # the secrets, or with Xweather down, the site builds on Open-Meteo alone
+      # and drops the second opinion once it is two days old.
+      - name: Pull the second opinion
+        id: xweather
+        continue-on-error: true
+        env:
+          XWEATHER_CLIENT_ID: ${{ secrets.XWEATHER_CLIENT_ID }}
+          XWEATHER_CLIENT_SECRET: ${{ secrets.XWEATHER_CLIENT_SECRET }}
+        run: node scripts/forecast-xweather.mjs
+
       - name: Rebuild the site
         run: node scripts/build.mjs
 
@@ -79,6 +90,11 @@ jobs:
             sleep 5
           done
           exit 1
+
+      - name: Say if the second opinion failed
+        if: steps.xweather.outcome != 'success'
+        run: |
+          echo "::warning::Xweather fetch failed; site rebuilt without a fresh second opinion."
 
       - name: Say if the forecast failed
         if: steps.forecast.outcome != 'success'
