@@ -344,6 +344,7 @@ function forecastSection() {
       ? withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b))[1].firstWindow : null;
     answer += xwSentence(Object.keys(fc.hills), id => xw.hills[id], withWindow.length, first);
   }
+  answer += modelSentence(known.map(([, h]) => h));
 
   const cards = REGIONS.map(({ slug, label, note }) => {
     const h = fc.hills[slug];
@@ -374,7 +375,136 @@ function forecastSection() {
       `updated twice a day and last pulled ${madeStr}. ` +
       `Guns can run under ${fc.threshold}&deg;.${xwNote()}${stale}`,
     CARDS: cards,
+    MODELS: modelTable(),
   };
+}
+
+// ------------------------------------------------------------ the models
+//
+// The same points through four weather models. A cold snap one model finds at
+// day twelve and nobody else does is not a window, and the only way to show
+// that is to put the models side by side. Forecasts pulled before
+// forecast.mjs asked for models carry none, and every piece here says nothing.
+const MODEL_KEYS = fc?.models ? Object.keys(fc.models) : [];
+const hasModels = f => MODEL_KEYS.length && f?.models;
+// Eight hours in a row is what the climatology counts as a window.
+const RUN = 8;
+const cold = v => v !== null && v < (fc?.threshold ?? 28);
+
+// Which models find snowmaking weather at any of these points, and whether
+// any of it lasts a night. Said after the main answer, and only when there
+// is a forecast with models to say it about.
+function modelSentence(points) {
+  const withModels = points.filter(hasModels);
+  if (!withModels.length) return "";
+  const seeing = MODEL_KEYS.filter(k => withModels.some(f => f.models[k].hoursUnder > 0));
+  const names = seeing.map(k => fc.models[k].name);
+  if (!seeing.length) return "";
+  const longest = Math.max(...withModels.flatMap(f => seeing.map(k => f.models[k].longestRun)));
+  const who = seeing.length === MODEL_KEYS.length ? "All four models agree."
+    : seeing.length === 1 ? `Only ${names[0]} has it.`
+    : `${names.join(" and ")} have some. ` +
+      `${MODEL_KEYS.filter(k => !seeing.includes(k)).map(k => fc.models[k].name).join(" and ")} have none.`;
+  const run = longest >= RUN
+    ? ` The longest stretch under ${fc.threshold}&deg; is ${longest} hours straight.`
+    : ` None of it holds for ${RUN} hours straight. The longest is ${longest}.`;
+  return ` ${who}${run}`;
+}
+
+// Every resort against every model: the coldest wet bulb each one reaches,
+// and the hours under the line where there are any. The hill names link to
+// the resort pages, which carry the day-by-day.
+function modelTable() {
+  if (!MODEL_KEYS.length) return "";
+  const rows = Object.entries(fc.hills).filter(([, h]) => hasModels(h))
+    .sort((a, b) => (a[1].min ?? 99) - (b[1].min ?? 99));
+  if (!rows.length) return "";
+  const cell = m => m.min === null ? `<td class="num mcell">&mdash;</td>`
+    : `<td class="num mcell${cold(m.min) ? " cold" : ""}">${m.min.toFixed(1)}&deg;` +
+      (m.hoursUnder ? `<span>${m.hoursUnder} hrs, ${m.longestRun} straight</span>` : "") + `</td>`;
+  return `
+    <div class="tbl-box mtbl">
+      <table>
+        <caption>Coldest wet bulb, by model</caption>
+        <thead><tr><th>Resort</th>${MODEL_KEYS.map(k =>
+          `<th class="num">${fc.models[k].name}<span>${fc.models[k].who}, ${modelReach(k)}</span></th>`).join("")}</tr></thead>
+        <tbody>
+${rows.map(([slug, h]) => `          <tr><td class="hill"><a href="resorts/${slug}.html">${esc(resorts[slug].name)}</a></td>` +
+  MODEL_KEYS.map(k => cell(h.models[k])).join("") + `</tr>`).join("\n")}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+// How far a model runs, read off the data rather than assumed: GEM and ICON
+// stop well short of sixteen days, and a blank past that point is not warmth.
+function modelReach(k) {
+  const any = Object.values(fc.hills).find(h => hasModels(h))?.models[k];
+  if (!any?.lastHour) return "no data";
+  const days = Math.round((new Date(`${any.lastHour}:00`) - new Date(`${fc.days[0]}T00:00`)) / 86400000);
+  return `${days} days`;
+}
+
+// One resort, day by day: each model's low for each day, cold cells lit.
+// This is the view that shows a lone model's cold snap for what it is.
+function modelGrid(f) {
+  if (!hasModels(f) || !fc.days) return "";
+  const head = fc.days.map(d => {
+    const dt = new Date(`${d}T12:00`);
+    return `<th class="num">${DAYS[dt.getDay()].slice(0, 2)}<span>${dt.getDate()}</span></th>`;
+  }).join("");
+  const row = k => {
+    const m = f.models[k];
+    return `          <tr><th scope="row">${fc.models[k].name}<span>${fc.models[k].who}</span></th>` +
+      fc.days.map((_, i) => {
+        const v = m.daily[i] ?? null;
+        return v === null ? `<td class="num dcell none">&middot;</td>`
+          : `<td class="num dcell${cold(v) ? " cold" : ""}">${Math.round(v)}</td>`;
+      }).join("") +
+      `<td class="num dcell run${m.longestRun >= RUN ? " cold" : ""}">${m.longestRun}</td></tr>`;
+  };
+  return `
+    <div class="tbl-box grid-box">
+      <table class="dgrid">
+        <caption>Daily low wet bulb, &deg;F</caption>
+        <thead><tr><th></th>${head}<th class="num">Run<span>hrs</span></th></tr></thead>
+        <tbody>
+${MODEL_KEYS.map(row).join("\n")}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+// The resort page's own forecast: one paragraph of the headline numbers and
+// whether the models agree, then the day-by-day grid.
+function resortForecast(slug) {
+  const h = fc?.hills?.[slug];
+  if (!h || h.min === null) return "";
+  const made = new Date(fc.generatedAt);
+  let answer = h.hoursUnder
+    ? `${h.hoursUnder} hours under ${fc.threshold}&deg; in the next ${fc.horizonDays} days, the first ${whenWindow(h.firstWindow)}.`
+    : `No snowmaking weather in the next ${fc.horizonDays} days. The coldest it gets is ${F(h.min)}.`;
+  const c = h.coldest;
+  if (c && h.hoursUnder) {
+    answer += ` Coldest is ${F(h.min)}, ${whenWindow(c.time)}` +
+      (c.temp !== null && c.humidity !== null ? `, from ${F(c.temp)} air at ${Math.round(c.humidity)}% humidity.` : ".");
+  }
+  answer += modelSentence([h]);
+  const x = xw?.hills?.[slug];
+  if (x && x.min !== null && (x.hoursUnder || h.hoursUnder)) {
+    answer += x.hoursUnder ? ` Xweather has ${x.hoursUnder} hours, the first ${whenWindow(x.firstWindow)}.`
+      : ` Xweather has none. Its coldest is ${F(x.min)}.`;
+  }
+  return `
+  <section class="sec">
+    <h2 class="sec-title">The next ${fc.horizonDays} days</h2>
+    <p class="fc-answer">${answer}</p>
+${modelGrid(h)}
+    <p class="sec-note fc-note">Wet-bulb forecasts from <a href="https://open-meteo.com/">Open-Meteo</a>,
+      last pulled ${made.getDate()} ${FULL[made.getMonth()]}. Each cell is that day's lowest hour.
+      <b>Run</b> is the longest stretch under ${fc.threshold}&deg; without a break. The history on this
+      site counts a window at ${RUN}. A dot means the model does not reach that far.</p>
+  </section>`;
 }
 
 // Small numbers read better as words in prose. Declared up here because both
@@ -1306,6 +1436,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   FORECAST_ANSWER: fcSection.ANSWER,
   FORECAST_NOTE: fcSection.NOTE,
   FORECAST_CARDS: fcSection.CARDS,
+  FORECAST_MODELS: fcSection.MODELS ?? "",
   HERO_SCENARIOS: heroScenarios(leader),
   HERO_SEASONS: String(lead.n),
   HERO_HILLS: String(Object.keys(resorts).length),
@@ -1395,6 +1526,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     TYPICAL: pretty(o.typical), EARLIEST: pretty(o.earliest), LATEST: pretty(o.latest),
     HOURS: String(hours[slug]?.normal ?? "—"),
     SEASONS: seasonRows(slug),
+    FORECAST: resortForecast(slug),
     SEASON_HEAD: seasonHead(slug),
     SEASON_NOTES: seasonNotesFor(slug),
     FOOTER_PROVENANCE: provenance,

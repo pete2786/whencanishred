@@ -59,6 +59,20 @@ The forecast is the one thing on the page that goes out of date. Rerun
 says so in the copy once it is two days old. Build it without `data/forecast.json`
 and the section says the forecast is missing rather than showing stale numbers.
 
+### Four models
+
+`scripts/forecast.mjs` asks Open-Meteo for the same points through GFS, ECMWF,
+GEM and ICON in one call, and stores each model's coldest hour, hours under
+28°, longest unbroken run under 28° and daily lows. Every other field in the
+file is still `best_match`, which is GFS here. The models run out at different
+horizons (GEM near day ten, ICON near day seven), and past that the file holds
+null, not a warm number.
+
+The homepage gets a table of every resort against every model, and each resort
+page gets the day-by-day grid. Built because of the 28 September run: GFS put
+18 of 19 hills under 28° on 10 October, which would have tied the earliest
+window in 31 years, ECMWF never had it, and the next GFS run dropped it.
+
 ### The second opinion
 
 `scripts/forecast-xweather.mjs` pulls a second forecast from

@@ -623,6 +623,38 @@ footer::before {
   background:var(--tape);
 }
 
+
+  /* The model tables. Cold cells take the threshold line's cyan, so anything
+     under 28 reads the same everywhere on the site. */
+  .mtbl, .grid-box { margin-top:18px; }
+  .mtbl table { min-width:600px; }
+  .mtbl th span, .dgrid th span, .mcell span {
+    display:block; font-size:10.5px; font-weight:500; letter-spacing:.02em;
+    text-transform:none; color:var(--ink-3); margin-top:2px;
+  }
+  .mcell.cold, .dcell.cold { color:var(--cold); font-weight:700; }
+  .dgrid { min-width:720px; }
+  .dgrid th, .dgrid td { padding:8px 6px; text-align:center; }
+  .dgrid th[scope="row"] { text-align:left; padding-left:14px; color:var(--ink); letter-spacing:.08em; }
+  .dgrid tbody th { border-bottom:1px solid var(--line-soft); }
+  .dcell { font-size:13px; }
+  .dcell.cold { background:var(--cold-soft); }
+  .dcell.none { color:var(--ink-3); }
+  .dcell.run { border-left:1px solid var(--line); }
+  /* Too many columns to stack like the other tables, so on a phone these keep
+     their grid and scroll inside the box, with the row names pinned. */
+  .mtbl td.hill, .dgrid th[scope="row"] { position:sticky; left:0; background:var(--surface); z-index:1; }
+  @media (max-width:700px) {
+    .mtbl table { min-width:600px; }
+    .grid-box .dgrid { min-width:720px; }
+    .mtbl thead, .grid-box thead { position:static; width:auto; height:auto; overflow:visible; clip-path:none; }
+    .mtbl tbody tr, .grid-box tbody tr { display:table-row; padding:0; border-bottom:0; }
+    .mtbl tbody tr td, .grid-box tbody tr td { display:table-cell; font-size:13px; }
+    .mtbl tbody tr td { padding:10px 12px; }
+    .mtbl tbody tr td.hill { font-size:14px; }
+    .grid-box tbody tr td { padding:8px 6px; }
+    .mtbl tbody tr td::before, .grid-box tbody tr td::before { content:none; }
+  }
 </style>
 <!--{{HILL_INK}}-->
 </head>
@@ -674,6 +706,7 @@ footer::before {
     <div class="duo">
 <!--{{FORECAST_CARDS}}-->
     </div>
+<!--{{FORECAST_MODELS}}-->
 
     <p class="sec-note fc-note"><!--{{FORECAST_NOTE}}--></p>
   </section>

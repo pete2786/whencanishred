@@ -436,6 +436,40 @@ footer::before {
   background:var(--tape);
 }
 
+
+  /* The model tables. Cold cells take the threshold line's cyan, so anything
+     under 28 reads the same everywhere on the site. */
+  .mtbl, .grid-box { margin-top:18px; }
+  .mtbl table { min-width:600px; }
+  .mtbl th span, .dgrid th span, .mcell span {
+    display:block; font-size:10.5px; font-weight:500; letter-spacing:.02em;
+    text-transform:none; color:var(--ink-3); margin-top:2px;
+  }
+  .mcell.cold, .dcell.cold { color:var(--cold); font-weight:700; }
+  .dgrid { min-width:720px; }
+  .dgrid th, .dgrid td { padding:8px 6px; text-align:center; }
+  .dgrid th[scope="row"] { text-align:left; padding-left:14px; color:var(--ink); letter-spacing:.08em; }
+  .dgrid tbody th { border-bottom:1px solid var(--line-soft); }
+  .dcell { font-size:13px; }
+  .dcell.cold { background:var(--cold-soft); }
+  .dcell.none { color:var(--ink-3); }
+  .dcell.run { border-left:1px solid var(--line); }
+  /* Too many columns to stack like the other tables, so on a phone these keep
+     their grid and scroll inside the box, with the row names pinned. */
+  .mtbl td.hill, .dgrid th[scope="row"] { position:sticky; left:0; background:var(--surface); z-index:1; }
+  @media (max-width:700px) {
+    .mtbl table { min-width:600px; }
+    .grid-box .dgrid { min-width:720px; }
+    .mtbl thead, .grid-box thead { position:static; width:auto; height:auto; overflow:visible; clip-path:none; }
+    .mtbl tbody tr, .grid-box tbody tr { display:table-row; padding:0; border-bottom:0; }
+    .mtbl tbody tr td, .grid-box tbody tr td { display:table-cell; font-size:13px; }
+    .mtbl tbody tr td { padding:10px 12px; }
+    .mtbl tbody tr td.hill { font-size:14px; }
+    .grid-box tbody tr td { padding:8px 6px; }
+    .mtbl tbody tr td::before, .grid-box tbody tr td::before { content:none; }
+  }
+  .fc-answer { font-size:15.5px; line-height:1.55; color:var(--ink); max-width:62ch; margin:12px 0 26px; }
+  .fc-note { margin:16px 0 0; }
 </style>
 <style>
   :root { --accent:#23ae5a; --accent-soft:#1d3526; --brand-ink:#23ae5a; --brand-ink-2:#4067c7; --brand-raw-1:#12592e; --brand-raw-2:#213871; }
@@ -502,6 +536,28 @@ footer::before {
   </section>
 
   <section class="sec">
+    <h2 class="sec-title">The next 16 days</h2>
+    <p class="fc-answer">No snowmaking weather in the next 16 days. The coldest it gets is 33.6&deg;.</p>
+
+    <div class="tbl-box grid-box">
+      <table class="dgrid">
+        <caption>Daily low wet bulb, &deg;F</caption>
+        <thead><tr><th></th><th class="num">Mo<span>28</span></th><th class="num">Tu<span>29</span></th><th class="num">We<span>30</span></th><th class="num">Th<span>1</span></th><th class="num">Fr<span>2</span></th><th class="num">Sa<span>3</span></th><th class="num">Su<span>4</span></th><th class="num">Mo<span>5</span></th><th class="num">Tu<span>6</span></th><th class="num">We<span>7</span></th><th class="num">Th<span>8</span></th><th class="num">Fr<span>9</span></th><th class="num">Sa<span>10</span></th><th class="num">Su<span>11</span></th><th class="num">Mo<span>12</span></th><th class="num">Tu<span>13</span></th><th class="num">Run<span>hrs</span></th></tr></thead>
+        <tbody>
+          <tr><th scope="row">GFS<span>American</span></th><td class="num dcell">48</td><td class="num dcell">57</td><td class="num dcell">52</td><td class="num dcell">40</td><td class="num dcell">38</td><td class="num dcell">40</td><td class="num dcell">40</td><td class="num dcell">38</td><td class="num dcell">36</td><td class="num dcell">40</td><td class="num dcell">34</td><td class="num dcell">38</td><td class="num dcell">34</td><td class="num dcell">34</td><td class="num dcell">35</td><td class="num dcell">34</td><td class="num dcell run">0</td></tr>
+          <tr><th scope="row">ECMWF<span>European</span></th><td class="num dcell">51</td><td class="num dcell">58</td><td class="num dcell">54</td><td class="num dcell">45</td><td class="num dcell">42</td><td class="num dcell">47</td><td class="num dcell">45</td><td class="num dcell">43</td><td class="num dcell">51</td><td class="num dcell">51</td><td class="num dcell">43</td><td class="num dcell">41</td><td class="num dcell">46</td><td class="num dcell">42</td><td class="num dcell">39</td><td class="num dcell">46</td><td class="num dcell run">0</td></tr>
+          <tr><th scope="row">GEM<span>Canadian</span></th><td class="num dcell">51</td><td class="num dcell">61</td><td class="num dcell">60</td><td class="num dcell">41</td><td class="num dcell">38</td><td class="num dcell">44</td><td class="num dcell">38</td><td class="num dcell">34</td><td class="num dcell">48</td><td class="num dcell">50</td><td class="num dcell">41</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell run">0</td></tr>
+          <tr><th scope="row">ICON<span>German</span></th><td class="num dcell">51</td><td class="num dcell">60</td><td class="num dcell">56</td><td class="num dcell">44</td><td class="num dcell">40</td><td class="num dcell">45</td><td class="num dcell">40</td><td class="num dcell">36</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell none">&middot;</td><td class="num dcell run">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note fc-note">Wet-bulb forecasts from <a href="https://open-meteo.com/">Open-Meteo</a>,
+      last pulled 28 September. Each cell is that day's lowest hour.
+      <b>Run</b> is the longest stretch under 28&deg; without a break. The history on this
+      site counts a window at 8. A dot means the model does not reach that far.</p>
+  </section>
+
+  <section class="sec">
     <h2 class="sec-title">Season by season</h2>
     <p class="sec-note">Each date says where it came from. <b>About</b> means the archive
       placed it in a window without pinning the day; <b>confirmed</b> means two independent
@@ -533,7 +589,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-09-28T21:51:22.788Z">28 September 2026, 16:51 CDT</time>. Forecast pulled <time datetime="2026-09-28T21:50:56.432Z">28 September 2026, 16:50 CDT</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-09-28T21:55:57.933Z">28 September 2026, 16:55 CDT</time>. Forecast pulled <time datetime="2026-09-28T21:52:58.510Z">28 September 2026, 16:52 CDT</time>.</span>
     <span><a href="../about.html">About this site</a></span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
