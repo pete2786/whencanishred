@@ -15,7 +15,6 @@ node scripts/allhours.mjs > data/hours.json   # Oct-Nov snowmaking hours per hil
 node scripts/climatology.mjs                  # first-window date, normal/earliest/latest
 node scripts/curve.mjs                        # mean wet-bulb curve -> data/curve.json
 node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
-node scripts/forecast-xweather.mjs            # 15-day second opinion -> data/forecast-xweather.json (needs keys)
 node scripts/places.mjs                       # climatology for regions with no hills -> data/places.json
 node scripts/project.mjs                      # projected opening dates -> data/projection.json
 node scripts/project.mjs --report              # the working, written nowhere
@@ -72,25 +71,6 @@ Each resort page gets the day-by-day grid. The homepage keeps to one sentence,
 and counts a window the way the climatology does: eight hours in a row. Built because of the 28 September run: GFS put
 18 of 19 hills under 28° on 10 October, which would have tied the earliest
 window in 31 years, ECMWF never had it, and the next GFS run dropped it.
-
-### The second opinion
-
-`scripts/forecast-xweather.mjs` pulls a second forecast from
-[Xweather](https://www.xweather.com/) for the same points and writes it in the
-same shape. It needs `XWEATHER_CLIENT_ID` and `XWEATHER_CLIENT_SECRET`, set as
-repository secrets for the workflow. The free tier is 15,000 calls a month and a
-day of refreshes costs 68.
-
-Xweather does not serve a psychrometric wet bulb. Its `wetBulbGlobeTemp` is WBGT,
-a heat-stress index, so the script computes wet bulb from temperature and
-humidity with Stull (2011). Open-Meteo's own values match that formula to within
-0.1°C, so both forecasts go through the same calculation.
-
-Where it is present and under two days old, each forecast card gets an Xweather
-row and the answer gets one more sentence: "Xweather agrees." when both have the
-same number of points with a window and the same first day, and Xweather's own
-count and first window when they differ. Missing or stale, the section renders
-exactly as it does without it.
 
 `review.html` is the page to read while editing: every field as a table, colors as
 swatches, handles as links, gaps in red, and each value sat next to the evidence
