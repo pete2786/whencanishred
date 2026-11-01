@@ -1,37 +1,33 @@
 {
   "wild-mountain": {
-    "date": "2026-11-10",
-    "label": "model"
+    "date": "2026-11-13",
+    "label": "weather",
+    "usual": "2026-11-10",
+    "night": "2026-11-12",
+    "gap": 1
   },
   "trollhaugen": {
-    "date": "2026-11-10",
-    "label": "model"
+    "date": "2026-11-14",
+    "label": "weather",
+    "usual": "2026-11-10",
+    "night": "2026-11-12",
+    "gap": 2
   },
   "andes-tower-hills": {
-    "date": "2026-11-11",
-    "label": "model"
-  },
-  "buena-vista": {
-    "date": "2026-11-20",
-    "label": "climate"
+    "date": "2026-11-17",
+    "label": "weather",
+    "usual": "2026-11-11",
+    "night": "2026-11-15",
+    "gap": 2
   },
   "detroit-mountain": {
-    "date": "2026-11-22",
-    "label": "climate"
-  },
-  "mount-ski-gull": {
-    "date": "2026-11-23",
-    "label": "climate"
-  },
-  "spirit-mountain": {
     "date": "2026-11-26",
-    "label": "model"
+    "label": "weather",
+    "usual": "2026-11-22",
+    "night": "2026-11-15",
+    "gap": 11
   },
   "powder-ridge": {
-    "date": "2026-11-27",
-    "label": "climate"
-  },
-  "chester-bowl": {
     "date": "2026-11-27",
     "label": "climate"
   },
@@ -47,9 +43,37 @@
     "date": "2026-11-29",
     "label": "model"
   },
+  "buena-vista": {
+    "date": "2026-11-29",
+    "label": "weather",
+    "usual": "2026-11-20",
+    "night": "2026-11-18",
+    "gap": 11
+  },
+  "mount-ski-gull": {
+    "date": "2026-11-29",
+    "label": "weather",
+    "usual": "2026-11-23",
+    "night": "2026-11-18",
+    "gap": 11
+  },
+  "chester-bowl": {
+    "date": "2026-11-29",
+    "label": "weather",
+    "usual": "2026-11-27",
+    "night": "2026-11-18",
+    "gap": 11
+  },
   "welch-village": {
     "date": "2026-11-30",
     "label": "model"
+  },
+  "spirit-mountain": {
+    "date": "2026-11-30",
+    "label": "weather",
+    "usual": "2026-11-26",
+    "night": "2026-11-12",
+    "gap": 18
   },
   "mount-kato": {
     "date": "2026-11-30",

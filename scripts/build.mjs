@@ -516,10 +516,14 @@ function heroScenarios(slug) {
       <span class="count-unit">days, probably</span>
     </div>`;
   }
+  // A past season's date that this fall's weather has already ruled out gets
+  // no countdown: counting down to it would promise a day that cannot come.
+  const p = projection[slug];
+  const ruledOut = iso => p.label === "weather" && iso < p.date && daysUntil(iso) > 0;
   const cells = rows.map(r => {
     const iso = thisSeason(r.date);
     return `      <div class="scen scen-${r.key}">
-        <span class="scen-num">${countdown(daysUntil(iso))}</span>
+        <span class="scen-num">${ruledOut(iso) ? `<span class="scen-word">too warm</span>` : countdown(daysUntil(iso))}</span>
         <span class="scen-date">${pretty(iso)}</span>
         <span class="scen-lede">${r.lede}<span class="scen-yr">${esc(r.season)}</span></span>
       </div>`;
@@ -1349,6 +1353,14 @@ ${cards}
 }
 
 
+// One sentence when this fall's weather has moved the leading projection.
+function weatherNote(slug) {
+  const p = projection[slug];
+  if (p.label !== "weather") return "";
+  return ` No snowmaking weather has reached <b>${esc(resorts[slug].name)}</b> yet, so its ` +
+    `projection moved from ${pretty(p.usual)} to ${pretty(p.date)}.`;
+}
+
 // Homepage
 const hero = heroCopy();
 const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
@@ -1375,7 +1387,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   }),
   HELLO: helloCard(),
   HERO_SAY: hero.SAY,
-  HERO_SUB: hero.SUB,
+  HERO_SUB: hero.SUB + weatherNote(leader),
   HERO_SHOT: indexHeroShot(),
 })));
 

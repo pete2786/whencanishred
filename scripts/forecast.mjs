@@ -143,6 +143,62 @@ for (const [id, p] of Object.entries(places)) {
   await sleep(600);
 }
 
+// --------------------------------------------------------- this season so far
+//
+// What has already happened at each hill since 1 September: the hours under the
+// line, and the first full night, eight hours in a row. project.mjs pushes an
+// opening back when the cold has not come, and needs to know whether it has.
+//
+// Open-Meteo serves the last 92 days alongside the forecast. A first night,
+// once found, is kept: by mid-December a September night has fallen out of
+// that window, and forgetting it would read as a fall that never got cold.
+const SEASON_OUT = "data/this-season.json";
+const nowCentral = new Intl.DateTimeFormat("sv-SE", {
+  timeZone: "America/Chicago", year: "numeric", month: "2-digit", day: "2-digit", hour: "2-digit", hourCycle: "h23",
+}).format(new Date()).replace(" ", "T") + ":00";
+const autumn = +nowCentral.slice(5, 7) >= 7 ? +nowCentral.slice(0, 4) : +nowCentral.slice(0, 4) - 1;
+const seasonStart = `${autumn}-09-01T00:00`;
+const kept = existsSync(SEASON_OUT) ? JSON.parse(readFileSync(SEASON_OUT, "utf8")) : null;
+const keptHills = kept?.season === autumn ? kept.hills : {};
+
+async function past(lat, lon) {
+  const q = new URLSearchParams({
+    latitude: String(lat), longitude: String(lon), hourly: "wet_bulb_temperature_2m",
+    temperature_unit: "fahrenheit", past_days: "92", forecast_days: "1", timezone: "America/Chicago",
+  });
+  const res = await fetch(`${API}?${q}`);
+  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  return (await res.json()).hourly;
+}
+
+const season = { season: autumn, through: nowCentral, threshold: THRESHOLD, hills: {} };
+for (const [slug, r] of Object.entries(resorts)) {
+  const was = keptHills[slug] ?? {};
+  try {
+    const h = await past(r.lat, r.lon);
+    let hours = 0, run = 0, firstNight = null;
+    for (let i = 0; i < h.time.length; i++) {
+      const t = h.time[i], v = h.wet_bulb_temperature_2m[i];
+      if (t < seasonStart || t >= nowCentral) continue;
+      if (v !== null && v < THRESHOLD) {
+        hours++;
+        if (++run === NIGHT && !firstNight) firstNight = h.time[i - NIGHT + 1];
+      } else run = 0;
+    }
+    // The window only reaches back 92 days, so the hours count is a floor
+    // once it stops covering September. The first night is not: it is kept.
+    season.hills[slug] = {
+      firstNight: was.firstNight ?? firstNight,
+      hours: Math.max(hours, was.hours ?? 0),
+    };
+  } catch (e) {
+    season.hills[slug] = { ...was, error: String(e.message) };
+    process.stderr.write(`${slug.padEnd(19)} ! season: ${e.message}\n`);
+  }
+  await sleep(300);
+}
+writeFileSync(SEASON_OUT, JSON.stringify(season, null, 2) + "\n");
+
 writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 const ok = Object.values(out.hills).filter(h => h.min !== null).length;
 console.log(`\nwrote ${OUT} — ${ok}/${Object.keys(resorts).length} hills, ${Object.keys(out.places).length} places, ${HORIZON}-day horizon`);

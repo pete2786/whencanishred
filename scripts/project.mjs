@@ -8,7 +8,7 @@
 // none. A hill with its own history is projected from that history; a hill
 // without one is projected from its climate, and the page says which by label.
 
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 
 const SEASON = 2026;
 const report = process.argv.includes("--report");
@@ -122,6 +122,79 @@ for (const slug of Object.keys(resorts)) {
   rows.push([slug, hours[slug]?.normal, "climate", date, `fit, was ${was?.date ?? "—"}`]);
 }
 
+// --- this fall's weather ------------------------------------------------------
+// The record says when a hill normally opens. It cannot say when the cold has
+// not come. Every one of the 60 openings on file came after at least one full
+// night of snowmaking, eight hours in a row under 28, and in the late falls on
+// record each hill opened close to the shortest gap it has ever managed after
+// that night: in 2024 Afton, Welch and Buck all opened ten days after it, which
+// is the least any of them has ever taken.
+//
+// So a hill opens no sooner than its first night plus its shortest gap. In a
+// normal fall that lands well before the median and changes nothing. In a late
+// one it is the binding date, and the projection moves to it.
+//
+// Before the first night has come, its date is the median of the falls that
+// were just as late: the years in data/nights.json with no night by today. When
+// no model in the forecast has a night in the coming week either, "just as
+// late" means no night a week from now. A week, because past it the models
+// have twice found nights that never came: 10 and 16 October, this fall.
+const nights = existsSync("data/nights.json") ? read("data/nights.json").hills : {};
+const now = existsSync("data/this-season.json") ? read("data/this-season.json") : null;
+const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
+const SURE_DAYS = 7;
+const live = now?.season === SEASON;
+const asOf = live ? now.through.slice(0, 10) : null;
+const dayDiff = (a, b) => Math.round((Date.parse(`${a}T00:00:00Z`) - Date.parse(`${b}T00:00:00Z`)) / 86400000);
+const addDays = (iso, n) => new Date(Date.parse(`${iso}T00:00:00Z`) + n * 86400000).toISOString().slice(0, 10);
+
+const shortestGap = slug => {
+  const gaps = Object.entries(seasons[slug] ?? {}).map(([season, v]) => {
+    const night = nights[slug]?.[season.slice(0, 4)];
+    return v.firstLift?.date && night ? dayDiff(v.firstLift.date, night) : null;
+  }).filter(g => g !== null && g >= 0);
+  return gaps.length ? Math.min(...gaps) : null;
+};
+// A hill with no record borrows the middle of everyone else's shortest gap.
+const ownGaps = Object.keys(resorts).map(shortestGap).filter(g => g !== null).sort((a, b) => a - b);
+const pooledGap = ownGaps.length ? Math.round(median(ownGaps)) : null;
+
+function firstNight(slug) {
+  const seen = now?.hills?.[slug]?.firstNight;
+  if (seen) return { date: seen.slice(0, 10), how: "observed" };
+  // A night any model sees inside the week keeps the clock at today.
+  const sure = addDays(asOf, SURE_DAYS);
+  const models = Object.values(fc?.hills?.[slug]?.models ?? {});
+  const coming = models.some(m => m.firstNight && m.firstNight.slice(0, 10) <= sure);
+  const by = models.length && !coming ? sure : asOf;
+  // Falls with no night by then, by month and day. A fall that never got one
+  // before New Year counts as the latest of all rather than dropping out.
+  const md = by.slice(5);
+  const late = Object.values(nights[slug] ?? {})
+    .map(d => (d === null ? "12-31" : d.slice(5))).filter(d => d > md).sort();
+  if (!late.length) return { date: addDays(by, 1), how: "unprecedented" };
+  const mid = late[Math.floor((late.length - 1) / 2)];
+  return { date: `${SEASON}-${mid}`, how: `median of ${late.length} falls with none by ${by.slice(5)}` };
+}
+
+if (live) {
+  for (const slug of Object.keys(out)) {
+    if (EXTERNAL.has(out[slug].label)) continue;
+    const gap = shortestGap(slug) ?? pooledGap;
+    if (gap === null) continue;
+    const night = firstNight(slug);
+    const earliest = addDays(night.date, gap);
+    const row = rows.find(r => r[0] === slug);
+    if (earliest > out[slug].date) {
+      row.push(`pushed from ${out[slug].date}: night ${night.date} (${night.how}) + ${gap}d`);
+      out[slug] = { date: earliest, label: "weather", usual: out[slug].date, night: night.date, gap };
+      row[2] = "weather"; row[3] = earliest;
+    } else {
+      row.push(`weather allows ${earliest}`);
+    }
+  }
+}
+
 const ordered = Object.fromEntries(
   Object.entries(out).sort(([, a], [, b]) => a.date.localeCompare(b.date)),
 );
@@ -130,8 +203,9 @@ const byKind = fitPoints.reduce((a, p) => ({ ...a, [p.kind]: (a[p.kind] ?? 0) + 
 console.log(`fit: ${slope.toFixed(3)} days per snowmaking hour, R2 ${r2.toFixed(2)}, on ${fitPoints.length} points ` +
             `(${Object.entries(byKind).map(([k, n]) => `${n} ${k}`).join(", ")})`);
 console.log("\nhill                 hrs  label    date        note");
-for (const [slug, hrs, label, date, note] of rows.sort((a, b) => a[3].localeCompare(b[3]))) {
-  console.log(`${slug.padEnd(20)}${String(hrs ?? "?").padStart(4)}  ${label.padEnd(8)} ${date}  ${note}`);
+if (live) console.log(`(this fall through ${asOf}; no-record hills borrow a ${pooledGap}-day gap)`);
+for (const [slug, hrs, label, date, ...notes] of rows.sort((a, b) => a[3].localeCompare(b[3]))) {
+  console.log(`${slug.padEnd(20)}${String(hrs ?? "?").padStart(4)}  ${label.padEnd(8)} ${date}  ${notes.join("; ")}`);
 }
 
 if (report) {

@@ -54,6 +54,11 @@ jobs:
         continue-on-error: true
         run: node scripts/forecast.mjs
 
+      # The projections move with this fall's weather, which forecast.mjs has
+      # just recorded in data/this-season.json.
+      - name: Reproject openings
+        run: node scripts/project.mjs
+
       - name: Rebuild the site
         run: node scripts/build.mjs
 

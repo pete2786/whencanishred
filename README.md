@@ -16,6 +16,7 @@ node scripts/climatology.mjs                  # first-window date, normal/earlie
 node scripts/curve.mjs                        # mean wet-bulb curve -> data/curve.json
 node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
 node scripts/places.mjs                       # climatology for regions with no hills -> data/places.json
+node scripts/nights.mjs                       # first full night each autumn, per hill -> data/nights.json (needs the cache)
 node scripts/project.mjs                      # projected opening dates -> data/projection.json
 node scripts/project.mjs --report              # the working, written nowhere
 node scripts/identity.mjs                     # social/color candidates -> data/raw/identity.json
@@ -92,6 +93,23 @@ staffing and holiday demand rather than by cold, and the curve flattens where
 the line does not. Feeding those stated dates into the fit buys sane
 extrapolation at the cost of in-sample R2, which is the right trade when the
 whole job is predicting hills that are not in the sample.
+
+Then this fall's weather gets a say. Every one of the 60 openings on record came
+after at least one full night of snowmaking, eight hours in a row under 28°, and
+in late falls each hill opened close to the shortest gap it has ever managed
+after that night (in 2024 Afton, Welch and Buck all opened ten days after it).
+So a hill opens no sooner than its first night plus its shortest gap; a hill
+with no record borrows the median of everyone else's. Before the first night
+comes, its date is the median of the falls in `data/nights.json` that had none
+by now, or none a week from now if no forecast model has one in the coming
+week. When that lands after the usual date, the projection moves and is
+labelled `weather`. In a normal fall it changes nothing.
+
+`forecast.mjs` writes what has happened so far to `data/this-season.json`: hours
+under 28° since 1 September and the first full night, which is kept once found.
+The workflow runs `project.mjs` after it, so projections move twice a day.
+`data/nights.json` comes from the ERA5 cache, which CI does not have, so it is
+committed and rerun by hand.
 
 A hill's own announced or targeted date always wins over the model. Both
 estimators are weak while the record is half empty; rerun after any backfill.
