@@ -161,7 +161,7 @@ const pooledGap = ownGaps.length ? Math.round(median(ownGaps)) : null;
 
 function firstNight(slug) {
   const seen = now?.hills?.[slug]?.firstNight;
-  if (seen) return { date: seen.slice(0, 10), how: "observed" };
+  if (seen) { const d = seen.slice(0, 10); return { date: d, lo: d, hi: d, how: "observed" }; }
   // A night any model sees inside the week keeps the clock at today.
   const sure = addDays(asOf, SURE_DAYS);
   const models = Object.values(fc?.hills?.[slug]?.models ?? {});
@@ -172,9 +172,10 @@ function firstNight(slug) {
   const md = by.slice(5);
   const late = Object.values(nights[slug] ?? {})
     .map(d => (d === null ? "12-31" : d.slice(5))).filter(d => d > md).sort();
-  if (!late.length) return { date: addDays(by, 1), how: "unprecedented" };
+  if (!late.length) { const d = addDays(by, 1); return { date: d, lo: d, hi: d, how: "unprecedented" }; }
   const mid = late[Math.floor((late.length - 1) / 2)];
-  return { date: `${SEASON}-${mid}`, how: `median of ${late.length} falls with none by ${by.slice(5)}` };
+  return { date: `${SEASON}-${mid}`, lo: `${SEASON}-${late[0]}`, hi: `${SEASON}-${late.at(-1)}`,
+           how: `median of ${late.length} falls with none by ${by.slice(5)}` };
 }
 
 if (live) {
@@ -185,6 +186,17 @@ if (live) {
     const night = firstNight(slug);
     const earliest = addDays(night.date, gap);
     const row = rows.find(r => r[0] === slug);
+    // The range around it. Each end is the later of what the weather allows,
+    // from the earliest and latest of the falls that were just as late, and
+    // what the hill itself has done, from its earliest and latest opening on
+    // record. In a normal fall the record decides both ends; in a late one the
+    // weather lifts them. Never earlier than tomorrow.
+    const obs = observed(slug).map(toDate);
+    const later = (...xs) => xs.filter(Boolean).sort().at(-1);
+    const range = {
+      lo: later(addDays(night.lo, gap), obs[0], addDays(asOf, 1)),
+      hi: later(addDays(night.hi, gap), obs.at(-1)),
+    };
     if (earliest > out[slug].date) {
       row.push(`pushed from ${out[slug].date}: night ${night.date} (${night.how}) + ${gap}d`);
       out[slug] = { date: earliest, label: "weather", usual: out[slug].date, night: night.date, gap };
@@ -192,6 +204,9 @@ if (live) {
     } else {
       row.push(`weather allows ${earliest}`);
     }
+    const d = out[slug].date;
+    out[slug].range = { lo: range.lo < d ? range.lo : d, hi: range.hi > d ? range.hi : d };
+    row.push(`range ${out[slug].range.lo} to ${out[slug].range.hi}`);
   }
 }
 

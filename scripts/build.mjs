@@ -474,30 +474,8 @@ const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(
 // ------------------------------------------------------------------- hero
 //
 // A single "75 days, probably" hid how wide the spread actually is: Wild
-// Mountain has opened as early as 18 October and as late as 20 November, five
-// weeks apart. Three numbers say that honestly. Each one is a season that
-// actually happened, not a percentile invented from five samples.
-
-// Openings land either side of New Year, so a season's dates belong to the
-// year the season started in, not the year on the calendar.
-const seasonStartYear = () => {
-  const n = new Date();
-  return n.getMonth() >= 6 ? n.getFullYear() : n.getFullYear() - 1;
-};
-const thisSeason = iso => `${seasonStartYear() + (Number(iso.slice(5, 7)) >= 7 ? 0 : 1)}-${iso.slice(5)}`;
-
-function scenarios(slug) {
-  const seen = Object.entries(seasons[slug] ?? {})
-    .map(([season, s]) => ({ season, date: s.firstLift?.date }))
-    .filter(e => e.date)
-    .sort((a, b) => snowDay(a.date) - snowDay(b.date));
-  if (seen.length < 2) return null;
-  return [
-    { ...seen[0], key: "early", lede: "earliest on record" },
-    { ...seen[Math.floor((seen.length - 1) / 2)], key: "real", lede: `median of ${seen.length} seasons` },
-    { ...seen.at(-1), key: "late", lede: "latest on record" },
-  ];
-}
+// Mountain has opened as early as 18 October and as late as 20 November. The
+// hero gives the range instead, with this fall's weather lifting either end.
 
 // Past the date the countdown is meaningless, and a build in December must not
 // print "-30 days". The scenario says it has come and gone instead.
@@ -507,28 +485,32 @@ function countdown(days) {
   return `<span class="scen-word">passed</span>`;
 }
 
-function heroScenarios(slug) {
-  const rows = scenarios(slug);
-  // One observed season is not a spread. Fall back to the model date alone.
-  if (!rows) {
-    return `<div class="count">
-      <span class="count-num">${daysUntil(projection[slug].date)}</span>
-      <span class="count-unit">days, probably</span>
+// The hero answers the site's question for the first lift anywhere: a range,
+// because a single date has never been honest here. Its ends are the soonest
+// any hill could open and the latest the first one is likely to, both from
+// project.mjs, which sets them from this fall's weather and each hill's record.
+function heroRange(slug) {
+  const ranged = Object.values(projection).filter(p => p.range);
+  if (!ranged.length) {
+    return `<div class="scens">
+      <div class="scen scen-real">
+        <span class="scen-num">${countdown(daysUntil(projection[slug].date))}</span>
+        <span class="scen-date">${pretty(projection[slug].date)}</span>
+        <span class="scen-lede">projected first lift</span>
+      </div>
     </div>`;
   }
-  // A past season's date that this fall's weather has already ruled out gets
-  // no countdown: counting down to it would promise a day that cannot come.
-  const p = projection[slug];
-  const ruledOut = iso => p.label === "weather" && iso < p.date && daysUntil(iso) > 0;
-  const cells = rows.map(r => {
-    const iso = thisSeason(r.date);
-    return `      <div class="scen scen-${r.key}">
-        <span class="scen-num">${ruledOut(iso) ? `<span class="scen-word">too warm</span>` : countdown(daysUntil(iso))}</span>
-        <span class="scen-date">${pretty(iso)}</span>
-        <span class="scen-lede">${r.lede}<span class="scen-yr">${esc(r.season)}</span></span>
-      </div>`;
-  });
-  return `<div class="scens">\n${cells.join("\n")}\n    </div>`;
+  const lo = ranged.map(p => p.range.lo).sort()[0];
+  const hi = ranged.map(p => p.range.hi).sort()[0];
+  const a = daysUntil(lo), b = daysUntil(hi);
+  const num = a === b ? countdown(a) : `${a}&ndash;${b}<span class="scen-unit">days</span>`;
+  return `<div class="scens">
+      <div class="scen scen-real">
+        <span class="scen-num">${num}</span>
+        <span class="scen-date">${pretty(lo)}${lo === hi ? "" : ` &ndash; ${pretty(hi)}`}</span>
+        <span class="scen-lede">first lift, from this fall's weather and the record</span>
+      </div>
+    </div>`;
 }
 
 const GROUPS = [["twin-cities", "Twin Cities"], ["greater-minnesota", "Greater Minnesota"]];
@@ -1373,7 +1355,7 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   FORECAST_ANSWER: fcSection.ANSWER,
   FORECAST_NOTE: fcSection.NOTE,
   FORECAST_CARDS: fcSection.CARDS,
-  HERO_SCENARIOS: heroScenarios(leader),
+  HERO_SCENARIOS: heroRange(leader),
   HERO_SEASONS: String(lead.n),
   HERO_HILLS: String(Object.keys(resorts).length),
   HERO_HOURS: String(hours[leader]?.normal ?? "—"),

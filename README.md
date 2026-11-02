@@ -105,6 +105,13 @@ by now, or none a week from now if no forecast model has one in the coming
 week. When that lands after the usual date, the projection moves and is
 labelled `weather`. In a normal fall it changes nothing.
 
+Each hill also gets a range. Its early end is the later of what the weather
+allows (the earliest of those late falls, plus the gap) and the hill's earliest
+opening on record; its late end is the later of the latest of those falls plus
+the gap and the hill's latest opening on record. The homepage hero shows the
+range for the first lift anywhere: the soonest early end and the soonest late
+end across all hills.
+
 `forecast.mjs` writes what has happened so far to `data/this-season.json`: hours
 under 28° since 1 September and the first full night, which is kept once found.
 The workflow runs `project.mjs` after it, so projections move twice a day.
