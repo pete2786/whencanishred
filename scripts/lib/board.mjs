@@ -40,8 +40,10 @@ export function bStrip(K, h, pre) {
     'aria-label="' + bEsc(h.name) + ", " + bDow(K.days[i]) + " " + bShort(K.days[i]) + ": " +
     c.under + " of " + c.n + ' models under the threshold"></button>').join("") + "</div>";
 }
-function bDays(n) {
-  if (n > 0) return '<span class="pc-num">' + n + '</span><span class="pc-unit">days</span>';
+// A projection is a floor, so it reads "9+"; a date the hill posted is exact.
+function bDays(n, posted) {
+  if (n > 0) return '<span class="pc-num">' + n + (posted ? "" : '<span class="pc-plus-sign">+</span>') +
+    '</span><span class="pc-unit">days</span>';
   if (n === 0) return '<span class="pc-num">Today</span>';
   return '<span class="pc-num">Open</span>';
 }
@@ -58,7 +60,7 @@ export function bCard(K, picks, slug, idx) {
     '<button type="button" class="pc-rm" data-rm="' + idx + '" aria-label="Remove ' + bEsc(h.name) + '">&times;</button>' +
     '<h3 class="pc-name">' + bEsc(h.name) + "</h3>" +
     '<p class="pc-place">' + bEsc(h.place) + "</p>" +
-    '<p class="pc-count">' + bDays(h.days) + "</p>" +
+    '<p class="pc-count">' + bDays(h.days, h.posted) + "</p>" +
     '<p class="pc-line">' + (h.posted
       ? '<a class="posted" href="' + bEsc(h.posted) + '" target="_blank" rel="noopener">Posted opening</a> <b>'
       : "Projected <b>") + bShort(h.lo) +
