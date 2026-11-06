@@ -105,7 +105,8 @@ whole job is predicting hills that are not in the sample.
 
 Two hand-kept inputs override that. `data/stated.json` holds dates a hill has
 put out for the current season, such as Lutsen's 26 November; these win over
-the hill's own record, are labelled `target`, and skip the weather check, whose
+the hill's own record, are labelled `target` and shown on the homepage as
+posted, join the climate fit when the hill has no record, and skip the weather check, whose
 gap would otherwise hold a hill to how long it has taken after the cold in the
 past. And a hill with no record can carry `projectLike` in `resorts.json`
 (Chester Bowl projects like Elm Creek until a date of its own is stated): it takes that hill's record and gaps

@@ -15,6 +15,9 @@ const SCHEME = "dark";
 const resorts = read("data/resorts.json");
 const seasons = read("data/seasons.json");
 const projection = read("data/projection.json");
+// Opening days the hills themselves have posted for this season. A posted date
+// is shown as posted, with its source, rather than as a projection.
+const stated = existsSync("data/stated.json") ? read("data/stated.json").hills : {};
 const hoursRows = read("data/hours.json");
 // Optional: the site builds without it, and says the forecast is missing
 // rather than printing numbers it does not have.
@@ -1071,6 +1074,7 @@ function boardHill(slug) {
     days: daysUntil(p.date), proj: p.date, label: p.label,
     lo: p.range?.lo ?? p.date, hi: p.range?.hi ?? p.date,
     last: seasons[slug]?.[lastSeason]?.firstLift?.date ?? null,
+    posted: p.label === "target" && stated[slug]?.date === p.date ? stated[slug].url : null,
     cells,
     daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
   };
@@ -1111,13 +1115,13 @@ function boardSection() {
       return `      <div class="brow">
         <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
         ${bStrip(BOARD, h, "row")}
-        <div class="brow-when">${when}<span>${bShort(h.proj)}</span></div>
+        <div class="brow-when">${when}<span${h.posted ? ' class="posted"' : ""}>${h.posted ? "Posted " : ""}${bShort(h.proj)}</span></div>
       </div>`;
     }).join("\n");
     return `    <div class="area">
       <div class="area-head"><h3>${esc(a.name)}</h3>
         <p>${night ? `Next night under ${fc.threshold}&deg; <b class="nb">${bDow(night.day)} ${bShort(night.day)}</b>, ${night.n} of ${a.hills.length} hills`
-          : `Nothing under ${fc.threshold}&deg; in ${BOARD.days.length} days`} &middot; first lift <b>${esc(first.name)}</b>, ${first.days > 0 ? `${first.days} days` : "open"}</p></div>
+          : `Nothing under ${fc.threshold}&deg; in ${BOARD.days.length} days`} &middot; <b>${esc(first.name)}</b>, ${first.days > 0 ? `${first.posted ? "posted" : "potential"} opening in ${first.days} days` : "open"}</p></div>
       <div class="brow brow-hd" aria-hidden="true"><div></div>${bHeader(BOARD)}<div></div></div>
 ${rows}
     </div>`;

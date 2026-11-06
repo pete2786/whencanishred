@@ -82,9 +82,16 @@ const EXTERNAL = new Set(["announced", "target"]);
 // hand-typed page and are contradicted by every season since: Lutsen has opened
 // on 6 December at the median and has never once opened before the 28th. Five
 // observed seasons beat a stated intention of unknown vintage.
-const statedWins = slug => EXTERNAL.has(prior[slug]?.label) && observed(slug).length < 2;
+const statedWins = slug => !statedNow[slug] && EXTERNAL.has(prior[slug]?.label) && observed(slug).length < 2;
 
-const anchorPoint = slug => (statedWins(slug) ? sinceOct(prior[slug].date) : null);
+// A date posted this season is the strongest anchor a hill without a record
+// can give the fit, and it is read from stated.json, never from last run's
+// output, so the fit does not depend on what the previous run happened to save.
+const anchorPoint = slug => {
+  if (observed(slug).length >= 2) return null;
+  if (statedNow[slug]) return sinceOct(statedNow[slug].date);
+  return statedWins(slug) ? sinceOct(prior[slug].date) : null;
+};
 
 const fitPoints = Object.keys(resorts).map(slug => {
   const x = hours[slug]?.normal;
@@ -92,7 +99,7 @@ const fitPoints = Object.keys(resorts).map(slug => {
   if (x == null) return null;
   if (obs.length >= 2) return { slug, x, y: median(obs), kind: "record" };
   const anchor = anchorPoint(slug);
-  return anchor == null ? null : { slug, x, y: anchor, kind: prior[slug].label };
+  return anchor == null ? null : { slug, x, y: anchor, kind: statedNow[slug] ? "posted" : prior[slug].label };
 }).filter(Boolean);
 
 const mean = xs => xs.reduce((a, b) => a + b, 0) / xs.length;
