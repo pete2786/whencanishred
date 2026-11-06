@@ -75,6 +75,14 @@
       "hi": "2026-11-26"
     }
   },
+  "giants-ridge": {
+    "date": "2026-11-27",
+    "label": "target",
+    "range": {
+      "lo": "2026-11-27",
+      "hi": "2026-11-27"
+    }
+  },
   "spirit-mountain": {
     "date": "2026-11-28",
     "label": "weather",
@@ -100,14 +108,6 @@
     "range": {
       "lo": "2026-11-24",
       "hi": "2026-12-04"
-    }
-  },
-  "giants-ridge": {
-    "date": "2026-11-29",
-    "label": "model",
-    "range": {
-      "lo": "2026-11-24",
-      "hi": "2026-12-02"
     }
   },
   "welch-village": {
