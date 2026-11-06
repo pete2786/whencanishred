@@ -1065,15 +1065,12 @@ function boardHill(slug) {
     const vals = MODEL_KEYS.map(k => f?.models?.[k]?.daily?.[i]).filter(v => v != null);
     return { n: vals.length, under: vals.filter(v => v < threshold).length };
   });
-  const nights = Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.firstNight ?? null]));
   return {
     slug, name: r.name, place: r.place,
     c1: r.colors?.primary ?? "#7B848A", c2: r.colors?.secondary ?? r.colors?.primary ?? "#7B848A",
     days: daysUntil(p.date), proj: p.date, label: p.label,
     lo: p.range?.lo ?? p.date, hi: p.range?.hi ?? p.date,
     last: seasons[slug]?.[lastSeason]?.firstLift?.date ?? null,
-    first: f?.firstWindow ?? null,
-    nights, agree: Object.values(nights).filter(Boolean).length,
     cells,
     daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
   };

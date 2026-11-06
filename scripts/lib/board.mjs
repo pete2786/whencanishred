@@ -23,10 +23,6 @@ export function bShort(iso) {
 export function bDow(iso) {
   return DOW[new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10))).getUTCDay()];
 }
-export function bHour(iso) {
-  const h = Number(iso.slice(11, 13));
-  return (h % 12 || 12) + (h < 12 ? "am" : "pm");
-}
 // How many of the models put that night under the threshold. A night past
 // every model's range has nothing to say and is hatched.
 export function bShade(c) {
@@ -58,21 +54,14 @@ export function bOptions(K, picks, current) {
 }
 export function bCard(K, picks, slug, idx) {
   const h = K.hills[slug];
-  const agree = '<span class="agree">' + Object.keys(K.models).map(m =>
-    '<i class="' + (h.nights[m] ? "on" : "") + '" title="' + bEsc(K.models[m]) + '"></i>').join("") + "</span>" +
-    h.agree + " of " + Object.keys(K.models).length + " models see a full night";
   return '<article class="pcard" style="--c1:' + h.c1 + ";--c2:" + h.c2 + '">' +
     '<button type="button" class="pc-rm" data-rm="' + idx + '" aria-label="Remove ' + bEsc(h.name) + '">&times;</button>' +
     '<h3 class="pc-name">' + bEsc(h.name) + "</h3>" +
     '<p class="pc-place">' + bEsc(h.place) + "</p>" +
     '<p class="pc-count">' + bDays(h.days) + "</p>" +
-    '<p class="pc-line">First lift <b>' + bShort(h.proj) + "</b>" + (h.label === "weather" ? ' <span class="tag">weather</span>' : "") + "</p>" +
-    '<p class="pc-line pc-mut">Range ' + bShort(h.lo) + " &ndash; " + bShort(h.hi) + "</p>" +
+    '<p class="pc-line">Projected <b>' + bShort(h.lo) + " &ndash; " + bShort(h.hi) + "</b></p>" +
     '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
     '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
-    '<p class="pc-line">' + (h.first ? "First hour under 28&deg; <b>" + bDow(h.first) + " " + bShort(h.first) + ", " + bHour(h.first) + "</b>"
-      : "Nothing under 28&deg; in " + K.days.length + " days") + "</p>" +
-    '<p class="pc-line pc-mut">' + agree + "</p>" +
     '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +
     "</article>";
 }
@@ -92,6 +81,6 @@ export function bSlots(K, picks) {
 }
 
 // Everything above, as source for the page.
-export const KIT = [bEsc, bShort, bDow, bHour, bShade, bHeader, bStrip, bDays, bOptions, bCard, bEmpty, bSlots]
+export const KIT = [bEsc, bShort, bDow, bShade, bHeader, bStrip, bDays, bOptions, bCard, bEmpty, bSlots]
   .map(f => f.toString()).join("\n") +
   `\nconst MON = ${JSON.stringify(MON)};\nconst DOW = ${JSON.stringify(DOW)};`;
