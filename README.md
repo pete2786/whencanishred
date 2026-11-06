@@ -103,6 +103,14 @@ the line does not. Feeding those stated dates into the fit buys sane
 extrapolation at the cost of in-sample R2, which is the right trade when the
 whole job is predicting hills that are not in the sample.
 
+Two hand-kept inputs override that. `data/stated.json` holds dates a hill has
+put out for the current season, such as Lutsen's 26 November; these win over
+the hill's own record, are labelled `target`, and skip the weather check, whose
+gap would otherwise hold a hill to how long it has taken after the cold in the
+past. And a hill with no record can carry `projectLike` in `resorts.json`
+(Chester Bowl projects like Elm Creek): it takes that hill's record and gaps
+instead of the climate fit, and is labelled `peer`.
+
 Then this fall's weather gets a say. Every one of the 60 openings on record came
 after at least one full night of snowmaking, eight hours in a row under 28°, and
 in late falls each hill opened close to the shortest gap it has ever managed

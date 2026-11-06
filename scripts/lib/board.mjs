@@ -59,7 +59,8 @@ export function bCard(K, picks, slug, idx) {
     '<h3 class="pc-name">' + bEsc(h.name) + "</h3>" +
     '<p class="pc-place">' + bEsc(h.place) + "</p>" +
     '<p class="pc-count">' + bDays(h.days) + "</p>" +
-    '<p class="pc-line">Projected <b>' + bShort(h.lo) + " &ndash; " + bShort(h.hi) + "</b></p>" +
+    '<p class="pc-line">' + "Projected <b>" + bShort(h.lo) +
+      (h.lo === h.hi ? "" : " &ndash; " + bShort(h.hi)) + "</b></p>" +
     '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
     '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
     '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +

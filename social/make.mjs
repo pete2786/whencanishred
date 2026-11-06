@@ -240,6 +240,8 @@ const DOMAIN = `whencanishred.com`;
 const LABEL = {
   model:   n => `median of ${n > 1 ? "each resort's" : "this resort's"} own record`,
   climate: n => `estimated from cold hours -- no record ${n > 1 ? "for these" : "yet"}`,
+  peer:    () => "projected from a similar hill's record",
+  target:  () => "the resort's own date",
 };
 const provenance = (label, n = 1) =>
   `<span class="prov"><span class="prov-k">${esc(label)}</span>${esc(LABEL[label]?.(n) ?? "")}</span>`;

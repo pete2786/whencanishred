@@ -18,6 +18,15 @@ const resorts = read("data/resorts.json");
 const seasons = read("data/seasons.json");
 const hoursRows = read("data/hours.json");
 const prior = read("data/projection.json");
+// Dates a hill has put out for this season. Unlike the old announced and
+// targeted dates below, these are current, so they win over the hill's own
+// record. They also skip the weather check below: that check's gap comes from
+// how long the hill has taken after its first cold night, and a hill like
+// Lutsen has always opened weeks after the cold for reasons that are not cold.
+// Holding its own posted date to that gap would overrule the hill.
+const stated = existsSync("data/stated.json") ? read("data/stated.json") : null;
+const statedNow = stated?.season === `${SEASON}-${String((SEASON + 1) % 100).padStart(2, "0")}`
+  ? stated.hills : {};
 
 const slugify = n => n.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const HOURS_ALIASES = { lutsen: "lutsen-mountains" };
@@ -38,6 +47,11 @@ const toDate = d => new Date(EPOCH(SEASON) + Math.round(d) * 86400000).toISOStri
 
 const observed = slug => Object.values(seasons[slug] ?? {})
   .map(v => v.firstLift?.date).filter(Boolean).map(sinceOct).sort((a, b) => a - b);
+
+// A hill with no record of its own can be told to project like another hill
+// whose record fits it better than the climate fit does: `projectLike` in
+// resorts.json. It borrows that hill's openings and gaps, not its weather.
+const recordHill = slug => observed(slug).length < 2 && resorts[slug].projectLike ? resorts[slug].projectLike : slug;
 
 // Median, not mean: Coffee Mill's 14 January 2024 is a real season but it is not
 // what Coffee Mill normally does, and one outlier in five should not move the
@@ -108,12 +122,21 @@ for (const slug of Object.keys(resorts)) {
     continue;
   }
 
-  const obs = observed(slug);
+  if (statedNow[slug]) {
+    const d = statedNow[slug].date;
+    out[slug] = { date: d, label: "target", range: { lo: d, hi: d } };
+    rows.push([slug, hours[slug]?.normal, "target", statedNow[slug].date, "stated this season"]);
+    continue;
+  }
+
+  const peer = recordHill(slug);
+  const obs = observed(peer);
   if (obs.length >= 2) {
     const date = toDate(median(obs));
-    out[slug] = { date, label: "model" };
-    rows.push([slug, hours[slug]?.normal, "model", date,
-               `median of ${obs.length}, was ${was?.date ?? "—"}`]);
+    const label = peer === slug ? "model" : "peer";
+    out[slug] = peer === slug ? { date, label } : { date, label, like: peer };
+    rows.push([slug, hours[slug]?.normal, label, date,
+               `median of ${obs.length}${peer === slug ? "" : ` at ${peer}`}, was ${was?.date ?? "—"}`]);
     continue;
   }
 
@@ -181,7 +204,7 @@ function firstNight(slug) {
 if (live) {
   for (const slug of Object.keys(out)) {
     if (EXTERNAL.has(out[slug].label)) continue;
-    const gap = shortestGap(slug) ?? pooledGap;
+    const gap = shortestGap(recordHill(slug)) ?? pooledGap;
     if (gap === null) continue;
     const night = firstNight(slug);
     const earliest = addDays(night.date, gap);
@@ -191,7 +214,7 @@ if (live) {
     // what the hill itself has done, from its earliest and latest opening on
     // record. In a normal fall the record decides both ends; in a late one the
     // weather lifts them. Never earlier than tomorrow.
-    const obs = observed(slug).map(toDate);
+    const obs = observed(recordHill(slug)).map(toDate);
     const later = (...xs) => xs.filter(Boolean).sort().at(-1);
     const range = {
       lo: later(addDays(night.lo, gap), obs[0], addDays(asOf, 1)),
