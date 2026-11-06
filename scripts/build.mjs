@@ -1111,7 +1111,7 @@ function boardSection() {
       return `      <div class="brow">
         <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
         ${bStrip(BOARD, h, "row")}
-        <div class="brow-when">${when}<span>${bShort(h.proj)}${h.label === "weather" ? ' <span class="tag">weather</span>' : ""}</span></div>
+        <div class="brow-when">${when}<span>${bShort(h.proj)}</span></div>
       </div>`;
     }).join("\n");
     return `    <div class="area">
