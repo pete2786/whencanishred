@@ -68,10 +68,19 @@ file is still `best_match`, which is GFS here. The models run out at different
 horizons (GEM near day ten, ICON near day seven), and past that the file holds
 null, not a warm number.
 
-Each resort page gets the day-by-day grid. The homepage keeps to one sentence,
-and counts a window the way the climatology does: eight hours in a row. Built because of the 28 September run: GFS put
-18 of 19 hills under 28° on 10 October, which would have tied the earliest
-window in 31 years, ECMWF never had it, and the next GFS run dropped it.
+Each resort page gets the day-by-day grid. The homepage gives every hill a
+strip of sixteen nights, each shaded by how many of the four models put that
+night's low under 28°. An area's "next night under 28°" needs two models to
+agree. Built because of the 28 September run: GFS put 18 of 19 hills under 28°
+on 10 October, which would have tied the earliest window in 31 years, ECMWF
+never had it, and the next GFS run dropped it.
+
+The homepage groups hills by `area` in `data/resorts.json` (Twin Cities, Duluth
+& the North, Central & West, Southern). The build stops if a hill has none. Its
+cards default to Trollhaugen, Wild Mountain and Andes Tower Hills; a reader can
+remove them and add their own, up to four, kept in their browser's localStorage. The cards and
+strips are drawn by `scripts/lib/board.mjs`, which the build both runs and
+inlines into the page, so the markup has one source.
 
 `review.html` is the page to read while editing: every field as a table, colors as
 swatches, handles as links, gaps in red, and each value sat next to the evidence
@@ -108,9 +117,8 @@ labelled `weather`. In a normal fall it changes nothing.
 Each hill also gets a range. Its early end is the later of what the weather
 allows (the earliest of those late falls, plus the gap) and the hill's earliest
 opening on record; its late end is the later of the latest of those falls plus
-the gap and the hill's latest opening on record. The homepage hero shows the
-range for the first lift anywhere: the soonest early end and the soonest late
-end across all hills.
+the gap and the hill's latest opening on record. Each homepage card shows its
+hill's range.
 
 `forecast.mjs` writes what has happened so far to `data/this-season.json`: hours
 under 28° since 1 September and the first full night, which is kept once found.

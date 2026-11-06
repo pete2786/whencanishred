@@ -623,6 +623,108 @@ footer::before {
 }
 
 
+
+/* ---- your hills ------------------------------------------------------- */
+/* The cyan steps are the threshold colour at four strengths: how many of the
+   four models put a night under it. Nothing past the last model is hatched,
+   not shaded as warm. */
+:root { --s0:#1D2023; --s1:#123B43; --s2:#1F7E8E; --s3:#37D2E8; }
+.hero { padding:18px 0 0; }
+.slots { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+@media (max-width:960px) { .slots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.pcard {
+  position:relative; display:flex; flex-direction:column; min-width:0;
+  background:var(--surface); border:2px solid var(--line); padding:14px 14px 12px;
+}
+.pcard::before {
+  content:""; position:absolute; left:-2px; right:-2px; top:-2px; height:5px;
+  background:linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+}
+.pcard p { margin:0; }
+.pc-name { font-weight:800; font-size:16px; line-height:1.25; margin:4px 26px 0 0; }
+.pc-choose select { position:absolute; inset:0; opacity:0; cursor:pointer; font-size:16px; width:100%; }
+.pc-rm {
+  position:absolute; top:8px; right:6px; border:0; background:none; color:var(--ink-3);
+  font-size:20px; line-height:1; padding:2px 6px; cursor:pointer;
+}
+.pc-rm:hover { color:var(--ink); }
+.pc-place { font-size:12px; color:var(--ink-3); }
+.pc-count { display:flex; align-items:baseline; gap:8px; margin:10px 0 6px !important; }
+.pc-num { font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-size:52px; line-height:.9; color:var(--accent); }
+.pc-unit { font-family:Anton,"Archivo Narrow",Impact,sans-serif; text-transform:uppercase; font-size:17px; color:var(--ink-2); letter-spacing:.02em; }
+.pc-line { font-size:12.5px; line-height:1.45; }
+.pc-mut { color:var(--ink-3); }
+.pc-strip { margin:10px 0 8px; }
+.pc-strip .cell { height:16px; }
+.pc-strip .hd { font-size:8.5px; }
+.pc-link { margin-top:auto; padding-top:10px; font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-2); text-decoration:none; }
+.pc-link:hover { color:var(--mark); }
+.agree { display:inline-flex; gap:3px; margin-right:6px; vertical-align:middle; }
+.agree i { width:7px; height:7px; background:var(--s0); border:1px solid var(--line); }
+.agree i.on { background:var(--s3); border-color:var(--s3); }
+.tag { font-size:9.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--warm); border:1px solid currentColor; padding:0 4px; }
+.pc-empty {
+  align-items:center; justify-content:center; text-align:center; min-height:300px;
+  background:transparent; border:2px dashed var(--line);
+}
+.pc-empty::before { display:none; }
+.pc-plus { font-family:Anton,Impact,sans-serif; font-size:44px; line-height:1; color:var(--mark); }
+.pc-add { font-size:12px; color:var(--ink-3); margin:4px 0 12px; }
+.pc-choose {
+  position:relative; cursor:pointer; font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--mark); border:2px solid var(--mark); padding:7px 14px;
+}
+.pc-choose:hover, .pc-choose:focus-within { background:var(--mark); color:#0B0C0D; }
+.slot-foot { font-size:12.5px; color:var(--ink-3); margin:10px 0 0; }
+.linkish { border:0; background:none; padding:0; font:inherit; color:var(--ink-2); text-decoration:underline; cursor:pointer; }
+
+/* ---- the board -------------------------------------------------------- */
+.strip { display:grid; grid-template-columns:repeat(16,minmax(0,1fr)); gap:2px; min-width:0; }
+.cell { display:block; height:24px; border:0; padding:0; cursor:pointer; background:var(--s0); }
+.cell.s1 { background:var(--s1); } .cell.s2 { background:var(--s2); } .cell.s3 { background:var(--s3); }
+.cell.na { background:repeating-linear-gradient(45deg,#1D2023 0 3px,#0B0C0D 3px 6px); }
+.cell.sel { outline:2px solid var(--ink); outline-offset:1px; }
+.hd { font-size:9.5px; line-height:1.2; color:var(--ink-3); text-align:center; }
+.night-legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:11.5px; color:var(--ink-3); margin:12px 0 4px; }
+.night-legend span { display:inline-flex; align-items:center; gap:6px; }
+.night-legend .cell { width:16px; height:11px; cursor:default; }
+.area { margin-top:30px; }
+.area-head { border-bottom:2px solid var(--accent); padding-bottom:6px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:4px 14px; }
+.area-head h3 { font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:22px; margin:0; }
+.area-head p { margin:0; font-size:12.5px; color:var(--ink-2); }
+.area-head .nb { color:var(--mark); }
+.brow { display:grid; grid-template-columns:190px minmax(0,1fr) 92px; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+.brow-hd { border:0; padding:6px 0 0; }
+.brow-name { display:flex; flex-wrap:wrap; align-items:center; min-width:0; }
+.brow-name .pip { flex:none; }
+.brow-name a { font-weight:700; color:var(--ink); text-decoration:none; }
+.brow-name a:hover { color:var(--mark); }
+.brow-name > span:last-child { flex-basis:100%; padding-left:22px; font-size:11.5px; color:var(--ink-3); }
+.brow-when { text-align:right; font-size:12px; color:var(--ink-3); }
+.brow-when b { display:inline; font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-weight:400; font-size:22px; color:var(--accent); }
+.brow-when > span { display:block; }
+.night-pop {
+  position:absolute; z-index:20; pointer-events:none; white-space:nowrap;
+  background:var(--surface-2); border:2px solid var(--mark); padding:8px 11px; font-size:12px;
+}
+.night-pop b { display:block; margin-bottom:4px; }
+.night-pop span { display:flex; justify-content:space-between; gap:18px; }
+.night-pop i { font-style:normal; color:var(--ink-2); }
+.night-pop em { font-style:normal; font-weight:700; }
+.night-pop em.cold { color:var(--mark); }
+.night-pop[hidden] { display:none; }
+@media (max-width:640px) {
+  .slots { gap:8px; }
+  .pcard { padding:12px 10px 10px; }
+  .pc-num { font-size:40px; }
+  .pc-strip { display:none; }
+  .pc-empty { min-height:200px; }
+  .brow { grid-template-columns:minmax(0,1fr) auto; row-gap:6px; }
+  .brow > .strip { grid-column:1/-1; grid-row:2; }
+  .brow-hd { display:none; }
+  .cell { height:20px; }
+}
+
 </style>
 </head>
 <body>
@@ -826,7 +928,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-05T23:38:39.422Z">5 November 2026, 17:38 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-06T03:48:14.398Z">5 November 2026, 21:48 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
     <span><a href="about.html">About this site</a></span>
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>

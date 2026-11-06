@@ -624,6 +624,108 @@ footer::before {
 }
 
 
+
+/* ---- your hills ------------------------------------------------------- */
+/* The cyan steps are the threshold colour at four strengths: how many of the
+   four models put a night under it. Nothing past the last model is hatched,
+   not shaded as warm. */
+:root { --s0:#1D2023; --s1:#123B43; --s2:#1F7E8E; --s3:#37D2E8; }
+.hero { padding:18px 0 0; }
+.slots { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+@media (max-width:960px) { .slots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.pcard {
+  position:relative; display:flex; flex-direction:column; min-width:0;
+  background:var(--surface); border:2px solid var(--line); padding:14px 14px 12px;
+}
+.pcard::before {
+  content:""; position:absolute; left:-2px; right:-2px; top:-2px; height:5px;
+  background:linear-gradient(90deg, var(--c1) 0 50%, var(--c2) 50% 100%);
+}
+.pcard p { margin:0; }
+.pc-name { font-weight:800; font-size:16px; line-height:1.25; margin:4px 26px 0 0; }
+.pc-choose select { position:absolute; inset:0; opacity:0; cursor:pointer; font-size:16px; width:100%; }
+.pc-rm {
+  position:absolute; top:8px; right:6px; border:0; background:none; color:var(--ink-3);
+  font-size:20px; line-height:1; padding:2px 6px; cursor:pointer;
+}
+.pc-rm:hover { color:var(--ink); }
+.pc-place { font-size:12px; color:var(--ink-3); }
+.pc-count { display:flex; align-items:baseline; gap:8px; margin:10px 0 6px !important; }
+.pc-num { font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-size:52px; line-height:.9; color:var(--accent); }
+.pc-unit { font-family:Anton,"Archivo Narrow",Impact,sans-serif; text-transform:uppercase; font-size:17px; color:var(--ink-2); letter-spacing:.02em; }
+.pc-line { font-size:12.5px; line-height:1.45; }
+.pc-mut { color:var(--ink-3); }
+.pc-strip { margin:10px 0 8px; }
+.pc-strip .cell { height:16px; }
+.pc-strip .hd { font-size:8.5px; }
+.pc-link { margin-top:auto; padding-top:10px; font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--ink-2); text-decoration:none; }
+.pc-link:hover { color:var(--mark); }
+.agree { display:inline-flex; gap:3px; margin-right:6px; vertical-align:middle; }
+.agree i { width:7px; height:7px; background:var(--s0); border:1px solid var(--line); }
+.agree i.on { background:var(--s3); border-color:var(--s3); }
+.tag { font-size:9.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--warm); border:1px solid currentColor; padding:0 4px; }
+.pc-empty {
+  align-items:center; justify-content:center; text-align:center; min-height:300px;
+  background:transparent; border:2px dashed var(--line);
+}
+.pc-empty::before { display:none; }
+.pc-plus { font-family:Anton,Impact,sans-serif; font-size:44px; line-height:1; color:var(--mark); }
+.pc-add { font-size:12px; color:var(--ink-3); margin:4px 0 12px; }
+.pc-choose {
+  position:relative; cursor:pointer; font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--mark); border:2px solid var(--mark); padding:7px 14px;
+}
+.pc-choose:hover, .pc-choose:focus-within { background:var(--mark); color:#0B0C0D; }
+.slot-foot { font-size:12.5px; color:var(--ink-3); margin:10px 0 0; }
+.linkish { border:0; background:none; padding:0; font:inherit; color:var(--ink-2); text-decoration:underline; cursor:pointer; }
+
+/* ---- the board -------------------------------------------------------- */
+.strip { display:grid; grid-template-columns:repeat(16,minmax(0,1fr)); gap:2px; min-width:0; }
+.cell { display:block; height:24px; border:0; padding:0; cursor:pointer; background:var(--s0); }
+.cell.s1 { background:var(--s1); } .cell.s2 { background:var(--s2); } .cell.s3 { background:var(--s3); }
+.cell.na { background:repeating-linear-gradient(45deg,#1D2023 0 3px,#0B0C0D 3px 6px); }
+.cell.sel { outline:2px solid var(--ink); outline-offset:1px; }
+.hd { font-size:9.5px; line-height:1.2; color:var(--ink-3); text-align:center; }
+.night-legend { display:flex; flex-wrap:wrap; gap:6px 16px; font-size:11.5px; color:var(--ink-3); margin:12px 0 4px; }
+.night-legend span { display:inline-flex; align-items:center; gap:6px; }
+.night-legend .cell { width:16px; height:11px; cursor:default; }
+.area { margin-top:30px; }
+.area-head { border-bottom:2px solid var(--accent); padding-bottom:6px; display:flex; flex-wrap:wrap; justify-content:space-between; align-items:baseline; gap:4px 14px; }
+.area-head h3 { font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.01em; font-size:22px; margin:0; }
+.area-head p { margin:0; font-size:12.5px; color:var(--ink-2); }
+.area-head .nb { color:var(--mark); }
+.brow { display:grid; grid-template-columns:190px minmax(0,1fr) 92px; align-items:center; gap:10px; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+.brow-hd { border:0; padding:6px 0 0; }
+.brow-name { display:flex; flex-wrap:wrap; align-items:center; min-width:0; }
+.brow-name .pip { flex:none; }
+.brow-name a { font-weight:700; color:var(--ink); text-decoration:none; }
+.brow-name a:hover { color:var(--mark); }
+.brow-name > span:last-child { flex-basis:100%; padding-left:22px; font-size:11.5px; color:var(--ink-3); }
+.brow-when { text-align:right; font-size:12px; color:var(--ink-3); }
+.brow-when b { display:inline; font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-weight:400; font-size:22px; color:var(--accent); }
+.brow-when > span { display:block; }
+.night-pop {
+  position:absolute; z-index:20; pointer-events:none; white-space:nowrap;
+  background:var(--surface-2); border:2px solid var(--mark); padding:8px 11px; font-size:12px;
+}
+.night-pop b { display:block; margin-bottom:4px; }
+.night-pop span { display:flex; justify-content:space-between; gap:18px; }
+.night-pop i { font-style:normal; color:var(--ink-2); }
+.night-pop em { font-style:normal; font-weight:700; }
+.night-pop em.cold { color:var(--mark); }
+.night-pop[hidden] { display:none; }
+@media (max-width:640px) {
+  .slots { gap:8px; }
+  .pcard { padding:12px 10px 10px; }
+  .pc-num { font-size:40px; }
+  .pc-strip { display:none; }
+  .pc-empty { min-height:200px; }
+  .brow { grid-template-columns:minmax(0,1fr) auto; row-gap:6px; }
+  .brow > .strip { grid-column:1/-1; grid-row:2; }
+  .brow-hd { display:none; }
+  .cell { height:20px; }
+}
+
 </style>
 <style>
 .hm[data-hill="wild-mountain"]{color:#beee07}
@@ -668,84 +770,135 @@ footer::before {
 
   <p class="eyebrow">5 November 2026 · Minnesota</p>
 
-  <section class="hero">
-    <div class="scens">
-      <div class="scen scen-real">
-        <span class="scen-num">2&ndash;15<span class="scen-unit">days</span></span>
-        <span class="scen-date">Nov 7 &ndash; Nov 20</span>
-        <span class="scen-lede">first lift, from this fall's weather and the record</span>
-      </div>
-    </div>
-    <div class="hero-split">
-      <div>
-        <p class="hero-say"><b class="hm" data-hill="andes-tower-hills">Andes Tower Hills</b> opened first last season, a day ahead of <b class="hm" data-hill="wild-mountain">Wild Mountain</b> and <b class="hm" data-hill="trollhaugen">Trollhaugen</b>.</p>
-        <p class="hero-sub">First open has gone to <b class="hm" data-hill="wild-mountain">Wild Mountain</b> and <b class="hm" data-hill="andes-tower-hills">Andes Tower Hills</b> twice each and <b class="hm" data-hill="trollhaugen">Trollhaugen</b> once; one of the five winters on record is too loosely dated to call. No resort has announced a date for the coming winter. No snowmaking weather has reached <b class="hm" data-hill="wild-mountain">Wild Mountain</b> yet, so its projection moved from Nov 10 to Nov 13.</p>
-
-        <dl class="stats">
-          <div><dt>Seasons on record</dt><dd class="lede">5</dd></div>
-          <div><dt>Guns can first run</dt><dd>Oct 28</dd></div>
-          <div><dt>Normal snowmaking hrs</dt><dd>337</dd></div>
-          <div><dt>Resorts tracked</dt><dd>19</dd></div>
-        </dl>
-      </div>
-      <figure class="hero-shot">
-        <img class="" src="photos/wild-mountain-lowsun-560.jpg"
-           srcset="photos/wild-mountain-lowsun-560.jpg 560w, photos/wild-mountain-lowsun-840.jpg 840w, photos/wild-mountain-lowsun-1120.jpg 1120w"
-           sizes="(max-width:820px) calc(100vw - 48px), 300px"
-           loading="eager" fetchpriority="high" decoding="async"
-           alt="Wild Mountain open on a thin strip of man-made snow at its preseason opening, low sun behind the hill, a few riders on the surface lift and grass showing at the edges.">
-        <figcaption>Wild Mountain&rsquo;s preseason opening, November 2025.</figcaption>
-      </figure>
+  <section class="hero" aria-label="Your hills">
+    <div id="picks">
+<div class="slots"><article class="pcard" style="--c1:#005395;--c2:#ffec26"><button type="button" class="pc-rm" data-rm="0" aria-label="Remove Trollhaugen">&times;</button><h3 class="pc-name">Trollhaugen</h3><p class="pc-place">Dresser</p><p class="pc-count"><span class="pc-num">9</span><span class="pc-unit">days</span></p><p class="pc-line">First lift <b>Nov 14</b> <span class="tag">weather</span></p><p class="pc-line pc-mut">Range Nov 8 &ndash; Nov 27</p><p class="pc-line pc-mut">Last season Nov 10</p><div class="pc-strip"><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div class="strip"><button type="button" class="cell s0" data-cell="card|trollhaugen|0" aria-label="Trollhaugen, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|trollhaugen|1" aria-label="Trollhaugen, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|trollhaugen|2" aria-label="Trollhaugen, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|3" aria-label="Trollhaugen, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|4" aria-label="Trollhaugen, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|5" aria-label="Trollhaugen, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|trollhaugen|6" aria-label="Trollhaugen, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|trollhaugen|7" aria-label="Trollhaugen, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|trollhaugen|8" aria-label="Trollhaugen, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|trollhaugen|9" aria-label="Trollhaugen, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|trollhaugen|10" aria-label="Trollhaugen, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|11" aria-label="Trollhaugen, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|12" aria-label="Trollhaugen, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|13" aria-label="Trollhaugen, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|14" aria-label="Trollhaugen, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|trollhaugen|15" aria-label="Trollhaugen, Fri Nov 20: 0 of 2 models under the threshold"></button></div></div><p class="pc-line">First hour under 28&deg; <b>Thu Nov 12, 7pm</b></p><p class="pc-line pc-mut"><span class="agree"><i class="on" title="GFS"></i><i class="" title="ECMWF"></i><i class="on" title="GEM"></i><i class="" title="ICON"></i></span>2 of 4 models see a full night</p><a class="pc-link" href="resorts/trollhaugen.html">Trollhaugen&rsquo;s history &rarr;</a></article><article class="pcard" style="--c1:#beee07;--c2:#000000"><button type="button" class="pc-rm" data-rm="1" aria-label="Remove Wild Mountain">&times;</button><h3 class="pc-name">Wild Mountain</h3><p class="pc-place">Taylors Falls</p><p class="pc-count"><span class="pc-num">8</span><span class="pc-unit">days</span></p><p class="pc-line">First lift <b>Nov 13</b> <span class="tag">weather</span></p><p class="pc-line pc-mut">Range Nov 7 &ndash; Nov 20</p><p class="pc-line pc-mut">Last season Nov 10</p><div class="pc-strip"><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div class="strip"><button type="button" class="cell s0" data-cell="card|wild-mountain|0" aria-label="Wild Mountain, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|wild-mountain|1" aria-label="Wild Mountain, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|wild-mountain|2" aria-label="Wild Mountain, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|3" aria-label="Wild Mountain, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|4" aria-label="Wild Mountain, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|5" aria-label="Wild Mountain, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|wild-mountain|6" aria-label="Wild Mountain, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|wild-mountain|7" aria-label="Wild Mountain, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|wild-mountain|8" aria-label="Wild Mountain, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|wild-mountain|9" aria-label="Wild Mountain, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|wild-mountain|10" aria-label="Wild Mountain, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|11" aria-label="Wild Mountain, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|12" aria-label="Wild Mountain, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|13" aria-label="Wild Mountain, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|14" aria-label="Wild Mountain, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|wild-mountain|15" aria-label="Wild Mountain, Fri Nov 20: 0 of 2 models under the threshold"></button></div></div><p class="pc-line">First hour under 28&deg; <b>Thu Nov 12, 7pm</b></p><p class="pc-line pc-mut"><span class="agree"><i class="on" title="GFS"></i><i class="on" title="ECMWF"></i><i class="on" title="GEM"></i><i class="" title="ICON"></i></span>3 of 4 models see a full night</p><a class="pc-link" href="resorts/wild-mountain.html">Wild Mountain&rsquo;s history &rarr;</a></article><article class="pcard" style="--c1:#12592e;--c2:#213871"><button type="button" class="pc-rm" data-rm="2" aria-label="Remove Andes Tower Hills">&times;</button><h3 class="pc-name">Andes Tower Hills</h3><p class="pc-place">Kensington</p><p class="pc-count"><span class="pc-num">12</span><span class="pc-unit">days</span></p><p class="pc-line">First lift <b>Nov 17</b> <span class="tag">weather</span></p><p class="pc-line pc-mut">Range Nov 9 &ndash; Nov 23</p><p class="pc-line pc-mut">Last season Nov 9</p><div class="pc-strip"><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div class="strip"><button type="button" class="cell s0" data-cell="card|andes-tower-hills|0" aria-label="Andes Tower Hills, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|andes-tower-hills|1" aria-label="Andes Tower Hills, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|andes-tower-hills|2" aria-label="Andes Tower Hills, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|3" aria-label="Andes Tower Hills, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|4" aria-label="Andes Tower Hills, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|5" aria-label="Andes Tower Hills, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|andes-tower-hills|6" aria-label="Andes Tower Hills, Wed Nov 11: 2 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|7" aria-label="Andes Tower Hills, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|andes-tower-hills|8" aria-label="Andes Tower Hills, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|andes-tower-hills|9" aria-label="Andes Tower Hills, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|10" aria-label="Andes Tower Hills, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|11" aria-label="Andes Tower Hills, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|12" aria-label="Andes Tower Hills, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|13" aria-label="Andes Tower Hills, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|14" aria-label="Andes Tower Hills, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|andes-tower-hills|15" aria-label="Andes Tower Hills, Fri Nov 20: 0 of 2 models under the threshold"></button></div></div><p class="pc-line">First hour under 28&deg; <b>Wed Nov 11, 4am</b></p><p class="pc-line pc-mut"><span class="agree"><i class="on" title="GFS"></i><i class="" title="ECMWF"></i><i class="on" title="GEM"></i><i class="" title="ICON"></i></span>2 of 4 models see a full night</p><a class="pc-link" href="resorts/andes-tower-hills.html">Andes Tower Hills&rsquo;s history &rarr;</a></article><div class="pcard pc-empty"><span class="pc-plus" aria-hidden="true">+</span><span class="pc-add">Add a hill</span><label class="pc-choose">Choose &#9662;<select data-slot="3" aria-label="Add a hill"><option value="" selected disabled>Choose a hill</option><optgroup label="Twin Cities"><option value="wild-mountain" disabled>Wild Mountain</option><option value="trollhaugen" disabled>Trollhaugen</option><option value="afton-alps">Afton Alps</option><option value="buck-hill">Buck Hill</option><option value="welch-village">Welch Village</option><option value="hyland-hills">Hyland Hills</option><option value="elm-creek">Elm Creek</option></optgroup><optgroup label="Duluth &amp; the North"><option value="chester-bowl">Chester Bowl</option><option value="spirit-mountain">Spirit Mountain</option><option value="giants-ridge">Giants Ridge</option><option value="lutsen-mountains">Lutsen Mountains</option></optgroup><optgroup label="Central &amp; West"><option value="andes-tower-hills" disabled>Andes Tower Hills</option><option value="buena-vista">Buena Vista</option><option value="detroit-mountain">Detroit Mountain</option><option value="mount-ski-gull">Mount Ski Gull</option><option value="powder-ridge">Powder Ridge</option></optgroup><optgroup label="Southern"><option value="mount-kato">Mount Kato</option><option value="steeplechase">Steeplechase</option><option value="coffee-mill">Coffee Mill</option></optgroup></select></label></div></div><p class="slot-foot">Remove any of these and add your own. This browser remembers them.</p>
     </div>
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">The next two weeks</h2>
-    <p class="fc-answer">18 of 19 resorts get a night cold enough to make snow, <b class="hm" data-hill="lutsen-mountains">Lutsen Mountains</b> first on Wed 11 Nov.</p>
-
-    <div class="duo">
-      <div class="card">
-        <h3>Metro</h3>
-        <p class="big">27.0&deg;</p>
-        <p>Coldest wet bulb the 16-day forecast reaches at Bloomington.</p>
-        <dl>
-          <dt>Coldest hour</dt><dd>Sat 14 Nov, 6am</dd>
-          <dt>Air temperature then</dt><dd>33.3&deg;</dd>
-          <dt>Humidity then</dt><dd>52%</dd>
-          <dt>Hours under 28&deg;</dt><dd>6</dd>
-          <dt>First window</dt><dd>Sat 14 Nov, 3am</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>292</dd>
-        </dl>
+    <h2 class="sec-title">The next sixteen nights</h2>
+    <div class="night-legend" aria-hidden="true">
+      <span><i class="cell s0"></i>none</span><span><i class="cell s1"></i>1 model</span>
+      <span><i class="cell s2"></i>2</span><span><i class="cell s3"></i>3 or 4 under 28&deg;</span>
+      <span><i class="cell na"></i>past every model</span>
+    </div>
+    <div class="area">
+      <div class="area-head"><h3>Twin Cities</h3>
+        <p>Next night under 28&deg; <b class="nb">Fri Nov 13</b>, 4 of 7 hills &middot; first lift <b class="hm" data-hill="wild-mountain">Wild Mountain</b>, 8 days</p></div>
+      <div class="brow brow-hd" aria-hidden="true"><div></div><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div></div></div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#beee07;--c2:#000000" aria-hidden="true"></span><a href="resorts/wild-mountain.html">Wild Mountain</a><span>Taylors Falls</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|wild-mountain|0" aria-label="Wild Mountain, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|wild-mountain|1" aria-label="Wild Mountain, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|wild-mountain|2" aria-label="Wild Mountain, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|3" aria-label="Wild Mountain, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|4" aria-label="Wild Mountain, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|5" aria-label="Wild Mountain, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|wild-mountain|6" aria-label="Wild Mountain, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|wild-mountain|7" aria-label="Wild Mountain, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|wild-mountain|8" aria-label="Wild Mountain, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|wild-mountain|9" aria-label="Wild Mountain, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|wild-mountain|10" aria-label="Wild Mountain, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|11" aria-label="Wild Mountain, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|12" aria-label="Wild Mountain, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|13" aria-label="Wild Mountain, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|14" aria-label="Wild Mountain, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|wild-mountain|15" aria-label="Wild Mountain, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>8</b> days<span>Nov 13 <span class="tag">weather</span></span></div>
       </div>
-      <div class="card">
-        <h3>Duluth</h3>
-        <p class="big">22.1&deg;</p>
-        <p>Coldest wet bulb the 16-day forecast reaches at Spirit Mountain.</p>
-        <dl>
-          <dt>Coldest hour</dt><dd>Fri 13 Nov, 5am</dd>
-          <dt>Air temperature then</dt><dd>26.9&deg;</dd>
-          <dt>Humidity then</dt><dd>61%</dd>
-          <dt>Hours under 28&deg;</dt><dd>60</dd>
-          <dt>First window</dt><dd>Thu 12 Nov, 1am</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>410</dd>
-        </dl>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#005395;--c2:#ffec26" aria-hidden="true"></span><a href="resorts/trollhaugen.html">Trollhaugen</a><span>Dresser</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|trollhaugen|0" aria-label="Trollhaugen, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|trollhaugen|1" aria-label="Trollhaugen, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|trollhaugen|2" aria-label="Trollhaugen, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|3" aria-label="Trollhaugen, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|4" aria-label="Trollhaugen, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|5" aria-label="Trollhaugen, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|trollhaugen|6" aria-label="Trollhaugen, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|trollhaugen|7" aria-label="Trollhaugen, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|trollhaugen|8" aria-label="Trollhaugen, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|trollhaugen|9" aria-label="Trollhaugen, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|trollhaugen|10" aria-label="Trollhaugen, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|11" aria-label="Trollhaugen, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|12" aria-label="Trollhaugen, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|13" aria-label="Trollhaugen, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|14" aria-label="Trollhaugen, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|trollhaugen|15" aria-label="Trollhaugen, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>9</b> days<span>Nov 14 <span class="tag">weather</span></span></div>
       </div>
-      <div class="card">
-        <h3>North Shore</h3>
-        <p class="big">21.6&deg;</p>
-        <p>Coldest wet bulb the 16-day forecast reaches at Lutsen.</p>
-        <dl>
-          <dt>Coldest hour</dt><dd>Fri 13 Nov, 5am</dd>
-          <dt>Air temperature then</dt><dd>25.7&deg;</dd>
-          <dt>Humidity then</dt><dd>67%</dd>
-          <dt>Hours under 28&deg;</dt><dd>80</dd>
-          <dt>First window</dt><dd>Wed 11 Nov, 9am</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>386</dd>
-        </dl>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#b02621;--c2:#10325a" aria-hidden="true"></span><a href="resorts/afton-alps.html">Afton Alps</a><span>Afton</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|afton-alps|0" aria-label="Afton Alps, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|afton-alps|1" aria-label="Afton Alps, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|afton-alps|2" aria-label="Afton Alps, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|3" aria-label="Afton Alps, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|4" aria-label="Afton Alps, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|5" aria-label="Afton Alps, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|afton-alps|6" aria-label="Afton Alps, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|afton-alps|7" aria-label="Afton Alps, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|afton-alps|8" aria-label="Afton Alps, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|afton-alps|9" aria-label="Afton Alps, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|afton-alps|10" aria-label="Afton Alps, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|11" aria-label="Afton Alps, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|12" aria-label="Afton Alps, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|13" aria-label="Afton Alps, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|14" aria-label="Afton Alps, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|afton-alps|15" aria-label="Afton Alps, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>24</b> days<span>Nov 29</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#3db3e3;--c2:#81d742" aria-hidden="true"></span><a href="resorts/buck-hill.html">Buck Hill</a><span>Burnsville</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|buck-hill|0" aria-label="Buck Hill, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buck-hill|1" aria-label="Buck Hill, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|2" aria-label="Buck Hill, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|3" aria-label="Buck Hill, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|4" aria-label="Buck Hill, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|5" aria-label="Buck Hill, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buck-hill|6" aria-label="Buck Hill, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|7" aria-label="Buck Hill, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buck-hill|8" aria-label="Buck Hill, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|buck-hill|9" aria-label="Buck Hill, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buck-hill|10" aria-label="Buck Hill, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|11" aria-label="Buck Hill, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|12" aria-label="Buck Hill, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|13" aria-label="Buck Hill, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|14" aria-label="Buck Hill, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buck-hill|15" aria-label="Buck Hill, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>24</b> days<span>Nov 29</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#1c75bc;--c2:#fff200" aria-hidden="true"></span><a href="resorts/welch-village.html">Welch Village</a><span>Welch</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|welch-village|0" aria-label="Welch Village, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|welch-village|1" aria-label="Welch Village, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|welch-village|2" aria-label="Welch Village, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|3" aria-label="Welch Village, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|4" aria-label="Welch Village, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|5" aria-label="Welch Village, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|welch-village|6" aria-label="Welch Village, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|welch-village|7" aria-label="Welch Village, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|welch-village|8" aria-label="Welch Village, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|welch-village|9" aria-label="Welch Village, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|welch-village|10" aria-label="Welch Village, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|11" aria-label="Welch Village, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|12" aria-label="Welch Village, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|13" aria-label="Welch Village, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|14" aria-label="Welch Village, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|welch-village|15" aria-label="Welch Village, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>25</b> days<span>Nov 30</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#5f3894;--c2:#f26522" aria-hidden="true"></span><a href="resorts/hyland-hills.html">Hyland Hills</a><span>Bloomington</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|hyland-hills|0" aria-label="Hyland Hills, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|hyland-hills|1" aria-label="Hyland Hills, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|hyland-hills|2" aria-label="Hyland Hills, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|3" aria-label="Hyland Hills, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|4" aria-label="Hyland Hills, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|5" aria-label="Hyland Hills, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|hyland-hills|6" aria-label="Hyland Hills, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|7" aria-label="Hyland Hills, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|8" aria-label="Hyland Hills, Fri Nov 13: 0 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|hyland-hills|9" aria-label="Hyland Hills, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|10" aria-label="Hyland Hills, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|11" aria-label="Hyland Hills, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|12" aria-label="Hyland Hills, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|13" aria-label="Hyland Hills, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|14" aria-label="Hyland Hills, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|hyland-hills|15" aria-label="Hyland Hills, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>26</b> days<span>Dec 1</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#fe3332;--c2:#ffffff" aria-hidden="true"></span><a href="resorts/elm-creek.html">Elm Creek</a><span>Maple Grove</span></div>
+        <div class="strip"><button type="button" class="cell s1" data-cell="row|elm-creek|0" aria-label="Elm Creek, Thu Nov 5: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|elm-creek|1" aria-label="Elm Creek, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|2" aria-label="Elm Creek, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|3" aria-label="Elm Creek, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|4" aria-label="Elm Creek, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|5" aria-label="Elm Creek, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|elm-creek|6" aria-label="Elm Creek, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|elm-creek|7" aria-label="Elm Creek, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|elm-creek|8" aria-label="Elm Creek, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|elm-creek|9" aria-label="Elm Creek, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|10" aria-label="Elm Creek, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|11" aria-label="Elm Creek, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|12" aria-label="Elm Creek, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|13" aria-label="Elm Creek, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|14" aria-label="Elm Creek, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|elm-creek|15" aria-label="Elm Creek, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>41</b> days<span>Dec 16</span></div>
       </div>
     </div>
-
-    <p class="sec-note fc-note">Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, updated twice a day and last pulled 5 November. Guns can run under 28&deg;.</p>
+    <div class="area">
+      <div class="area-head"><h3>Duluth &amp; the North</h3>
+        <p>Next night under 28&deg; <b class="nb">Thu Nov 5</b>, 3 of 4 hills &middot; first lift <b class="hm" data-hill="chester-bowl">Chester Bowl</b>, 22 days</p></div>
+      <div class="brow brow-hd" aria-hidden="true"><div></div><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div></div></div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#41a62a;--c2:#003388" aria-hidden="true"></span><a href="resorts/chester-bowl.html">Chester Bowl</a><span>Duluth</span></div>
+        <div class="strip"><button type="button" class="cell s1" data-cell="row|chester-bowl|0" aria-label="Chester Bowl, Thu Nov 5: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|chester-bowl|1" aria-label="Chester Bowl, Fri Nov 6: 2 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|chester-bowl|2" aria-label="Chester Bowl, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|3" aria-label="Chester Bowl, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|4" aria-label="Chester Bowl, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|5" aria-label="Chester Bowl, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|6" aria-label="Chester Bowl, Wed Nov 11: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|chester-bowl|7" aria-label="Chester Bowl, Thu Nov 12: 2 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|chester-bowl|8" aria-label="Chester Bowl, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|chester-bowl|9" aria-label="Chester Bowl, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|chester-bowl|10" aria-label="Chester Bowl, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|11" aria-label="Chester Bowl, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|12" aria-label="Chester Bowl, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|13" aria-label="Chester Bowl, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|14" aria-label="Chester Bowl, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|chester-bowl|15" aria-label="Chester Bowl, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>22</b> days<span>Nov 27</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#2d65b0;--c2:#189f5a" aria-hidden="true"></span><a href="resorts/spirit-mountain.html">Spirit Mountain</a><span>Duluth</span></div>
+        <div class="strip"><button type="button" class="cell s2" data-cell="row|spirit-mountain|0" aria-label="Spirit Mountain, Thu Nov 5: 2 of 4 models under the threshold"></button><button type="button" class="cell s3" data-cell="row|spirit-mountain|1" aria-label="Spirit Mountain, Fri Nov 6: 3 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|spirit-mountain|2" aria-label="Spirit Mountain, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|3" aria-label="Spirit Mountain, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|4" aria-label="Spirit Mountain, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|5" aria-label="Spirit Mountain, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|6" aria-label="Spirit Mountain, Wed Nov 11: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|spirit-mountain|7" aria-label="Spirit Mountain, Thu Nov 12: 2 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|spirit-mountain|8" aria-label="Spirit Mountain, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|spirit-mountain|9" aria-label="Spirit Mountain, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|spirit-mountain|10" aria-label="Spirit Mountain, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|11" aria-label="Spirit Mountain, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|12" aria-label="Spirit Mountain, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|13" aria-label="Spirit Mountain, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|14" aria-label="Spirit Mountain, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|spirit-mountain|15" aria-label="Spirit Mountain, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>23</b> days<span>Nov 28 <span class="tag">weather</span></span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#ed2a00;--c2:#99de74" aria-hidden="true"></span><a href="resorts/giants-ridge.html">Giants Ridge</a><span>Biwabik</span></div>
+        <div class="strip"><button type="button" class="cell s2" data-cell="row|giants-ridge|0" aria-label="Giants Ridge, Thu Nov 5: 2 of 4 models under the threshold"></button><button type="button" class="cell s3" data-cell="row|giants-ridge|1" aria-label="Giants Ridge, Fri Nov 6: 3 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|giants-ridge|2" aria-label="Giants Ridge, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|3" aria-label="Giants Ridge, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|4" aria-label="Giants Ridge, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|5" aria-label="Giants Ridge, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|giants-ridge|6" aria-label="Giants Ridge, Wed Nov 11: 2 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|giants-ridge|7" aria-label="Giants Ridge, Thu Nov 12: 2 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|giants-ridge|8" aria-label="Giants Ridge, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|giants-ridge|9" aria-label="Giants Ridge, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|giants-ridge|10" aria-label="Giants Ridge, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|11" aria-label="Giants Ridge, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|12" aria-label="Giants Ridge, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|13" aria-label="Giants Ridge, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|14" aria-label="Giants Ridge, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|giants-ridge|15" aria-label="Giants Ridge, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>24</b> days<span>Nov 29</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#00344f;--c2:#45697d" aria-hidden="true"></span><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a><span>Lutsen</span></div>
+        <div class="strip"><button type="button" class="cell s2" data-cell="row|lutsen-mountains|0" aria-label="Lutsen Mountains, Thu Nov 5: 2 of 4 models under the threshold"></button><button type="button" class="cell s3" data-cell="row|lutsen-mountains|1" aria-label="Lutsen Mountains, Fri Nov 6: 3 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|lutsen-mountains|2" aria-label="Lutsen Mountains, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|3" aria-label="Lutsen Mountains, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|4" aria-label="Lutsen Mountains, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|5" aria-label="Lutsen Mountains, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s3" data-cell="row|lutsen-mountains|6" aria-label="Lutsen Mountains, Wed Nov 11: 3 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|lutsen-mountains|7" aria-label="Lutsen Mountains, Thu Nov 12: 2 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|lutsen-mountains|8" aria-label="Lutsen Mountains, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|lutsen-mountains|9" aria-label="Lutsen Mountains, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|lutsen-mountains|10" aria-label="Lutsen Mountains, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|11" aria-label="Lutsen Mountains, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|12" aria-label="Lutsen Mountains, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|13" aria-label="Lutsen Mountains, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|14" aria-label="Lutsen Mountains, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|lutsen-mountains|15" aria-label="Lutsen Mountains, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>31</b> days<span>Dec 6</span></div>
+      </div>
+    </div>
+    <div class="area">
+      <div class="area-head"><h3>Central &amp; West</h3>
+        <p>Next night under 28&deg; <b class="nb">Fri Nov 6</b>, 1 of 5 hills &middot; first lift <b class="hm" data-hill="andes-tower-hills">Andes Tower Hills</b>, 12 days</p></div>
+      <div class="brow brow-hd" aria-hidden="true"><div></div><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div></div></div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#12592e;--c2:#213871" aria-hidden="true"></span><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a><span>Kensington</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|andes-tower-hills|0" aria-label="Andes Tower Hills, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|andes-tower-hills|1" aria-label="Andes Tower Hills, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|andes-tower-hills|2" aria-label="Andes Tower Hills, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|3" aria-label="Andes Tower Hills, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|4" aria-label="Andes Tower Hills, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|5" aria-label="Andes Tower Hills, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|andes-tower-hills|6" aria-label="Andes Tower Hills, Wed Nov 11: 2 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|7" aria-label="Andes Tower Hills, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|andes-tower-hills|8" aria-label="Andes Tower Hills, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|andes-tower-hills|9" aria-label="Andes Tower Hills, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|10" aria-label="Andes Tower Hills, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|11" aria-label="Andes Tower Hills, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|12" aria-label="Andes Tower Hills, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|13" aria-label="Andes Tower Hills, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|14" aria-label="Andes Tower Hills, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|andes-tower-hills|15" aria-label="Andes Tower Hills, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>12</b> days<span>Nov 17 <span class="tag">weather</span></span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#0c356d;--c2:#c03223" aria-hidden="true"></span><a href="resorts/buena-vista.html">Buena Vista</a><span>Bemidji</span></div>
+        <div class="strip"><button type="button" class="cell s1" data-cell="row|buena-vista|0" aria-label="Buena Vista, Thu Nov 5: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buena-vista|1" aria-label="Buena Vista, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|2" aria-label="Buena Vista, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|3" aria-label="Buena Vista, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|4" aria-label="Buena Vista, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|5" aria-label="Buena Vista, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buena-vista|6" aria-label="Buena Vista, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buena-vista|7" aria-label="Buena Vista, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buena-vista|8" aria-label="Buena Vista, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buena-vista|9" aria-label="Buena Vista, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|buena-vista|10" aria-label="Buena Vista, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|11" aria-label="Buena Vista, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|12" aria-label="Buena Vista, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|13" aria-label="Buena Vista, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|14" aria-label="Buena Vista, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|buena-vista|15" aria-label="Buena Vista, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>15</b> days<span>Nov 20</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#fbab54;--c2:#009ddd" aria-hidden="true"></span><a href="resorts/detroit-mountain.html">Detroit Mountain</a><span>Detroit Lakes</span></div>
+        <div class="strip"><button type="button" class="cell s1" data-cell="row|detroit-mountain|0" aria-label="Detroit Mountain, Thu Nov 5: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|detroit-mountain|1" aria-label="Detroit Mountain, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|2" aria-label="Detroit Mountain, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|3" aria-label="Detroit Mountain, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|4" aria-label="Detroit Mountain, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|detroit-mountain|5" aria-label="Detroit Mountain, Tue Nov 10: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|detroit-mountain|6" aria-label="Detroit Mountain, Wed Nov 11: 2 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|7" aria-label="Detroit Mountain, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|detroit-mountain|8" aria-label="Detroit Mountain, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|detroit-mountain|9" aria-label="Detroit Mountain, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|10" aria-label="Detroit Mountain, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|11" aria-label="Detroit Mountain, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|12" aria-label="Detroit Mountain, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|13" aria-label="Detroit Mountain, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|14" aria-label="Detroit Mountain, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|detroit-mountain|15" aria-label="Detroit Mountain, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>19</b> days<span>Nov 24 <span class="tag">weather</span></span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#116600;--c2:#4caac9" aria-hidden="true"></span><a href="resorts/mount-ski-gull.html">Mount Ski Gull</a><span>Nisswa</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|mount-ski-gull|0" aria-label="Mount Ski Gull, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|mount-ski-gull|1" aria-label="Mount Ski Gull, Fri Nov 6: 2 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|2" aria-label="Mount Ski Gull, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|3" aria-label="Mount Ski Gull, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|4" aria-label="Mount Ski Gull, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|5" aria-label="Mount Ski Gull, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-ski-gull|6" aria-label="Mount Ski Gull, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-ski-gull|7" aria-label="Mount Ski Gull, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|mount-ski-gull|8" aria-label="Mount Ski Gull, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-ski-gull|9" aria-label="Mount Ski Gull, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-ski-gull|10" aria-label="Mount Ski Gull, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|11" aria-label="Mount Ski Gull, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|12" aria-label="Mount Ski Gull, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|13" aria-label="Mount Ski Gull, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|14" aria-label="Mount Ski Gull, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-ski-gull|15" aria-label="Mount Ski Gull, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>19</b> days<span>Nov 24 <span class="tag">weather</span></span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#068bc4;--c2:#1a2738" aria-hidden="true"></span><a href="resorts/powder-ridge.html">Powder Ridge</a><span>Kimball</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|powder-ridge|0" aria-label="Powder Ridge, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|powder-ridge|1" aria-label="Powder Ridge, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|powder-ridge|2" aria-label="Powder Ridge, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|3" aria-label="Powder Ridge, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|4" aria-label="Powder Ridge, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|5" aria-label="Powder Ridge, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|powder-ridge|6" aria-label="Powder Ridge, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|7" aria-label="Powder Ridge, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|powder-ridge|8" aria-label="Powder Ridge, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|powder-ridge|9" aria-label="Powder Ridge, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|powder-ridge|10" aria-label="Powder Ridge, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|11" aria-label="Powder Ridge, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|12" aria-label="Powder Ridge, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|13" aria-label="Powder Ridge, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|14" aria-label="Powder Ridge, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|powder-ridge|15" aria-label="Powder Ridge, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>22</b> days<span>Nov 27</span></div>
+      </div>
+    </div>
+    <div class="area">
+      <div class="area-head"><h3>Southern</h3>
+        <p>Next night under 28&deg; <b class="nb">Fri Nov 13</b>, 3 of 3 hills &middot; first lift <b class="hm" data-hill="mount-kato">Mount Kato</b>, 25 days</p></div>
+      <div class="brow brow-hd" aria-hidden="true"><div></div><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div></div></div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#00487f;--c2:#fd8204" aria-hidden="true"></span><a href="resorts/mount-kato.html">Mount Kato</a><span>Mankato</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|mount-kato|0" aria-label="Mount Kato, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-kato|1" aria-label="Mount Kato, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-kato|2" aria-label="Mount Kato, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|3" aria-label="Mount Kato, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|4" aria-label="Mount Kato, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|5" aria-label="Mount Kato, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-kato|6" aria-label="Mount Kato, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|7" aria-label="Mount Kato, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|mount-kato|8" aria-label="Mount Kato, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|mount-kato|9" aria-label="Mount Kato, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|10" aria-label="Mount Kato, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|11" aria-label="Mount Kato, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|12" aria-label="Mount Kato, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|13" aria-label="Mount Kato, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|14" aria-label="Mount Kato, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|mount-kato|15" aria-label="Mount Kato, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>25</b> days<span>Nov 30</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#ea492e;--c2:#0f2ccf" aria-hidden="true"></span><a href="resorts/steeplechase.html">Steeplechase</a><span>Mazeppa</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|steeplechase|0" aria-label="Steeplechase, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|steeplechase|1" aria-label="Steeplechase, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|steeplechase|2" aria-label="Steeplechase, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|3" aria-label="Steeplechase, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|4" aria-label="Steeplechase, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|5" aria-label="Steeplechase, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|steeplechase|6" aria-label="Steeplechase, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|steeplechase|7" aria-label="Steeplechase, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|steeplechase|8" aria-label="Steeplechase, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|steeplechase|9" aria-label="Steeplechase, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|steeplechase|10" aria-label="Steeplechase, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|11" aria-label="Steeplechase, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|12" aria-label="Steeplechase, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|13" aria-label="Steeplechase, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|14" aria-label="Steeplechase, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|steeplechase|15" aria-label="Steeplechase, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>25</b> days<span>Nov 30</span></div>
+      </div>
+      <div class="brow">
+        <div class="brow-name"><span class="pip" style="--c1:#00a8f0;--c2:#000000" aria-hidden="true"></span><a href="resorts/coffee-mill.html">Coffee Mill</a><span>Wabasha</span></div>
+        <div class="strip"><button type="button" class="cell s0" data-cell="row|coffee-mill|0" aria-label="Coffee Mill, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|coffee-mill|1" aria-label="Coffee Mill, Fri Nov 6: 1 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|coffee-mill|2" aria-label="Coffee Mill, Sat Nov 7: 1 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|3" aria-label="Coffee Mill, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|4" aria-label="Coffee Mill, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|5" aria-label="Coffee Mill, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|6" aria-label="Coffee Mill, Wed Nov 11: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|coffee-mill|7" aria-label="Coffee Mill, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|coffee-mill|8" aria-label="Coffee Mill, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="row|coffee-mill|9" aria-label="Coffee Mill, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="row|coffee-mill|10" aria-label="Coffee Mill, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|11" aria-label="Coffee Mill, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|12" aria-label="Coffee Mill, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|13" aria-label="Coffee Mill, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|14" aria-label="Coffee Mill, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="row|coffee-mill|15" aria-label="Coffee Mill, Fri Nov 20: 0 of 2 models under the threshold"></button></div>
+        <div class="brow-when"><b>38</b> days<span>Dec 13</span></div>
+      </div>
+    </div>
+    <p class="sec-note fc-note">Wet-bulb forecasts from <a href="https://open-meteo.com/">Open-Meteo</a> through GFS, ECMWF, GEM, ICON, updated twice a day and last pulled 5 November. Each square is one night, shaded by how many models dip under 28&deg;. Tap one for each model's low.</p>
   </section>
 
   <section class="sec">
@@ -850,203 +1003,6 @@ footer::before {
   </section>
 
   <section class="sec">
-    <h2 class="sec-title">Every resort we track</h2>
-    <p class="sec-note">
-      Sorted by how soon you can expect to be on it. Snowmaking hours are the hours under
-      28&deg; a resort normally gets across October and November.
-    </p>
-    <p class="sec-cta">Click any resort to see its past opening dates.</p>
-
-    <div class="tbl-box">
-      <table>
-        <caption>Projected openings, 2026&ndash;27</caption>
-        <thead>
-          <tr>
-            <th>Resort</th><th>Where</th><th>Projected</th>
-            <th class="num">Days</th><th class="num">Snowmaking hrs</th><th>Typical opening</th>
-            <th><span class="vh">Link</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="grp"><td colspan="7">Twin Cities</td></tr>
-          <tr class="first">
-            <td class="hill"><span class="pip" data-tier="green" style="--c1:#beee07;--c2:#000000" aria-hidden="true"></span><a href="resorts/wild-mountain.html">Wild Mountain</a></td>
-            <td class="where" data-label="Where">Taylors Falls</td>
-            <td data-label="Projected">Nov 13<span class="rng">weather</span></td>
-            <td class="num days" data-label="Days">8</td>
-            <td class="num" data-label="Snowmaking hrs">337<span class="rng">57&ndash;564</span></td>
-            <td data-label="Typical opening">Nov 10<span class="rng">Oct 18 &ndash; Nov 20</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/wild-mountain.html" aria-label="See Wild Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="green" style="--c1:#005395;--c2:#ffec26" aria-hidden="true"></span><a href="resorts/trollhaugen.html">Trollhaugen</a></td>
-            <td class="where" data-label="Where">Dresser</td>
-            <td data-label="Projected">Nov 14<span class="rng">weather</span></td>
-            <td class="num days" data-label="Days">9</td>
-            <td class="num" data-label="Snowmaking hrs">334<span class="rng">56&ndash;562</span></td>
-            <td data-label="Typical opening">Nov 10<span class="rng">Oct 19 &ndash; Nov 27</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/trollhaugen.html" aria-label="See Trollhaugen's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#b02621;--c2:#10325a" aria-hidden="true"></span><a href="resorts/afton-alps.html">Afton Alps</a></td>
-            <td class="where" data-label="Where">Afton</td>
-            <td data-label="Projected">Nov 29<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">24</td>
-            <td class="num" data-label="Snowmaking hrs">303<span class="rng">32&ndash;555</span></td>
-            <td data-label="Typical opening">Nov 29<span class="rng">Nov 18 &ndash; Dec 4</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/afton-alps.html" aria-label="See Afton Alps's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#3db3e3;--c2:#81d742" aria-hidden="true"></span><a href="resorts/buck-hill.html">Buck Hill</a></td>
-            <td class="where" data-label="Where">Burnsville</td>
-            <td data-label="Projected">Nov 29<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">24</td>
-            <td class="num" data-label="Snowmaking hrs">301<span class="rng">43&ndash;553</span></td>
-            <td data-label="Typical opening">Nov 29<span class="rng">Nov 22 &ndash; Dec 1</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/buck-hill.html" aria-label="See Buck Hill's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#1c75bc;--c2:#fff200" aria-hidden="true"></span><a href="resorts/welch-village.html">Welch Village</a></td>
-            <td class="where" data-label="Where">Welch</td>
-            <td data-label="Projected">Nov 30<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">25</td>
-            <td class="num" data-label="Snowmaking hrs">296<span class="rng">34&ndash;552</span></td>
-            <td data-label="Typical opening">Nov 30<span class="rng">Nov 25 &ndash; Dec 4</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/welch-village.html" aria-label="See Welch Village's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="black" style="--c1:#5f3894;--c2:#f26522" aria-hidden="true"></span><a href="resorts/hyland-hills.html">Hyland Hills</a></td>
-            <td class="where" data-label="Where">Bloomington</td>
-            <td data-label="Projected">Dec 1<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">26</td>
-            <td class="num" data-label="Snowmaking hrs">292<span class="rng">33&ndash;553</span></td>
-            <td data-label="Typical opening">Dec 1<span class="rng">Nov 22 &ndash; Dec 4</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/hyland-hills.html" aria-label="See Hyland Hills's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="black" style="--c1:#fe3332;--c2:#ffffff" aria-hidden="true"></span><a href="resorts/elm-creek.html">Elm Creek</a></td>
-            <td class="where" data-label="Where">Maple Grove</td>
-            <td data-label="Projected">Dec 16<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">41</td>
-            <td class="num" data-label="Snowmaking hrs">316<span class="rng">45&ndash;558</span></td>
-            <td data-label="Typical opening">Dec 16<span class="rng">Dec 10 &ndash; Dec 19</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/elm-creek.html" aria-label="See Elm Creek's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr class="grp"><td colspan="7">Greater Minnesota</td></tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="green" style="--c1:#12592e;--c2:#213871" aria-hidden="true"></span><a href="resorts/andes-tower-hills.html">Andes Tower Hills</a></td>
-            <td class="where" data-label="Where">Kensington</td>
-            <td data-label="Projected">Nov 17<span class="rng">weather</span></td>
-            <td class="num days" data-label="Days">12</td>
-            <td class="num" data-label="Snowmaking hrs">399<span class="rng">108&ndash;659</span></td>
-            <td data-label="Typical opening">Nov 11<span class="rng">Oct 18 &ndash; Nov 23</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/andes-tower-hills.html" aria-label="See Andes Tower Hills's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="green" style="--c1:#0c356d;--c2:#c03223" aria-hidden="true"></span><a href="resorts/buena-vista.html">Buena Vista</a></td>
-            <td class="where" data-label="Where">Bemidji</td>
-            <td data-label="Projected">Nov 20<span class="rng">climate</span></td>
-            <td class="num days" data-label="Days">15</td>
-            <td class="num" data-label="Snowmaking hrs">458<span class="rng">124&ndash;812</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/buena-vista.html" aria-label="See Buena Vista's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="green" style="--c1:#fbab54;--c2:#009ddd" aria-hidden="true"></span><a href="resorts/detroit-mountain.html">Detroit Mountain</a></td>
-            <td class="where" data-label="Where">Detroit Lakes</td>
-            <td data-label="Projected">Nov 24<span class="rng">weather</span></td>
-            <td class="num days" data-label="Days">19</td>
-            <td class="num" data-label="Snowmaking hrs">434<span class="rng">113&ndash;714</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/detroit-mountain.html" aria-label="See Detroit Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="green" style="--c1:#116600;--c2:#4caac9" aria-hidden="true"></span><a href="resorts/mount-ski-gull.html">Mount Ski Gull</a></td>
-            <td class="where" data-label="Where">Nisswa</td>
-            <td data-label="Projected">Nov 24<span class="rng">weather</span></td>
-            <td class="num days" data-label="Days">19</td>
-            <td class="num" data-label="Snowmaking hrs">405<span class="rng">106&ndash;705</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/mount-ski-gull.html" aria-label="See Mount Ski Gull's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#068bc4;--c2:#1a2738" aria-hidden="true"></span><a href="resorts/powder-ridge.html">Powder Ridge</a></td>
-            <td class="where" data-label="Where">Kimball</td>
-            <td data-label="Projected">Nov 27<span class="rng">climate</span></td>
-            <td class="num days" data-label="Days">22</td>
-            <td class="num" data-label="Snowmaking hrs">356<span class="rng">104&ndash;572</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/powder-ridge.html" aria-label="See Powder Ridge's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#41a62a;--c2:#003388" aria-hidden="true"></span><a href="resorts/chester-bowl.html">Chester Bowl</a></td>
-            <td class="where" data-label="Where">Duluth</td>
-            <td data-label="Projected">Nov 27<span class="rng">climate</span></td>
-            <td class="num days" data-label="Days">22</td>
-            <td class="num" data-label="Snowmaking hrs">342<span class="rng">49&ndash;609</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/chester-bowl.html" aria-label="See Chester Bowl's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#2d65b0;--c2:#189f5a" aria-hidden="true"></span><a href="resorts/spirit-mountain.html">Spirit Mountain</a></td>
-            <td class="where" data-label="Where">Duluth</td>
-            <td data-label="Projected">Nov 28<span class="rng">weather</span></td>
-            <td class="num days" data-label="Days">23</td>
-            <td class="num" data-label="Snowmaking hrs">410<span class="rng">119&ndash;741</span></td>
-            <td data-label="Typical opening">Nov 26<span class="rng">Nov 25 &ndash; Nov 30</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/spirit-mountain.html" aria-label="See Spirit Mountain's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#ed2a00;--c2:#99de74" aria-hidden="true"></span><a href="resorts/giants-ridge.html">Giants Ridge</a></td>
-            <td class="where" data-label="Where">Biwabik</td>
-            <td data-label="Projected">Nov 29<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">24</td>
-            <td class="num" data-label="Snowmaking hrs">454<span class="rng">109&ndash;839</span></td>
-            <td data-label="Typical opening">Nov 29<span class="rng">Nov 24 &ndash; Dec 2</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/giants-ridge.html" aria-label="See Giants Ridge's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#00487f;--c2:#fd8204" aria-hidden="true"></span><a href="resorts/mount-kato.html">Mount Kato</a></td>
-            <td class="where" data-label="Where">Mankato</td>
-            <td data-label="Projected">Nov 30<span class="rng">climate</span></td>
-            <td class="num days" data-label="Days">25</td>
-            <td class="num" data-label="Snowmaking hrs">308<span class="rng">80&ndash;549</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/mount-kato.html" aria-label="See Mount Kato's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="blue" style="--c1:#ea492e;--c2:#0f2ccf" aria-hidden="true"></span><a href="resorts/steeplechase.html">Steeplechase</a></td>
-            <td class="where" data-label="Where">Mazeppa</td>
-            <td data-label="Projected">Nov 30<span class="rng">climate</span></td>
-            <td class="num days" data-label="Days">25</td>
-            <td class="num" data-label="Snowmaking hrs">302<span class="rng">51&ndash;547</span></td>
-            <td data-label="Typical opening">&mdash;<span class="rng">no record yet</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/steeplechase.html" aria-label="See Steeplechase's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="black" style="--c1:#00344f;--c2:#45697d" aria-hidden="true"></span><a href="resorts/lutsen-mountains.html">Lutsen Mountains</a></td>
-            <td class="where" data-label="Where">Lutsen</td>
-            <td data-label="Projected">Dec 6<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">31</td>
-            <td class="num" data-label="Snowmaking hrs">386<span class="rng">97&ndash;714</span></td>
-            <td data-label="Typical opening">Dec 6<span class="rng">Nov 28 &ndash; Dec 10</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/lutsen-mountains.html" aria-label="See Lutsen Mountains's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-          <tr>
-            <td class="hill"><span class="pip" data-tier="black" style="--c1:#00a8f0;--c2:#000000" aria-hidden="true"></span><a href="resorts/coffee-mill.html">Coffee Mill</a></td>
-            <td class="where" data-label="Where">Wabasha</td>
-            <td data-label="Projected">Dec 13<span class="rng">model</span></td>
-            <td class="num days" data-label="Days">38</td>
-            <td class="num" data-label="Snowmaking hrs">266<span class="rng">11&ndash;540</span></td>
-            <td data-label="Typical opening">Dec 13<span class="rng">Dec 7 &ndash; Jan 14</span></td>
-            <td class="go-cell"><a class="btn" href="resorts/coffee-mill.html" aria-label="See Coffee Mill's record">See record<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <section class="sec">
       <aside class="hello">
         <img class="hello-shot" src="photos/david-midwest-560.jpg"
            srcset="photos/david-midwest-560.jpg 560w, photos/david-midwest-840.jpg 840w, photos/david-midwest-1120.jpg 1120w"
@@ -1069,7 +1025,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-05T23:38:39.422Z">5 November 2026, 17:38 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-06T03:48:14.398Z">5 November 2026, 21:48 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
     <span>Midwest Skiers has been documenting these resorts for years: the
@@ -1079,5 +1035,135 @@ footer::before {
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
 </div>
+<div id="night-pop" class="night-pop" role="status" hidden></div>
+<script>
+function bEsc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function bShort(iso) {
+  return MON[Number(iso.slice(5, 7)) - 1] + " " + Number(iso.slice(8, 10));
+}
+function bDow(iso) {
+  return DOW[new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10))).getUTCDay()];
+}
+function bHour(iso) {
+  const h = Number(iso.slice(11, 13));
+  return (h % 12 || 12) + (h < 12 ? "am" : "pm");
+}
+function bShade(c) {
+  if (c.n === 0) return "na";
+  return "s" + Math.min(c.under, 3);
+}
+function bHeader(K) {
+  return '<div class="strip strip-hd" aria-hidden="true">' + K.days.map(d =>
+    '<span class="hd">' + bDow(d)[0] + "<br>" + Number(d.slice(8, 10)) + "</span>").join("") + "</div>";
+}
+function bStrip(K, h, pre) {
+  return '<div class="strip">' + h.cells.map((c, i) =>
+    '<button type="button" class="cell ' + bShade(c) + '" data-cell="' + pre + "|" + h.slug + "|" + i + '" ' +
+    'aria-label="' + bEsc(h.name) + ", " + bDow(K.days[i]) + " " + bShort(K.days[i]) + ": " +
+    c.under + " of " + c.n + ' models under the threshold"></button>').join("") + "</div>";
+}
+function bDays(n) {
+  if (n > 0) return '<span class="pc-num">' + n + '</span><span class="pc-unit">days</span>';
+  if (n === 0) return '<span class="pc-num">Today</span>';
+  return '<span class="pc-num">Open</span>';
+}
+function bOptions(K, picks, current) {
+  return '<option value=""' + (current ? "" : " selected") + " disabled>Choose a hill</option>" +
+    K.areas.map(a => '<optgroup label="' + bEsc(a.name) + '">' + a.hills.map(s =>
+      '<option value="' + s + '"' + (s === current ? " selected" : "") +
+      (s !== current && picks.indexOf(s) >= 0 ? " disabled" : "") + ">" + bEsc(K.hills[s].name) + "</option>").join("") +
+      "</optgroup>").join("");
+}
+function bCard(K, picks, slug, idx) {
+  const h = K.hills[slug];
+  const agree = '<span class="agree">' + Object.keys(K.models).map(m =>
+    '<i class="' + (h.nights[m] ? "on" : "") + '" title="' + bEsc(K.models[m]) + '"></i>').join("") + "</span>" +
+    h.agree + " of " + Object.keys(K.models).length + " models see a full night";
+  return '<article class="pcard" style="--c1:' + h.c1 + ";--c2:" + h.c2 + '">' +
+    '<button type="button" class="pc-rm" data-rm="' + idx + '" aria-label="Remove ' + bEsc(h.name) + '">&times;</button>' +
+    '<h3 class="pc-name">' + bEsc(h.name) + "</h3>" +
+    '<p class="pc-place">' + bEsc(h.place) + "</p>" +
+    '<p class="pc-count">' + bDays(h.days) + "</p>" +
+    '<p class="pc-line">First lift <b>' + bShort(h.proj) + "</b>" + (h.label === "weather" ? ' <span class="tag">weather</span>' : "") + "</p>" +
+    '<p class="pc-line pc-mut">Range ' + bShort(h.lo) + " &ndash; " + bShort(h.hi) + "</p>" +
+    '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
+    '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
+    '<p class="pc-line">' + (h.first ? "First hour under 28&deg; <b>" + bDow(h.first) + " " + bShort(h.first) + ", " + bHour(h.first) + "</b>"
+      : "Nothing under 28&deg; in " + K.days.length + " days") + "</p>" +
+    '<p class="pc-line pc-mut">' + agree + "</p>" +
+    '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +
+    "</article>";
+}
+function bEmpty(K, picks, idx) {
+  return '<div class="pcard pc-empty"><span class="pc-plus" aria-hidden="true">+</span>' +
+    '<span class="pc-add">Add a hill</span>' +
+    '<label class="pc-choose">Choose &#9662;<select data-slot="' + idx + '" aria-label="Add a hill">' +
+    bOptions(K, picks, null) + "</select></label></div>";
+}
+function bSlots(K, picks) {
+  const isDefault = picks.join() === K.defaults.join();
+  return '<div class="slots">' + picks.map((s, i) => bCard(K, picks, s, i)).join("") +
+    (picks.length < K.max ? bEmpty(K, picks, picks.length) : "") + "</div>" +
+    '<p class="slot-foot">' + (isDefault
+      ? "Remove any of these and add your own. This browser remembers them."
+      : 'Your hills, saved in this browser. <button type="button" class="linkish" data-reset>Back to the defaults</button>') + "</p>";
+}
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+(function () {
+  var K = {"days":["2026-11-05","2026-11-06","2026-11-07","2026-11-08","2026-11-09","2026-11-10","2026-11-11","2026-11-12","2026-11-13","2026-11-14","2026-11-15","2026-11-16","2026-11-17","2026-11-18","2026-11-19","2026-11-20"],"models":{"gfs":"GFS","ecmwf":"ECMWF","gem":"GEM","icon":"ICON"},"areas":[{"id":"metro","name":"Twin Cities","hills":["wild-mountain","trollhaugen","afton-alps","buck-hill","welch-village","hyland-hills","elm-creek"]},{"id":"north","name":"Duluth & the North","hills":["chester-bowl","spirit-mountain","giants-ridge","lutsen-mountains"]},{"id":"central","name":"Central & West","hills":["andes-tower-hills","buena-vista","detroit-mountain","mount-ski-gull","powder-ridge"]},{"id":"south","name":"Southern","hills":["mount-kato","steeplechase","coffee-mill"]}],"hills":{"wild-mountain":{"slug":"wild-mountain","name":"Wild Mountain","place":"Taylors Falls","c1":"#beee07","c2":"#000000","days":8,"proj":"2026-11-13","label":"weather","lo":"2026-11-07","hi":"2026-11-20","last":"2025-11-10","first":"2026-11-12T19:00","nights":{"gfs":"2026-11-12T19:00","ecmwf":"2026-11-13T00:00","gem":"2026-11-06T00:00","icon":null},"agree":3,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[33.7,32.1,32.2,38.1,37.2,33.9,29.2,25.2,22.7,22.9,25.6,36.9,34.9,36.4,32.2,33.8],"ecmwf":[32.5,28.8,32.6,36.9,37,33.7,31.4,28.1,26,26.9,32.2,33.5,36,35.1,34.7,41.5],"gem":[28.6,21.2,22.5,32.4,33.1,30.4,24.5,34,29.9,37.5,48,null,null,null,null,null],"icon":[34.2,28.1,30.3,36.3,36.1,34.7,34.3,31.9,null,null,null,null,null,null,null,null]}},"trollhaugen":{"slug":"trollhaugen","name":"Trollhaugen","place":"Dresser","c1":"#005395","c2":"#ffec26","days":9,"proj":"2026-11-14","label":"weather","lo":"2026-11-08","hi":"2026-11-27","last":"2025-11-10","first":"2026-11-12T19:00","nights":{"gfs":"2026-11-12T19:00","ecmwf":null,"gem":"2026-11-06T22:00","icon":null},"agree":2,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":1},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[32.7,32.1,32.1,38.3,37.1,34,29.3,25.3,22.4,22.8,25.5,37,34.9,36,32.3,33.8],"ecmwf":[33.3,30.7,32.6,38.2,37.2,35.7,32.9,28.8,28.2,26.9,32.6,34.9,36.1,35.3,34.8,41.2],"gem":[30.3,24.3,24.3,32.6,32.9,30.4,24.1,33.7,29.2,36.7,47.6,null,null,null,null,null],"icon":[34.3,28.1,30.3,36.3,36.1,34.7,34.3,31.9,null,null,null,null,null,null,null,null]}},"hyland-hills":{"slug":"hyland-hills","name":"Hyland Hills","place":"Bloomington","c1":"#5f3894","c2":"#f26522","days":26,"proj":"2026-12-01","label":"model","lo":"2026-11-22","hi":"2026-12-06","last":"2025-12-03","first":"2026-11-14T03:00","nights":{"gfs":null,"ecmwf":null,"gem":"2026-11-07T01:00","icon":null},"agree":1,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":0},{"n":3,"under":0},{"n":3,"under":2},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[37,30.8,33.3,40.7,40.3,37,32.3,31.5,28.3,27,29.8,38.8,37.3,37.6,35,38],"ecmwf":[34.2,31.2,33,38.1,38.1,37.1,36,29.8,28.6,27.2,33.1,37.8,37.1,34.4,35.8,40.6],"gem":[32.9,24.9,26,33.7,34.6,32.7,25.8,34.5,29.9,38.2,49.8,null,null,null,null,null],"icon":[35.8,30.7,32.8,38.9,37.2,36.5,39.8,32.4,null,null,null,null,null,null,null,null]}},"afton-alps":{"slug":"afton-alps","name":"Afton Alps","place":"Afton","c1":"#b02621","c2":"#10325a","days":24,"proj":"2026-11-29","label":"model","lo":"2026-11-18","hi":"2026-12-04","last":"2025-12-04","first":"2026-11-12T21:00","nights":{"gfs":"2026-11-12T21:00","ecmwf":null,"gem":"2026-11-06T01:00","icon":null},"agree":2,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":1},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[33.1,30.1,33.5,39.1,38.5,35.9,30.5,26.6,24.2,24,26.8,37.3,36.4,37.8,33.8,36.3],"ecmwf":[34.5,32.3,32,37.7,36.9,36.7,36.1,29.7,26.3,28.7,33.7,36,37.2,34.8,35.6,41.2],"gem":[31.6,23.2,24.9,32.1,32.8,31.8,25.8,34.2,31,38.4,48.4,null,null,null,null,null],"icon":[35.9,30,31.6,40.3,38.1,37.1,39.4,32.8,null,null,null,null,null,null,null,null]}},"welch-village":{"slug":"welch-village","name":"Welch Village","place":"Welch","c1":"#1c75bc","c2":"#fff200","days":25,"proj":"2026-11-30","label":"model","lo":"2026-11-25","hi":"2026-12-04","last":"2025-11-30","first":"2026-11-12T22:00","nights":{"gfs":"2026-11-12T22:00","ecmwf":null,"gem":"2026-11-06T01:00","icon":null},"agree":2,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[36.1,30.5,33.5,38.9,38.5,35,30.1,26.8,22.9,22.9,26.7,36.5,35.6,38,33.5,37],"ecmwf":[34.7,30.8,31.4,38.3,37.5,36.8,37.1,29.8,25.5,26.9,33.6,38.9,37.4,34.3,35.3,42.1],"gem":[31.5,20.9,24,33.1,33.2,31.4,26.5,33.8,30.1,39.1,48,null,null,null,null,null],"icon":[36.4,30.7,31.1,38.4,36.5,38.6,40.4,34,null,null,null,null,null,null,null,null]}},"buck-hill":{"slug":"buck-hill","name":"Buck Hill","place":"Burnsville","c1":"#3db3e3","c2":"#81d742","days":24,"proj":"2026-11-29","label":"model","lo":"2026-11-24","hi":"2026-12-04","last":"2025-11-29","first":"2026-11-13T00:00","nights":{"gfs":"2026-11-13T00:00","ecmwf":null,"gem":null,"icon":null},"agree":1,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":0},{"n":3,"under":1},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[34.8,29.3,33.1,39.7,39,35.7,31.2,28.2,24.6,23.5,27.2,37.2,35.4,37.1,33.6,36.5],"ecmwf":[33.8,30.8,32.6,37.8,37.8,36.7,35.6,29.4,28.2,26.8,32.7,37.4,36.7,34,35.4,40.2],"gem":[32.5,25.6,28.4,33.9,34.3,31.3,24.9,33.6,28.8,38.3,48.9,null,null,null,null,null],"icon":[36,30.3,31.5,39.3,35.9,36.3,39.4,32.1,null,null,null,null,null,null,null,null]}},"elm-creek":{"slug":"elm-creek","name":"Elm Creek","place":"Maple Grove","c1":"#fe3332","c2":"#ffffff","days":41,"proj":"2026-12-16","label":"model","lo":"2026-12-10","hi":"2026-12-19","last":"2025-12-19","first":"2026-11-12T23:00","nights":{"gfs":"2026-11-12T23:00","ecmwf":null,"gem":"2026-11-05T23:00","icon":null},"agree":2,"cells":[{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[36.5,33,33.4,38.9,39.2,35,29.9,27.5,25.4,25.6,29.5,37.8,36.3,37.1,33.1,36.4],"ecmwf":[31.6,28.2,32.7,36.9,36.8,35.5,33.3,28.9,26.1,27.8,32.6,35,36.8,35.6,36,40.9],"gem":[27.7,18.9,28,33.5,35.2,31.1,24.2,34.6,30.6,38.4,49.7,null,null,null,null,null],"icon":[34.7,29.3,33,39.2,38.8,36.4,38.2,30.8,null,null,null,null,null,null,null,null]}},"lutsen-mountains":{"slug":"lutsen-mountains","name":"Lutsen Mountains","place":"Lutsen","c1":"#00344f","c2":"#45697d","days":31,"proj":"2026-12-06","label":"model","lo":"2026-11-29","hi":"2026-12-12","last":"2025-11-28","first":"2026-11-11T09:00","nights":{"gfs":"2026-11-11T17:00","ecmwf":"2026-11-06T01:00","gem":"2026-11-05T18:00","icon":"2026-11-05T21:00"},"agree":4,"cells":[{"n":4,"under":2},{"n":4,"under":3},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":3},{"n":4,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[28.4,28.5,29.7,35.1,34.6,30.8,26.1,23.4,21.6,22.8,26.9,34.7,32.3,33.7,28.3,29.2],"ecmwf":[28.5,25.2,29.3,35.4,33.9,34.7,26.2,25.4,26.7,28.3,32.8,35.1,35.7,31.3,31.3,37.4],"gem":[23.6,19,19.4,31.2,32.8,28.5,24.2,29,33.8,33.9,41.3,null,null,null,null,null],"icon":[26.8,24.8,31.8,35.7,34.6,36.1,32.1,29.2,null,null,null,null,null,null,null,null]}},"giants-ridge":{"slug":"giants-ridge","name":"Giants Ridge","place":"Biwabik","c1":"#ed2a00","c2":"#99de74","days":24,"proj":"2026-11-29","label":"model","lo":"2026-11-24","hi":"2026-12-02","last":"2025-11-29","first":"2026-11-11T20:00","nights":{"gfs":"2026-11-11T20:00","ecmwf":"2026-11-12T00:00","gem":"2026-11-05T20:00","icon":"2026-11-05T20:00"},"agree":4,"cells":[{"n":4,"under":2},{"n":4,"under":3},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":2},{"n":4,"under":2},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[29.4,28.9,31,36.1,36.6,30.2,26.6,23,21.4,22.3,24.5,34.7,33.9,32.5,28.2,29.1],"ecmwf":[28.3,27.9,29.9,34,34.2,31.6,28.3,24.5,26.8,27.4,30,31.2,36.1,33.1,33.3,38.1],"gem":[23.6,16.7,25.3,29.5,31.9,31.1,26.2,31.2,33.9,32.7,44.4,null,null,null,null,null],"icon":[26.6,23.3,30,33.9,31.2,31.9,29.5,29.9,null,null,null,null,null,null,null,null]}},"spirit-mountain":{"slug":"spirit-mountain","name":"Spirit Mountain","place":"Duluth","c1":"#2d65b0","c2":"#189f5a","days":23,"proj":"2026-11-28","label":"weather","lo":"2026-11-25","hi":"2026-12-06","last":"2025-11-30","first":"2026-11-12T01:00","nights":{"gfs":"2026-11-12T17:00","ecmwf":"2026-11-12T19:00","gem":"2026-11-05T22:00","icon":"2026-11-05T23:00"},"agree":4,"cells":[{"n":4,"under":2},{"n":4,"under":3},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":2},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[29.4,29.2,31.3,34.8,35.4,31.3,28.8,24.4,22.1,22.4,23.5,34.8,32.5,33,29.8,29.5],"ecmwf":[29.9,27.6,29.2,35.1,34.2,34.2,30.3,26.8,26.2,25.7,29.2,30.9,36.2,33,33.4,38.6],"gem":[26.6,21.8,25.9,30.7,30.6,31.5,28.6,30.1,28.5,30.2,43,null,null,null,null,null],"icon":[27.7,24.7,30.5,32,31.9,35.5,32.1,31.1,null,null,null,null,null,null,null,null]}},"powder-ridge":{"slug":"powder-ridge","name":"Powder Ridge","place":"Kimball","c1":"#068bc4","c2":"#1a2738","days":22,"proj":"2026-11-27","label":"climate","lo":"2026-11-17","hi":"2026-11-30","last":null,"first":"2026-11-13T03:00","nights":{"gfs":"2026-11-13T18:00","ecmwf":null,"gem":"2026-11-06T01:00","icon":null},"agree":2,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":0},{"n":3,"under":1},{"n":3,"under":1},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[32,30.4,33.4,37.4,38.7,34,28.3,28.8,25.3,24.3,27.8,37.8,35.7,35,31.6,34.5],"ecmwf":[33,29.5,32.6,37.7,37.6,35.3,34.5,30,29.1,28.5,32.8,37,35.3,33.3,36.6,37.6],"gem":[29.9,24.4,27.9,33.7,34.9,30.5,23.8,34.4,29.7,36,48.6,null,null,null,null,null],"icon":[33.6,28.6,33.2,39,38.4,34.6,38.1,29.9,null,null,null,null,null,null,null,null]}},"mount-kato":{"slug":"mount-kato","name":"Mount Kato","place":"Mankato","c1":"#00487f","c2":"#fd8204","days":25,"proj":"2026-11-30","label":"climate","lo":"2026-11-26","hi":"2026-11-30","last":null,"first":"2026-11-13T06:00","nights":{"gfs":"2026-11-13T21:00","ecmwf":null,"gem":null,"icon":null},"agree":1,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":0},{"n":3,"under":2},{"n":3,"under":1},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[36.8,33.6,33.9,41.1,41,35.8,32,30.5,26.9,24.9,29.5,37.8,36.3,37.7,34.1,37.3],"ecmwf":[34.8,30.3,31.7,37.4,37.3,35.3,37.9,30.4,27.8,28.3,33.8,37,35.6,31.1,37.3,38.5],"gem":[35.1,27.1,26.2,32.4,34.2,30.3,24.5,34.2,32.1,42,50.5,null,null,null,null,null],"icon":[37.1,34.7,33,38.7,36.6,37.3,40,33.4,null,null,null,null,null,null,null,null]}},"buena-vista":{"slug":"buena-vista","name":"Buena Vista","place":"Bemidji","c1":"#0c356d","c2":"#c03223","days":15,"proj":"2026-11-20","label":"climate","lo":"2026-11-17","hi":"2026-12-01","last":null,"first":"2026-11-12T20:00","nights":{"gfs":"2026-11-12T20:00","ecmwf":null,"gem":"2026-11-05T21:00","icon":null},"agree":2,"cells":[{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":1},{"n":3,"under":1},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[29.9,29.9,34,35.3,37,29.9,28.9,26.4,24.3,24.6,27.6,32.7,31.6,32.2,28.5,30.3],"ecmwf":[29.7,29.6,33.4,36,36.1,33.5,30.1,28.6,29.2,31.2,33.7,34,35.6,35.2,35.2,39.1],"gem":[25,23.7,29,36.5,36,32.3,25.8,36.2,35.4,38.4,46.1,null,null,null,null,null],"icon":[29.9,28.1,35.2,35.6,36.4,32.6,31.3,30.4,null,null,null,null,null,null,null,null]}},"detroit-mountain":{"slug":"detroit-mountain","name":"Detroit Mountain","place":"Detroit Lakes","c1":"#fbab54","c2":"#009ddd","days":19,"proj":"2026-11-24","label":"weather","lo":"2026-11-18","hi":"2026-12-01","last":null,"first":"2026-11-11T02:00","nights":{"gfs":"2026-11-13T18:00","ecmwf":null,"gem":"2026-11-05T20:00","icon":null},"agree":2,"cells":[{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":2},{"n":4,"under":0},{"n":3,"under":1},{"n":3,"under":1},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[30,30.1,34.4,34.7,36.8,29.3,26.8,28.2,25.1,24.9,28.4,34.8,34.4,32.2,28.1,31.5],"ecmwf":[30.2,29.2,34.6,35.6,37.2,34.1,30.8,28.5,28.9,30,34.2,36.6,34.5,33.7,36.2,37.7],"gem":[23.4,21.3,30,32.4,34.5,27.8,23.2,34.6,32.4,37.3,47.6,null,null,null,null,null],"icon":[31.6,29.1,35.9,35.8,38.3,33.3,30,29,null,null,null,null,null,null,null,null]}},"andes-tower-hills":{"slug":"andes-tower-hills","name":"Andes Tower Hills","place":"Kensington","c1":"#12592e","c2":"#213871","days":12,"proj":"2026-11-17","label":"weather","lo":"2026-11-09","hi":"2026-11-23","last":"2025-11-09","first":"2026-11-11T04:00","nights":{"gfs":"2026-11-13T19:00","ecmwf":null,"gem":"2026-11-06T00:00","icon":null},"agree":2,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":2},{"n":4,"under":0},{"n":3,"under":1},{"n":3,"under":1},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[30.5,30.3,33.9,36.2,36.8,32.1,26.7,28.4,25.3,23.9,29.3,36.8,35.8,33.8,29.5,32.2],"ecmwf":[31.9,29.5,32.5,35.6,37.3,33.7,34.4,29.3,30.4,30.3,34.5,37.6,33.1,31.3,36.9,37.3],"gem":[28.3,24.5,27.6,30.2,32.6,29.2,22.4,35.1,33.5,38.6,48.3,null,null,null,null,null],"icon":[33.1,29.7,33.4,37.1,38.9,34.6,36.2,29.1,null,null,null,null,null,null,null,null]}},"coffee-mill":{"slug":"coffee-mill","name":"Coffee Mill","place":"Wabasha","c1":"#00a8f0","c2":"#000000","days":38,"proj":"2026-12-13","label":"model","lo":"2026-12-07","hi":"2027-01-14","last":"2025-12-13","first":"2026-11-12T23:00","nights":{"gfs":"2026-11-12T23:00","ecmwf":null,"gem":"2026-11-06T23:00","icon":null},"agree":2,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[35.3,31.5,33,38.2,37.5,35.2,30.6,27.7,23.1,23,25.8,35.9,35.3,38.5,33.6,37.3],"ecmwf":[34.2,31.4,31.9,38.7,36.1,37.4,36.9,29.4,26.1,27.1,33.6,36.3,37.7,35.4,35.1,40],"gem":[34.1,25.3,23,34.2,33.5,34.3,29.3,34.6,31.7,39.9,48.5,null,null,null,null,null],"icon":[34.9,31,30.1,39.8,35.9,38.4,37.9,35.1,null,null,null,null,null,null,null,null]}},"mount-ski-gull":{"slug":"mount-ski-gull","name":"Mount Ski Gull","place":"Nisswa","c1":"#116600","c2":"#4caac9","days":19,"proj":"2026-11-24","label":"weather","lo":"2026-11-17","hi":"2026-12-01","last":null,"first":"2026-11-13T00:00","nights":{"gfs":"2026-11-13T00:00","ecmwf":"2026-11-12T23:00","gem":"2026-11-06T01:00","icon":null},"agree":3,"cells":[{"n":4,"under":0},{"n":4,"under":2},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":1},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[30.4,29.3,32.5,35.3,37.4,30.4,28,28,24.5,24.4,27.4,34.7,34.3,34.1,29.2,31.6],"ecmwf":[29.7,27.3,31.2,35.9,35.9,32.9,31.4,27.9,26.9,28.1,32.3,33.8,35.5,35.3,35.4,37.7],"gem":[29.5,21.7,30.9,35.8,35.3,29.6,23.8,35.5,32.2,36.9,46.9,null,null,null,null,null],"icon":[30.3,28.3,34.4,37,39.3,34.1,33.1,31.7,null,null,null,null,null,null,null,null]}},"chester-bowl":{"slug":"chester-bowl","name":"Chester Bowl","place":"Duluth","c1":"#41a62a","c2":"#003388","days":22,"proj":"2026-11-27","label":"climate","lo":"2026-11-17","hi":"2026-12-04","last":null,"first":"2026-11-12T04:00","nights":{"gfs":"2026-11-12T20:00","ecmwf":"2026-11-12T20:00","gem":"2026-11-05T21:00","icon":null},"agree":3,"cells":[{"n":4,"under":1},{"n":4,"under":2},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":2},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[29.2,29.1,31.4,37,37.4,32.2,29.4,26.1,24.2,25.1,26.4,36.6,34.7,34.1,31.4,32.1],"ecmwf":[30.3,28,29.6,35.6,34.7,34.6,30.7,27.2,26.6,26.1,29.6,31.3,36.6,33.4,33.9,39.1],"gem":[26.3,21.7,24.9,34.3,34.3,33.8,29.9,33.1,33.6,34.7,43.7,null,null,null,null,null],"icon":[29.4,27,30.3,33.2,32.1,35.6,32.2,32,null,null,null,null,null,null,null,null]}},"steeplechase":{"slug":"steeplechase","name":"Steeplechase","place":"Mazeppa","c1":"#ea492e","c2":"#0f2ccf","days":25,"proj":"2026-11-30","label":"climate","lo":"2026-11-17","hi":"2026-12-01","last":null,"first":"2026-11-12T05:00","nights":{"gfs":"2026-11-12T23:00","ecmwf":"2026-11-13T00:00","gem":"2026-11-06T20:00","icon":null},"agree":3,"cells":[{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[35.5,29.9,32.5,38.2,37.7,35,29.6,27.9,22.4,22.3,25.7,35.7,35.1,37.4,33,37.3],"ecmwf":[33.4,29.9,29.8,36.1,35,36.4,36.8,28.1,25.4,25.8,32.9,36.5,36.6,33.8,34.1,41.3],"gem":[32.4,21.2,22.1,31,31,31.1,25.5,31.9,28.9,37.8,47.4,null,null,null,null,null],"icon":[34.8,28.8,28.1,36.8,33.2,36.8,36.3,33.7,null,null,null,null,null,null,null,null]}}},"defaults":["trollhaugen","wild-mountain","andes-tower-hills"],"max":4,"threshold":28};
+  var KEY = "wcis.picks";
+  function load() {
+    try {
+      var v = JSON.parse(localStorage.getItem(KEY));
+      if (Array.isArray(v)) return v.filter(function (s) { return K.hills[s]; }).slice(0, K.max);
+    } catch (e) {}
+    return K.defaults.slice();
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (e) {} }
+  var picks = load();
+  var host = document.getElementById("picks");
+  function draw() { host.innerHTML = bSlots(K, picks); }
+  if (picks.join() !== K.defaults.join()) draw();
+
+  var pop = document.getElementById("night-pop"), open = null;
+  function hide() {
+    pop.hidden = true; open = null;
+    var s = document.querySelector(".cell.sel"); if (s) s.classList.remove("sel");
+  }
+  function show(btn) {
+    var p = btn.dataset.cell.split("|"), h = K.hills[p[1]], i = +p[2];
+    pop.innerHTML = "<b>" + bEsc(h.name) + " &middot; " + bDow(K.days[i]) + " " + bShort(K.days[i]) + "</b>" +
+      Object.keys(K.models).map(function (m) {
+        var v = h.daily[m][i];
+        return '<span><i>' + K.models[m] + '</i><em class="' + (v != null && v < K.threshold ? "cold" : "") + '">' +
+          (v == null ? "out of range" : v.toFixed(1) + "&deg;") + "</em></span>";
+      }).join("");
+    pop.hidden = false;
+    var r = btn.getBoundingClientRect(), w = pop.offsetWidth;
+    pop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + scrollX + "px";
+    pop.style.top = r.top + scrollY - pop.offsetHeight - 8 + "px";
+    btn.classList.add("sel");
+  }
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest("[data-cell]");
+    if (c) { var same = open === c; hide(); if (!same) { open = c; show(c); } return; }
+    hide();
+    var b = e.target.closest("button");
+    if (!b || !host.contains(b)) return;
+    if (b.dataset.rm != null) { picks.splice(+b.dataset.rm, 1); save(); draw(); }
+    else if (b.hasAttribute("data-reset")) { picks = K.defaults.slice(); save(); draw(); }
+  });
+  host.addEventListener("change", function (e) {
+    var s = e.target.closest("select[data-slot]");
+    if (!s || !s.value) return;
+    picks[+s.dataset.slot] = s.value; save(); draw();
+  });
+  addEventListener("scroll", hide, { passive: true });
+  addEventListener("resize", hide);
+})();
+</script>
 </body>
 </html>

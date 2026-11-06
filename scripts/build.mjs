@@ -3,7 +3,8 @@
 // repo root.
 
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
-import { daysUntil } from "./lib/days.mjs";
+import { daysUntil, todayIn } from "./lib/days.mjs";
+import { KIT, bHeader, bShort, bDow, bSlots, bStrip } from "./lib/board.mjs";
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));
 
@@ -238,14 +239,6 @@ function seasonNotesFor(slug) {
 }
 
 // --------------------------------------------------------------- forecast
-//
-// Three hills stand for the three climates the state's hills sit in. The
-// metro is the warm case, the North Shore the cold one, and Duluth between.
-const REGIONS = [
-  { slug: "hyland-hills", label: "Metro", note: "Bloomington" },
-  { slug: "spirit-mountain", label: "Duluth", note: "Spirit Mountain" },
-  { slug: "lutsen-mountains", label: "North Shore", note: "Lutsen" },
-];
 
 const F = n => `${n.toFixed(1)}&deg;`;
 const whenWindow = iso => {
@@ -257,10 +250,6 @@ const whenWindow = iso => {
   return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}, ${h12}${hour < 12 ? "am" : "pm"}`;
 };
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const whenDay = iso => {
-  const d = new Date(`${iso}:00`);
-  return `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMonth()]}`;
-};
 
 // The hour behind the big number: when the coldest wet bulb comes, and the
 // air temperature and humidity it is worked out from. Forecasts pulled before
@@ -273,80 +262,6 @@ const coldestRows = f => {
   if (c.humidity !== null) rows.push(`\n          <dt>Humidity then</dt><dd>${Math.round(c.humidity)}%</dd>`);
   return rows.join("");
 };
-
-function forecastSection() {
-  if (!fc) {
-    return { TITLE: "The next two weeks", ANSWER: "No forecast on file.",
-             NOTE: "Run <code>node scripts/forecast.mjs</code>.", CARDS: "" };
-  }
-  const made = new Date(fc.generatedAt);
-  const ageDays = Math.floor((new Date() - made) / 86400000);
-  const madeStr = `${made.getDate()} ${FULL[made.getMonth()]}`;
-  // A forecast is only a forecast while it is about the future. Past a couple
-  // of days it is a stale guess, and the page should say so rather than let
-  // the reader assume it is current.
-  const stale = ageDays >= 2 ? ` <b>${ageDays} days old. The refresh has not run.</b>` : "";
-
-  const known = Object.entries(fc.hills).filter(([, h]) => h.min !== null);
-  const withWindow = known.filter(([, h]) => h.hoursUnder > 0);
-
-  // The answer, which used to be set as the section's heading. At display size
-  // and with no label above it, it read as the page making a pronouncement
-  // rather than reporting a forecast, so it moved down into the text and a
-  // plain heading took its place.
-  let answer;
-  if (!known.length) {
-    answer = "The forecast did not load for any resort.";
-  } else if (!withWindow.length) {
-    const [slug, h] = known.reduce((a, b) => (b[1].min < a[1].min ? b : a));
-    answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
-      `The coldest any resort gets is <b>${esc(resorts[slug].name)}</b> at ${F(h.min)}.`;
-  } else {
-    // One sentence. A night of snowmaking is eight hours in a row, the same
-    // test as the climatology; colder hours than that are only a dip.
-    const nights = withWindow.filter(([, h]) => h.models?.gfs?.firstNight);
-    if (nights.length) {
-      const [slug, h] = nights.reduce((a, b) => (a[1].models.gfs.firstNight <= b[1].models.gfs.firstNight ? a : b));
-      answer = `${nights.length} of ${known.length} resorts get a night cold enough to make snow, ` +
-        `<b>${esc(resorts[slug].name)}</b> first on ${whenDay(h.models.gfs.firstNight)}.`;
-    } else {
-      const [slug, h] = withWindow.reduce((a, b) => (a[1].firstWindow <= b[1].firstWindow ? a : b));
-      answer = `<b>${esc(resorts[slug].name)}</b> dips under ${fc.threshold}&deg; on ${whenDay(h.firstWindow)}, ` +
-        `but nowhere stays cold long enough to make snow.`;
-    }
-  }
-
-  const cards = REGIONS.map(({ slug, label, note }) => {
-    const h = fc.hills[slug];
-    if (!h || h.min === null) {
-      return `      <div class="card"><h3>${label}</h3><p class="big">&mdash;</p>
-        <p>Forecast unavailable for ${esc(note)}.</p></div>`;
-    }
-    return `      <div class="card">
-        <h3>${label}</h3>
-        <p class="big">${F(h.min)}</p>
-        <p>Coldest wet bulb the ${fc.horizonDays}-day forecast reaches at ${esc(note)}.</p>
-        <dl>${coldestRows(h)}
-          <dt>Hours under ${fc.threshold}&deg;</dt><dd>${h.hoursUnder}</dd>
-          <dt>First window</dt><dd>${h.firstWindow ? whenWindow(h.firstWindow) : "&mdash;"}</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>${hours[slug]?.normal ?? "&mdash;"}</dd>
-        </dl>
-      </div>`;
-  }).join("\n");
-
-  return {
-    // Rounded to whole weeks on purpose: a heading reads better in the unit
-    // people actually think in, and the exact horizon appears twice directly
-    // beneath it, in the answer and again in the note.
-    TITLE: `The next ${WORDS[Math.round(fc.horizonDays / 7)] ?? Math.round(fc.horizonDays / 7)} ` +
-           `${Math.round(fc.horizonDays / 7) === 1 ? "week" : "weeks"}`,
-    ANSWER: answer,
-    NOTE: `Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, ` +
-      `updated twice a day and last pulled ${madeStr}. ` +
-      `Guns can run under ${fc.threshold}&deg;.${stale}`,
-    CARDS: cards,
-  };
-}
 
 // ------------------------------------------------------------ the models
 //
@@ -440,7 +355,6 @@ ${modelGrid(h)}
 // Small numbers read better as words in prose. Declared up here because both
 // the forecast heading and the hero copy want them, and they sit 400 lines apart.
 const WORDS = ["", "one", "two", "three", "four", "five", "six"];
-const TIMES = ["", "once", "twice", "three times", "four times", "five times"];
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const FULL = ["January","February","March","April","May","June","July","August",
@@ -467,113 +381,23 @@ function observed(slug) {
   };
 }
 
+// "A and B", "A, B and C".
+const listOf = xs => xs.length < 2 ? (xs[0] ?? "")
+  : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
+
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 // Whole calendar days in the resorts' own zone, so the countdown holds still
 // through a reader's day and ticks at local midnight. See lib/days.mjs.
 
-// ------------------------------------------------------------------- hero
-//
-// A single "75 days, probably" hid how wide the spread actually is: Wild
-// Mountain has opened as early as 18 October and as late as 20 November. The
-// hero gives the range instead, with this fall's weather lifting either end.
-
-// Past the date the countdown is meaningless, and a build in December must not
-// print "-30 days". The scenario says it has come and gone instead.
-function countdown(days) {
-  if (days > 0) return `${days}<span class="scen-unit">days</span>`;
-  if (days === 0) return `<span class="scen-word">today</span>`;
-  return `<span class="scen-word">passed</span>`;
-}
-
-// The hero answers the site's question for the first lift anywhere: a range,
-// because a single date has never been honest here. Its ends are the soonest
-// any hill could open and the latest the first one is likely to, both from
-// project.mjs, which sets them from this fall's weather and each hill's record.
-function heroRange(slug) {
-  const ranged = Object.values(projection).filter(p => p.range);
-  if (!ranged.length) {
-    return `<div class="scens">
-      <div class="scen scen-real">
-        <span class="scen-num">${countdown(daysUntil(projection[slug].date))}</span>
-        <span class="scen-date">${pretty(projection[slug].date)}</span>
-        <span class="scen-lede">projected first lift</span>
-      </div>
-    </div>`;
-  }
-  const lo = ranged.map(p => p.range.lo).sort()[0];
-  const hi = ranged.map(p => p.range.hi).sort()[0];
-  const a = daysUntil(lo), b = daysUntil(hi);
-  const num = a === b ? countdown(a) : `${a}&ndash;${b}<span class="scen-unit">days</span>`;
-  return `<div class="scens">
-      <div class="scen scen-real">
-        <span class="scen-num">${num}</span>
-        <span class="scen-date">${pretty(lo)}${lo === hi ? "" : ` &ndash; ${pretty(hi)}`}</span>
-        <span class="scen-lede">first lift, from this fall's weather and the record</span>
-      </div>
-    </div>`;
-}
-
-const GROUPS = [["twin-cities", "Twin Cities"], ["greater-minnesota", "Greater Minnesota"]];
-
 // The hill's own two colours, split across one dot. Enough to tell sixteen rows
 // apart without putting a logo palette into the type, where several of these
 // fail contrast. Hills with only a primary get a solid dot.
-// How soon the hill opens, as the three marks every skier already reads. The
-// cut points are the natural gaps in the projection: six hills before the last
-// week of November, six inside it, four in December. Purely presentational —
-// themes that do not draw markers ignore the attribute.
-const tierOf = iso => {
-  const [, m, d] = iso.split("-").map(Number);
-  if (m <= 11 && d <= 24) return "green";
-  if (m <= 11) return "blue";
-  return "black";
-};
-
 function pip(r, tier) {
   const a = r.colors?.primary;
   if (!a) return "";
   const b = r.colors?.secondary ?? a;
   const t = tier ? ` data-tier="${tier}"` : "";
   return `<span class="pip"${t} style="--c1:${esc(a)};--c2:${esc(b)}" aria-hidden="true"></span>`;
-}
-
-function tableRows() {
-  const out = [];
-  for (const [region, title] of GROUPS) {
-    out.push(`          <tr class="grp"><td colspan="7">${title}</td></tr>`);
-    const slugs = Object.keys(resorts)
-      .filter(s => resorts[s].region === region)
-      .sort((a, b) => projection[a].date.localeCompare(projection[b].date));
-
-    for (const [i, slug] of slugs.entries()) {
-      const r = resorts[slug], p = projection[slug], h = hours[slug], o = observed(slug);
-      const cls = region === GROUPS[0][0] && i === 0 ? ' class="first"' : "";
-      const typical = o.typical
-        ? `${pretty(o.typical)}<span class="rng">${pretty(o.earliest)} &ndash; ${pretty(o.latest)}</span>`
-        : `&mdash;<span class="rng">${o.n === 1 ? "one season only" : "no record yet"}</span>`;
-      const hrs = h
-        ? `${h.normal}<span class="rng">${h.lean}&ndash;${h.fat}</span>`
-        : `&mdash;`;
-
-      // data-label carries the column header into the stacked mobile layout,
-      // where the real <thead> is hidden.
-      out.push(
-        `          <tr${cls}>`,
-        `            <td class="hill">${pip(r, tierOf(p.date))}` +
-          `<a href="resorts/${slug}.html">${esc(r.name)}</a></td>`,
-        `            <td class="where" data-label="Where">${esc(r.place)}</td>`,
-        `            <td data-label="Projected">${pretty(p.date)}<span class="rng">${p.label}</span></td>`,
-        `            <td class="num days" data-label="Days">${daysUntil(p.date)}</td>`,
-        `            <td class="num" data-label="Snowmaking hrs">${hrs}</td>`,
-        `            <td data-label="Typical opening">${typical}</td>`,
-        `            <td class="go-cell"><a class="btn" href="resorts/${slug}.html"` +
-          ` aria-label="See ${esc(r.name)}'s record">See record` +
-          `<span class="btn-arrow" aria-hidden="true">&rarr;</span></a></td>`,
-        `          </tr>`,
-      );
-    }
-  }
-  return out.join("\n");
 }
 
 // The season table used to print "single" under every date, "local" in every
@@ -707,8 +531,6 @@ const lastUpdated = (() => {
 const copyright = "&copy; " + new Intl.DateTimeFormat("en-CA", {
   timeZone: CT, year: "numeric",
 }).format(now) + " DP Labs, LLC";
-
-const fcSection = forecastSection();
 
 // Regions are states, because that is how people group these hills. Minnesota
 // is the only one with a record; the rest get a page that says so and asks for
@@ -992,20 +814,6 @@ ${figs}
 `;
 }
 
-// The homepage headline says Wild Mountain opens first; this is Wild Mountain
-// opening. It follows whichever photo that hill has marked as its hero, so the
-// two cannot drift apart.
-const INDEX_HERO = "wild-mountain";
-
-function indexHeroShot() {
-  const ph = (resorts[INDEX_HERO].photos ?? []).find(p => p.hero);
-  if (!ph) return "";
-  return `      <figure class="hero-shot">
-        ${SHOT(ph.file, "", ph.alt, "(max-width:820px) calc(100vw - 48px), 300px", "", true)}
-        <figcaption>${esc(resorts[INDEX_HERO].name)}&rsquo;s ${esc(ph.caption[0].toLowerCase() + ph.caption.slice(1))}</figcaption>
-      </figure>`;
-}
-
 // ------------------------------------------------------------ who made this
 //
 // The about page was reachable only from the footer, which is where things go
@@ -1063,116 +871,6 @@ function helloCard() {
           </div>
         </div>
       </aside>`;
-}
-
-// ------------------------------------------------------- who opened first
-//
-// This was two hardcoded sentences asserting a fact the data already knew, and
-// it had drifted twice over. It counted a dead heat with Andes Tower Hills in
-// 2022-23 as a win, and it counted 2024-25, where Wild Mountain's first lift is
-// bracketed to a seventeen-day window running to 2 December — Andes opened on
-// 23 November inside it, so nobody can say who was first.
-//
-// A date here is an interval, not a point. `exact` is a single day; `bracket`
-// carries a range, and a null bound is unbounded. A hill could have been first
-// if its earliest possible day is not after the earliest last-possible day of
-// any other. One candidate is a winner, several identical exact ones are a tie,
-// anything else is a winter nobody gets to claim.
-
-// A closed bracket is real uncertainty: Wild Mountain's 2024-25 first lift sits
-// somewhere in a seventeen-day window, and nobody can rank inside it.
-//
-// A one-sided bracket is not the same thing. "No closed capture before the first
-// open one" means the archive never looked earlier — absence of evidence, not
-// evidence of an earlier opening. Treating it as unbounded let an archive
-// sampling gap veto Trollhaugen's own post announcing opening weekend on
-// 19 November 2021, which is exactly backwards. It ranks as its recorded date.
-function interval(fl) {
-  if (!fl?.date) return null;
-  const r = fl.range;
-  if (fl.precision === "exact" || !r) return [fl.date, fl.date];
-  if (r[0] == null || r[1] == null) return [fl.date, fl.date];
-  return [r[0], r[1]];
-}
-
-function leadersBySeason() {
-  const all = new Set();
-  for (const h of Object.values(seasons)) for (const s of Object.keys(h)) all.add(s);
-  const out = [];
-  for (const season of [...all].sort()) {
-    const rows = [];
-    for (const [slug, hs] of Object.entries(seasons)) {
-      const iv = interval(hs[season]?.firstLift);
-      if (iv && resorts[slug]) rows.push({ slug, lo: iv[0], hi: iv[1], exact: iv[0] === iv[1] });
-    }
-    if (!rows.length) continue;
-    const earliestHi = rows.reduce((m, r) => (r.hi < m ? r.hi : m), rows[0].hi);
-    const could = rows.filter(r => r.lo <= earliestHi);
-    const tied = could.length > 1 &&
-                 could.every(r => r.exact && r.lo === could[0].lo);
-    const settled = could.length === 1 || tied;
-    // Everyone tied for the next place, not whichever one sorted first: Wild
-    // Mountain and Trollhaugen both took their first lift on 10 November 2025,
-    // and naming one of them was an arbitrary choice presented as a fact.
-    const rest = rows.filter(r => !could.includes(r)).sort((x, y) => x.lo.localeCompare(y.lo));
-    const nextLo = rest[0]?.lo ?? null;
-    out.push({ season, settled, leaders: settled ? could.map(r => r.slug) : [],
-               date: could[0].lo,
-               next: settled && nextLo ? rest.filter(r => r.lo === nextLo) : [] });
-  }
-  return out;
-}
-
-// "A and B", "A, B and C" — the runner-up is often a tie.
-const listOf = xs => xs.length < 2 ? (xs[0] ?? "")
-  : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
-
-const dayGap = (a, b) =>
-  Math.round((new Date(`${b}T00:00:00`) - new Date(`${a}T00:00:00`)) / 86400000);
-
-function heroCopy() {
-  const rows = leadersBySeason();
-  if (!rows.length) return { SAY: "", SUB: "" };
-  const bold = slug => `<b>${esc(resorts[slug].name)}</b>`;
-  const last = rows.at(-1);
-
-  let SAY;
-  if (!last.settled) {
-    SAY = "Last season's dates are too loose to say who opened first.";
-  } else if (last.leaders.length > 1) {
-    SAY = `${listOf(last.leaders.map(bold))} opened first last season, to the day.`;
-  } else if (last.next.length) {
-    const n = dayGap(last.date, last.next[0].lo);
-    SAY = `${bold(last.leaders[0])} opened first last season, ` +
-          `${n === 1 ? "a day" : `${n} days`} ahead of ${listOf(last.next.map(r => bold(r.slug)))}.`;
-  } else {
-    SAY = `${bold(last.leaders[0])} opened first last season.`;
-  }
-
-  const tally = new Map();
-  for (const r of rows) for (const slug of r.leaders) tally.set(slug, (tally.get(slug) ?? 0) + 1);
-  const loose = rows.filter(r => !r.settled).length;
-
-  // Group by how many each has won, so a hill with one is named alongside the
-  // hills with two rather than dropped for not topping the table.
-  const byCount = new Map();
-  for (const [slug, n] of tally) {
-    if (!byCount.has(n)) byCount.set(n, []);
-    byCount.get(n).push(slug);
-  }
-  const groups = [...byCount].sort((a, b) => b[0] - a[0]).map(([n, slugs]) =>
-    `${listOf(slugs.map(bold))} ${TIMES[n] ?? n + " times"}${slugs.length > 1 ? " each" : ""}`);
-
-  let SUB = "";
-  if (groups.length) {
-    SUB = `First open has gone to ${listOf(groups)}`;
-    SUB += loose
-      ? `; ${WORDS[loose] ?? loose} of the ${WORDS[rows.length] ?? rows.length} winters on ` +
-        `record ${loose === 1 ? "is" : "are"} too loosely dated to call. `
-      : `. `;
-  }
-  SUB += "No resort has announced a date for the coming winter.";
-  return { SAY, SUB };
 }
 
 // ------------------------------------------------- regions without hills
@@ -1335,30 +1033,177 @@ ${cards}
 }
 
 
-// One sentence when this fall's weather has moved the leading projection.
-function weatherNote(slug) {
-  const p = projection[slug];
-  if (p.label !== "weather") return "";
-  return ` No snowmaking weather has reached <b>${esc(resorts[slug].name)}</b> yet, so its ` +
-    `projection moved from ${pretty(p.usual)} to ${pretty(p.date)}.`;
+// ------------------------------------------------------------------ board
+//
+// The homepage in November: a few hills the reader cares about, then every
+// hill by area with the next sixteen nights laid out, shaded by how many of the
+// four models put that night under the threshold.
+//
+// `area` in resorts.json is the board's grouping. It is finer than `region`,
+// which only splits the metro from everywhere else.
+const AREAS = [
+  { id: "metro",   name: "Twin Cities" },
+  { id: "north",   name: "Duluth & the North" },
+  { id: "central", name: "Central & West" },
+  { id: "south",   name: "Southern" },
+];
+const DEFAULT_PICKS = ["trollhaugen", "wild-mountain", "andes-tower-hills"];
+const MAX_PICKS = 4;
+
+// The season that just ended, by the same September cut the record uses.
+const lastSeason = (() => {
+  const [y, m] = todayIn().split("-").map(Number);
+  const start = m >= 9 ? y - 1 : y - 2;
+  return `${start}-${String((start + 1) % 100).padStart(2, "0")}`;
+})();
+
+function boardHill(slug) {
+  const r = resorts[slug], p = projection[slug], f = fc?.hills?.[slug];
+  const days = fc?.days ?? [];
+  const threshold = fc?.threshold ?? 28;
+  const cells = days.map((_, i) => {
+    const vals = MODEL_KEYS.map(k => f?.models?.[k]?.daily?.[i]).filter(v => v != null);
+    return { n: vals.length, under: vals.filter(v => v < threshold).length };
+  });
+  const nights = Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.firstNight ?? null]));
+  return {
+    slug, name: r.name, place: r.place,
+    c1: r.colors?.primary ?? "#7B848A", c2: r.colors?.secondary ?? r.colors?.primary ?? "#7B848A",
+    days: daysUntil(p.date), proj: p.date, label: p.label,
+    lo: p.range?.lo ?? p.date, hi: p.range?.hi ?? p.date,
+    last: seasons[slug]?.[lastSeason]?.firstLift?.date ?? null,
+    first: f?.firstWindow ?? null,
+    nights, agree: Object.values(nights).filter(Boolean).length,
+    cells,
+    daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
+  };
 }
 
+const areaHills = id => Object.keys(resorts).filter(s => resorts[s].area === id)
+  .sort((a, b) => projection[a].date.localeCompare(projection[b].date) || resorts[a].name.localeCompare(resorts[b].name));
+
+const unplaced = Object.keys(resorts).filter(s => !AREAS.some(a => a.id === resorts[s].area));
+if (unplaced.length) throw new Error(`no board area for: ${unplaced.join(", ")}`);
+
+const BOARD = {
+  days: fc?.days ?? [],
+  models: Object.fromEntries(MODEL_KEYS.map(k => [k, fc.models[k].name])),
+  areas: AREAS.map(a => ({ ...a, hills: areaHills(a.id) })),
+  hills: Object.fromEntries(Object.keys(resorts).map(s => [s, boardHill(s)])),
+  defaults: DEFAULT_PICKS, max: MAX_PICKS, threshold: fc?.threshold ?? 28,
+};
+
+// The first night at least two models put any hill in the area under the
+// threshold. Two, so one model's lone cold snap does not make the headline.
+function areaNight(a) {
+  for (let i = 0; i < BOARD.days.length; i++) {
+    const hs = a.hills.filter(s => BOARD.hills[s].cells[i].under >= 2);
+    if (hs.length) return { day: BOARD.days[i], n: hs.length };
+  }
+  return null;
+}
+
+function boardSection() {
+  if (!fc) return `<p class="sec-note">No forecast on file. Run <code>node scripts/forecast.mjs</code>.</p>`;
+  return BOARD.areas.map(a => {
+    const night = areaNight(a);
+    const first = BOARD.hills[a.hills[0]];
+    const rows = a.hills.map(s => {
+      const h = BOARD.hills[s];
+      const when = h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
+      return `      <div class="brow">
+        <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
+        ${bStrip(BOARD, h, "row")}
+        <div class="brow-when">${when}<span>${bShort(h.proj)}${h.label === "weather" ? ' <span class="tag">weather</span>' : ""}</span></div>
+      </div>`;
+    }).join("\n");
+    return `    <div class="area">
+      <div class="area-head"><h3>${esc(a.name)}</h3>
+        <p>${night ? `Next night under ${fc.threshold}&deg; <b class="nb">${bDow(night.day)} ${bShort(night.day)}</b>, ${night.n} of ${a.hills.length} hills`
+          : `Nothing under ${fc.threshold}&deg; in ${BOARD.days.length} days`} &middot; first lift <b>${esc(first.name)}</b>, ${first.days > 0 ? `${first.days} days` : "open"}</p></div>
+      <div class="brow brow-hd" aria-hidden="true"><div></div>${bHeader(BOARD)}<div></div></div>
+${rows}
+    </div>`;
+  }).join("\n");
+}
+
+// Pulled time and staleness, said once under the board.
+function boardNote() {
+  if (!fc) return "";
+  const made = new Date(fc.generatedAt);
+  const ageDays = Math.floor((new Date() - made) / 86400000);
+  const stale = ageDays >= 2 ? ` <b>${ageDays} days old. The refresh has not run.</b>` : "";
+  return `Wet-bulb forecasts from <a href="https://open-meteo.com/">Open-Meteo</a> through ` +
+    `${MODEL_KEYS.map(k => fc.models[k].name).join(", ")}, updated twice a day and last pulled ` +
+    `${made.getDate()} ${FULL[made.getMonth()]}. Each square is one night, shaded by how many models ` +
+    `dip under ${fc.threshold}&deg;. Tap one for each model's low.${stale}`;
+}
+
+// The browser half: storage, adding and removing, and the per-night popover.
+const boardScript = `<script>
+${KIT}
+(function () {
+  var K = ${JSON.stringify(BOARD).replace(/</g, "\\u003c")};
+  var KEY = "wcis.picks";
+  function load() {
+    try {
+      var v = JSON.parse(localStorage.getItem(KEY));
+      if (Array.isArray(v)) return v.filter(function (s) { return K.hills[s]; }).slice(0, K.max);
+    } catch (e) {}
+    return K.defaults.slice();
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (e) {} }
+  var picks = load();
+  var host = document.getElementById("picks");
+  function draw() { host.innerHTML = bSlots(K, picks); }
+  if (picks.join() !== K.defaults.join()) draw();
+
+  var pop = document.getElementById("night-pop"), open = null;
+  function hide() {
+    pop.hidden = true; open = null;
+    var s = document.querySelector(".cell.sel"); if (s) s.classList.remove("sel");
+  }
+  function show(btn) {
+    var p = btn.dataset.cell.split("|"), h = K.hills[p[1]], i = +p[2];
+    pop.innerHTML = "<b>" + bEsc(h.name) + " &middot; " + bDow(K.days[i]) + " " + bShort(K.days[i]) + "</b>" +
+      Object.keys(K.models).map(function (m) {
+        var v = h.daily[m][i];
+        return '<span><i>' + K.models[m] + '</i><em class="' + (v != null && v < K.threshold ? "cold" : "") + '">' +
+          (v == null ? "out of range" : v.toFixed(1) + "&deg;") + "</em></span>";
+      }).join("");
+    pop.hidden = false;
+    var r = btn.getBoundingClientRect(), w = pop.offsetWidth;
+    pop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + scrollX + "px";
+    pop.style.top = r.top + scrollY - pop.offsetHeight - 8 + "px";
+    btn.classList.add("sel");
+  }
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest("[data-cell]");
+    if (c) { var same = open === c; hide(); if (!same) { open = c; show(c); } return; }
+    hide();
+    var b = e.target.closest("button");
+    if (!b || !host.contains(b)) return;
+    if (b.dataset.rm != null) { picks.splice(+b.dataset.rm, 1); save(); draw(); }
+    else if (b.hasAttribute("data-reset")) { picks = K.defaults.slice(); save(); draw(); }
+  });
+  host.addEventListener("change", function (e) {
+    var s = e.target.closest("select[data-slot]");
+    if (!s || !s.value) return;
+    picks[+s.dataset.slot] = s.value; save(); draw();
+  });
+  addEventListener("scroll", hide, { passive: true });
+  addEventListener("resize", hide);
+})();
+</script>`;
+
 // Homepage
-const hero = heroCopy();
-const leader = Object.keys(projection).sort((a, b) => projection[a].date.localeCompare(projection[b].date))[0];
-const lead = observed(leader);
 
 writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", "utf8"), {
-  TABLE: tableRows(),
   DATELINE: dateline,
-  FORECAST_TITLE: fcSection.TITLE,
-  FORECAST_ANSWER: fcSection.ANSWER,
-  FORECAST_NOTE: fcSection.NOTE,
-  FORECAST_CARDS: fcSection.CARDS,
-  HERO_SCENARIOS: heroRange(leader),
-  HERO_SEASONS: String(lead.n),
-  HERO_HILLS: String(Object.keys(resorts).length),
-  HERO_HOURS: String(hours[leader]?.normal ?? "—"),
+  PICKS: bSlots(BOARD, DEFAULT_PICKS),
+  BOARD: boardSection(),
+  BOARD_NOTE: boardNote(),
+  BOARD_SCRIPT: boardScript,
   FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
   COPYRIGHT: copyright,
@@ -1368,9 +1213,6 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
     curve, window: WINDOW, pins: chartPins(), label: curve.label, years: curve.years,
   }),
   HELLO: helloCard(),
-  HERO_SAY: hero.SAY,
-  HERO_SUB: hero.SUB + weatherNote(leader),
-  HERO_SHOT: indexHeroShot(),
 })));
 
 // Resort pages

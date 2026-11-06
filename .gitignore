@@ -21,3 +21,4 @@ data/powder.json
 
 # Staged for the Pages deploy in CI.
 _site/
+.superpowers/
