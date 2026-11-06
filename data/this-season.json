@@ -1,11 +1,11 @@
 {
   "season": 2026,
-  "through": "2026-11-05T23:00",
+  "through": "2026-11-06T08:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
       "firstNight": null,
-      "hours": 0
+      "hours": 1
     },
     "trollhaugen": {
       "firstNight": null,
@@ -29,35 +29,35 @@
     },
     "elm-creek": {
       "firstNight": null,
-      "hours": 0
+      "hours": 1
     },
     "lutsen-mountains": {
-      "firstNight": null,
-      "hours": 8
+      "firstNight": "2026-11-06T00:00",
+      "hours": 16
     },
     "giants-ridge": {
       "firstNight": "2026-10-29T23:00",
-      "hours": 16
+      "hours": 26
     },
     "spirit-mountain": {
-      "firstNight": null,
-      "hours": 1
+      "firstNight": "2026-11-06T00:00",
+      "hours": 9
     },
     "powder-ridge": {
       "firstNight": null,
-      "hours": 0
+      "hours": 5
     },
     "mount-kato": {
       "firstNight": null,
       "hours": 0
     },
     "buena-vista": {
-      "firstNight": null,
-      "hours": 6
+      "firstNight": "2026-11-05T22:00",
+      "hours": 16
     },
     "detroit-mountain": {
       "firstNight": null,
-      "hours": 3
+      "hours": 6
     },
     "andes-tower-hills": {
       "firstNight": null,
@@ -68,12 +68,12 @@
       "hours": 0
     },
     "mount-ski-gull": {
-      "firstNight": null,
-      "hours": 0
+      "firstNight": "2026-11-06T00:00",
+      "hours": 8
     },
     "chester-bowl": {
       "firstNight": null,
-      "hours": 0
+      "hours": 3
     },
     "steeplechase": {
       "firstNight": null,
