@@ -145,6 +145,14 @@
       "hi": "2026-12-06"
     }
   },
+  "chester-bowl": {
+    "date": "2026-12-12",
+    "label": "target",
+    "range": {
+      "lo": "2026-12-12",
+      "hi": "2026-12-12"
+    }
+  },
   "coffee-mill": {
     "date": "2026-12-13",
     "label": "model",
@@ -156,15 +164,6 @@
   "elm-creek": {
     "date": "2026-12-16",
     "label": "model",
-    "range": {
-      "lo": "2026-12-10",
-      "hi": "2026-12-19"
-    }
-  },
-  "chester-bowl": {
-    "date": "2026-12-16",
-    "label": "peer",
-    "like": "elm-creek",
     "range": {
       "lo": "2026-12-10",
       "hi": "2026-12-19"

@@ -108,7 +108,7 @@ put out for the current season, such as Lutsen's 26 November; these win over
 the hill's own record, are labelled `target`, and skip the weather check, whose
 gap would otherwise hold a hill to how long it has taken after the cold in the
 past. And a hill with no record can carry `projectLike` in `resorts.json`
-(Chester Bowl projects like Elm Creek): it takes that hill's record and gaps
+(Chester Bowl projects like Elm Creek until a date of its own is stated): it takes that hill's record and gaps
 instead of the climate fit, and is labelled `peer`.
 
 Then this fall's weather gets a say. Every one of the 60 openings on record came
