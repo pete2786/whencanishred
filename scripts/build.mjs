@@ -1277,6 +1277,26 @@ writeFileSync("about.html", fill(readFileSync("templates/about.html", "utf8"), {
 }));
 
 const resortTpl = readFileSync("templates/resort.html", "utf8");
+
+// The hill's own posted opening day for this season, when it has one and the
+// projection is using it: the date, the hill's words when we have them
+// verbatim, and where it was posted.
+const WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+function postedDay(slug) {
+  const st = stated[slug], p = projection[slug];
+  if (!st || p.label !== "target" || p.date !== st.date) return "";
+  const [y, m, d] = st.date.split("-").map(Number);
+  const day = `${WEEKDAYS[new Date(Date.UTC(y, m - 1, d)).getUTCDay()]}, ${FULL[m - 1]} ${d}`;
+  const n = daysUntil(st.date);
+  const when = n > 1 ? `${n} days away` : n === 1 ? "tomorrow" : n === 0 ? "today" : "";
+  const host = new URL(st.url).hostname.replace(/^www\./, "");
+  return `    <div class="posted-day">
+      <p class="posted-k">Posted opening day</p>
+      <p class="posted-date"><b>${day}</b>${when ? `<span>${when}</span>` : ""}</p>
+      ${st.quote ? `<p class="posted-q">&ldquo;${esc(st.quote)}&rdquo;</p>` : ""}
+      <a class="posted-src" href="${esc(st.url)}" target="_blank" rel="noopener">Posted on ${esc(host)} &rarr;</a>
+    </div>`;
+}
 for (const [slug, r] of Object.entries(resorts)) {
   const o = observed(slug);
   writeFileSync(`resorts/${slug}.html`, markHills(fill(resortTpl, {
@@ -1297,6 +1317,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     HILL_INK: hillInkCss(),
     PHOTOS: photoSection(slug),
     HERO_SHOT: heroShot(slug),
+    POSTED: postedDay(slug),
   })));
 }
 

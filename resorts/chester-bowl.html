@@ -466,6 +466,16 @@ footer::before {
   }
   .fc-answer { font-size:15.5px; line-height:1.55; color:var(--ink); max-width:62ch; margin:12px 0 26px; }
   .fc-note { margin:16px 0 0; }
+
+/* ---- posted opening day ----------------------------------------------- */
+.posted-day { margin:22px 0 0; padding:14px 16px 14px 18px; border:2px solid var(--mark); border-left-width:6px; background:var(--surface); max-width:560px; }
+.posted-k { margin:0; font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--mark); }
+.posted-date { margin:4px 0 0; display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; }
+.posted-date b { font-family:Anton,"Archivo Narrow",Impact,sans-serif; font-weight:400; font-size:30px; line-height:1.1; text-transform:uppercase; letter-spacing:.01em; color:var(--ink); }
+.posted-date span { font-size:13px; color:var(--ink-2); }
+.posted-q { margin:6px 0 0; font-size:13.5px; color:var(--ink-2); font-style:italic; }
+.posted-src { display:inline-block; margin-top:8px; font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase; color:var(--mark); text-decoration:none; }
+.posted-src:hover { text-decoration:underline; }
 </style>
 <style>
   :root { --accent:#44ae2c; --accent-soft:#21351d; --brand-ink:#44ae2c; --brand-ink-2:#005df8; --brand-raw-1:#41a62a; --brand-raw-2:#003388; }
@@ -520,7 +530,12 @@ footer::before {
     <p class="hero-sub">Duluth, MN &middot;
       <a href="https://chesterbowl.org/" target="_blank" rel="noopener">Official site</a>
     </p>
-
+    <div class="posted-day">
+      <p class="posted-k">Posted opening day</p>
+      <p class="posted-date"><b>Saturday, December 12</b><span>37 days away</span></p>
+      <p class="posted-q">&ldquo;Tentative Opening Day (weather permitting): December 12&rdquo;</p>
+      <a class="posted-src" href="https://www.chesterbowl.org/ski-and-snowboard/season-pass-purchases/" target="_blank" rel="noopener">Posted on chesterbowl.org &rarr;</a>
+    </div>
     <dl class="stats">
       <div><dt>Typical first day</dt><dd class="lede">&mdash;</dd></div>
       <div><dt>Earliest observed</dt><dd>&mdash;</dd></div>
@@ -577,7 +592,7 @@ footer::before {
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-06T03:59:05.361Z">5 November 2026, 21:59 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-06T04:04:22.471Z">5 November 2026, 22:04 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
     <span><a href="../about.html">About this site</a></span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
