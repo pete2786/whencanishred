@@ -32,14 +32,6 @@
       "hi": "2026-11-23"
     }
   },
-  "buena-vista": {
-    "date": "2026-11-20",
-    "label": "climate",
-    "range": {
-      "lo": "2026-11-17",
-      "hi": "2026-12-01"
-    }
-  },
   "powder-ridge": {
     "date": "2026-11-21",
     "label": "target",
@@ -48,19 +40,16 @@
       "hi": "2026-11-21"
     }
   },
-  "detroit-mountain": {
-    "date": "2026-11-24",
-    "label": "weather",
-    "usual": "2026-11-22",
-    "night": "2026-11-13",
-    "gap": 11,
+  "buena-vista": {
+    "date": "2026-11-22",
+    "label": "climate",
     "range": {
-      "lo": "2026-11-18",
+      "lo": "2026-11-17",
       "hi": "2026-12-01"
     }
   },
   "mount-ski-gull": {
-    "date": "2026-11-24",
+    "date": "2026-11-25",
     "label": "climate",
     "range": {
       "lo": "2026-11-17",
@@ -76,6 +65,14 @@
     }
   },
   "giants-ridge": {
+    "date": "2026-11-27",
+    "label": "target",
+    "range": {
+      "lo": "2026-11-27",
+      "hi": "2026-11-27"
+    }
+  },
+  "detroit-mountain": {
     "date": "2026-11-27",
     "label": "target",
     "range": {
