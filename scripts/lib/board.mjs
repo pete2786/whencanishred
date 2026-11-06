@@ -78,9 +78,7 @@ export function bSlots(K, picks) {
   const isDefault = picks.join() === K.defaults.join();
   return '<div class="slots">' + picks.map((s, i) => bCard(K, picks, s, i)).join("") +
     (picks.length < K.max ? bEmpty(K, picks, picks.length) : "") + "</div>" +
-    '<p class="slot-foot">' + (isDefault
-      ? "Remove any of these and add your own. This browser remembers them."
-      : 'Your hills, saved in this browser. <button type="button" class="linkish" data-reset>Back to the defaults</button>') + "</p>";
+    (isDefault ? "" : '<p class="slot-foot"><button type="button" class="linkish" data-reset>Back to the defaults</button></p>');
 }
 
 // Everything above, as source for the page.
