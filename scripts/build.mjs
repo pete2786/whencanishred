@@ -569,6 +569,22 @@ function picker(current, root) {
          `      <nav class="picker-menu">\n${items}\n      </nav>\n    </details>`;
 }
 
+// The image a shared link previews with. Scrapers need an absolute URL and
+// crop anything far from 1.91:1, so each is a 1200x630 cut in photos/og/ of
+// the hill's hero photo. Hills without one, and the region pages, use Wild
+// Mountain's preseason opening, the photo the homepage used to lead with.
+const SITE = `https://${readFileSync("CNAME", "utf8").trim()}/`;
+const OG_DEFAULT = "wild-mountain";
+function ogImage(slug = OG_DEFAULT) {
+  const own = existsSync(`photos/og/${slug}.jpg`) ? slug : OG_DEFAULT;
+  const ph = (resorts[own].photos ?? []).find(p => p.hero);
+  return `<meta property="og:image" content="${SITE}photos/og/${own}.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(ph?.alt ?? resorts[own].name)}">
+<meta name="twitter:card" content="summary_large_image">`;
+}
+
 const fill = (tpl, map) =>
   Object.entries(map).reduce((s, [k, v]) => s.replaceAll(`<!--{{${k}}}-->`, v), tpl);
 
@@ -1150,6 +1166,7 @@ const NIGHT_LEGEND = `<div class="night-legend" aria-hidden="true">
 writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", "utf8"), {
   DATELINE: dateline,
   PICKS: bSlots(BOARD, DEFAULT_PICKS),
+  OG_IMAGE: ogImage(),
   BOARD: boardSection(),
   BOARD_NOTE: boardNote(),
   BOARD_SCRIPT: boardScript(BOARD),
@@ -1208,6 +1225,7 @@ ${placeCards(clim.places, K)}
     PICKER: picker(region.id, ""),
     REGION: esc(region.name),
     HERO,
+    OG_IMAGE: ogImage(),
     REGION_CLIMATE: clim.CLIMATE,
     ROSTER: roster(region.id),
     CTA: region.cta ?? `Know a ${region.name} resort's dates, or want to take on the whole ` +
@@ -1282,6 +1300,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     PHOTOS: photoSection(slug),
     HERO_SHOT: heroShot(slug),
     POSTED: postedDay(slug),
+    OG_IMAGE: ogImage(slug),
   })));
 }
 
