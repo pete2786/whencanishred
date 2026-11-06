@@ -632,6 +632,9 @@ footer::before {
 :root { --s0:#1D2023; --s1:#123B43; --s2:#1F7E8E; --s3:#37D2E8; }
 .hero { padding:18px 0 0; }
 .slots { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.slots-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.slots-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.pcard-place { --c1:var(--mark); --c2:var(--mark); }
 @media (max-width:960px) { .slots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .pcard {
   position:relative; display:flex; flex-direction:column; min-width:0;
@@ -747,11 +750,7 @@ a.posted:hover { border-bottom-style:solid; }
 
   <section class="sec">
     <h2 class="sec-title">The next 2+ weeks</h2>
-    <div class="night-legend" aria-hidden="true">
-      <span><i class="cell s0"></i>none</span><span><i class="cell s1"></i>1 model</span>
-      <span><i class="cell s2"></i>2</span><span><i class="cell s3"></i>3 or 4 under 28&deg;</span>
-      <span><i class="cell na"></i>past every model</span>
-    </div>
+    <!--{{NIGHT_LEGEND}}-->
 <!--{{BOARD}}-->
     <p class="sec-note fc-note"><!--{{BOARD_NOTE}}--></p>
   </section>

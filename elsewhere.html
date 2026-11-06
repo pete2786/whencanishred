@@ -631,6 +631,9 @@ footer::before {
 :root { --s0:#1D2023; --s1:#123B43; --s2:#1F7E8E; --s3:#37D2E8; }
 .hero { padding:18px 0 0; }
 .slots { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.slots-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.slots-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.pcard-place { --c1:var(--mark); --c2:var(--mark); }
 @media (max-width:960px) { .slots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .pcard {
   position:relative; display:flex; flex-direction:column; min-width:0;
@@ -750,7 +753,6 @@ a.posted:hover { border-bottom-style:solid; }
     <p class="eyebrow">Not planned</p>
     <h1 class="fc-head">Everywhere else, if anyone wants it.</h1>
     <p class="hero-sub">This site answers one question: when does it get cold enough to blow snow, and how long after that do resorts open? That matters where resorts make their own winter. Where it snows for real, the answer is probably just that the resort opens when it snows. I do not know whether this is worth having for the Rockies, the East or anywhere else.</p>
-
     <dl class="stats stats-region">
       <div><dt>Resorts tracked</dt><dd>0</dd></div>
       <div><dt>Opening dates on file</dt><dd>0</dd></div>
@@ -779,10 +781,11 @@ a.posted:hover { border-bottom-style:solid; }
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-06T04:09:38.828Z">5 November 2026, 22:09 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-06T04:13:20.483Z">5 November 2026, 22:13 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
     <span><a href="about.html">About this site</a></span>
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
 </div>
+
 </body>
 </html>

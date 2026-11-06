@@ -205,9 +205,12 @@ snowmaking normally first becomes possible, and the October-November hours under
 28°F — and writes them to `data/places.json`. `forecast.mjs` forecasts those
 points too.
 
-The region page then carries the same chart and the same tiles as Minnesota and
-stops there: no season table, no projection, no opening date. The headline is
-the climatology and says so, because there is nothing to project from.
+The region page leads with one card per reference town, built like the
+homepage's hill cards: days to the next night at least two models put under
+28°, the town's normal first window, and the same sixteen-night strip. Then the
+chart, then the list of resorts nobody has gathered yet. No season table, no
+projection, no opening date, because there is nothing to project from. A region
+with no reference towns keeps its plain text page.
 
 Wisconsin is the worked example. Madison and Milwaukee are close enough in
 wet-bulb terms to share one reading, and the hills trend toward Madison anyway,

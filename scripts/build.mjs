@@ -254,18 +254,6 @@ const whenWindow = iso => {
 };
 const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-// The hour behind the big number: when the coldest wet bulb comes, and the
-// air temperature and humidity it is worked out from. Forecasts pulled before
-// forecast.mjs recorded these have no coldest hour, and get no rows.
-const coldestRows = f => {
-  const c = f.coldest;
-  if (!c) return "";
-  const rows = [`\n          <dt>Coldest hour</dt><dd>${whenWindow(c.time)}</dd>`];
-  if (c.temp !== null) rows.push(`\n          <dt>Air temperature then</dt><dd>${F(c.temp)}</dd>`);
-  if (c.humidity !== null) rows.push(`\n          <dt>Humidity then</dt><dd>${Math.round(c.humidity)}%</dd>`);
-  return rows.join("");
-};
-
 // ------------------------------------------------------------ the models
 //
 // The same points through four weather models. A cold snap one model finds at
@@ -355,9 +343,6 @@ ${modelGrid(h)}
   </section>`;
 }
 
-// Small numbers read better as words in prose. Declared up here because both
-// the forecast heading and the hero copy want them, and they sit 400 lines apart.
-const WORDS = ["", "one", "two", "three", "four", "five", "six"];
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const FULL = ["January","February","March","April","May","June","July","August",
@@ -383,10 +368,6 @@ function observed(slug) {
     earliest: dates[0], latest: dates.at(-1), n: dates.length,
   };
 }
-
-// "A and B", "A, B and C".
-const listOf = xs => xs.length < 2 ? (xs[0] ?? "")
-  : `${xs.slice(0, -1).join(", ")} and ${xs.at(-1)}`;
 
 const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 // Whole calendar days in the resorts' own zone, so the countdown holds still
@@ -917,14 +898,6 @@ ${items}
 
 // The next time a calendar day comes round, which is what "N days away" means
 // in August when the date in question is in November.
-function daysUntilMd(md) {
-  const [m, d] = md.split("-").map(Number);
-  const today = new Date();
-  let when = new Date(today.getFullYear(), m - 1, d);
-  if (when < today) when = new Date(today.getFullYear() + 1, m - 1, d);
-  return Math.round((when - new Date(today.getFullYear(), today.getMonth(), today.getDate())) / 86400000);
-}
-
 const stat = (label, value, lede = false) =>
   `      <div><dt>${label}</dt><dd${lede ? ' class="lede"' : ""}>${value}</dd></div>`;
 
@@ -933,47 +906,11 @@ function regionClimate(id) {
   // Nothing is tracked on these pages yet, and saying so with a zero beats
   // borrowing Minnesota's totals, which describe a different state.
   if (!list.length) {
-    return { CLIMATE: "", HEADLINE: null, LEAD: null, EYEBROW: null,
+    return { CLIMATE: "", places: [],
              STATS: [stat("Resorts tracked", "0"), stat("Opening dates on file", "0")].join("\n") };
   }
 
   const [, ref] = list.find(([, p]) => p.curve) ?? list[0];
-
-  const cards = list.map(([pid, p]) => {
-    const f = fc?.places?.[pid];
-    if (!f || f.min === null) {
-      return `      <div class="card"><h3>${esc(p.label)}</h3><p class="big">&mdash;</p>
-        <p>Forecast unavailable for ${esc(p.note)}.</p></div>`;
-    }
-    return `      <div class="card">
-        <h3>${esc(p.label)}</h3>
-        <p class="big">${F(f.min)}</p>
-        <p>Coldest wet bulb the ${fc.horizonDays}-day forecast reaches at ${esc(p.note)}.</p>
-        <dl>${coldestRows(f)}
-          <dt>Hours under ${fc.threshold}&deg;</dt><dd>${f.hoursUnder}</dd>
-          <dt>First window</dt><dd>${f.firstWindow ? whenWindow(f.firstWindow) : "&mdash;"}</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>${p.hours.normal}</dd>
-        </dl>
-      </div>`;
-  }).join("\n");
-
-  // Keep the place with its own forecast rather than matching two arrays by
-  // index: one unreadable forecast would shift them and name the wrong town.
-  const known = list
-    .map(([pid, p]) => ({ p, f: fc?.places?.[pid] }))
-    .filter(({ f }) => f && f.min !== null);
-  const withWindow = known.filter(({ f }) => f.hoursUnder > 0);
-  let answer;
-  if (!fc) answer = "No forecast on file.";
-  else if (!known.length) answer = "The forecast did not load for any of these.";
-  else if (!withWindow.length) {
-    const cold = known.reduce((a, b) => (b.f.min < a.f.min ? b : a));
-    answer = `No snowmaking weather in the next ${fc.horizonDays} days. ` +
-      `The coldest any of these gets is ${F(cold.f.min)} at ${esc(cold.p.note)}.`;
-  } else {
-    answer = `${withWindow.length} of ${known.length} get snowmaking weather in the ` +
-      `next ${fc.horizonDays} days.`;
-  }
 
   const chart = chartSection({
     curve: ref.curve, window: ref.window, pins: [], label: ref.note, years: ref.years,
@@ -994,47 +931,10 @@ ${chart}
     </div>
   </section>
 
-  <section class="sec">
-    <h2 class="sec-title">The next ${WORDS[Math.round((fc?.horizonDays ?? 14) / 7)] ?? ""} weeks</h2>
-    <p class="fc-answer">${answer}</p>
-
-    <div class="duo">
-${cards}
-    </div>
-
-    <p class="sec-note fc-note">
-      Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, updated twice a
-      day. Guns can run under ${fc?.threshold ?? 28}&deg;.
-    </p>
-  </section>
 `;
 
-  // The headline answers "when can I first ride here", so it takes the soonest
-  // of the region's points rather than the one the chart happens to be drawn
-  // for. In the Dakotas that is a 700-mile difference: the Black Hills cross
-  // four weeks before Dubuque.
-  const soonest = list.reduce((a, b) =>
-    (b[1].window.normal < a[1].window.normal ? b : a))[1];
-  const days = daysUntilMd(soonest.window.normal);
-  return {
-    STATS: [
-      stat("Resorts tracked", "0"),
-      stat("Opening dates on file", "0"),
-      stat("Earliest normal window", md2(soonest.window.normal), true),
-      stat(`Oct&ndash;Nov hrs there`, String(soonest.hours.normal)),
-    ].join("\n"),
-    CLIMATE,
-    EYEBROW: `Normally ${md2(soonest.window.normal)}`,
-    HEADLINE: `Snowmaking weather normally reaches ${esc(soonest.label)} around ` +
-              `${md2(soonest.window.normal)}, ${days} days away.`,
-    LEAD: `That is the whole estimate, and it describes the weather at a reference town. ` +
-          `Nobody has filed an opening date for a resort here, so there is nothing to ` +
-          `project from. The chart and the tiles below are the same ones the ` +
-          `Minnesota page runs on, taken at ${listOf(list.map(([, p]) => esc(p.note)))} ` +
-          `instead of at resorts. The curve shown is ${esc(ref.note)}'s.`,
-  };
+  return { CLIMATE, places: list };
 }
-
 
 // ------------------------------------------------------------------ board
 //
@@ -1141,10 +1041,12 @@ function boardNote() {
 }
 
 // The browser half: storage, adding and removing, and the per-night popover.
-const boardScript = `<script>
+// Region pages reuse it for the per-night popover alone: with no #picks on the
+// page, the picks half does nothing.
+const boardScript = K => `<script>
 ${KIT}
 (function () {
-  var K = ${JSON.stringify(BOARD).replace(/</g, "\\u003c")};
+  var K = ${JSON.stringify(K).replace(/</g, "\\u003c")};
   var KEY = "wcis.picks";
   function load() {
     try {
@@ -1157,7 +1059,7 @@ ${KIT}
   var picks = load();
   var host = document.getElementById("picks");
   function draw() { host.innerHTML = bSlots(K, picks); }
-  if (picks.join() !== K.defaults.join()) draw();
+  if (host && picks.join() !== K.defaults.join()) draw();
 
   var pop = document.getElementById("night-pop"), open = null;
   function hide() {
@@ -1183,11 +1085,11 @@ ${KIT}
     if (c) { var same = open === c; hide(); if (!same) { open = c; show(c); } return; }
     hide();
     var b = e.target.closest("button");
-    if (!b || !host.contains(b)) return;
+    if (!b || !host || !host.contains(b)) return;
     if (b.dataset.rm != null) { picks.splice(+b.dataset.rm, 1); save(); draw(); }
     else if (b.hasAttribute("data-reset")) { picks = K.defaults.slice(); save(); draw(); }
   });
-  host.addEventListener("change", function (e) {
+  if (host) host.addEventListener("change", function (e) {
     var s = e.target.closest("select[data-slot]");
     if (!s || !s.value) return;
     picks[+s.dataset.slot] = s.value; save(); draw();
@@ -1197,6 +1099,52 @@ ${KIT}
 })();
 </script>`;
 
+// ------------------------------------------------------------ region pages
+//
+// A state with no resorts gathered yet gets the homepage's cards, one per
+// reference town, counting down to the next night cold enough to make snow
+// there instead of to an opening day nobody has filed.
+function placeBoard(list) {
+  const threshold = fc?.threshold ?? 28;
+  const hills = Object.fromEntries(list.map(([pid, p]) => {
+    const f = fc?.places?.[pid];
+    const cells = (fc?.days ?? []).map((_, i) => {
+      const vals = MODEL_KEYS.map(k => f?.models?.[k]?.daily?.[i]).filter(v => v != null);
+      return { n: vals.length, under: vals.filter(v => v < threshold).length };
+    });
+    return [pid, { slug: pid, name: p.label, cells,
+                   daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])) }];
+  }));
+  return { days: fc?.days ?? [], models: BOARD.models, threshold, hills, defaults: [], max: 0, areas: [] };
+}
+
+function placeCards(list, K) {
+  return list.map(([pid, p]) => {
+    const h = K.hills[pid];
+    const i = h.cells.findIndex(c => c.under >= 2);
+    const night = i >= 0 ? K.days[i] : null;
+    const n = night ? daysUntil(night) : null;
+    const count = n === null ? `<span class="pc-num">${K.days.length}<span class="pc-plus-sign">+</span></span><span class="pc-unit">days</span>`
+      : n <= 0 ? `<span class="pc-num">Tonight</span>`
+      : `<span class="pc-num">${n}</span><span class="pc-unit">${n === 1 ? "day" : "days"}</span>`;
+    return `<article class="pcard pcard-place">
+      <h3 class="pc-name">${esc(p.label)}</h3>
+      <p class="pc-place">at ${esc(p.note)}</p>
+      <p class="pc-count">${count}</p>
+      <p class="pc-line">${night ? `Next night under ${K.threshold}&deg; <b>${bDow(night)} ${bShort(night)}</b>`
+        : `No night under ${K.threshold}&deg; in the forecast yet`}</p>
+      <p class="pc-line pc-mut">Normally cold enough by ${md2(p.window.normal)}</p>
+      <div class="pc-strip">${bHeader(K)}${bStrip(K, h, "card")}</div>
+    </article>`;
+  }).join("\n");
+}
+
+const NIGHT_LEGEND = `<div class="night-legend" aria-hidden="true">
+      <span><i class="cell s0"></i>none</span><span><i class="cell s1"></i>1 model</span>
+      <span><i class="cell s2"></i>2</span><span><i class="cell s3"></i>3 or 4 under 28&deg;</span>
+      <span><i class="cell na"></i>past every model</span>
+    </div>`;
+
 // Homepage
 
 writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", "utf8"), {
@@ -1204,7 +1152,8 @@ writeFileSync("index.html", markHills(fill(readFileSync("templates/index.html", 
   PICKS: bSlots(BOARD, DEFAULT_PICKS),
   BOARD: boardSection(),
   BOARD_NOTE: boardNote(),
-  BOARD_SCRIPT: boardScript,
+  BOARD_SCRIPT: boardScript(BOARD),
+  NIGHT_LEGEND,
   FOOTER_PROVENANCE: provenance,
   LAST_UPDATED: lastUpdated,
   COPYRIGHT: copyright,
@@ -1233,26 +1182,41 @@ for (const region of STATES.filter(r => r.id !== "mn")) {
       `the state is covered: nobody has gathered the rest of ${region.name} yet.`
     : `No ${region.name} resorts are on the site yet. Everything here is built from dates ` +
       `gathered one post at a time, and nobody has worked this state.`;
+  const legacyHero = `  <section class="hero">
+    <p class="eyebrow">${region.eyebrow ?? (n ? "Barely started" : "Not covered yet")}</p>
+    <h1 class="fc-head">${region.headline ?? (n ? `${region.name} is barely started.` : `${region.name} is not covered yet.`)}</h1>
+    <p class="hero-sub">${region.lead ?? lead}</p>
+    <dl class="stats stats-region">
+${clim.STATS}
+    </dl>
+  </section>`;
+  let HERO = legacyHero, SCRIPT = "";
+  if (clim.places.length && fc) {
+    const K = placeBoard(clim.places);
+    HERO = `  <p class="eyebrow">${dateline} &middot; ${esc(region.name)}</p>
+  <section class="hero" aria-label="Snowmaking weather">
+    <div class="slots slots-${Math.min(clim.places.length, 4)}">
+${placeCards(clim.places, K)}
+    </div>
+    <p class="slot-foot">Weather at reference towns. Resort dates for ${esc(region.name)} are not gathered yet.</p>
+    ${NIGHT_LEGEND}
+  </section>`;
+    SCRIPT = `<div id="night-pop" class="night-pop" role="status" hidden></div>\n${boardScript(K)}`;
+  }
   writeFileSync(region.file, fill(regionTpl, {
     STYLE: style,
     PICKER: picker(region.id, ""),
     REGION: esc(region.name),
-    // A region with climatology leads with the weather; one without still says
-    // plainly that nobody has worked it.
-    EYEBROW: clim.EYEBROW ?? region.eyebrow ?? (n ? "Barely started" : "Not covered yet"),
-    HEADLINE: clim.HEADLINE ?? region.headline ?? (n
-      ? `${region.name} is barely started.`
-      : `${region.name} is not covered yet.`),
-    LEAD: clim.LEAD ?? region.lead ?? lead,
+    HERO,
     REGION_CLIMATE: clim.CLIMATE,
     ROSTER: roster(region.id),
-    REGION_STATS: clim.STATS,
     CTA: region.cta ?? `Know a ${region.name} resort's dates, or want to take on the whole ` +
          `state?`,
     FOOTER_PROVENANCE: provenance,
-  LAST_UPDATED: lastUpdated,
-  COPYRIGHT: copyright,
-  }));
+    LAST_UPDATED: lastUpdated,
+    COPYRIGHT: copyright,
+    BOARD_SCRIPT: SCRIPT,
+  }));;
 }
 console.log(`built ${STATES.length - 1} state placeholders`);
 

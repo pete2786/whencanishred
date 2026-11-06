@@ -632,6 +632,9 @@ footer::before {
 :root { --s0:#1D2023; --s1:#123B43; --s2:#1F7E8E; --s3:#37D2E8; }
 .hero { padding:18px 0 0; }
 .slots { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.slots-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.slots-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.pcard-place { --c1:var(--mark); --c2:var(--mark); }
 @media (max-width:960px) { .slots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .pcard {
   position:relative; display:flex; flex-direction:column; min-width:0;
@@ -1025,7 +1028,7 @@ a.posted:hover { border-bottom-style:solid; }
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-06T04:09:38.828Z">5 November 2026, 22:09 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-06T04:13:20.483Z">5 November 2026, 22:13 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
     <span>We are working on entering the rest. If you want to help, email me at
       <a href="mailto:eazydp@gmail.com">eazydp@gmail.com</a>.</span>
     <span>Midwest Skiers has been documenting these resorts for years: the
@@ -1117,7 +1120,7 @@ const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
   var picks = load();
   var host = document.getElementById("picks");
   function draw() { host.innerHTML = bSlots(K, picks); }
-  if (picks.join() !== K.defaults.join()) draw();
+  if (host && picks.join() !== K.defaults.join()) draw();
 
   var pop = document.getElementById("night-pop"), open = null;
   function hide() {
@@ -1143,11 +1146,11 @@ const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     if (c) { var same = open === c; hide(); if (!same) { open = c; show(c); } return; }
     hide();
     var b = e.target.closest("button");
-    if (!b || !host.contains(b)) return;
+    if (!b || !host || !host.contains(b)) return;
     if (b.dataset.rm != null) { picks.splice(+b.dataset.rm, 1); save(); draw(); }
     else if (b.hasAttribute("data-reset")) { picks = K.defaults.slice(); save(); draw(); }
   });
-  host.addEventListener("change", function (e) {
+  if (host) host.addEventListener("change", function (e) {
     var s = e.target.closest("select[data-slot]");
     if (!s || !s.value) return;
     picks[+s.dataset.slot] = s.value; save(); draw();

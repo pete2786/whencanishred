@@ -631,6 +631,9 @@ footer::before {
 :root { --s0:#1D2023; --s1:#123B43; --s2:#1F7E8E; --s3:#37D2E8; }
 .hero { padding:18px 0 0; }
 .slots { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+.slots-3 { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.slots-2 { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.pcard-place { --c1:var(--mark); --c2:var(--mark); }
 @media (max-width:960px) { .slots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 .pcard {
   position:relative; display:flex; flex-direction:column; min-width:0;
@@ -746,17 +749,40 @@ a.posted:hover { border-bottom-style:solid; }
     </details>
   </header>
 
-  <section class="hero">
-    <p class="eyebrow">Normally Nov 5</p>
-    <h1 class="fc-head">Snowmaking weather normally reaches Cadillac around Nov 5, 365 days away.</h1>
-    <p class="hero-sub">That is the whole estimate, and it describes the weather at a reference town. Nobody has filed an opening date for a resort here, so there is nothing to project from. The chart and the tiles below are the same ones the Minnesota page runs on, taken at Traverse City, Cadillac and Brighton instead of at resorts. The curve shown is Traverse City's.</p>
-
-    <dl class="stats stats-region">
-      <div><dt>Resorts tracked</dt><dd>0</dd></div>
-      <div><dt>Opening dates on file</dt><dd>0</dd></div>
-      <div><dt>Earliest normal window</dt><dd class="lede">Nov 5</dd></div>
-      <div><dt>Oct&ndash;Nov hrs there</dt><dd>232</dd></div>
-    </dl>
+  <p class="eyebrow">5 November 2026 &middot; Michigan · Lower Peninsula</p>
+  <section class="hero" aria-label="Snowmaking weather">
+    <div class="slots slots-3">
+<article class="pcard pcard-place">
+      <h3 class="pc-name">Traverse City</h3>
+      <p class="pc-place">at Traverse City</p>
+      <p class="pc-count"><span class="pc-num">16<span class="pc-plus-sign">+</span></span><span class="pc-unit">days</span></p>
+      <p class="pc-line">No night under 28&deg; in the forecast yet</p>
+      <p class="pc-line pc-mut">Normally cold enough by Nov 17</p>
+      <div class="pc-strip"><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div class="strip"><button type="button" class="cell s0" data-cell="card|traverse|0" aria-label="Traverse City, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|1" aria-label="Traverse City, Fri Nov 6: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|2" aria-label="Traverse City, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|3" aria-label="Traverse City, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|4" aria-label="Traverse City, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|5" aria-label="Traverse City, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|6" aria-label="Traverse City, Wed Nov 11: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|7" aria-label="Traverse City, Thu Nov 12: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|traverse|8" aria-label="Traverse City, Fri Nov 13: 1 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|traverse|9" aria-label="Traverse City, Sat Nov 14: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|10" aria-label="Traverse City, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|11" aria-label="Traverse City, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|12" aria-label="Traverse City, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|13" aria-label="Traverse City, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|14" aria-label="Traverse City, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|traverse|15" aria-label="Traverse City, Fri Nov 20: 0 of 2 models under the threshold"></button></div></div>
+    </article>
+<article class="pcard pcard-place">
+      <h3 class="pc-name">Cadillac</h3>
+      <p class="pc-place">at Cadillac</p>
+      <p class="pc-count"><span class="pc-num">8</span><span class="pc-unit">days</span></p>
+      <p class="pc-line">Next night under 28&deg; <b>Fri Nov 13</b></p>
+      <p class="pc-line pc-mut">Normally cold enough by Nov 5</p>
+      <div class="pc-strip"><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div class="strip"><button type="button" class="cell s0" data-cell="card|cadillac|0" aria-label="Cadillac, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|1" aria-label="Cadillac, Fri Nov 6: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|2" aria-label="Cadillac, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|3" aria-label="Cadillac, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|4" aria-label="Cadillac, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|5" aria-label="Cadillac, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|6" aria-label="Cadillac, Wed Nov 11: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|cadillac|7" aria-label="Cadillac, Thu Nov 12: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|cadillac|8" aria-label="Cadillac, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|cadillac|9" aria-label="Cadillac, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|10" aria-label="Cadillac, Sun Nov 15: 0 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|11" aria-label="Cadillac, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|12" aria-label="Cadillac, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|13" aria-label="Cadillac, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|14" aria-label="Cadillac, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|cadillac|15" aria-label="Cadillac, Fri Nov 20: 0 of 2 models under the threshold"></button></div></div>
+    </article>
+<article class="pcard pcard-place">
+      <h3 class="pc-name">Detroit</h3>
+      <p class="pc-place">at Brighton</p>
+      <p class="pc-count"><span class="pc-num">7</span><span class="pc-unit">days</span></p>
+      <p class="pc-line">Next night under 28&deg; <b>Thu Nov 12</b></p>
+      <p class="pc-line pc-mut">Normally cold enough by Nov 11</p>
+      <div class="pc-strip"><div class="strip strip-hd" aria-hidden="true"><span class="hd">T<br>5</span><span class="hd">F<br>6</span><span class="hd">S<br>7</span><span class="hd">S<br>8</span><span class="hd">M<br>9</span><span class="hd">T<br>10</span><span class="hd">W<br>11</span><span class="hd">T<br>12</span><span class="hd">F<br>13</span><span class="hd">S<br>14</span><span class="hd">S<br>15</span><span class="hd">M<br>16</span><span class="hd">T<br>17</span><span class="hd">W<br>18</span><span class="hd">T<br>19</span><span class="hd">F<br>20</span></div><div class="strip"><button type="button" class="cell s0" data-cell="card|detroit|0" aria-label="Detroit, Thu Nov 5: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|1" aria-label="Detroit, Fri Nov 6: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|2" aria-label="Detroit, Sat Nov 7: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|3" aria-label="Detroit, Sun Nov 8: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|4" aria-label="Detroit, Mon Nov 9: 0 of 4 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|5" aria-label="Detroit, Tue Nov 10: 0 of 4 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|detroit|6" aria-label="Detroit, Wed Nov 11: 1 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|detroit|7" aria-label="Detroit, Thu Nov 12: 2 of 4 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|detroit|8" aria-label="Detroit, Fri Nov 13: 2 of 3 models under the threshold"></button><button type="button" class="cell s2" data-cell="card|detroit|9" aria-label="Detroit, Sat Nov 14: 2 of 3 models under the threshold"></button><button type="button" class="cell s1" data-cell="card|detroit|10" aria-label="Detroit, Sun Nov 15: 1 of 3 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|11" aria-label="Detroit, Mon Nov 16: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|12" aria-label="Detroit, Tue Nov 17: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|13" aria-label="Detroit, Wed Nov 18: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|14" aria-label="Detroit, Thu Nov 19: 0 of 2 models under the threshold"></button><button type="button" class="cell s0" data-cell="card|detroit|15" aria-label="Detroit, Fri Nov 20: 0 of 2 models under the threshold"></button></div></div>
+    </article>
+    </div>
+    <p class="slot-foot">Weather at reference towns. Resort dates for Michigan · Lower Peninsula are not gathered yet.</p>
+    <div class="night-legend" aria-hidden="true">
+      <span><i class="cell s0"></i>none</span><span><i class="cell s1"></i>1 model</span>
+      <span><i class="cell s2"></i>2</span><span><i class="cell s3"></i>3 or 4 under 28&deg;</span>
+      <span><i class="cell na"></i>past every model</span>
+    </div>
   </section>
 
 
@@ -844,57 +870,6 @@ a.posted:hover { border-bottom-style:solid; }
     </div>
   </section>
 
-  <section class="sec">
-    <h2 class="sec-title">The next two weeks</h2>
-    <p class="fc-answer">3 of 3 get snowmaking weather in the next 16 days.</p>
-
-    <div class="duo">
-      <div class="card">
-        <h3>Traverse City</h3>
-        <p class="big">26.4&deg;</p>
-        <p>Coldest wet bulb the 16-day forecast reaches at Traverse City.</p>
-        <dl>
-          <dt>Coldest hour</dt><dd>Fri 13 Nov, 9pm</dd>
-          <dt>Air temperature then</dt><dd>30.9&deg;</dd>
-          <dt>Humidity then</dt><dd>67%</dd>
-          <dt>Hours under 28&deg;</dt><dd>11</dd>
-          <dt>First window</dt><dd>Fri 13 Nov, 5pm</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>133</dd>
-        </dl>
-      </div>
-      <div class="card">
-        <h3>Cadillac</h3>
-        <p class="big">21.0&deg;</p>
-        <p>Coldest wet bulb the 16-day forecast reaches at Cadillac.</p>
-        <dl>
-          <dt>Coldest hour</dt><dd>Fri 13 Nov, 10pm</dd>
-          <dt>Air temperature then</dt><dd>25.4&deg;</dd>
-          <dt>Humidity then</dt><dd>63%</dd>
-          <dt>Hours under 28&deg;</dt><dd>38</dd>
-          <dt>First window</dt><dd>Thu 12 Nov, 6pm</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>232</dd>
-        </dl>
-      </div>
-      <div class="card">
-        <h3>Detroit</h3>
-        <p class="big">19.9&deg;</p>
-        <p>Coldest wet bulb the 16-day forecast reaches at Brighton.</p>
-        <dl>
-          <dt>Coldest hour</dt><dd>Sat 14 Nov, 5am</dd>
-          <dt>Air temperature then</dt><dd>22.8&deg;</dd>
-          <dt>Humidity then</dt><dd>78%</dd>
-          <dt>Hours under 28&deg;</dt><dd>35</dd>
-          <dt>First window</dt><dd>Thu 12 Nov, 1am</dd>
-          <dt>Normal Oct&ndash;Nov hours</dt><dd>155</dd>
-        </dl>
-      </div>
-    </div>
-
-    <p class="sec-note fc-note">
-      Wet-bulb forecast from <a href="https://open-meteo.com/">Open-Meteo</a>, updated twice a
-      day. Guns can run under 28&deg;.
-    </p>
-  </section>
 
   <section class="sec">
     <h2 class="sec-title">Want resort-specific info? We need help!</h2>
@@ -940,10 +915,131 @@ a.posted:hover { border-bottom-style:solid; }
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>60 of 80 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-06T04:09:38.828Z">5 November 2026, 22:09 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-06T04:13:20.483Z">5 November 2026, 22:13 CST</time>. Forecast pulled <time datetime="2026-11-05T23:38:09.444Z">5 November 2026, 17:38 CST</time>.</span>
     <span><a href="about.html">About this site</a></span>
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
 </div>
+<div id="night-pop" class="night-pop" role="status" hidden></div>
+<script>
+function bEsc(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+function bShort(iso) {
+  return MON[Number(iso.slice(5, 7)) - 1] + " " + Number(iso.slice(8, 10));
+}
+function bDow(iso) {
+  return DOW[new Date(Date.UTC(+iso.slice(0, 4), +iso.slice(5, 7) - 1, +iso.slice(8, 10))).getUTCDay()];
+}
+function bShade(c) {
+  if (c.n === 0) return "na";
+  return "s" + Math.min(c.under, 3);
+}
+function bHeader(K) {
+  return '<div class="strip strip-hd" aria-hidden="true">' + K.days.map(d =>
+    '<span class="hd">' + bDow(d)[0] + "<br>" + Number(d.slice(8, 10)) + "</span>").join("") + "</div>";
+}
+function bStrip(K, h, pre) {
+  return '<div class="strip">' + h.cells.map((c, i) =>
+    '<button type="button" class="cell ' + bShade(c) + '" data-cell="' + pre + "|" + h.slug + "|" + i + '" ' +
+    'aria-label="' + bEsc(h.name) + ", " + bDow(K.days[i]) + " " + bShort(K.days[i]) + ": " +
+    c.under + " of " + c.n + ' models under the threshold"></button>').join("") + "</div>";
+}
+function bDays(n, posted) {
+  if (n > 0) return '<span class="pc-num">' + n + (posted ? "" : '<span class="pc-plus-sign">+</span>') +
+    '</span><span class="pc-unit">days</span>';
+  if (n === 0) return '<span class="pc-num">Today</span>';
+  return '<span class="pc-num">Open</span>';
+}
+function bOptions(K, picks, current) {
+  return '<option value=""' + (current ? "" : " selected") + " disabled>Choose a hill</option>" +
+    K.areas.map(a => '<optgroup label="' + bEsc(a.name) + '">' + a.hills.map(s =>
+      '<option value="' + s + '"' + (s === current ? " selected" : "") +
+      (s !== current && picks.indexOf(s) >= 0 ? " disabled" : "") + ">" + bEsc(K.hills[s].name) + "</option>").join("") +
+      "</optgroup>").join("");
+}
+function bCard(K, picks, slug, idx) {
+  const h = K.hills[slug];
+  return '<article class="pcard" style="--c1:' + h.c1 + ";--c2:" + h.c2 + '">' +
+    '<button type="button" class="pc-rm" data-rm="' + idx + '" aria-label="Remove ' + bEsc(h.name) + '">&times;</button>' +
+    '<h3 class="pc-name">' + bEsc(h.name) + "</h3>" +
+    '<p class="pc-place">' + bEsc(h.place) + "</p>" +
+    '<p class="pc-count">' + bDays(h.days, h.posted) + "</p>" +
+    '<p class="pc-line">' + (h.posted
+      ? '<a class="posted" href="' + bEsc(h.posted) + '" target="_blank" rel="noopener">Posted opening</a> <b>'
+      : "Projected <b>") + bShort(h.lo) +
+      (h.lo === h.hi ? "" : " &ndash; " + bShort(h.hi)) + "</b></p>" +
+    '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
+    '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
+    '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +
+    "</article>";
+}
+function bEmpty(K, picks, idx) {
+  return '<div class="pcard pc-empty"><span class="pc-plus" aria-hidden="true">+</span>' +
+    '<span class="pc-add">Add a hill</span>' +
+    '<label class="pc-choose">Choose &#9662;<select data-slot="' + idx + '" aria-label="Add a hill">' +
+    bOptions(K, picks, null) + "</select></label></div>";
+}
+function bSlots(K, picks) {
+  const isDefault = picks.join() === K.defaults.join();
+  return '<div class="slots">' + picks.map((s, i) => bCard(K, picks, s, i)).join("") +
+    (picks.length < K.max ? bEmpty(K, picks, picks.length) : "") + "</div>" +
+    (isDefault ? "" : '<p class="slot-foot"><button type="button" class="linkish" data-reset>Back to the defaults</button></p>');
+}
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+(function () {
+  var K = {"days":["2026-11-05","2026-11-06","2026-11-07","2026-11-08","2026-11-09","2026-11-10","2026-11-11","2026-11-12","2026-11-13","2026-11-14","2026-11-15","2026-11-16","2026-11-17","2026-11-18","2026-11-19","2026-11-20"],"models":{"gfs":"GFS","ecmwf":"ECMWF","gem":"GEM","icon":"ICON"},"threshold":28,"hills":{"traverse":{"slug":"traverse","name":"Traverse City","cells":[{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":3,"under":1},{"n":3,"under":1},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[37.9,37.2,34.7,36,38.9,40,32.4,28.9,26.4,27.2,35.4,36.8,39.8,40.9,35.4,35.7],"ecmwf":[40.4,39.3,37.7,40,40.9,42.9,36.4,34.4,33.5,32,33.3,37.3,40.2,34.9,33.6,36.3],"gem":[40.6,40.4,36.1,40.1,36.7,40,34.7,34.2,32.9,35.6,45.8,null,null,null,null,null],"icon":[41,40.1,37.2,40.5,42.5,45.6,40.8,37.6,null,null,null,null,null,null,null,null]}},"cadillac":{"slug":"cadillac","name":"Cadillac","cells":[{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[36.9,33.5,30.7,31.4,35.4,37.8,29.1,26.2,21,21.1,31.7,33.1,36.8,36.7,32.9,32.6],"ecmwf":[38.1,35.9,34.2,37.2,36.6,40.4,34.3,31.5,28.3,27.6,29.6,35,37.5,33.4,30.7,35.4],"gem":[37.5,34.6,31.5,35.5,32.3,38.2,31.2,28.2,23.7,29.2,40.5,null,null,null,null,null],"icon":[37,34.3,32.1,35.5,37.8,43.2,37.4,34.5,null,null,null,null,null,null,null,null]}},"detroit":{"slug":"detroit","name":"Detroit","cells":[{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":0},{"n":4,"under":1},{"n":4,"under":2},{"n":3,"under":2},{"n":3,"under":2},{"n":3,"under":1},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0},{"n":2,"under":0}],"daily":{"gfs":[44,35.9,33.1,29.9,36.8,39.2,30.4,24.8,23,19.9,33.9,30.4,38.3,37.3,33.6,33],"ecmwf":[45.4,37.4,36.6,34.9,37.7,39.8,40.4,30,28.6,26.6,25.7,33.2,38.4,36.3,33.2,37.9],"gem":[46.9,36.2,33.6,33.1,30.1,38.2,26.3,22.8,26.5,30.4,38,null,null,null,null,null],"icon":[46.1,33.5,32.9,32.5,36.8,40.9,39.3,39.8,null,null,null,null,null,null,null,null]}}},"defaults":[],"max":0,"areas":[]};
+  var KEY = "wcis.picks";
+  function load() {
+    try {
+      var v = JSON.parse(localStorage.getItem(KEY));
+      if (Array.isArray(v)) return v.filter(function (s) { return K.hills[s]; }).slice(0, K.max);
+    } catch (e) {}
+    return K.defaults.slice();
+  }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(picks)); } catch (e) {} }
+  var picks = load();
+  var host = document.getElementById("picks");
+  function draw() { host.innerHTML = bSlots(K, picks); }
+  if (host && picks.join() !== K.defaults.join()) draw();
+
+  var pop = document.getElementById("night-pop"), open = null;
+  function hide() {
+    pop.hidden = true; open = null;
+    var s = document.querySelector(".cell.sel"); if (s) s.classList.remove("sel");
+  }
+  function show(btn) {
+    var p = btn.dataset.cell.split("|"), h = K.hills[p[1]], i = +p[2];
+    pop.innerHTML = "<b>" + bEsc(h.name) + " &middot; " + bDow(K.days[i]) + " " + bShort(K.days[i]) + "</b>" +
+      Object.keys(K.models).map(function (m) {
+        var v = h.daily[m][i];
+        return '<span><i>' + K.models[m] + '</i><em class="' + (v != null && v < K.threshold ? "cold" : "") + '">' +
+          (v == null ? "out of range" : v.toFixed(1) + "&deg;") + "</em></span>";
+      }).join("");
+    pop.hidden = false;
+    var r = btn.getBoundingClientRect(), w = pop.offsetWidth;
+    pop.style.left = Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + scrollX + "px";
+    pop.style.top = r.top + scrollY - pop.offsetHeight - 8 + "px";
+    btn.classList.add("sel");
+  }
+  document.addEventListener("click", function (e) {
+    var c = e.target.closest("[data-cell]");
+    if (c) { var same = open === c; hide(); if (!same) { open = c; show(c); } return; }
+    hide();
+    var b = e.target.closest("button");
+    if (!b || !host || !host.contains(b)) return;
+    if (b.dataset.rm != null) { picks.splice(+b.dataset.rm, 1); save(); draw(); }
+    else if (b.hasAttribute("data-reset")) { picks = K.defaults.slice(); save(); draw(); }
+  });
+  if (host) host.addEventListener("change", function (e) {
+    var s = e.target.closest("select[data-slot]");
+    if (!s || !s.value) return;
+    picks[+s.dataset.slot] = s.value; save(); draw();
+  });
+  addEventListener("scroll", hide, { passive: true });
+  addEventListener("resize", hide);
+})();
+</script>
 </body>
 </html>
