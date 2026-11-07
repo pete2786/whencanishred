@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "through": "2026-11-07T07:00",
+  "through": "2026-11-07T15:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
@@ -21,7 +21,7 @@
     },
     "welch-village": {
       "firstNight": null,
-      "hours": 0
+      "hours": 1
     },
     "buck-hill": {
       "firstNight": null,
@@ -45,7 +45,7 @@
     },
     "powder-ridge": {
       "firstNight": null,
-      "hours": 6
+      "hours": 7
     },
     "mount-kato": {
       "firstNight": null,
