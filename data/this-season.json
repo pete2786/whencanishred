@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "through": "2026-11-08T16:00",
+  "through": "2026-11-09T10:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
@@ -41,7 +41,7 @@
     },
     "spirit-mountain": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 21
+      "hours": 24
     },
     "powder-ridge": {
       "firstNight": null,
