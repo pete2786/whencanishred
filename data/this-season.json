@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "through": "2026-11-09T19:00",
+  "through": "2026-11-10T08:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
@@ -9,7 +9,7 @@
     },
     "trollhaugen": {
       "firstNight": null,
-      "hours": 4
+      "hours": 5
     },
     "hyland-hills": {
       "firstNight": null,
@@ -57,7 +57,7 @@
     },
     "detroit-mountain": {
       "firstNight": null,
-      "hours": 6
+      "hours": 9
     },
     "andes-tower-hills": {
       "firstNight": null,
