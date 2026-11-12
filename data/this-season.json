@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "through": "2026-11-12T09:00",
+  "through": "2026-11-12T17:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
@@ -33,15 +33,15 @@
     },
     "lutsen-mountains": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 29
+      "hours": 33
     },
     "giants-ridge": {
       "firstNight": "2026-10-29T23:00",
-      "hours": 43
+      "hours": 49
     },
     "spirit-mountain": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 30
+      "hours": 33
     },
     "powder-ridge": {
       "firstNight": null,
@@ -53,15 +53,15 @@
     },
     "buena-vista": {
       "firstNight": "2026-11-05T22:00",
-      "hours": 21
+      "hours": 23
     },
     "detroit-mountain": {
       "firstNight": null,
-      "hours": 9
+      "hours": 10
     },
     "andes-tower-hills": {
       "firstNight": "2026-11-11T23:00",
-      "hours": 10
+      "hours": 11
     },
     "coffee-mill": {
       "firstNight": null,
@@ -69,11 +69,11 @@
     },
     "mount-ski-gull": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 11
+      "hours": 12
     },
     "chester-bowl": {
       "firstNight": "2026-11-06T19:00",
-      "hours": 23
+      "hours": 25
     },
     "steeplechase": {
       "firstNight": null,
