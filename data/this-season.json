@@ -1,83 +1,83 @@
 {
   "season": 2026,
-  "through": "2026-11-12T17:00",
+  "through": "2026-11-13T08:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
-      "firstNight": null,
-      "hours": 11
+      "firstNight": "2026-11-12T18:00",
+      "hours": 25
     },
     "trollhaugen": {
-      "firstNight": null,
-      "hours": 5
+      "firstNight": "2026-11-12T18:00",
+      "hours": 19
     },
     "hyland-hills": {
-      "firstNight": null,
-      "hours": 0
+      "firstNight": "2026-11-12T19:00",
+      "hours": 13
     },
     "afton-alps": {
-      "firstNight": null,
-      "hours": 0
+      "firstNight": "2026-11-12T19:00",
+      "hours": 13
     },
     "welch-village": {
-      "firstNight": null,
-      "hours": 1
+      "firstNight": "2026-11-12T19:00",
+      "hours": 14
     },
     "buck-hill": {
-      "firstNight": null,
-      "hours": 0
+      "firstNight": "2026-11-12T18:00",
+      "hours": 14
     },
     "elm-creek": {
-      "firstNight": null,
-      "hours": 3
+      "firstNight": "2026-11-12T18:00",
+      "hours": 17
     },
     "lutsen-mountains": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 33
+      "hours": 48
     },
     "giants-ridge": {
       "firstNight": "2026-10-29T23:00",
-      "hours": 49
+      "hours": 64
     },
     "spirit-mountain": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 33
+      "hours": 48
     },
     "powder-ridge": {
-      "firstNight": null,
-      "hours": 7
+      "firstNight": "2026-11-12T19:00",
+      "hours": 20
     },
     "mount-kato": {
-      "firstNight": null,
-      "hours": 0
+      "firstNight": "2026-11-12T20:00",
+      "hours": 12
     },
     "buena-vista": {
       "firstNight": "2026-11-05T22:00",
-      "hours": 23
+      "hours": 38
     },
     "detroit-mountain": {
-      "firstNight": null,
-      "hours": 10
+      "firstNight": "2026-11-12T18:00",
+      "hours": 24
     },
     "andes-tower-hills": {
       "firstNight": "2026-11-11T23:00",
-      "hours": 11
+      "hours": 25
     },
     "coffee-mill": {
-      "firstNight": null,
-      "hours": 1
+      "firstNight": "2026-11-12T20:00",
+      "hours": 13
     },
     "mount-ski-gull": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 12
+      "hours": 26
     },
     "chester-bowl": {
       "firstNight": "2026-11-06T19:00",
-      "hours": 25
+      "hours": 40
     },
     "steeplechase": {
-      "firstNight": null,
-      "hours": 0
+      "firstNight": "2026-11-12T19:00",
+      "hours": 13
     }
   }
 }
