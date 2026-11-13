@@ -1,83 +1,83 @@
 {
   "season": 2026,
-  "through": "2026-11-13T08:00",
+  "through": "2026-11-13T17:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 25
+      "hours": 27
     },
     "trollhaugen": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 19
+      "hours": 21
     },
     "hyland-hills": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 13
+      "hours": 16
     },
     "afton-alps": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 13
+      "hours": 15
     },
     "welch-village": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 14
+      "hours": 16
     },
     "buck-hill": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 14
+      "hours": 16
     },
     "elm-creek": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 17
+      "hours": 19
     },
     "lutsen-mountains": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 48
+      "hours": 52
     },
     "giants-ridge": {
       "firstNight": "2026-10-29T23:00",
-      "hours": 64
+      "hours": 72
     },
     "spirit-mountain": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 48
+      "hours": 55
     },
     "powder-ridge": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 20
+      "hours": 23
     },
     "mount-kato": {
       "firstNight": "2026-11-12T20:00",
-      "hours": 12
+      "hours": 14
     },
     "buena-vista": {
       "firstNight": "2026-11-05T22:00",
-      "hours": 38
+      "hours": 42
     },
     "detroit-mountain": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 24
+      "hours": 28
     },
     "andes-tower-hills": {
       "firstNight": "2026-11-11T23:00",
-      "hours": 25
+      "hours": 27
     },
     "coffee-mill": {
       "firstNight": "2026-11-12T20:00",
-      "hours": 13
+      "hours": 14
     },
     "mount-ski-gull": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 26
+      "hours": 29
     },
     "chester-bowl": {
       "firstNight": "2026-11-06T19:00",
-      "hours": 40
+      "hours": 45
     },
     "steeplechase": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 13
+      "hours": 15
     }
   }
 }
