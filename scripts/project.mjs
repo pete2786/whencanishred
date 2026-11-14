@@ -45,8 +45,14 @@ const sinceOct = iso => {
 };
 const toDate = d => new Date(EPOCH(SEASON) + Math.round(d) * 86400000).toISOString().slice(0, 10);
 
-const observed = slug => Object.values(seasons[slug] ?? {})
-  .map(v => v.firstLift?.date).filter(Boolean).map(sinceOct).sort((a, b) => a - b);
+// Past seasons only. This season's opening, once it happens, is the answer
+// for this season, not one more sample of what the hill normally does: left
+// in, Andes Tower Hills' 14 November 2026 pulled its own projection to itself.
+const THIS_SEASON = `${SEASON}-${String((SEASON + 1) % 100).padStart(2, "0")}`;
+const observed = slug => Object.entries(seasons[slug] ?? {})
+  .filter(([season]) => season !== THIS_SEASON)
+  .map(([, v]) => v.firstLift?.date).filter(Boolean).map(sinceOct).sort((a, b) => a - b);
+const openedOn = slug => seasons[slug]?.[THIS_SEASON]?.firstLift?.date ?? null;
 
 // A hill with no record of its own can be told to project like another hill
 // whose record fits it better than the climate fit does: `projectLike` in
@@ -120,6 +126,15 @@ const r2 = 1 - ssRes / ssTot;
 const out = {}, rows = [];
 for (const slug of Object.keys(resorts)) {
   const was = prior[slug];
+
+  // Open is open. Nothing is projected for a hill that has already turned a
+  // lift this season.
+  if (openedOn(slug)) {
+    const d = openedOn(slug);
+    out[slug] = { date: d, label: "open", range: { lo: d, hi: d } };
+    rows.push([slug, hours[slug]?.normal, "open", d, "opened"]);
+    continue;
+  }
 
   // An announced or targeted date is something a hill said about itself. The
   // model does not get to overrule it.
@@ -210,7 +225,7 @@ function firstNight(slug) {
 
 if (live) {
   for (const slug of Object.keys(out)) {
-    if (EXTERNAL.has(out[slug].label)) continue;
+    if (EXTERNAL.has(out[slug].label) || out[slug].label === "open") continue;
     const gap = shortestGap(recordHill(slug)) ?? pooledGap;
     if (gap === null) continue;
     const night = firstNight(slug);

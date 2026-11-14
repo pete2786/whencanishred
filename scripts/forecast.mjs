@@ -39,6 +39,19 @@ const places = existsSync("data/places.json")
   ? JSON.parse(readFileSync("data/places.json", "utf8")) : {};
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
+// The workflow shares its IP with everyone else's Actions runners, and on
+// 14 November every call came back 429. Back off and try again before giving
+// up on a point.
+async function get(url) {
+  for (let attempt = 0; attempt < 4; attempt++) {
+    const res = await fetch(url);
+    if (res.ok) return res;
+    if (res.status !== 429) throw new Error(`${res.status} ${res.statusText}`);
+    await sleep(15000 * (attempt + 1));
+  }
+  throw new Error("429 Too Many Requests, after 4 tries");
+}
+
 async function forecast(lat, lon) {
   const q = new URLSearchParams({
     latitude: String(lat), longitude: String(lon),
@@ -50,8 +63,7 @@ async function forecast(lat, lon) {
     timezone: "America/Chicago",
     models: ["best_match", ...Object.values(MODELS).map(m => m.id)].join(","),
   });
-  const res = await fetch(`${API}?${q}`);
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  const res = await get(`${API}?${q}`);
   const raw = (await res.json()).hourly;
   // Asked for several models, every variable comes back suffixed with the
   // model's id. The best_match set goes back under the plain names, so
@@ -166,8 +178,7 @@ async function past(lat, lon) {
     latitude: String(lat), longitude: String(lon), hourly: "wet_bulb_temperature_2m",
     temperature_unit: "fahrenheit", past_days: "92", forecast_days: "1", timezone: "America/Chicago",
   });
-  const res = await fetch(`${API}?${q}`);
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+  const res = await get(`${API}?${q}`);
   return (await res.json()).hourly;
 }
 
@@ -199,6 +210,13 @@ for (const [slug, r] of Object.entries(resorts)) {
 }
 writeFileSync(SEASON_OUT, JSON.stringify(season, null, 2) + "\n");
 
-writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 const ok = Object.values(out.hills).filter(h => h.min !== null).length;
+// Not one hill loaded: keep the last good forecast, which says its own age,
+// rather than replace it with nothing. Failing here marks the workflow step
+// failed, which is what makes it warn.
+if (!ok) {
+  console.error(`\nno hill loaded; ${OUT} left as it was`);
+  process.exit(1);
+}
+writeFileSync(OUT, JSON.stringify(out, null, 2) + "\n");
 console.log(`\nwrote ${OUT} — ${ok}/${Object.keys(resorts).length} hills, ${Object.keys(out.places).length} places, ${HORIZON}-day horizon`);

@@ -41,7 +41,8 @@ export function bStrip(K, h, pre) {
     c.under + " of " + c.n + ' models under the threshold"></button>').join("") + "</div>";
 }
 // A projection is a floor, so it reads "9+"; a date the hill posted is exact.
-function bDays(n, posted) {
+function bDays(n, posted, open) {
+  if (open) return '<span class="pc-num">Open</span>';
   if (n > 0) return '<span class="pc-num">' + n + (posted ? "" : '<span class="pc-plus-sign">+</span>') +
     '</span><span class="pc-unit">days</span>';
   if (n === 0) return '<span class="pc-num">Today</span>';
@@ -60,8 +61,8 @@ export function bCard(K, picks, slug, idx) {
     '<button type="button" class="pc-rm" data-rm="' + idx + '" aria-label="Remove ' + bEsc(h.name) + '">&times;</button>' +
     '<h3 class="pc-name">' + bEsc(h.name) + "</h3>" +
     '<p class="pc-place">' + bEsc(h.place) + "</p>" +
-    '<p class="pc-count">' + bDays(h.days, h.posted) + "</p>" +
-    '<p class="pc-line">' + (h.posted
+    '<p class="pc-count">' + bDays(h.days, h.posted, h.open) + "</p>" +
+    '<p class="pc-line">' + (h.open ? "Opened <b>" : h.posted
       ? '<a class="posted" href="' + bEsc(h.posted) + '" target="_blank" rel="noopener">Posted opening</a> <b>'
       : "Projected <b>") + bShort(h.lo) +
       (h.lo === h.hi ? "" : " &ndash; " + bShort(h.hi)) + "</b></p>" +

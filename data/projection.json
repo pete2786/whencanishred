@@ -1,24 +1,10 @@
 {
   "wild-mountain": {
     "date": "2026-11-13",
-    "label": "weather",
-    "usual": "2026-11-10",
-    "night": "2026-11-12",
-    "gap": 1,
+    "label": "open",
     "range": {
       "lo": "2026-11-13",
-      "hi": "2026-11-20"
-    }
-  },
-  "andes-tower-hills": {
-    "date": "2026-11-13",
-    "label": "weather",
-    "usual": "2026-11-11",
-    "night": "2026-11-11",
-    "gap": 2,
-    "range": {
-      "lo": "2026-11-13",
-      "hi": "2026-11-23"
+      "hi": "2026-11-13"
     }
   },
   "trollhaugen": {
@@ -30,6 +16,14 @@
     "range": {
       "lo": "2026-11-14",
       "hi": "2026-11-27"
+    }
+  },
+  "andes-tower-hills": {
+    "date": "2026-11-14",
+    "label": "open",
+    "range": {
+      "lo": "2026-11-14",
+      "hi": "2026-11-14"
     }
   },
   "powder-ridge": {

@@ -388,7 +388,9 @@ function pip(r, tier) {
 // Sources cell and an em dash down the whole Closed column. Five columns, three
 // of them the same word repeated. Only say what differs from the default.
 function seasonRows(slug) {
-  const rows = Object.entries(seasons[slug] ?? {});
+  // A season with nothing dated yet, this one before opening day, is not a row.
+  const rows = Object.entries(seasons[slug] ?? {})
+    .filter(([, ev]) => ev.firstLift?.date || ev.fullOps?.date || ev.close?.date);
   const showClose = rows.some(([, ev]) => ev.close?.date);
 
   const cell = e => {
@@ -991,6 +993,7 @@ function boardHill(slug) {
     lo: p.range?.lo ?? p.date, hi: p.range?.hi ?? p.date,
     last: seasons[slug]?.[lastSeason]?.firstLift?.date ?? null,
     posted: p.label === "target" && stated[slug]?.date === p.date ? stated[slug].url : null,
+    open: p.label === "open",
     cells,
     daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
   };
@@ -1027,7 +1030,7 @@ function boardSection() {
     const first = BOARD.hills[a.hills[0]];
     const rows = a.hills.map(s => {
       const h = BOARD.hills[s];
-      const when = h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
+      const when = h.open ? "<b>Open</b>" : h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
       return `      <div class="brow">
         <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
         ${bStrip(BOARD, h, "row")}

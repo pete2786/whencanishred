@@ -4,7 +4,7 @@
 
 import { readFileSync, writeFileSync } from "node:fs";
 
-const SEASONS = ["2021-22", "2022-23", "2023-24", "2024-25", "2025-26"];
+const SEASONS = ["2021-22", "2022-23", "2023-24", "2024-25", "2025-26", "2026-27"];
 const MONTHS = { oct: 10, nov: 11, dec: 12, jan: 1 };
 
 const read = f => JSON.parse(readFileSync(f, "utf8"));

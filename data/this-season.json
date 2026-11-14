@@ -1,102 +1,83 @@
 {
   "season": 2026,
-  "through": "2026-11-14T07:00",
+  "through": "2026-11-14T15:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 27,
-      "error": "429 Too Many Requests"
+      "hours": 44
     },
     "trollhaugen": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 21,
-      "error": "429 Too Many Requests"
+      "hours": 38
     },
     "hyland-hills": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 16,
-      "error": "429 Too Many Requests"
+      "hours": 30
     },
     "afton-alps": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 15,
-      "error": "429 Too Many Requests"
+      "hours": 31
     },
     "welch-village": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 16,
-      "error": "429 Too Many Requests"
+      "hours": 32
     },
     "buck-hill": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 16,
-      "error": "429 Too Many Requests"
+      "hours": 32
     },
     "elm-creek": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 19,
-      "error": "429 Too Many Requests"
+      "hours": 35
     },
     "lutsen-mountains": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 52,
-      "error": "429 Too Many Requests"
+      "hours": 69
     },
     "giants-ridge": {
       "firstNight": "2026-10-29T23:00",
-      "hours": 72,
-      "error": "429 Too Many Requests"
+      "hours": 89
     },
     "spirit-mountain": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 55,
-      "error": "429 Too Many Requests"
+      "hours": 72
     },
     "powder-ridge": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 23,
-      "error": "429 Too Many Requests"
+      "hours": 40
     },
     "mount-kato": {
       "firstNight": "2026-11-12T20:00",
-      "hours": 14,
-      "error": "429 Too Many Requests"
+      "hours": 30
     },
     "buena-vista": {
       "firstNight": "2026-11-05T22:00",
-      "hours": 42,
-      "error": "429 Too Many Requests"
+      "hours": 60
     },
     "detroit-mountain": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 28,
-      "error": "429 Too Many Requests"
+      "hours": 45
     },
     "andes-tower-hills": {
       "firstNight": "2026-11-11T23:00",
-      "hours": 27,
-      "error": "429 Too Many Requests"
+      "hours": 43
     },
     "coffee-mill": {
       "firstNight": "2026-11-12T20:00",
-      "hours": 14,
-      "error": "429 Too Many Requests"
+      "hours": 30
     },
     "mount-ski-gull": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 29,
-      "error": "429 Too Many Requests"
+      "hours": 46
     },
     "chester-bowl": {
       "firstNight": "2026-11-06T19:00",
-      "hours": 45,
-      "error": "429 Too Many Requests"
+      "hours": 62
     },
     "steeplechase": {
       "firstNight": "2026-11-12T19:00",
-      "hours": 15,
-      "error": "429 Too Many Requests"
+      "hours": 31
     }
   }
 }

@@ -214,6 +214,33 @@
           }
         ]
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": "2026-11-13",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November."
+          }
+        ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "trollhaugen": {
@@ -372,6 +399,26 @@
             "evidence": "Facebook, 22 November 2025: \"NORMAL HOURS BEGIN 11/28\". Rentals, ski shop, snack bar and lounge from 11/28; Chair 2 and Storebakken/Minibakken added for Thanksgiving weekend. Closed 11/24-11/27 to make snow. Lessons lagged to 12/1."
           }
         ]
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
       },
       "close": {
         "date": null,
@@ -551,6 +598,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "afton-alps": {
@@ -675,6 +742,26 @@
             "evidence": "aftonalps.com banner, 2 December 2025: \"Afton Opening Announcement: Afton Alps opens Thur, Dec 4th\"; captured again on the 6th, after the fact: \"Afton is Open. The 25/26 season is underway.\" On 17 November the banner offered only pre-season retail and tune shop hours."
           }
         ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
       },
       "fullOps": {
         "date": null,
@@ -846,6 +933,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "buck-hill": {
@@ -997,6 +1104,26 @@
             "evidence": "Facebook, 2 and 4 December 2025: \"We are officially back on Friday, December 5th at 3:00 PM. New trails, more parks, and additional lifts will be ready to go.\" Snow tubing opened the same day and lessons were bookable. The hill ran the opening weekend of 29-30 November then closed 1-4 December to make snow, so this is the day it started operating as a hill rather than an event. Not 100%: more terrain followed on the 12th and the halfpipe on the 17th, both treated as bonus."
           }
         ]
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
       },
       "close": {
         "date": null,
@@ -1176,6 +1303,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "lutsen-mountains": {
@@ -1313,6 +1460,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "giants-ridge": {
@@ -1437,6 +1604,26 @@
             "evidence": "Giants Ridge Facebook: \"Opening Day at Giants Ridge Is Almost Here. The countdown is on and we are getting ready to kick off the season at Giants Ridge next Saturday, November 29th at 9AM!\""
           }
         ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
       },
       "fullOps": {
         "date": null,
@@ -1622,6 +1809,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "powder-ridge": {
@@ -1706,6 +1913,26 @@
       }
     },
     "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
       "firstLift": {
         "date": null,
         "precision": null,
@@ -1826,6 +2053,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "buena-vista": {
@@ -1928,6 +2175,26 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "detroit-mountain": {
@@ -2012,6 +2279,26 @@
       }
     },
     "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
       "firstLift": {
         "date": null,
         "precision": null,
@@ -2181,6 +2468,33 @@
         "corroboration": "unknown",
         "sources": []
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": "2026-11-14",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Supplied by David on 14 November 2026: Andes Tower Hills opened today, 14 November.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Supplied by David on 14 November 2026: Andes Tower Hills opened today, 14 November."
+          }
+        ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
     }
   },
   "coffee-mill": {
@@ -2305,6 +2619,392 @@
             "evidence": "cmskiarea.com WP post 3 Dec 2025: \"OPEN THIS WEEKEND DECEMBER 13th and 14th, 10am-5pm... both lifts running which equals more runs.\" Announced ten days ahead; 15 Dec holiday-hours and 28 Dec open posts confirm operation, no correction posted."
           }
         ]
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "mount-ski-gull": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "chester-bowl": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    }
+  },
+  "steeplechase": {
+    "2021-22": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2022-23": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2023-24": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2024-25": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2025-26": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "fullOps": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      },
+      "close": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
+      }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": null,
+        "precision": null,
+        "corroboration": "unknown",
+        "sources": []
       },
       "fullOps": {
         "date": null,
