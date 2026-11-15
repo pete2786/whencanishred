@@ -23,6 +23,8 @@ const hoursRows = read("data/hours.json");
 // rather than printing numbers it does not have.
 const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
 const seasonNotes = existsSync("data/season-notes.json") ? read("data/season-notes.json") : {};
+// Hills that opened this season and shut again. Hand-owned, see the file.
+const status = existsSync("data/status.json") ? read("data/status.json").hills : {};
 
 // data/hours.json keys hills by display name, and one of them is shorter than
 // the name in the resort record.
@@ -994,6 +996,7 @@ function boardHill(slug) {
     last: seasons[slug]?.[lastSeason]?.firstLift?.date ?? null,
     posted: p.label === "target" && stated[slug]?.date === p.date ? stated[slug].url : null,
     open: p.label === "open",
+    closed: p.label === "open" ? status[slug]?.closed ?? null : null,
     cells,
     daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
   };
@@ -1030,7 +1033,7 @@ function boardSection() {
     const first = BOARD.hills[a.hills[0]];
     const rows = a.hills.map(s => {
       const h = BOARD.hills[s];
-      const when = h.open ? "<b>Open</b>" : h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
+      const when = h.closed ? "<b>Closed</b>" : h.open ? "<b>Open</b>" : h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
       return `      <div class="brow">
         <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
         ${bStrip(BOARD, h, "row")}

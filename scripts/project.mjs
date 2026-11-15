@@ -255,6 +255,18 @@ if (live) {
   }
 }
 
+// A hill not recorded as open has not opened, as far as the site knows, so its
+// projection cannot sit in the past: the board would read that as open. It
+// holds at today until the hill opens or the weather moves it. Trollhaugen's
+// 14 November passed on the 15th with no opening on record.
+if (live) {
+  for (const p of Object.values(out)) {
+    if (p.label === "open" || p.date >= asOf) continue;
+    p.date = asOf;
+    if (p.range) p.range = { lo: p.range.lo < asOf ? asOf : p.range.lo, hi: p.range.hi < asOf ? asOf : p.range.hi };
+  }
+}
+
 const ordered = Object.fromEntries(
   Object.entries(out).sort(([, a], [, b]) => a.date.localeCompare(b.date)),
 );

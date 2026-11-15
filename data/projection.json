@@ -7,23 +7,23 @@
       "hi": "2026-11-13"
     }
   },
-  "trollhaugen": {
-    "date": "2026-11-14",
-    "label": "weather",
-    "usual": "2026-11-10",
-    "night": "2026-11-12",
-    "gap": 2,
-    "range": {
-      "lo": "2026-11-14",
-      "hi": "2026-11-27"
-    }
-  },
   "andes-tower-hills": {
     "date": "2026-11-14",
     "label": "open",
     "range": {
       "lo": "2026-11-14",
       "hi": "2026-11-14"
+    }
+  },
+  "trollhaugen": {
+    "date": "2026-11-15",
+    "label": "weather",
+    "usual": "2026-11-10",
+    "night": "2026-11-12",
+    "gap": 2,
+    "range": {
+      "lo": "2026-11-15",
+      "hi": "2026-11-27"
     }
   },
   "powder-ridge": {

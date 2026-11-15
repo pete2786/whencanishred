@@ -138,6 +138,10 @@ committed and rerun by hand.
 A hill's own announced or targeted date always wins over the model. Both
 estimators are weak while the record is half empty; rerun after any backfill.
 
+`data/status.json` is hand-owned too: hills that opened this season and shut
+again. The first lift stays in the record as it happened; the entry only stops
+the board calling the hill open. Delete it when the hill reopens.
+
 `data/resorts.json` is hand-owned. `scripts/identity.mjs` only gathers candidate
 handles and colors from the resorts' own pages — archived captures first, then a
 live fetch — and a human transcribes the winners. Colors are recorded but nothing
