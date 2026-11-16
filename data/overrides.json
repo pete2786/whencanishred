@@ -45,6 +45,12 @@
         "date": "2024-12-08",
         "note": "Facebook, 8 December 2024: \"Regular Hours are back and we’re open daily at 10am for skiing & snowboarding! Wahoo!\" Eleven runs and six-plus lifts that weekend. Terrain kept filling in afterwards — Valhalla on the 12th, Bjorkedahl on the 18th, Chair 1 not until the 23rd — which is why the hill running normally comes before the hill being complete."
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": "2026-11-15",
+        "note": "Supplied by David on 16 November 2026: Trollhaugen opened yesterday, 15 November, and is open 16 and 17 November."
+      }
     }
   },
   "buck-hill": {
@@ -134,7 +140,7 @@
     "2026-27": {
       "firstLift": {
         "date": "2026-11-13",
-        "note": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November."
+        "note": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November. On 16 November: open through Friday 20 November, 4-8pm."
       }
     }
   },

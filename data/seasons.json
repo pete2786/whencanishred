@@ -220,12 +220,12 @@
         "date": "2026-11-13",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November.",
+        "note": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November. On 16 November: open through Friday 20 November, 4-8pm.",
         "sources": [
           {
             "kind": "local",
             "url": null,
-            "evidence": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November."
+            "evidence": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November. On 16 November: open through Friday 20 November, 4-8pm."
           }
         ]
       },
@@ -409,10 +409,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-15",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Supplied by David on 16 November 2026: Trollhaugen opened yesterday, 15 November, and is open 16 and 17 November.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": null,
+            "evidence": "Supplied by David on 16 November 2026: Trollhaugen opened yesterday, 15 November, and is open 16 and 17 November."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
