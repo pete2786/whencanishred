@@ -996,11 +996,16 @@ function boardHill(slug) {
     last: seasons[slug]?.[lastSeason]?.firstLift?.date ?? null,
     posted: p.label === "target" && stated[slug]?.date === p.date ? stated[slug].url : null,
     open: p.label === "open",
-    closed: p.label === "open" ? status[slug]?.closed ?? null : null,
+    // status.closed is the first day shut. Before it the hill is open through
+    // the day prior; from it on the hill is paused, not done for the season.
+    closed: p.label === "open" && status[slug]?.closed && daysUntil(status[slug].closed) <= 0 ? status[slug].closed : null,
+    until: p.label === "open" && status[slug]?.closed && daysUntil(status[slug].closed) > 0 ? addDays(status[slug].closed, -1) : null,
     cells,
     daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
   };
 }
+
+const addDays = (iso, n) => new Date(Date.parse(iso + "T12:00Z") + n * 86400000).toISOString().slice(0, 10);
 
 const areaHills = id => Object.keys(resorts).filter(s => resorts[s].area === id)
   .sort((a, b) => projection[a].date.localeCompare(projection[b].date) || resorts[a].name.localeCompare(resorts[b].name));
@@ -1033,11 +1038,11 @@ function boardSection() {
     const first = BOARD.hills[a.hills[0]];
     const rows = a.hills.map(s => {
       const h = BOARD.hills[s];
-      const when = h.closed ? "<b>Closed</b>" : h.open ? "<b>Open</b>" : h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
+      const when = h.closed ? "<b>Paused</b>" : h.open ? "<b>Open</b>" : h.days > 0 ? `<b>${h.days}</b> days` : h.days === 0 ? "<b>Today</b>" : "<b>Open</b>";
       return `      <div class="brow">
         <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
         ${bStrip(BOARD, h, "row")}
-        <div class="brow-when">${when}<span${h.posted ? ' class="posted"' : ""}>${h.posted ? "Posted " : ""}${bShort(h.proj)}</span></div>
+        <div class="brow-when">${when}<span${h.posted ? ' class="posted"' : ""}>${h.closed ? "Reopening soon" : h.until ? `Through ${bShort(h.until)}` : `${h.posted ? "Posted " : ""}${bShort(h.proj)}`}</span></div>
       </div>`;
     }).join("\n");
     return `    <div class="area">

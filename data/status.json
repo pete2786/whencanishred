@@ -1,10 +1,18 @@
 {
-  "_comment": "Hand-owned. Hills that have opened this season and shut again. The first lift stays in the record as it happened; this only stops the site calling the hill open. Delete the entry when it reopens.",
+  "_comment": "Hand-owned. Hills that have opened this season and shut again. closed is the first day shut; a future date shows the hill open through the day before, then paused. The first lift stays in the record as it happened; this only stops the site calling the hill open. Delete the entry when it reopens.",
   "season": "2026-27",
   "hills": {
     "andes-tower-hills": {
       "closed": "2026-11-15",
       "note": "Supplied by David on 15 November 2026: Andes Tower Hills closed again the day after opening."
+    },
+    "trollhaugen": {
+      "closed": "2026-11-18",
+      "note": "Supplied by David on 18 November 2026: Trollhaugen closed again."
+    },
+    "wild-mountain": {
+      "closed": "2026-11-21",
+      "note": "Supplied by David on 18 November 2026: Wild Mountain is open until Friday 20 November."
     }
   }
 }

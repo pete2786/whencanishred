@@ -55,15 +55,15 @@
       "hi": "2026-11-26"
     }
   },
-  "spirit-mountain": {
-    "date": "2026-11-26",
-    "label": "model",
+  "giants-ridge": {
+    "date": "2026-11-27",
+    "label": "target",
     "range": {
-      "lo": "2026-11-25",
-      "hi": "2026-11-30"
+      "lo": "2026-11-27",
+      "hi": "2026-11-27"
     }
   },
-  "giants-ridge": {
+  "spirit-mountain": {
     "date": "2026-11-27",
     "label": "target",
     "range": {

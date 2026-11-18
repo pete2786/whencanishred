@@ -42,7 +42,7 @@ export function bStrip(K, h, pre) {
 }
 // A projection is a floor, so it reads "9+"; a date the hill posted is exact.
 function bDays(n, posted, open, closed) {
-  if (closed) return '<span class="pc-num">Closed</span>';
+  if (closed) return '<span class="pc-num">Paused</span>';
   if (open) return '<span class="pc-num">Open</span>';
   if (n > 0) return '<span class="pc-num">' + n + (posted ? "" : '<span class="pc-plus-sign">+</span>') +
     '</span><span class="pc-unit">days</span>';
@@ -67,7 +67,7 @@ export function bCard(K, picks, slug, idx) {
       ? '<a class="posted" href="' + bEsc(h.posted) + '" target="_blank" rel="noopener">Posted opening</a> <b>'
       : "Projected <b>") + bShort(h.lo) +
       (h.lo === h.hi ? "" : " &ndash; " + bShort(h.hi)) + "</b>" +
-      (h.closed ? ", closed <b>" + bShort(h.closed) + "</b>" : "") + "</p>" +
+      (h.closed ? ", <b>reopening soon</b>" : h.until ? ", open through <b>" + bShort(h.until) + "</b>" : "") + "</p>" +
     '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
     '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
     '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +
