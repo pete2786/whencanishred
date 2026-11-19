@@ -217,15 +217,15 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": "2026-11-13",
+        "date": "2026-11-14",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November. On 16 November: open through Friday 20 November, 4-8pm.",
+        "note": "Supplied by David: Wild Mountain opened Saturday 14 November (corrected on 19 November from 13 November, which had Wild and Andes swapped). On 16 November: open through Friday 20 November, 4-8pm.",
         "sources": [
           {
             "kind": "local",
             "url": null,
-            "evidence": "Supplied by David on 14 November 2026: Wild Mountain opened yesterday, 13 November. On 16 November: open through Friday 20 November, 4-8pm."
+            "evidence": "Supplied by David: Wild Mountain opened Saturday 14 November (corrected on 19 November from 13 November, which had Wild and Andes swapped). On 16 November: open through Friday 20 November, 4-8pm."
           }
         ]
       },
@@ -2478,15 +2478,15 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": "2026-11-14",
+        "date": "2026-11-13",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Supplied by David on 14 November 2026: Andes Tower Hills opened today, 14 November.",
+        "note": "Supplied by David: Andes Tower Hills opened Friday 13 November (corrected on 19 November from 14 November, which had Wild and Andes swapped).",
         "sources": [
           {
             "kind": "local",
             "url": null,
-            "evidence": "Supplied by David on 14 November 2026: Andes Tower Hills opened today, 14 November."
+            "evidence": "Supplied by David: Andes Tower Hills opened Friday 13 November (corrected on 19 November from 14 November, which had Wild and Andes swapped)."
           }
         ]
       },

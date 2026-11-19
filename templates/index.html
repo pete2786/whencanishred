@@ -224,6 +224,16 @@
   }
   .card p { font-size:13.5px; color:var(--ink-2); margin:0; }
   .card .pod { font-size:30px; }
+  /* The podium's own three colours, on the medal and the card's top edge only.
+     Everything else saturated on the page belongs to a hill. */
+  .card:has(.medal) {
+    border-top:4px solid var(--medal);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--medal) 16%, var(--surface)) 0%, var(--surface) 75%);
+  }
+  .card .medal { color:var(--medal); font-weight:800; font-size:12.5px; }
+  .medal.gold { --medal:#E3B341; } .card:has(.gold) { --medal:#E3B341; }
+  .medal.silver { --medal:#C4CCD3; } .card:has(.silver) { --medal:#C4CCD3; }
+  .medal.bronze { --medal:#CD8550; } .card:has(.bronze) { --medal:#CD8550; }
   .card dl { margin:12px 0 0; display:grid; grid-template-columns:1fr auto; gap:7px 12px; font-size:13px; }
   .card dt { color:var(--ink-3); }
   .card dd { margin:0; text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
@@ -757,19 +767,19 @@ a.posted:hover { border-bottom-style:solid; }
     <p class="sec-note">The first three to turn a lift this season.</p>
     <div class="duo">
       <div class="card">
-        <h3>Gold</h3>
+        <h3 class="medal gold">Gold</h3>
         <p class="big pod"><b>Andes Tower Hills</b></p>
-        <p>Opened Saturday, 14 November.</p>
+        <p>Opened Friday, 13 November.</p>
       </div>
       <div class="card">
-        <h3>Silver</h3>
+        <h3 class="medal silver">Silver</h3>
         <p class="big pod"><b>Wild Mountain</b></p>
-        <p>Opened Friday, 13 November. Bonus points for first chair.</p>
+        <p>Opened Saturday, 14 November. Bonus points for first chair.</p>
       </div>
       <div class="card">
-        <h3>Bronze</h3>
+        <h3 class="medal bronze">Bronze</h3>
         <p class="big pod"><b>Trollhaugen</b></p>
-        <p>Opened Sunday, 15 November. Our personal favorite, for setting a pill in the park.</p>
+        <p>Opened Sunday, 15 November.</p>
       </div>
     </div>
   </section>

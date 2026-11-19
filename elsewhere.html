@@ -227,6 +227,16 @@
   }
   .card p { font-size:13.5px; color:var(--ink-2); margin:0; }
   .card .pod { font-size:30px; }
+  /* The podium's own three colours, on the medal and the card's top edge only.
+     Everything else saturated on the page belongs to a hill. */
+  .card:has(.medal) {
+    border-top:4px solid var(--medal);
+    background:linear-gradient(180deg, color-mix(in srgb, var(--medal) 16%, var(--surface)) 0%, var(--surface) 75%);
+  }
+  .card .medal { color:var(--medal); font-weight:800; font-size:12.5px; }
+  .medal.gold { --medal:#E3B341; } .card:has(.gold) { --medal:#E3B341; }
+  .medal.silver { --medal:#C4CCD3; } .card:has(.silver) { --medal:#C4CCD3; }
+  .medal.bronze { --medal:#CD8550; } .card:has(.bronze) { --medal:#CD8550; }
   .card dl { margin:12px 0 0; display:grid; grid-template-columns:1fr auto; gap:7px 12px; font-size:13px; }
   .card dt { color:var(--ink-3); }
   .card dd { margin:0; text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
@@ -787,7 +797,7 @@ a.posted:hover { border-bottom-style:solid; }
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>63 of 114 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-19T04:42:14.828Z">18 November 2026, 22:42 CST</time>. Forecast pulled <time datetime="2026-11-19T04:41:46.217Z">18 November 2026, 22:41 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-19T04:46:40.712Z">18 November 2026, 22:46 CST</time>. Forecast pulled <time datetime="2026-11-19T04:41:46.217Z">18 November 2026, 22:41 CST</time>.</span>
     <span><a href="about.html">About this site</a></span>
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
