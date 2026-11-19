@@ -223,6 +223,7 @@
     line-height:1; font-variant-numeric:tabular-nums; margin:0 0 8px; color:var(--warm);
   }
   .card p { font-size:13.5px; color:var(--ink-2); margin:0; }
+  .card .pod { font-size:30px; }
   .card dl { margin:12px 0 0; display:grid; grid-template-columns:1fr auto; gap:7px 12px; font-size:13px; }
   .card dt { color:var(--ink-3); }
   .card dd { margin:0; text-align:right; font-weight:600; font-variant-numeric:tabular-nums; }
@@ -746,6 +747,30 @@ a.posted:hover { border-bottom-style:solid; }
   <section class="hero" aria-label="Your hills">
     <div id="picks">
 <!--{{PICKS}}-->
+    </div>
+  </section>
+
+  <!-- Hand-written, not built from data: a podium is a judgement, not a date.
+       Hill names are bare <b> so markHills paints them in their own colours. -->
+  <section class="sec">
+    <h2 class="sec-title">Hats off to the snowmakers</h2>
+    <p class="sec-note">The first three to turn a lift this season.</p>
+    <div class="duo">
+      <div class="card">
+        <h3>Gold</h3>
+        <p class="big pod"><b>Andes Tower Hills</b></p>
+        <p>Opened Saturday, 14 November.</p>
+      </div>
+      <div class="card">
+        <h3>Silver</h3>
+        <p class="big pod"><b>Wild Mountain</b></p>
+        <p>Opened Friday, 13 November. Bonus points for first chair.</p>
+      </div>
+      <div class="card">
+        <h3>Bronze</h3>
+        <p class="big pod"><b>Trollhaugen</b></p>
+        <p>Opened Sunday, 15 November. Our personal favorite, for setting a pill in the park.</p>
+      </div>
     </div>
   </section>
 
