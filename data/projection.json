@@ -23,14 +23,6 @@
       "hi": "2026-11-15"
     }
   },
-  "powder-ridge": {
-    "date": "2026-11-21",
-    "label": "target",
-    "range": {
-      "lo": "2026-11-21",
-      "hi": "2026-11-21"
-    }
-  },
   "buena-vista": {
     "date": "2026-11-22",
     "label": "climate",
@@ -45,14 +37,6 @@
     "range": {
       "lo": "2026-11-20",
       "hi": "2026-11-25"
-    }
-  },
-  "lutsen-mountains": {
-    "date": "2026-11-26",
-    "label": "target",
-    "range": {
-      "lo": "2026-11-26",
-      "hi": "2026-11-26"
     }
   },
   "giants-ridge": {
@@ -79,6 +63,22 @@
       "hi": "2026-11-27"
     }
   },
+  "lutsen-mountains": {
+    "date": "2026-11-28",
+    "label": "target",
+    "range": {
+      "lo": "2026-11-28",
+      "hi": "2026-11-28"
+    }
+  },
+  "powder-ridge": {
+    "date": "2026-11-28",
+    "label": "climate",
+    "range": {
+      "lo": "2026-11-23",
+      "hi": "2026-11-28"
+    }
+  },
   "afton-alps": {
     "date": "2026-11-29",
     "label": "model",
@@ -103,20 +103,20 @@
       "hi": "2026-12-04"
     }
   },
-  "mount-kato": {
-    "date": "2026-11-30",
-    "label": "climate",
-    "range": {
-      "lo": "2026-11-23",
-      "hi": "2026-11-30"
-    }
-  },
   "hyland-hills": {
     "date": "2026-12-01",
     "label": "model",
     "range": {
       "lo": "2026-11-24",
       "hi": "2026-12-04"
+    }
+  },
+  "mount-kato": {
+    "date": "2026-12-01",
+    "label": "climate",
+    "range": {
+      "lo": "2026-11-23",
+      "hi": "2026-12-01"
     }
   },
   "steeplechase": {

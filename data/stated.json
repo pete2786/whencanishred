@@ -2,8 +2,9 @@
   "season": "2026-27",
   "hills": {
     "lutsen-mountains": {
-      "date": "2026-11-26",
-      "note": "Lutsen Mountains website, seen 5 November 2026: projecting a 26 November opening, weather permitting.",
+      "date": "2026-11-28",
+      "quote": "ANTICIPATED OPENING DAY OF THE 2026/2027 SEASON IS NOVEMBER 28th",
+      "note": "Lutsen Mountains website lift status banner, seen 18 November 2026: \"ANTICIPATED OPENING DAY OF THE 2026/2027 SEASON IS NOVEMBER 28th\". Lutsen also emailed David the 28th. Replaces the 26 November seen on 5 November; the homepage copy still read 26th on the 18th.",
       "url": "https://www.lutsen.com/"
     },
     "chester-bowl": {
@@ -11,12 +12,6 @@
       "note": "Chester Bowl season pass page, seen 5 November 2026: \"Opening Day: Sunday, December 12, 2026\" under Important Dates, and \"Tentative Opening Day (weather permitting): December 12\".",
       "url": "https://www.chesterbowl.org/ski-and-snowboard/season-pass-purchases/",
       "quote": "Tentative Opening Day (weather permitting): December 12"
-    },
-    "powder-ridge": {
-      "date": "2026-11-21",
-      "note": "Powder Ridge hours and trail map pages, seen 5 November 2026: \"Tentative opening day for skiing and snowboarding is November 21st, weather permitting!\"",
-      "url": "https://powderridge.com/ski-ride/hours/",
-      "quote": "Tentative opening day for skiing and snowboarding is November 21st, weather permitting!"
     },
     "giants-ridge": {
       "date": "2026-11-27",
