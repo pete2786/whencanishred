@@ -86,21 +86,24 @@ async function forecast(lat, lon) {
 function perModel(time, wb) {
   const days = [];
   let min = null, hoursUnder = 0, run = 0, longest = 0, lastHour = null, firstNight = null;
+  // Hours under the line on each day, null once the model has run out.
   for (let i = 0; i < time.length; i++) {
     const v = wb[i] ?? null;
     const day = time[i].slice(0, 10);
-    if (!days.length || days.at(-1).date !== day) days.push({ date: day, low: null });
+    if (!days.length || days.at(-1).date !== day) days.push({ date: day, low: null, hours: null });
     if (v === null) { run = 0; continue; }
     lastHour = time[i];
     if (min === null || v < min) min = v;
     const d = days.at(-1);
     if (d.low === null || v < d.low) d.low = v;
+    d.hours = (d.hours ?? 0) + (v < THRESHOLD ? 1 : 0);
     if (v < THRESHOLD) {
       hoursUnder++; longest = Math.max(longest, ++run);
       if (run === NIGHT && !firstNight) firstNight = time[i - NIGHT + 1];
     } else run = 0;
   }
-  return { min, hoursUnder, longestRun: longest, firstNight, lastHour, daily: days.map(d => d.low) };
+  return { min, hoursUnder, longestRun: longest, firstNight, lastHour,
+           daily: days.map(d => d.low), dailyHours: days.map(d => d.hours) };
 }
 
 function summarise(h) {
@@ -188,10 +191,17 @@ for (const [slug, r] of Object.entries(resorts)) {
   try {
     const h = await past(r.lat, r.lon);
     let hours = 0, run = 0, firstNight = null;
+    // Hours under the line on each finished day, which project.mjs sums over
+    // the last two weeks. Today is not finished, so it is left out.
+    const daily = { ...(was.daily ?? {}) };
+    const today = nowCentral.slice(0, 10);
     for (let i = 0; i < h.time.length; i++) {
       const t = h.time[i], v = h.wet_bulb_temperature_2m[i];
       if (t < seasonStart || t >= nowCentral) continue;
+      const day = t.slice(0, 10);
+      if (day < today && t.endsWith("T00:00")) daily[day] = 0;
       if (v !== null && v < THRESHOLD) {
+        if (day < today) daily[day] = (daily[day] ?? 0) + 1;
         hours++;
         if (++run === NIGHT && !firstNight) firstNight = h.time[i - NIGHT + 1];
       } else run = 0;
@@ -201,6 +211,7 @@ for (const [slug, r] of Object.entries(resorts)) {
     season.hills[slug] = {
       firstNight: was.firstNight ?? firstNight,
       hours: Math.max(hours, was.hours ?? 0),
+      daily,
     };
   } catch (e) {
     season.hills[slug] = { ...was, error: String(e.message) };

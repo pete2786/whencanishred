@@ -16,7 +16,7 @@ node scripts/climatology.mjs                  # first-window date, normal/earlie
 node scripts/curve.mjs                        # mean wet-bulb curve -> data/curve.json
 node scripts/forecast.mjs                     # 16-day wet-bulb forecast -> data/forecast.json
 node scripts/places.mjs                       # climatology for regions with no hills -> data/places.json
-node scripts/nights.mjs                       # first full night each autumn, per hill -> data/nights.json (needs the cache)
+node scripts/coldhours.mjs                    # daily hours under 28 each autumn, per hill -> data/coldhours.json (needs the cache)
 node scripts/project.mjs                      # projected opening dates -> data/projection.json
 node scripts/project.mjs --report              # the working, written nowhere
 node scripts/identity.mjs                     # social/color candidates -> data/raw/identity.json
@@ -112,28 +112,33 @@ past. And a hill with no record can carry `projectLike` in `resorts.json`
 (Chester Bowl projects like Elm Creek until a date of its own is stated): it takes that hill's record and gaps
 instead of the climate fit, and is labelled `peer`.
 
-Then this fall's weather gets a say. Every one of the 60 openings on record came
-after at least one full night of snowmaking, eight hours in a row under 28°, and
-in late falls each hill opened close to the shortest gap it has ever managed
-after that night (in 2024 Afton, Welch and Buck all opened ten days after it).
-So a hill opens no sooner than its first night plus its shortest gap; a hill
-with no record borrows the median of everyone else's. Before the first night
-comes, its date is the median of the falls in `data/nights.json` that had none
-by now, or none a week from now if no forecast model has one in the coming
-week. When that lands after the usual date, the projection moves and is
-labelled `weather`. In a normal fall it changes nothing.
+Then this fall's weather gets a say, as hours banked: hours under 28° in the
+14 days before a given day. A hill can open no sooner than the day it has banked
+the fewest it has ever opened on; a hill with no record needs the median of
+everyone else's fewest. When that day lands after the usual date, the
+projection moves and is labelled `weather`.
 
-Each hill also gets a range. Its early end is the later of what the weather
-allows (the earliest of those late falls, plus the gap) and the hill's earliest
-opening on record; its late end is the later of the latest of those falls plus
-the gap and the hill's latest opening on record. Each homepage card shows its
+The hours come from what has happened this season, then the forecast (the
+average of the American and European models), then past the forecast each
+hill's normal for that day. Tested on the 60 openings on record, each predicted
+from the other seasons only, the median date alone misses by 7.0 days on
+average and the median held back by banked hours by 5.9. For a hill with no
+record of its own, 11.9 days becomes 11.3. Those dates are partly business
+decisions, which no weather explains. This replaced a first-night rule that
+scored 6.9.
+
+Each hill also gets a range. Its early end is the later of the day the wetter
+model banks the hours and the hill's earliest opening on record; its late end
+is the later of the day the drier model does and its latest opening on record.
+A hill with no record has no latest opening, so its late end runs 11 days, the
+backtest's average miss, past the projection. Each homepage card shows its
 hill's range.
 
 `forecast.mjs` writes what has happened so far to `data/this-season.json`: hours
-under 28° since 1 September and the first full night, which is kept once found.
-The workflow runs `project.mjs` after it, so projections move twice a day.
-`data/nights.json` comes from the ERA5 cache, which CI does not have, so it is
-committed and rerun by hand.
+under 28° per day since 1 September and the first full night, both kept once
+recorded. The workflow runs `project.mjs` after it, so projections move twice a
+day. `data/coldhours.json` comes from the ERA5 cache, which CI does not have, so
+it is committed and rerun by hand.
 
 A hill's own announced or targeted date always wins over the model. Both
 estimators are weak while the record is half empty; rerun after any backfill.

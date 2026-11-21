@@ -172,88 +172,110 @@ for (const slug of Object.keys(resorts)) {
 
 // --- this fall's weather ------------------------------------------------------
 // The record says when a hill normally opens. It cannot say when the cold has
-// not come. Every one of the 60 openings on file came after at least one full
-// night of snowmaking, eight hours in a row under 28, and in the late falls on
-// record each hill opened close to the shortest gap it has ever managed after
-// that night: in 2024 Afton, Welch and Buck all opened ten days after it, which
-// is the least any of them has ever taken.
+// not come, or has come for a night and left. What a hill opens on is snow it
+// has made, so the weather enters as hours banked: hours under 28 in the two
+// weeks before the day. Each hill needs at least the fewest it has ever opened
+// on; a hill with no record needs the median of everyone else's fewest.
 //
-// So a hill opens no sooner than its first night plus its shortest gap. In a
-// normal fall that lands well before the median and changes nothing. In a late
-// one it is the binding date, and the projection moves to it.
+// Tested on the 60 openings on record, each predicted from the other seasons
+// only: the median date alone misses by 7.0 days on average, the median held
+// back until the hours are banked by 5.9. The first-night rule this replaced
+// managed 6.9. For a hill predicted with no record of its own, 11.9 days
+// becomes 11.3; those dates are partly business decisions, which no weather
+// explains.
 //
-// Before the first night has come, its date is the median of the falls that
-// were just as late: the years in data/nights.json with no night by today. When
-// no model in the forecast has a night in the coming week either, "just as
-// late" means no night a week from now. A week, because past it the models
-// have twice found nights that never came: 10 and 16 October, this fall.
-const nights = existsSync("data/nights.json") ? read("data/nights.json").hills : {};
+// The hours come from three places in turn: what has happened this season
+// (data/this-season.json), the forecast (data/forecast.json), and past its
+// horizon each hill's normal for that day (data/coldhours.json). The American
+// and European models set the range: the wetter one its early end, the drier
+// one its late end, and their average the projection.
+const coldHist = existsSync("data/coldhours.json") ? read("data/coldhours.json").hills : {};
 const now = existsSync("data/this-season.json") ? read("data/this-season.json") : null;
 const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
-const SURE_DAYS = 7;
+const WINDOW = 14;
+const NO_RECORD_MISS = 11;
 const live = now?.season === SEASON;
 const asOf = live ? now.through.slice(0, 10) : null;
-const dayDiff = (a, b) => Math.round((Date.parse(`${a}T00:00:00Z`) - Date.parse(`${b}T00:00:00Z`)) / 86400000);
 const addDays = (iso, n) => new Date(Date.parse(`${iso}T00:00:00Z`) + n * 86400000).toISOString().slice(0, 10);
+const dayOf = (year, iso) => Math.round((Date.parse(`${iso}T00:00:00Z`) - Date.parse(`${year}-09-01T00:00:00Z`)) / 86400000);
+const autumnOf = season => +season.slice(0, 4);
 
-const shortestGap = slug => {
-  const gaps = Object.entries(seasons[slug] ?? {}).map(([season, v]) => {
-    const night = nights[slug]?.[season.slice(0, 4)];
-    return v.firstLift?.date && night ? dayDiff(v.firstLift.date, night) : null;
-  }).filter(g => g !== null && g >= 0);
-  return gaps.length ? Math.min(...gaps) : null;
+// Hours under the line in the WINDOW days before day d of one autumn on record.
+const bankedOn = (row, d) => {
+  if (!row || d < WINDOW) return null;
+  const xs = row.slice(d - WINDOW, d);
+  return xs.some(x => x === null) ? null : xs.reduce((a, x) => a + x, 0);
 };
-// A hill with no record borrows the middle of everyone else's shortest gap.
-const ownGaps = Object.keys(resorts).map(shortestGap).filter(g => g !== null).sort((a, b) => a - b);
-const pooledGap = ownGaps.length ? Math.round(median(ownGaps)) : null;
+const ownNeed = slug => {
+  const got = Object.entries(seasons[slug] ?? {})
+    .filter(([season, v]) => season !== THIS_SEASON && v.firstLift?.date)
+    .map(([season, v]) => bankedOn(coldHist[slug]?.[autumnOf(season)], dayOf(autumnOf(season), v.firstLift.date)))
+    .filter(x => x !== null);
+  return got.length ? Math.min(...got) : null;
+};
+const ownNeeds = Object.keys(resorts).map(ownNeed).filter(x => x !== null).sort((a, b) => a - b);
+const pooledNeed = ownNeeds.length ? median(ownNeeds) : null;
+const needOf = slug => ownNeed(recordHill(slug)) ?? pooledNeed;
 
-function firstNight(slug) {
-  const seen = now?.hills?.[slug]?.firstNight;
-  if (seen) { const d = seen.slice(0, 10); return { date: d, lo: d, hi: d, how: "observed" }; }
-  // A night any model sees inside the week keeps the clock at today.
-  const sure = addDays(asOf, SURE_DAYS);
-  const models = Object.values(fc?.hills?.[slug]?.models ?? {});
-  const coming = models.some(m => m.firstNight && m.firstNight.slice(0, 10) <= sure);
-  const by = models.length && !coming ? sure : asOf;
-  // Falls with no night by then, by month and day. A fall that never got one
-  // before New Year counts as the latest of all rather than dropping out.
-  const md = by.slice(5);
-  const late = Object.values(nights[slug] ?? {})
-    .map(d => (d === null ? "12-31" : d.slice(5))).filter(d => d > md).sort();
-  if (!late.length) { const d = addDays(by, 1); return { date: d, lo: d, hi: d, how: "unprecedented" }; }
-  const mid = late[Math.floor((late.length - 1) / 2)];
-  return { date: `${SEASON}-${mid}`, lo: `${SEASON}-${late[0]}`, hi: `${SEASON}-${late.at(-1)}`,
-           how: `median of ${late.length} falls with none by ${by.slice(5)}` };
+// A hill's normal hours on each day of the autumn, averaged over the record.
+const normalOn = (slug, d) => {
+  const rows = Object.values(coldHist[slug] ?? {}).map(r => r[d]).filter(x => x !== null && x !== undefined);
+  return rows.length ? rows.reduce((a, x) => a + x, 0) / rows.length : 0;
+};
+
+// Hours under the line on one date this season: what happened, then the
+// forecast, then the normal. which picks how the two models combine.
+function hoursOn(slug, iso, which) {
+  if (iso < asOf) return now.hills?.[slug]?.daily?.[iso] ?? 0;
+  const i = fc?.days?.indexOf(iso) ?? -1;
+  const m = fc?.hills?.[slug]?.models;
+  const xs = i < 0 || !m ? [] : ["gfs", "ecmwf"].map(k => m[k]?.dailyHours?.[i]).filter(x => x !== null && x !== undefined);
+  if (!xs.length) return normalOn(slug, dayOf(SEASON, iso));
+  return which === "wet" ? Math.max(...xs) : which === "dry" ? Math.min(...xs) : xs.reduce((a, x) => a + x, 0) / xs.length;
+}
+
+// The first day from tomorrow on with the hill's need banked, searching to the
+// end of January. Null if never: a hill that cannot get there on normal
+// weather is left on its record date.
+function ready(slug, which) {
+  const need = needOf(slug);
+  if (need === null) return null;
+  const memo = new Map();
+  const h = iso => (memo.has(iso) ? memo.get(iso) : (memo.set(iso, hoursOn(slug, iso, which)), memo.get(iso)));
+  for (let k = 1; k < 75; k++) {
+    const day = addDays(asOf, k);
+    let sum = 0;
+    for (let j = 1; j <= WINDOW; j++) sum += h(addDays(day, -j));
+    if (sum >= need) return day;
+  }
+  return null;
 }
 
 if (live) {
+  const later = (...xs) => xs.filter(Boolean).sort().at(-1);
   for (const slug of Object.keys(out)) {
     if (EXTERNAL.has(out[slug].label) || out[slug].label === "open") continue;
-    const gap = shortestGap(recordHill(slug)) ?? pooledGap;
-    if (gap === null) continue;
-    const night = firstNight(slug);
-    const earliest = addDays(night.date, gap);
     const row = rows.find(r => r[0] === slug);
-    // The range around it. Each end is the later of what the weather allows,
-    // from the earliest and latest of the falls that were just as late, and
-    // what the hill itself has done, from its earliest and latest opening on
-    // record. In a normal fall the record decides both ends; in a late one the
-    // weather lifts them. Never earlier than tomorrow.
-    const obs = observed(recordHill(slug)).map(toDate);
-    const later = (...xs) => xs.filter(Boolean).sort().at(-1);
-    const range = {
-      lo: later(addDays(night.lo, gap), obs[0], addDays(asOf, 1)),
-      hi: later(addDays(night.hi, gap), obs.at(-1)),
-    };
-    if (earliest > out[slug].date) {
-      row.push(`pushed from ${out[slug].date}: night ${night.date} (${night.how}) + ${gap}d`);
-      out[slug] = { date: earliest, label: "weather", usual: out[slug].date, night: night.date, gap };
-      row[2] = "weather"; row[3] = earliest;
+    const mid = ready(slug, "mid"), wet = ready(slug, "wet"), dry = ready(slug, "dry");
+    if (!mid) { row.push("weather: need not reached by January"); continue; }
+    const need = Math.round(needOf(slug));
+    if (mid > out[slug].date) {
+      row.push(`pushed from ${out[slug].date}: ${need}h banked by ${mid}`);
+      out[slug] = { date: mid, label: "weather", usual: out[slug].date, need };
+      row[2] = "weather"; row[3] = mid;
     } else {
-      row.push(`weather allows ${earliest}`);
+      row.push(`${need}h banked by ${mid}`);
     }
+    // The range: each end the later of what the weather allows and what the
+    // hill has done, its earliest and latest opening on record.
+    // A hill with no record of its own has nothing to bound the late end, and
+    // the backtest misses those by 11 days on average, so its range runs that
+    // far past the projection rather than pretending to a single day.
+    const obs = observed(recordHill(slug)).map(toDate);
     const d = out[slug].date;
-    out[slug].range = { lo: range.lo < d ? range.lo : d, hi: range.hi > d ? range.hi : d };
+    const lo = later(wet ?? mid, obs[0], addDays(asOf, 1));
+    const hi = later(dry ?? mid, obs.length ? obs.at(-1) : addDays(d, NO_RECORD_MISS));
+    out[slug].range = { lo: lo < d ? lo : d, hi: hi > d ? hi : d };
     row.push(`range ${out[slug].range.lo} to ${out[slug].range.hi}`);
   }
 }
@@ -278,7 +300,7 @@ const byKind = fitPoints.reduce((a, p) => ({ ...a, [p.kind]: (a[p.kind] ?? 0) + 
 console.log(`fit: ${slope.toFixed(3)} days per snowmaking hour, R2 ${r2.toFixed(2)}, on ${fitPoints.length} points ` +
             `(${Object.entries(byKind).map(([k, n]) => `${n} ${k}`).join(", ")})`);
 console.log("\nhill                 hrs  label    date        note");
-if (live) console.log(`(this fall through ${asOf}; no-record hills borrow a ${pooledGap}-day gap)`);
+if (live) console.log(`(this fall through ${asOf}; ${WINDOW}-day banked hours; no-record hills need ${Math.round(pooledNeed)}h)`);
 for (const [slug, hrs, label, date, ...notes] of rows.sort((a, b) => a[3].localeCompare(b[3]))) {
   console.log(`${slug.padEnd(20)}${String(hrs ?? "?").padStart(4)}  ${label.padEnd(8)} ${date}  ${notes.join("; ")}`);
 }
