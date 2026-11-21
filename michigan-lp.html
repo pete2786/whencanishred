@@ -931,7 +931,7 @@ a.posted:hover { border-bottom-style:solid; }
     <span>Wet-bulb climatology from 31 years of ERA5 reanalysis via
       <a href="https://open-meteo.com/">Open-Meteo</a> (CC BY 4.0).</span>
     <span>63 of 114 opening dates sourced from archived resort pages and the opening announcements on them, plus hand-recorded posts, news and local knowledge.</span>
-    <span class="updated">Rebuilt <time datetime="2026-11-20T23:59:21.026Z">20 November 2026, 17:59 CST</time>. Forecast pulled <time datetime="2026-11-20T23:58:52.735Z">20 November 2026, 17:58 CST</time>.</span>
+    <span class="updated">Rebuilt <time datetime="2026-11-21T05:31:19.700Z">20 November 2026, 23:31 CST</time>. Forecast pulled <time datetime="2026-11-20T23:58:52.735Z">20 November 2026, 17:58 CST</time>.</span>
     <span><a href="about.html">About this site</a></span>
     <span class="copy">&copy; 2026 DP Labs, LLC</span>
   </footer>
@@ -987,7 +987,7 @@ function bCard(K, picks, slug, idx) {
       ? '<a class="posted" href="' + bEsc(h.posted) + '" target="_blank" rel="noopener">Posted opening</a> <b>'
       : "Projected <b>") + bShort(h.lo) +
       (h.lo === h.hi ? "" : " &ndash; " + bShort(h.hi)) + "</b>" +
-      (h.closed ? ", <b>reopening soon</b>" : h.until ? ", open through <b>" + bShort(h.until) + "</b>" : "") + "</p>" +
+      (h.closed ? (h.reopens ? ", reopens <b>" + bShort(h.reopens) + "</b>" : ", <b>reopening soon</b>") : h.until ? ", open through <b>" + bShort(h.until) + "</b>" : "") + "</p>" +
     '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
     '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
     '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +

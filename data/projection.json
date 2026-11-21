@@ -24,11 +24,19 @@
     }
   },
   "buena-vista": {
-    "date": "2026-11-22",
+    "date": "2026-11-21",
     "label": "climate",
     "range": {
       "lo": "2026-11-21",
-      "hi": "2026-11-22"
+      "hi": "2026-11-21"
+    }
+  },
+  "detroit-mountain": {
+    "date": "2026-11-23",
+    "label": "climate",
+    "range": {
+      "lo": "2026-11-23",
+      "hi": "2026-11-23"
     }
   },
   "mount-ski-gull": {
@@ -39,14 +47,6 @@
       "hi": "2026-11-25"
     }
   },
-  "giants-ridge": {
-    "date": "2026-11-27",
-    "label": "target",
-    "range": {
-      "lo": "2026-11-27",
-      "hi": "2026-11-27"
-    }
-  },
   "spirit-mountain": {
     "date": "2026-11-27",
     "label": "target",
@@ -55,7 +55,7 @@
       "hi": "2026-11-27"
     }
   },
-  "detroit-mountain": {
+  "powder-ridge": {
     "date": "2026-11-27",
     "label": "target",
     "range": {
@@ -68,14 +68,6 @@
     "label": "target",
     "range": {
       "lo": "2026-11-28",
-      "hi": "2026-11-28"
-    }
-  },
-  "powder-ridge": {
-    "date": "2026-11-28",
-    "label": "climate",
-    "range": {
-      "lo": "2026-11-23",
       "hi": "2026-11-28"
     }
   },
@@ -125,6 +117,14 @@
     "range": {
       "lo": "2026-11-23",
       "hi": "2026-12-01"
+    }
+  },
+  "giants-ridge": {
+    "date": "2026-12-04",
+    "label": "target",
+    "range": {
+      "lo": "2026-12-04",
+      "hi": "2026-12-04"
     }
   },
   "chester-bowl": {

@@ -67,7 +67,7 @@ export function bCard(K, picks, slug, idx) {
       ? '<a class="posted" href="' + bEsc(h.posted) + '" target="_blank" rel="noopener">Posted opening</a> <b>'
       : "Projected <b>") + bShort(h.lo) +
       (h.lo === h.hi ? "" : " &ndash; " + bShort(h.hi)) + "</b>" +
-      (h.closed ? ", <b>reopening soon</b>" : h.until ? ", open through <b>" + bShort(h.until) + "</b>" : "") + "</p>" +
+      (h.closed ? (h.reopens ? ", reopens <b>" + bShort(h.reopens) + "</b>" : ", <b>reopening soon</b>") : h.until ? ", open through <b>" + bShort(h.until) + "</b>" : "") + "</p>" +
     '<p class="pc-line pc-mut">' + (h.last ? "Last season " + bShort(h.last) : "No first lift on record last season") + "</p>" +
     '<div class="pc-strip">' + bHeader(K) + bStrip(K, h, "card") + "</div>" +
     '<a class="pc-link" href="resorts/' + slug + '.html">' + bEsc(h.name) + "&rsquo;s history &rarr;</a>" +

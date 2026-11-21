@@ -998,8 +998,15 @@ function boardHill(slug) {
     open: p.label === "open",
     // status.closed is the first day shut. Before it the hill is open through
     // the day prior; from it on the hill is paused, not done for the season.
-    closed: p.label === "open" && status[slug]?.closed && daysUntil(status[slug].closed) <= 0 ? status[slug].closed : null,
-    until: p.label === "open" && status[slug]?.closed && daysUntil(status[slug].closed) > 0 ? addDays(status[slug].closed, -1) : null,
+    // status.reopens, when the hill has posted one, ends the pause on that day.
+    ...(() => {
+      const st = p.label === "open" ? status[slug] : null;
+      const reopened = st?.reopens && daysUntil(st.reopens) <= 0;
+      if (!st?.closed || reopened) return { closed: null, until: null, reopens: null };
+      return daysUntil(st.closed) <= 0
+        ? { closed: st.closed, until: null, reopens: st.reopens ?? null }
+        : { closed: null, until: addDays(st.closed, -1), reopens: null };
+    })(),
     cells,
     daily: Object.fromEntries(MODEL_KEYS.map(k => [k, f?.models?.[k]?.daily ?? []])),
   };
@@ -1042,7 +1049,7 @@ function boardSection() {
       return `      <div class="brow">
         <div class="brow-name">${pip(resorts[s])}<a href="resorts/${s}.html">${esc(h.name)}</a><span>${esc(h.place)}</span></div>
         ${bStrip(BOARD, h, "row")}
-        <div class="brow-when">${when}<span${h.posted ? ' class="posted"' : ""}>${h.closed ? "Reopening soon" : h.until ? `Through ${bShort(h.until)}` : `${h.posted ? "Posted " : ""}${bShort(h.proj)}`}</span></div>
+        <div class="brow-when">${when}<span${h.posted ? ' class="posted"' : ""}>${h.closed ? (h.reopens ? `Reopens ${bShort(h.reopens)}` : "Reopening soon") : h.until ? `Through ${bShort(h.until)}` : `${h.posted ? "Posted " : ""}${bShort(h.proj)}`}</span></div>
       </div>`;
     }).join("\n");
     return `    <div class="area">

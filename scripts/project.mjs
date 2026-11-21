@@ -88,7 +88,10 @@ const EXTERNAL = new Set(["announced", "target"]);
 // hand-typed page and are contradicted by every season since: Lutsen has opened
 // on 6 December at the median and has never once opened before the 28th. Five
 // observed seasons beat a stated intention of unknown vintage.
-const statedWins = slug => !statedNow[slug] && EXTERNAL.has(prior[slug]?.label) && observed(slug).length < 2;
+// Only the old hand-typed "announced" dates carry over from last run. A
+// "target" is owned by stated.json: taken out of that file, it must go, or
+// Detroit Mountain's withdrawn 27 November would outlive the post behind it.
+const statedWins = slug => !statedNow[slug] && prior[slug]?.label === "announced" && observed(slug).length < 2;
 
 // A date posted this season is the strongest anchor a hill without a record
 // can give the fit, and it is read from stated.json, never from last run's
