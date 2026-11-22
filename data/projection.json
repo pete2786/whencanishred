@@ -23,6 +23,36 @@
       "hi": "2026-11-15"
     }
   },
+  "buena-vista": {
+    "date": "2026-11-25",
+    "label": "weather",
+    "usual": "2026-11-21",
+    "need": 123,
+    "range": {
+      "lo": "2026-11-25",
+      "hi": "2026-12-06"
+    }
+  },
+  "detroit-mountain": {
+    "date": "2026-11-26",
+    "label": "weather",
+    "usual": "2026-11-23",
+    "need": 123,
+    "range": {
+      "lo": "2026-11-26",
+      "hi": "2026-12-07"
+    }
+  },
+  "mount-ski-gull": {
+    "date": "2026-11-26",
+    "label": "weather",
+    "usual": "2026-11-25",
+    "need": 123,
+    "range": {
+      "lo": "2026-11-26",
+      "hi": "2026-12-07"
+    }
+  },
   "spirit-mountain": {
     "date": "2026-11-27",
     "label": "target",
@@ -39,26 +69,6 @@
       "hi": "2026-11-27"
     }
   },
-  "buena-vista": {
-    "date": "2026-11-27",
-    "label": "weather",
-    "usual": "2026-11-21",
-    "need": 123,
-    "range": {
-      "lo": "2026-11-27",
-      "hi": "2026-12-08"
-    }
-  },
-  "detroit-mountain": {
-    "date": "2026-11-27",
-    "label": "weather",
-    "usual": "2026-11-23",
-    "need": 123,
-    "range": {
-      "lo": "2026-11-27",
-      "hi": "2026-12-08"
-    }
-  },
   "lutsen-mountains": {
     "date": "2026-11-28",
     "label": "target",
@@ -67,22 +77,36 @@
       "hi": "2026-11-28"
     }
   },
+  "afton-alps": {
+    "date": "2026-11-29",
+    "label": "model",
+    "range": {
+      "lo": "2026-11-26",
+      "hi": "2026-12-04"
+    }
+  },
   "buck-hill": {
     "date": "2026-11-29",
     "label": "model",
     "range": {
-      "lo": "2026-11-27",
+      "lo": "2026-11-25",
       "hi": "2026-12-01"
     }
   },
-  "mount-ski-gull": {
+  "welch-village": {
     "date": "2026-11-30",
-    "label": "weather",
-    "usual": "2026-11-25",
-    "need": 123,
+    "label": "model",
     "range": {
-      "lo": "2026-11-30",
-      "hi": "2026-12-11"
+      "lo": "2026-11-27",
+      "hi": "2026-12-16"
+    }
+  },
+  "mount-kato": {
+    "date": "2026-12-01",
+    "label": "climate",
+    "range": {
+      "lo": "2026-11-27",
+      "hi": "2026-12-12"
     }
   },
   "steeplechase": {
@@ -91,46 +115,6 @@
     "range": {
       "lo": "2026-11-26",
       "hi": "2026-12-12"
-    }
-  },
-  "afton-alps": {
-    "date": "2026-12-02",
-    "label": "weather",
-    "usual": "2026-11-29",
-    "need": 121,
-    "range": {
-      "lo": "2026-12-02",
-      "hi": "2026-12-04"
-    }
-  },
-  "welch-village": {
-    "date": "2026-12-02",
-    "label": "weather",
-    "usual": "2026-11-30",
-    "need": 125,
-    "range": {
-      "lo": "2026-12-02",
-      "hi": "2026-12-04"
-    }
-  },
-  "mount-kato": {
-    "date": "2026-12-02",
-    "label": "weather",
-    "usual": "2026-12-01",
-    "need": 123,
-    "range": {
-      "lo": "2026-12-02",
-      "hi": "2026-12-13"
-    }
-  },
-  "hyland-hills": {
-    "date": "2026-12-04",
-    "label": "weather",
-    "usual": "2026-12-01",
-    "need": 156,
-    "range": {
-      "lo": "2026-12-04",
-      "hi": "2026-12-04"
     }
   },
   "giants-ridge": {
@@ -149,22 +133,34 @@
       "hi": "2026-12-12"
     }
   },
+  "hyland-hills": {
+    "date": "2026-12-17",
+    "label": "weather",
+    "usual": "2026-12-01",
+    "need": 156,
+    "range": {
+      "lo": "2026-12-15",
+      "hi": "2026-12-18"
+    }
+  },
+  "elm-creek": {
+    "date": "2026-12-18",
+    "label": "weather",
+    "usual": "2026-12-16",
+    "need": 190,
+    "range": {
+      "lo": "2026-12-17",
+      "hi": "2026-12-19"
+    }
+  },
   "coffee-mill": {
-    "date": "2026-12-15",
+    "date": "2026-12-22",
     "label": "weather",
     "usual": "2026-12-13",
     "need": 226,
     "range": {
-      "lo": "2026-12-15",
+      "lo": "2026-12-22",
       "hi": "2027-01-14"
-    }
-  },
-  "elm-creek": {
-    "date": "2026-12-16",
-    "label": "model",
-    "range": {
-      "lo": "2026-12-10",
-      "hi": "2026-12-19"
     }
   }
 }
