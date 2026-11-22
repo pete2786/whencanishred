@@ -1,6 +1,6 @@
 {
   "season": 2026,
-  "through": "2026-11-22T12:00",
+  "through": "2026-11-22T17:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
@@ -709,7 +709,7 @@
     },
     "giants-ridge": {
       "firstNight": "2026-10-29T23:00",
-      "hours": 106,
+      "hours": 108,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
@@ -1061,7 +1061,7 @@
     },
     "buena-vista": {
       "firstNight": "2026-11-05T22:00",
-      "hours": 83,
+      "hours": 84,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
@@ -1149,7 +1149,7 @@
     },
     "detroit-mountain": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 67,
+      "hours": 72,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
@@ -1237,7 +1237,7 @@
     },
     "andes-tower-hills": {
       "firstNight": "2026-11-11T23:00",
-      "hours": 63,
+      "hours": 66,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
@@ -1413,7 +1413,7 @@
     },
     "mount-ski-gull": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 64,
+      "hours": 66,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
