@@ -113,19 +113,24 @@ past. And a hill with no record can carry `projectLike` in `resorts.json`
 instead of the climate fit, and is labelled `peer`.
 
 Then this fall's weather gets a say, as hours banked: hours under 28° in the
-14 days before a given day. A hill can open no sooner than the day it has banked
-the fewest it has ever opened on; a hill with no record needs the median of
-everyone else's fewest. When that day lands after the usual date, the
-projection moves and is labelled `weather`.
+21 days before a given day. A hill can open no sooner than the day it has banked
+nine tenths of the fewest it has ever opened on; a hill with no record needs
+nine tenths of the median of everyone else's fewest. When that day lands after
+the usual date, the projection moves and is labelled `weather`.
 
 The hours come from what has happened this season, then the forecast (the
 average of the American and European models), then past the forecast each
 hill's normal for that day. Tested on the 60 openings on record, each predicted
 from the other seasons only, the median date alone misses by 7.0 days on
-average and the median held back by banked hours by 5.9. For a hill with no
-record of its own, 11.9 days becomes 11.3. Those dates are partly business
-decisions, which no weather explains. This replaced a first-night rule that
-scored 6.9.
+average and the median held back by banked hours by about 6, whichever window
+length and share is used. For a hill with no record of its own, 11.9 days
+becomes about 11. Those dates are partly business decisions, which no weather
+explains. This replaced a first-night rule that scored 6.9.
+
+The window and the share were settled by this season, which history could not
+separate. A 14-day window forgot snow still on the hill and held Hyland Hills to
+16 December while it posted that it was getting close; Lutsen opened on 90% of
+its fewest.
 
 Each hill also gets a range. Its early end is the later of the day the wetter
 model banks the hours and the hill's earliest opening on record; its late end

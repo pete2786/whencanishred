@@ -173,16 +173,16 @@ for (const slug of Object.keys(resorts)) {
 // --- this fall's weather ------------------------------------------------------
 // The record says when a hill normally opens. It cannot say when the cold has
 // not come, or has come for a night and left. What a hill opens on is snow it
-// has made, so the weather enters as hours banked: hours under 28 in the two
-// weeks before the day. Each hill needs at least the fewest it has ever opened
-// on; a hill with no record needs the median of everyone else's fewest.
+// has made, so the weather enters as hours banked: hours under 28 in the
+// three weeks before the day. Each hill needs nine tenths of the fewest it has
+// ever opened on; a hill with no record needs the median of everyone else's.
 //
 // Tested on the 60 openings on record, each predicted from the other seasons
 // only: the median date alone misses by 7.0 days on average, the median held
-// back until the hours are banked by 5.9. The first-night rule this replaced
-// managed 6.9. For a hill predicted with no record of its own, 11.9 days
-// becomes 11.3; those dates are partly business decisions, which no weather
-// explains.
+// back until the hours are banked by about 6, whichever window and share. The
+// first-night rule this replaced managed 6.9. For a hill predicted with no
+// record of its own, 11.9 days becomes about 11; those dates are partly
+// business decisions, which no weather explains.
 //
 // The hours come from three places in turn: what has happened this season
 // (data/this-season.json), the forecast (data/forecast.json), and past its
@@ -192,7 +192,17 @@ for (const slug of Object.keys(resorts)) {
 const coldHist = existsSync("data/coldhours.json") ? read("data/coldhours.json").hills : {};
 const now = existsSync("data/this-season.json") ? read("data/this-season.json") : null;
 const fc = existsSync("data/forecast.json") ? read("data/forecast.json") : null;
-const WINDOW = 14;
+// Three weeks, not two. Scored on the record the two are a wash (5.8 days
+// against 6.1), but a 14-day window forgets snow that is still on the hill:
+// on 28 November it was dropping Hyland's mid-November cold just as a warm
+// week set in, and held its projection to 16 December while Hyland posted
+// that it was getting close.
+const WINDOW = 21;
+// A hill can open a little short of its fewest. On the record 90% and the
+// full amount score the same; this season decided it. Lutsen opened on 152 hours against a fewest of 169, and
+// Hyland Hills, needing 156, sat at 120 on 28 November with its own post
+// saying it was getting close.
+const NEED_SHARE = 0.9;
 const NO_RECORD_MISS = 11;
 const live = now?.season === SEASON;
 const asOf = live ? now.through.slice(0, 10) : null;
@@ -215,7 +225,10 @@ const ownNeed = slug => {
 };
 const ownNeeds = Object.keys(resorts).map(ownNeed).filter(x => x !== null).sort((a, b) => a - b);
 const pooledNeed = ownNeeds.length ? median(ownNeeds) : null;
-const needOf = slug => ownNeed(recordHill(slug)) ?? pooledNeed;
+const needOf = slug => {
+  const n = ownNeed(recordHill(slug)) ?? pooledNeed;
+  return n === null ? null : n * NEED_SHARE;
+};
 
 // A hill's normal hours on each day of the autumn, averaged over the record.
 const normalOn = (slug, d) => {
