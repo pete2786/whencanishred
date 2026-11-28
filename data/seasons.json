@@ -1491,10 +1491,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "From the posted opening day, not a same-day post. Lutsen homepage, seen the morning of 28 November 2026: \"Lutsen Mountains opens for the season on November 28th, and opening weekend runs through November 29th.\" Its Instagram had only the opening-day announcement by then (David, 28 November). Correct this if it slipped.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.lutsen.com/",
+            "evidence": "From the posted opening day, not a same-day post. Lutsen homepage, seen the morning of 28 November 2026: \"Lutsen Mountains opens for the season on November 28th, and opening weekend runs through November 29th.\" Its Instagram had only the opening-day announcement by then (David, 28 November). Correct this if it slipped."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
