@@ -1,11 +1,11 @@
 {
   "season": 2026,
-  "through": "2026-11-28T09:00",
+  "through": "2026-11-28T10:00",
   "threshold": 28,
   "hills": {
     "wild-mountain": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 178,
+      "hours": 179,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
@@ -99,7 +99,7 @@
     },
     "trollhaugen": {
       "firstNight": "2026-11-12T18:00",
-      "hours": 160,
+      "hours": 161,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
@@ -663,7 +663,7 @@
     },
     "lutsen-mountains": {
       "firstNight": "2026-11-06T00:00",
-      "hours": 221,
+      "hours": 222,
       "daily": {
         "2026-09-01": 0,
         "2026-09-02": 0,
