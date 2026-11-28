@@ -765,10 +765,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Instagram, seen 28 November 2026, supplied by David, posted 27 November: \"We can't wait to see you tomorrow, Saturday, November 28th! Meet for first chair at Chair 5 at 10AM to kick off the season!\" Hours 10am-8pm; Lifts 4 and 5, the Alps Carpet and the West LZ tow rope; Nancy's Nursery, Teresa's Trail and West LZ.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.instagram.com/p/DgQOyX_FPAg/",
+            "evidence": "Instagram, seen 28 November 2026, supplied by David, posted 27 November: \"We can't wait to see you tomorrow, Saturday, November 28th! Meet for first chair at Chair 5 at 10AM to kick off the season!\" Hours 10am-8pm; Lifts 4 and 5, the Alps Carpet and the West LZ tow rope; Nancy's Nursery, Teresa's Trail and West LZ."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -943,10 +950,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Instagram, seen 28 November 2026, supplied by David: \"We will be open Noon-5pm Saturday, Nov. 28th and Sunday, Nov. 29th. For now, ONLY Welch Village Season Pass Holders allowed due to limited terrain available.\" Counted as the first lift, as Powder Ridge's pass-holder day is. Paula's Party on the new Joy Ride Quad; terrain park and rope tow aimed for Sunday.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.instagram.com/p/DgQrwtfSjrn/",
+            "evidence": "Instagram, seen 28 November 2026, supplied by David: \"We will be open Noon-5pm Saturday, Nov. 28th and Sunday, Nov. 29th. For now, ONLY Welch Village Season Pass Holders allowed due to limited terrain available.\" Counted as the first lift, as Powder Ridge's pass-holder day is. Paula's Party on the new Joy Ride Quad; terrain park and rope tow aimed for Sunday."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -1121,10 +1135,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Instagram, seen 28 November 2026, supplied by David: \"Sat., Nov. 28th | 10AM - 4PM / Sun., Nov. 29th | 10AM - 4PM / Mon., Nov. 30th & Beyond | TBD\".",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://www.instagram.com/p/DgSkZEPFfTh/",
+            "evidence": "Instagram, seen 28 November 2026, supplied by David: \"Sat., Nov. 28th | 10AM - 4PM / Sun., Nov. 29th | 10AM - 4PM / Mon., Nov. 30th & Beyond | TBD\"."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -1822,12 +1843,12 @@
         "date": "2026-11-28",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted.",
+        "note": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted. Confirmed on Instagram, seen 28 November 2026, supplied by David: \"It's official folks, we're opening on Saturday, November 28th! ... we're moving our opening day to the 28th instead of the 27th.\" Powder Monkey, Bindle Stiff and Downhill Musher on the Spirit Express, 10am-5pm Saturday and Sunday. https://www.instagram.com/p/DgK1UZexPmt/",
         "sources": [
           {
             "kind": "local",
             "url": "https://spiritmt.com/",
-            "evidence": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted."
+            "evidence": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted. Confirmed on Instagram, seen 28 November 2026, supplied by David: \"It's official folks, we're opening on Saturday, November 28th! ... we're moving our opening day to the 28th instead of the 27th.\" Powder Monkey, Bindle Stiff and Downhill Musher on the Spirit Express, 10am-5pm Saturday and Sunday. https://www.instagram.com/p/DgK1UZexPmt/"
           }
         ]
       },
@@ -1948,15 +1969,15 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": "2026-11-28",
+        "date": "2026-11-27",
         "precision": "exact",
         "corroboration": "single",
-        "note": "Powder Ridge homepage snow report, updated 28 November 2026: \"Opening Day Details Are Here! ... Saturday, 11/28: Open to Everyone. 10:00 AM - 5:00 PM\". Sunday 29 November open, Monday 30 November closed. The 27 November season-pass-holder day posted on Instagram no longer appears.",
+        "note": "Instagram, seen 28 November 2026, supplied by David, posted 27 November: \"Everyone else can join in tomorrow (11/28) and Sunday (11/29) from 10 AM - 5 PM!\" So the 27 November day for season pass holders went ahead, as posted on 20 November, and is the first lift. The homepage snow report on the morning of the 28th listed only the public days from the 28th.",
         "sources": [
           {
             "kind": "local",
-            "url": "https://powderridge.com/",
-            "evidence": "Powder Ridge homepage snow report, updated 28 November 2026: \"Opening Day Details Are Here! ... Saturday, 11/28: Open to Everyone. 10:00 AM - 5:00 PM\". Sunday 29 November open, Monday 30 November closed. The 27 November season-pass-holder day posted on Instagram no longer appears."
+            "url": "https://www.instagram.com/p/DgP59HiyfS-/",
+            "evidence": "Instagram, seen 28 November 2026, supplied by David, posted 27 November: \"Everyone else can join in tomorrow (11/28) and Sunday (11/29) from 10 AM - 5 PM!\" So the 27 November day for season pass holders went ahead, as posted on 20 November, and is the first lift. The homepage snow report on the morning of the 28th listed only the public days from the 28th."
           }
         ]
       },

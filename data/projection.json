@@ -23,6 +23,38 @@
       "hi": "2026-11-15"
     }
   },
+  "powder-ridge": {
+    "date": "2026-11-27",
+    "label": "open",
+    "range": {
+      "lo": "2026-11-27",
+      "hi": "2026-11-27"
+    }
+  },
+  "afton-alps": {
+    "date": "2026-11-28",
+    "label": "open",
+    "range": {
+      "lo": "2026-11-28",
+      "hi": "2026-11-28"
+    }
+  },
+  "welch-village": {
+    "date": "2026-11-28",
+    "label": "open",
+    "range": {
+      "lo": "2026-11-28",
+      "hi": "2026-11-28"
+    }
+  },
+  "buck-hill": {
+    "date": "2026-11-28",
+    "label": "open",
+    "range": {
+      "lo": "2026-11-28",
+      "hi": "2026-11-28"
+    }
+  },
   "lutsen-mountains": {
     "date": "2026-11-28",
     "label": "target",
@@ -37,22 +69,6 @@
     "range": {
       "lo": "2026-11-28",
       "hi": "2026-11-28"
-    }
-  },
-  "powder-ridge": {
-    "date": "2026-11-28",
-    "label": "open",
-    "range": {
-      "lo": "2026-11-28",
-      "hi": "2026-11-28"
-    }
-  },
-  "buck-hill": {
-    "date": "2026-11-29",
-    "label": "model",
-    "range": {
-      "lo": "2026-11-29",
-      "hi": "2026-12-01"
     }
   },
   "mount-ski-gull": {
@@ -85,16 +101,6 @@
       "hi": "2026-12-11"
     }
   },
-  "afton-alps": {
-    "date": "2026-12-01",
-    "label": "weather",
-    "usual": "2026-11-29",
-    "need": 121,
-    "range": {
-      "lo": "2026-12-01",
-      "hi": "2026-12-17"
-    }
-  },
   "steeplechase": {
     "date": "2026-12-01",
     "label": "climate",
@@ -109,16 +115,6 @@
     "range": {
       "lo": "2026-12-04",
       "hi": "2026-12-04"
-    }
-  },
-  "welch-village": {
-    "date": "2026-12-06",
-    "label": "weather",
-    "usual": "2026-11-30",
-    "need": 125,
-    "range": {
-      "lo": "2026-12-01",
-      "hi": "2026-12-17"
     }
   },
   "mount-kato": {
