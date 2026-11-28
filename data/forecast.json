@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-28T15:30:55.752Z",
+  "generatedAt": "2026-11-28T15:42:14.225Z",
   "horizonDays": 16,
   "threshold": 28,
   "models": {
@@ -41,7 +41,7 @@
   "hills": {
     "wild-mountain": {
       "min": 16.2,
-      "hoursUnder": 177,
+      "hoursUnder": 176,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-12-12T05:00",
@@ -51,7 +51,7 @@
       "models": {
         "gfs": {
           "min": 16.2,
-          "hoursUnder": 177,
+          "hoursUnder": 176,
           "longestRun": 52,
           "firstNight": "2026-11-28T00:00",
           "lastHour": "2026-12-13T23:00",
@@ -75,7 +75,7 @@
           ],
           "dailyHours": [
             10,
-            7,
+            6,
             24,
             6,
             0,
@@ -225,7 +225,7 @@
     },
     "trollhaugen": {
       "min": 15.7,
-      "hoursUnder": 174,
+      "hoursUnder": 173,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-12-12T05:00",
@@ -235,7 +235,7 @@
       "models": {
         "gfs": {
           "min": 15.7,
-          "hoursUnder": 174,
+          "hoursUnder": 173,
           "longestRun": 52,
           "firstNight": "2026-11-28T00:00",
           "lastHour": "2026-12-13T23:00",
@@ -259,7 +259,7 @@
           ],
           "dailyHours": [
             10,
-            6,
+            5,
             24,
             6,
             0,
@@ -1145,7 +1145,7 @@
     },
     "elm-creek": {
       "min": 17.5,
-      "hoursUnder": 157,
+      "hoursUnder": 158,
       "firstWindow": "2026-11-28T05:00",
       "coldest": {
         "time": "2026-12-12T06:00",
@@ -1155,7 +1155,7 @@
       "models": {
         "gfs": {
           "min": 17.5,
-          "hoursUnder": 157,
+          "hoursUnder": 158,
           "longestRun": 51,
           "firstNight": "2026-11-29T17:00",
           "lastHour": "2026-12-13T23:00",
@@ -1179,7 +1179,7 @@
           ],
           "dailyHours": [
             4,
-            13,
+            14,
             24,
             0,
             0,
@@ -1513,7 +1513,7 @@
     },
     "giants-ridge": {
       "min": 15.2,
-      "hoursUnder": 252,
+      "hoursUnder": 251,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-12-12T05:00",
@@ -1523,7 +1523,7 @@
       "models": {
         "gfs": {
           "min": 15.2,
-          "hoursUnder": 252,
+          "hoursUnder": 251,
           "longestRun": 76,
           "firstNight": "2026-11-28T00:00",
           "lastHour": "2026-12-13T23:00",
@@ -1546,7 +1546,7 @@
             17.3
           ],
           "dailyHours": [
-            12,
+            11,
             24,
             24,
             11,
@@ -1697,7 +1697,7 @@
     },
     "spirit-mountain": {
       "min": 13.1,
-      "hoursUnder": 243,
+      "hoursUnder": 240,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-11-30T03:00",
@@ -1707,7 +1707,7 @@
       "models": {
         "gfs": {
           "min": 13.1,
-          "hoursUnder": 243,
+          "hoursUnder": 240,
           "longestRun": 78,
           "firstNight": "2026-11-28T00:00",
           "lastHour": "2026-12-13T23:00",
@@ -1730,8 +1730,8 @@
             18
           ],
           "dailyHours": [
-            10,
-            24,
+            9,
+            22,
             24,
             10,
             0,
@@ -2264,7 +2264,7 @@
           "firstNight": "2026-11-28T20:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
-            25.4,
+            26.4,
             16,
             12.9,
             24.1,
@@ -2433,8 +2433,8 @@
     },
     "detroit-mountain": {
       "min": 13.8,
-      "hoursUnder": 238,
-      "firstWindow": "2026-11-28T23:00",
+      "hoursUnder": 237,
+      "firstWindow": "2026-11-29T00:00",
       "coldest": {
         "time": "2026-11-30T03:00",
         "temp": 16.6,
@@ -2443,12 +2443,12 @@
       "models": {
         "gfs": {
           "min": 13.8,
-          "hoursUnder": 238,
+          "hoursUnder": 237,
           "longestRun": 78,
-          "firstNight": "2026-11-28T23:00",
+          "firstNight": "2026-11-29T00:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
-            27.4,
+            28.1,
             16.6,
             13.8,
             24.5,
@@ -2466,7 +2466,7 @@
             20.6
           ],
           "dailyHours": [
-            1,
+            0,
             24,
             24,
             9,
@@ -2816,7 +2816,7 @@
           "firstNight": "2026-11-29T21:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
-            27.9,
+            27.6,
             25.7,
             21.6,
             25.2,
@@ -2985,8 +2985,8 @@
     },
     "mount-ski-gull": {
       "min": 16.4,
-      "hoursUnder": 215,
-      "firstWindow": "2026-11-28T22:00",
+      "hoursUnder": 211,
+      "firstWindow": "2026-11-29T02:00",
       "coldest": {
         "time": "2026-12-12T07:00",
         "temp": 19.1,
@@ -2995,12 +2995,12 @@
       "models": {
         "gfs": {
           "min": 16.4,
-          "hoursUnder": 215,
+          "hoursUnder": 211,
           "longestRun": 62,
-          "firstNight": "2026-11-28T22:00",
+          "firstNight": "2026-11-29T02:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
-            27,
+            28.3,
             20.2,
             17,
             24.9,
@@ -3018,8 +3018,8 @@
             21.3
           ],
           "dailyHours": [
-            2,
-            24,
+            0,
+            22,
             24,
             9,
             0,
@@ -3169,7 +3169,7 @@
     },
     "chester-bowl": {
       "min": 13.3,
-      "hoursUnder": 220,
+      "hoursUnder": 219,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-11-30T03:00",
@@ -3179,9 +3179,9 @@
       "models": {
         "gfs": {
           "min": 13.3,
-          "hoursUnder": 220,
+          "hoursUnder": 219,
           "longestRun": 127,
-          "firstNight": "2026-11-28T23:00",
+          "firstNight": "2026-11-29T02:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
             24.1,
@@ -3203,7 +3203,7 @@
           ],
           "dailyHours": [
             5,
-            24,
+            23,
             24,
             10,
             0,
@@ -3907,7 +3907,7 @@
     },
     "wausau": {
       "min": 18.8,
-      "hoursUnder": 183,
+      "hoursUnder": 184,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-12-12T08:00",
@@ -3917,9 +3917,9 @@
       "models": {
         "gfs": {
           "min": 18.8,
-          "hoursUnder": 183,
+          "hoursUnder": 184,
           "longestRun": 44,
-          "firstNight": "2026-11-29T00:00",
+          "firstNight": "2026-11-28T23:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
             25.7,
@@ -3940,7 +3940,7 @@
             20.7
           ],
           "dailyHours": [
-            8,
+            9,
             15,
             24,
             10,
@@ -4091,7 +4091,7 @@
     },
     "ironwood": {
       "min": 11.4,
-      "hoursUnder": 205,
+      "hoursUnder": 206,
       "firstWindow": "2026-11-28T00:00",
       "coldest": {
         "time": "2026-12-10T02:00",
@@ -4101,7 +4101,7 @@
       "models": {
         "gfs": {
           "min": 11.4,
-          "hoursUnder": 205,
+          "hoursUnder": 206,
           "longestRun": 69,
           "firstNight": "2026-11-28T00:00",
           "lastHour": "2026-12-13T23:00",
@@ -4124,7 +4124,7 @@
             12.9
           ],
           "dailyHours": [
-            9,
+            10,
             20,
             24,
             11,
@@ -5027,7 +5027,7 @@
           "lastHour": "2026-12-13T23:00",
           "daily": [
             30.8,
-            31.6,
+            31.5,
             27.1,
             26.8,
             30.9,
@@ -5195,8 +5195,8 @@
     },
     "black-hills": {
       "min": 7.5,
-      "hoursUnder": 219,
-      "firstWindow": "2026-11-28T18:00",
+      "hoursUnder": 220,
+      "firstWindow": "2026-11-28T17:00",
       "coldest": {
         "time": "2026-12-13T20:00",
         "temp": 8.4,
@@ -5205,12 +5205,12 @@
       "models": {
         "gfs": {
           "min": 7.5,
-          "hoursUnder": 219,
+          "hoursUnder": 220,
           "longestRun": 66,
-          "firstNight": "2026-11-28T18:00",
+          "firstNight": "2026-11-28T17:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
-            26.3,
+            26,
             21.1,
             25.1,
             31.7,
@@ -5228,7 +5228,7 @@
             7.5
           ],
           "dailyHours": [
-            6,
+            7,
             20,
             10,
             0,
@@ -5394,7 +5394,7 @@
           "firstNight": "2026-11-29T03:00",
           "lastHour": "2026-12-13T23:00",
           "daily": [
-            28.9,
+            29.3,
             19.4,
             19.3,
             26.5,
@@ -6131,7 +6131,7 @@
           "lastHour": "2026-12-13T23:00",
           "daily": [
             34.2,
-            36.5,
+            36.4,
             31.4,
             30.8,
             36.2,

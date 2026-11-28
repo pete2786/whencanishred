@@ -55,16 +55,6 @@
       "hi": "2026-12-01"
     }
   },
-  "detroit-mountain": {
-    "date": "2026-11-29",
-    "label": "weather",
-    "usual": "2026-11-23",
-    "need": 123,
-    "range": {
-      "lo": "2026-11-29",
-      "hi": "2026-12-10"
-    }
-  },
   "mount-ski-gull": {
     "date": "2026-11-29",
     "label": "weather",
@@ -82,6 +72,16 @@
     "need": 123,
     "range": {
       "lo": "2026-11-30",
+      "hi": "2026-12-11"
+    }
+  },
+  "detroit-mountain": {
+    "date": "2026-11-30",
+    "label": "weather",
+    "usual": "2026-11-23",
+    "need": 123,
+    "range": {
+      "lo": "2026-11-29",
       "hi": "2026-12-11"
     }
   },
