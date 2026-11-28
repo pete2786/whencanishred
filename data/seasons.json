@@ -1819,10 +1819,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://spiritmt.com/",
+            "evidence": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted."
+          }
+        ]
       },
       "fullOps": {
         "date": null,
@@ -1941,10 +1948,17 @@
     },
     "2026-27": {
       "firstLift": {
-        "date": null,
-        "precision": null,
-        "corroboration": "unknown",
-        "sources": []
+        "date": "2026-11-28",
+        "precision": "exact",
+        "corroboration": "single",
+        "note": "Powder Ridge homepage snow report, updated 28 November 2026: \"Opening Day Details Are Here! ... Saturday, 11/28: Open to Everyone. 10:00 AM - 5:00 PM\". Sunday 29 November open, Monday 30 November closed. The 27 November season-pass-holder day posted on Instagram no longer appears.",
+        "sources": [
+          {
+            "kind": "local",
+            "url": "https://powderridge.com/",
+            "evidence": "Powder Ridge homepage snow report, updated 28 November 2026: \"Opening Day Details Are Here! ... Saturday, 11/28: Open to Everyone. 10:00 AM - 5:00 PM\". Sunday 29 November open, Monday 30 November closed. The 27 November season-pass-holder day posted on Instagram no longer appears."
+          }
+        ]
       },
       "fullOps": {
         "date": null,

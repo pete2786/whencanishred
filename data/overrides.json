@@ -528,6 +528,22 @@
         "url": "https://www.facebook.com/reel/1748162076587849/",
         "note": "Spirit Mountain Facebook reel: \"We’re opening full time starting December 12! It’s an exciting time at Spirit and it wouldn’t be possible without our incredible team that has been working around the clock.\" A separate, later milestone than first chair, as in 2024-25 when first chair was 30 November and full-time hours began 13 December."
       }
+    },
+    "2026-27": {
+      "firstLift": {
+        "date": "2026-11-28",
+        "url": "https://spiritmt.com/",
+        "note": "Spirit Mountain homepage Mountain Message dated 28 November 2026, seen that morning: \"It's opening day! We'll be open today and tomorrow, 10am-5pm. Powder Monkey, Bindle Stiff, and Downhill Musher will be open.\" A day after the tentative 27 November it had posted."
+      }
+    }
+  },
+  "powder-ridge": {
+    "2026-27": {
+      "firstLift": {
+        "date": "2026-11-28",
+        "url": "https://powderridge.com/",
+        "note": "Powder Ridge homepage snow report, updated 28 November 2026: \"Opening Day Details Are Here! ... Saturday, 11/28: Open to Everyone. 10:00 AM - 5:00 PM\". Sunday 29 November open, Monday 30 November closed. The 27 November season-pass-holder day posted on Instagram no longer appears."
+      }
     }
   }
 }
